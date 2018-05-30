@@ -12,8 +12,16 @@ class LoginController extends Controller
 	{
 		// check if the user is authenticated
 		if(Auth::check()) {
-			return 'user is authenticated';
-		}		
+			// check if what type of user
+			// return to designated page
+			if(Auth::user()->user_type == 1) {
+				return 'The authenticated user is commuter!';
+			}
+			else {
+				return 'The authenticated user is driver!';
+			}
+			
+		}
 		else {
 			// return the login page view
 			return view('login');

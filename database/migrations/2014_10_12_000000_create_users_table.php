@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('user_type')->default(1); // 1 for commuters, 2 for drivers
             $table->string('identification');
             $table->string('mobile_number')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

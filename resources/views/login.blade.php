@@ -12,7 +12,7 @@
                 <strong>Login for Commuter &amp; Driver</strong>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="{{ route('login.post') }}" autocomplete="off">
+                <form class="form-horizontal" method="POST" action="{{ route('login.submit') }}" autocomplete="off">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
