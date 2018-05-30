@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'user_type', 'identificatoion', 'email', 'password',
+        'first_name', 'last_name', 'role', 'email', 'password',
     ];
 
     /**
@@ -32,6 +31,6 @@ class User extends Authenticatable
     // the user has many activity log records | one to many relationship
     public function activity_log()
     {
-        return $this->hasMany('App\ActivityLog', 'user_id', 'id');
+        return $this->hasMany('App\ActivityLog', 'admin_id', 'id');
     }
 }
