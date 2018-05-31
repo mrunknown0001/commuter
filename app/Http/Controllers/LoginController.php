@@ -12,15 +12,7 @@ class LoginController extends Controller
 	{
 		// check if the user is authenticated
 		if(Auth::check()) {
-			// check if what type of user
-			// return to designated page
-			if(Auth::user()->user_type == 1) {
-				return 'The authenticated user is commuter!';
-			}
-			else {
-				return 'The authenticated user is driver!';
-			}
-			
+			return $this->check_user();
 		}
 		else {
 			// return the login page view
@@ -45,11 +37,32 @@ class LoginController extends Controller
 
     	// authenticate user
     	if(Auth::attempt(['identification' => $id, 'password' => $password])) {
-    		return 'Login Success!';
+    		// login success
     		// redirect to homepage of the user based on its user type
+            return $this->check_user();
     	}
 
-    	return 'No User';
+
+    	// return with error displaying on the login form
+    	// with no user found
+    	return redirect()->route('login')->with('error', 'No User Found!');
     	
     }
+
+
+
+    // this method is use to redirect to home page of the type of the authenticated user
+    private function check_user()
+    {
+        // check if what type of user
+        // return to designated page
+        // user type: 1 for commuter, 2 for the driver
+        if(Auth::user()->user_type == 1) {
+            return redirect()->route('commuter.home');
+        }
+        else {
+            return 'The authenticated user is driver!';
+        }
+    }
+
 }

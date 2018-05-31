@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile_number')->nullable();
             $table->string('email')->nullable();
             $table->string('password');
+            $table->tinyInteger('active')->default(1); // 1 for active users, 0 for deactivated users
             $table->rememberToken();
             $table->timestamps();
         });

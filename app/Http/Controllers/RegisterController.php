@@ -39,9 +39,9 @@ class RegisterController extends Controller
     	// check if there is existing email used
     	$check_email = User::whereEmail($email)->first();
 
-    	if(count($check_email) > 0) {
+    	if($email != Null && count($check_email) > 0) {
     		// return to designated view/page
-    		return 'Email Already Used';
+    		return redirect()->route('register')->with('error', 'Email is already used!');
     	}
 
 
@@ -57,7 +57,8 @@ class RegisterController extends Controller
 
 
     	// return to designated page
-    	return 'Registration Successful';
+    	// with success message
+    	return redirect()->route('register')->with('success', 'Registration Successful! You can now login!');
     	
 
     }

@@ -13,6 +13,8 @@
                 </div>
 
                 <div class="panel-body">
+                    @include('includes.success')
+                    @include('includes.error')
                     <form class="form-horizontal" method="POST" action="{{ route('register.submit') }}" autocomplete="off">
                         {{ csrf_field() }}
 

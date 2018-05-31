@@ -7,13 +7,12 @@
 
         <title>@yield('title') | {{ env('app_name') }}</title>
 
-        <!-- Bootstrap 3.3.7 -->
+        <!-- Bootstrap 3.3.7 && Fontawesome -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-
-
 
     </head>
     <body>
         @yield('content')
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

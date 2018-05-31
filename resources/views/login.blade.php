@@ -12,6 +12,7 @@
                 <strong>Login for Commuter &amp; Driver</strong>
             </div>
             <div class="panel-body">
+                @include('includes.error')
                 <form class="form-horizontal" method="POST" action="{{ route('login.submit') }}" autocomplete="off">
                     {{ csrf_field() }}
 
