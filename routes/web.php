@@ -1,6 +1,6 @@
 <?php
 
-Route::view('/', 'welcome')->name('welcome');
+Route::get('/', 'LoginController@showWelcome')->name('welcome');
 
 
 Route::get('/logout', function () {
@@ -52,7 +52,8 @@ Route::group(['prefix' => 'c'], function () {
  * Controller Protected Middleware auth/user, driver middleware
  */
 Route::group(['prefix' => 'd'], function () {
-
+	// home page of the drivers
+	Route::get('/home', 'DriverController@home')->name('driver.home');
 });
 
 

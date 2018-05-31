@@ -10,4 +10,11 @@ class DriverController extends Controller
     {
     	$this->middleware(['auth', 'driver']);
     }
+
+
+    // method use to go to home page of the driver
+    public function home()
+    {
+    	return view('driver.home');
+    }
 }

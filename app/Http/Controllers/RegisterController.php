@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\User;
+use App\Http\Controllers\LoginController;
 
 class RegisterController extends Controller
 {
     
     public function showRegistration()
     {
+        // check if there is authenticated user
+        if(Auth::check()) {
+            return LoginController::check_user();
+        }
     	// return the registration form view for the commuter
     	return view('register');
     }

@@ -51,8 +51,22 @@ class LoginController extends Controller
 
 
 
+    // check authenticated user in accessing login page
+    public function showWelcome()
+    {
+        if(Auth::check()) {
+            return $this->check_user();
+        }
+
+        return view('welcome');
+    }
+
+
+
+
     // this method is use to redirect to home page of the type of the authenticated user
-    private function check_user()
+    // this method can call in other controller
+    public static function check_user()
     {
         // check if what type of user
         // return to designated page
