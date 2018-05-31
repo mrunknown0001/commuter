@@ -4,7 +4,11 @@ Route::get('/', 'LoginController@showWelcome')->name('welcome');
 
 
 Route::get('/logout', function () {
+	// logout user guard
 	Auth::logout();
+	// logout admin guard
+	Auth::guard('admin')->logout();
+
 	return redirect()->route('welcome');
 })->name('logout');
 
@@ -31,6 +35,9 @@ Route::get('/admin', function () {
 
 // admin login form
 Route::get('/admin/login', 'AdminLoginController@showAdminLoginForm')->name('admin.login');
+
+// post admin login form
+Route::post('/admin/login', 'AdminLoginController@postAdminLogin')->name('admin.login.submit');
 
 
 /*
@@ -59,6 +66,7 @@ Route::group(['prefix' => 'd'], function () {
 
 /*
  * Admin
+ * Controller Protected Middleware admin guard
  */
 Route::group(['prefix' => 'admin'], function () {
 	// route to go to dashboard of the admin

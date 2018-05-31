@@ -17,9 +17,11 @@ class CreateAdminTable extends Migration
             $table->increments('id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('username')->unique();
             $table->tinyInteger('role')->default(2); // 1 for superadmin, 2 for regular admins
             $table->string('email')->unique()->nullable();
             $table->string('password');
+            $table->tinyInteger('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

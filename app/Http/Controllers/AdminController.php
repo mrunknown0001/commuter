@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function __construct()
     {
     	// only admin can access
-    	$this->middleware('auth:admin');
+    	$this->middleware(['auth:admin', 'admin']);
     }
 
 
