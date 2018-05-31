@@ -75,7 +75,7 @@ class LoginController extends Controller
             return redirect()->route('commuter.home');
         }
         else {
-            return 'The authenticated user is driver!';
+            return redirect()->route('driver.home');
         }
     }
 
