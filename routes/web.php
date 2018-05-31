@@ -71,4 +71,7 @@ Route::group(['prefix' => 'd'], function () {
 Route::group(['prefix' => 'admin'], function () {
 	// route to go to dashboard of the admin
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+
+	// route to go to activity log of the admin
+	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');
 });

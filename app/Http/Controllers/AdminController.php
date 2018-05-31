@@ -20,4 +20,11 @@ class AdminController extends Controller
     {
     	return view('admin.dashboard');
     }
+
+
+    // admin activity log
+    public function activityLog()
+    {
+        return view('admin.activity-log');
+    }
 }
