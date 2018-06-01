@@ -4,7 +4,7 @@
 
 @section('content')
 	
-@include('driver.includes.navbar')
+@include('commuter.includes.navbar')
 
 <div class="container-fluid">
 		

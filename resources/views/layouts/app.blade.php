@@ -10,6 +10,8 @@
         <!-- Bootstrap 3.3.7 && Fontawesome -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+
     </head>
     <body>
  

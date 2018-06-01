@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
 use App\ActivityLog;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -23,10 +24,113 @@ class AdminController extends Controller
     }
 
 
+    // admin profile
+    public function profile($username = null)
+    {
+        return view('admin.profile');
+    }
+
+
     // admin add driver method, show the add driver form
     public function registerDriver()
     {
         return view('admin.register-driver');
+    }
+
+
+
+    // method to store new driver
+    public function postRegisterDriver(Request $request)
+    {
+        // validate data
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'identification' => 'required|unique:users'
+        ]);
+
+        // store data in varabiels
+        $first_name = $request['first_name'];
+        $last_name = $request['last_name'];
+        $id = $request['identification'];
+        $mobile = $request['mobile_number'];
+        $email = $request['email'];
+
+
+        // other check
+        // check if email/mobile number is already used
+        $check_email = User::whereEmail($email)->first();
+
+        if($email != Null && count($check_email) > 0) {
+            // return to designated view/page
+            return redirect()->route('admin.register.driver')->with('error', 'Email ' . $email . ' is already used!')->withInput();
+        }
+
+
+        // save/register new driver info
+        // driver is the default password for driver
+        // user_type == 2
+        $driver = new User();
+        $driver->first_name = $first_name;
+        $driver->last_name = $last_name;
+        $driver->identification = $id;
+        $driver->mobile_number = $mobile;
+        $driver->email = $email;
+        $driver->user_type = 2;
+        $driver->password = bcrypt('driver'); // driver is the default password for driver
+        $driver->save();
+
+        // save activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Registered a Driver: ' . $driver->identification, now());
+
+        // redirect with message success
+        return redirect()->route('admin.register.driver')->with('success', 'Driver ' . $driver->identification . ' Successfully Registered!');
+    }
+
+
+
+    // method use to view all driver
+    public function viewAllDriver()
+    {
+        return view('admin.view-all-drivers');
+    }
+
+
+    // method use to view all commuters
+    public function viewAllCommuters()
+    {
+        return view('admin.view-all-commuters');
+    }
+
+
+
+    // method use to view all rides history
+    public function ridesHistory()
+    {
+        return view('admin.rides-history');
+    }
+
+
+
+    // method use to view commutes reports
+    public function commutersReports()
+    {
+        return view('admin.commuters-reports');
+    }
+
+
+
+    // method use to view drivers reports
+    public function driversReports()
+    {
+        return view('admin.drivers-reports');
+    }
+
+
+    // method use to view feedbacks
+    public function viewFeedbacks()
+    {
+        return view('admin.feedbacks');
     }
 
 

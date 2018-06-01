@@ -16,6 +16,9 @@ class LoginController extends Controller
 		if(Auth::check()) {
 			return $this->check_user();
 		}
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.login');
+        }
 		else {
 			// return the login page view
 			return view('login');
@@ -62,6 +65,9 @@ class LoginController extends Controller
     {
         if(Auth::check()) {
             return $this->check_user();
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.login');
         }
 
         return view('welcome');

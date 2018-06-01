@@ -66,10 +66,43 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
 
+	// route to view profile of the admin
+	Route::get('/profile/{username}', 'AdminController@profile')->name('admin.profile');
+
+
 	Route::group(['prefix' => 'driver'], function () {
 		// add driver form
 		Route::get('/register', 'AdminController@registerDriver')->name('admin.register.driver');
+
+		// post add driver
+		Route::post('/register', 'AdminController@postRegisterDriver')->name('admin.post.register.driver');
+
+		// view all driver
+		Route::get('/view/all', 'AdminController@viewAllDriver')->name('admin.view.all.driver');
 	});
+
+
+	Route::group(['prefix' => 'commuter'], function () {
+		// route to view all commuters
+		Route::get('/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
+	});
+
+
+	// route use to view all successful rides
+	Route::get('/rides/history', 'AdminController@ridesHistory')->name('admin.rides.history');
+
+
+	// route use to view reports from commuters
+	Route::get('/reports/commuters', 'AdminController@commutersReports')->name('admin.commuters.reports');
+
+
+	// route use to view reports from drivers
+	Route::get('/reports/drivers', 'AdminController@driversReports')->name('admin.drivers.reports');
+
+
+	// route to view feedbacks
+	Route::get('/feedbacks', 'AdminController@viewFeedbacks')->name('admin.view.feedbacks');
+
 
 	// route to go to activity log of the admin
 	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');

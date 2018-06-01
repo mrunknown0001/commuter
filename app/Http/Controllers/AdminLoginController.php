@@ -15,6 +15,9 @@ class AdminLoginController extends Controller
         if(Auth::guard('admin')->check()) {
             return $this->check_admin();
         }
+        elseif(Auth::check()) {
+            return redirect()->route('login');
+        }
 
     	return view('admin-login');
     }
@@ -56,7 +59,7 @@ class AdminLoginController extends Controller
         // return to designated page
         // user type: 1 for commuter, 2 for the driver
         if(Auth::guard('admin')->user()->role == 1) {
-            return "Super Admin Authenticated";
+            return redirect()->route('admin.dashboard');
         }
         else {
             return "Co-Admin";

@@ -6,12 +6,15 @@
   <title>@yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap and Fontawesome -->
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <!--Admin Theme-->
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skin -->
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-green.min.css') }}">
+
+  <!-- Bootstrap and Fontawesome -->
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
 </head>
 <body class="hold-transition skin-green sidebar-mini">
