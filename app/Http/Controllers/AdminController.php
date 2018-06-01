@@ -16,11 +16,17 @@ class AdminController extends Controller
     }
 
 
-
     // admin dashboard
     public function dashboard()
     {
     	return view('admin.dashboard');
+    }
+
+
+    // admin add driver method, show the add driver form
+    public function registerDriver()
+    {
+        return view('admin.register-driver');
     }
 
 

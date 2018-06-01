@@ -65,6 +65,12 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to go to dashboard of the admin
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
+
+	Route::group(['prefix' => 'driver'], function () {
+		// add driver form
+		Route::get('/register', 'AdminController@registerDriver')->name('admin.register.driver');
+	});
+
 	// route to go to activity log of the admin
 	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');
 });

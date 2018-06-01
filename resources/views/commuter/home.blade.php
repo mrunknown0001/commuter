@@ -3,9 +3,14 @@
 @section('title') Commuter Home @endsection
 
 @section('content')
+	
+@include('driver.includes.navbar')
+
 <div class="container-fluid">
-	<h3>Commuter Home Page</h3>
-	<p>Welcome, <span class="capitalize">{{ Auth::user()->first_name }}!</span></p>
-	<a href="{{ route('logout') }}">Logout</a>
+		
+	<p class="text-center"><span>Welcome, {{ ucwords(Auth::user()->first_name) }}!</span></p>
+	<p class="text-center"><a href="#" class="btn btn-primary">Tap to Request Ride</a></p>
+	
+
 </div>
 @endsection

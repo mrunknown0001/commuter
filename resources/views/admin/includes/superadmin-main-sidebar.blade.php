@@ -21,12 +21,43 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Register Driver</a></li>
+            <li><a href="{{ route('admin.register.driver') }}"><i class="fa fa-circle-o"></i> Register Driver</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> View All Drivers</a></li>
           </ul>
         </li>
 
-        <li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Commuters</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> View All Commuters</a></li>
+          </ul>
+        </li>
+
+        <li class="">
+          <a href="#">
+            <i class="fa fa-motorcycle"></i> <span>Ride History</span>
+          </a>
+        </li>
+
+       <li class="">
+          <a href="#">
+            <i class="fa fa-flag"></i> <span>Reports</span>
+          </a>
+        </li>
+
+
+        <li class="">
+          <a href="#">
+            <i class="fa fa-comments"></i> <span>Feedbacks</span>
+          </a>
+        </li>
+
+<!--         <li>
           <a href="#">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
             <span class="pull-right-container">
@@ -68,7 +99,7 @@
             </li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
-        </li>
+        </li> -->
 
         <li class="{{ route('admin.activity.log') == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.activity.log') }}">
