@@ -3,14 +3,7 @@
 Route::get('/', 'LoginController@showWelcome')->name('welcome');
 
 
-Route::get('/logout', function () {
-	// logout user guard
-	Auth::logout();
-	// logout admin guard
-	Auth::guard('admin')->logout();
-
-	return redirect()->route('welcome');
-})->name('logout');
+Route::get('/logout', 'LoginController@logout')->name('logout');
 
 
 // Registration form for commuter only

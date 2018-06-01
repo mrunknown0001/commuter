@@ -18,6 +18,47 @@
         <!-- Main content -->
     <section class="content">
 
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Action</th>
+              <th>Time &amp; Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($logs as $log)
+            <tr>
+              <td>
+              @if($log->admin_id != null)
+                {{ $log->admin->first_name }}
+                {{ $log->admin->last_name }}
+              @else
+                {{ $log->user->first_name }}
+                {{ $log->user->last_name }}
+              @endif
+              </td>
+              <td>
+                {{ $log->action_performed }}
+              </td>
+              <td>
+                {{ date('l, F j, Y g:i:s a', strtotime($log->performed_on)) }}
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+
+        {{--<p class="text-center"><strong>{{ $logs->count() + $logs->perPage() * ($logs->currentPage() - 1) }} of {{ $logs->total() }} records</strong></p>--}}
+
+            <!-- Page Number render() -->
+            <div class="text-center"> {{ $logs->links() }}</div>
+      </div>
+    </div>
+
 
     </section>
     <!-- /.content -->

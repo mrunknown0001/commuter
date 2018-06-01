@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Http\Controllers\GeneralController;
 
 class AdminLoginController extends Controller
 {
@@ -36,6 +37,9 @@ class AdminLoginController extends Controller
 
     	// Auth::guard('admin')->attempt($credentials)
     	if(Auth::guard('admin')->attempt(['username' => $username, 'password' => $password])) {
+            // add log here
+            GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Login', now());
+
             return redirect()->route('admin.dashboard');
         }
 

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\GeneralController;
 use Auth;
 
 class LoginController extends Controller
 {
 
+    // method to show login form
 	public function showLogin()
 	{
 		// check if the user is authenticated
@@ -20,6 +22,8 @@ class LoginController extends Controller
 		}
 	}
     
+
+    // post method use to login users
     public function postLogin(Request $request)
     {
 
@@ -37,8 +41,11 @@ class LoginController extends Controller
 
     	// authenticate user
     	if(Auth::attempt(['identification' => $id, 'password' => $password])) {
+            // add log here
+            GeneralController::activity_log(Auth::user()->id, null, 'Login', now());
     		// login success
     		// redirect to homepage of the user based on its user type
+             
             return $this->check_user();
     	}
 
@@ -48,7 +55,6 @@ class LoginController extends Controller
     	return redirect()->route('login')->with('error', 'No User Found!');
     	
     }
-
 
 
     // check authenticated user in accessing login page
@@ -62,6 +68,26 @@ class LoginController extends Controller
     }
 
 
+
+    // logout function for all users
+    public function logout()
+    {
+        if(Auth::guard('admin')->check()) {
+            // add log here
+            GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Logout', now());
+            // logout admin guard
+            Auth::guard('admin')->logout();
+        }
+        else {
+            // add log here
+            GeneralController::activity_log(Auth::user()->id, null, 'Logout', now());
+
+            // logout user guard
+            Auth::logout();
+        }
+        
+        return redirect()->route('welcome');
+    }
 
 
     // this method is use to redirect to home page of the type of the authenticated user

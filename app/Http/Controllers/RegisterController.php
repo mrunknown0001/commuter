@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\GeneralController;
 
 class RegisterController extends Controller
 {
@@ -62,6 +63,8 @@ class RegisterController extends Controller
     	$user->save();
 
 
+        // add log here
+        GeneralController::activity_log($user->id, null, 'Register', now());
     	// return to designated page
     	// with success message
     	return redirect()->route('register')->with('success', 'Registration Successful! You can now login!');
