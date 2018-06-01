@@ -115,6 +115,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                                <a href="{{ route('welcome') }}" class="btn btn-danger">
+                                Cancel</a>
                             </div>
                         </div>
                     </form>

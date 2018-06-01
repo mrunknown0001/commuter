@@ -10,10 +10,10 @@
       <h1>
         Activity Log
       </h1>
-      <!-- <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol> -->
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-history"></i> Home</a></li>
+        <li class="active">Activity Log</li>
+      </ol>
     </section>
         <!-- Main content -->
     <section class="content">
