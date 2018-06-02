@@ -44,6 +44,12 @@ Route::group(['prefix' => 'c'], function () {
 	// profile of the commuter
 	Route::get('/profile', 'CommuterController@profile')->name('commuter.profile');
 
+	// route to go to update profile view
+	Route::get('/profile/update', 'CommuterController@updateProfile')->name('commuter.profile.update');
+
+	// route to update profile of the user
+	Route::post('/profile/update', 'CommuterController@postUpdateProfile')->name('commuter.profile.update.post');
+
 	// route to go to notification
 	Route::get('/notification', 'CommuterController@notification')->name('commuter.notification');
 

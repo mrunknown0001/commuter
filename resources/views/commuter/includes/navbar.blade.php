@@ -54,10 +54,12 @@
           <a href="{{ route('commuter.notification') }}"><i class="fa fa-bell"></i> Notification</a>
         </li>
 
-        <li class="dropdown {{ route('commuter.profile') == url()->current() ? 'active' : '' }}">
+        <li class="dropdown {{ route('commuter.profile') == url()->current() || route('commuter.profile.update') == url()->current() ? 'active' : '' }}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('commuter.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#"><i class="fa fa-key"></i> Change Password</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>

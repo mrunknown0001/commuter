@@ -27,6 +27,27 @@ class CommuterController extends Controller
         return view('commuter.profile');
     }
 
+    // method to view update profile form
+    public function updateProfile()
+    {
+        return view('commuter.update-profile');
+    }
+
+
+    // method to update profile of the user
+    public function postUpdateProfile(Request $request)
+    {
+        return $request;
+
+        // validate request
+
+        // check if existing unique values from database
+
+        // update/save the profile of the user
+
+        // redirect to the profile page
+    }
+
 
     // method to view notifications
     public function notification()
