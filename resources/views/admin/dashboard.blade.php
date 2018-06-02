@@ -55,7 +55,7 @@
             <div class="inner">
               <h3>44</h3>
 
-              <p>Registered Users</p>
+              <p>Registered Commuters</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>

@@ -18,7 +18,37 @@
         <!-- Main content -->
     <section class="content">
 
- 
+
+    <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($commuters as $commuter)
+              <tr>
+                <td>
+                  {{ strtoupper($commuter->last_name . ', ' . $commuter->first_name) }}
+                </td>
+                <td>
+                  {{ $commuter->identification }}
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+
+          {{--<p class="text-center"><strong>{{ $commuters->count() + $commuters->perPage() * ($commuters->currentPage() - 1) }} of {{ $commuters->total() }} records</strong></p>--}}
+
+              <!-- Page Number render() -->
+              <div class="text-center"> {{ $commuters->links() }}</div>
+        </div>
+      </div> 
 
 
     </section>

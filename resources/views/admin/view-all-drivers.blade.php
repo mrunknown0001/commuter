@@ -18,7 +18,36 @@
         <!-- Main content -->
     <section class="content">
 
- 
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($drivers as $driver)
+              <tr>
+                <td>
+                  {{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}
+                </td>
+                <td>
+                  {{ $driver->identification }}
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+
+          {{--<p class="text-center"><strong>{{ $drivers->count() + $drivers->perPage() * ($drivers->currentPage() - 1) }} of {{ $drivers->total() }} records</strong></p>--}}
+
+              <!-- Page Number render() -->
+              <div class="text-center"> {{ $drivers->links() }}</div>
+        </div>
+      </div>
 
 
     </section>

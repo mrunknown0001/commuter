@@ -44,6 +44,15 @@ Route::group(['prefix' => 'c'], function () {
 	// profile of the commuter
 	Route::get('/profile', 'CommuterController@profile')->name('commuter.profile');
 
+	// route to go to notification
+	Route::get('/notification', 'CommuterController@notification')->name('commuter.notification');
+
+	// route to request ride for commuter
+	Route::get('/ride/request', 'CommuterController@requestRide')->name('commuter.request.ride');
+
+	// route to view ride history of the commuter
+	Route::get('/ride/history', 'CommuterController@rideHistory')->name('commuter.ride.history');
+
 });
 
 
@@ -54,6 +63,17 @@ Route::group(['prefix' => 'c'], function () {
 Route::group(['prefix' => 'd'], function () {
 	// home page of the drivers
 	Route::get('/home', 'DriverController@home')->name('driver.home');
+
+	// route use to view profile of the driver
+	Route::get('/profile', 'DriverController@profile')->name('driver.profile');
+
+
+	// route use to view ride request
+	Route::get('/ride/request', 'DriverController@rideRequest')->name('driver.ride.request');
+
+
+	// route use to view ride history of the driver
+	Route::get('/ride/history', 'DriverController@rideHistory')->name('driver.ride.history');
 });
 
 

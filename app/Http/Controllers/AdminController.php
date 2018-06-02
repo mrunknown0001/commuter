@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+
 use App\Http\Controllers\GeneralController;
+
 use App\ActivityLog;
 use App\User;
 
@@ -92,14 +94,26 @@ class AdminController extends Controller
     // method use to view all driver
     public function viewAllDriver()
     {
-        return view('admin.view-all-drivers');
+        // get all drivers in pagination form
+        $drivers = User::where('user_type', 2)
+                        ->where('active', 1)
+                        ->orderBy('last_name', 'asc')
+                        ->paginate(15);
+
+        return view('admin.view-all-drivers', ['drivers' => $drivers]);
     }
 
 
     // method use to view all commuters
     public function viewAllCommuters()
     {
-        return view('admin.view-all-commuters');
+        // get all drivers in pagination form
+        $commuters = User::where('user_type', 1)
+                        ->where('active', 1)
+                        ->orderBy('last_name', 'asc')
+                        ->paginate(15);
+
+        return view('admin.view-all-commuters', ['commuters' => $commuters]);
     }
 
 

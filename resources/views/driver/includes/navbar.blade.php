@@ -8,22 +8,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ route('commuter.home') }}"><strong>Driver</strong></a>
+      <a class="navbar-brand" href="{{ route('driver.home') }}"><strong>Driver</strong></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="{{ route('commuter.home') == url()->current() ? 'active' : '' }}"><a href="{{ route('commuter.home') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li class="{{ route('driver.home') == url()->current() ? 'active' : '' }}"><a href="{{ route('driver.home') }}"><i class="fa fa-home"></i> Home</a></li>
         
 
 
-        <li class="dropdown">
+        <li class="dropdown {{ route('driver.ride.request') == url()->current() || route('driver.ride.history') ? 'active' : '' }}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-motorcycle"></i> Ride <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Accept Ride</a></li>
+            <li><a href="{{ route('driver.ride.request') }}">Ride Requests</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Ride History</a></li>
+            <li><a href="{{ route('driver.ride.history') }}">Ride History</a></li>
           </ul>
         </li>
 
@@ -51,10 +51,10 @@
 
       <ul class="nav navbar-nav navbar-right">
         <!-- <li><a href="#"><i class="fa fa-bell"></i> Notification</a></li> -->
-        <li class="dropdown">
+        <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+            <li><a href="{{ route('driver.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>

@@ -17,4 +17,27 @@ class DriverController extends Controller
     {
     	return view('driver.home');
     }
+
+
+
+    // method to view profile of the driver
+    public function profile()
+    {
+    	return view('driver.profile');
+    }
+
+
+
+    // method to view ride request
+    public function rideRequest()
+    {
+    	return view('driver.ride-request');
+    }
+
+
+    // method use to view ride history
+    public function rideHistory()
+    {
+    	return view('driver.ride-history');
+    }
 }

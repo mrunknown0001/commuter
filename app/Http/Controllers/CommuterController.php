@@ -23,6 +23,28 @@ class CommuterController extends Controller
     // method use to show/view profile of the commuter
     public function profile()
     {
-    	return Auth::user();
+    	// return Auth::user();
+        return view('commuter.profile');
+    }
+
+
+    // method to view notifications
+    public function notification()
+    {
+        return view('commuter.notification');
+    }
+
+
+    // method use to request ride ride form
+    public function requestRide()
+    {
+        return view('commuter.request-ride');
+    }
+
+
+    // method use to view ride history of commuter
+    public function rideHistory()
+    {
+        return view('commuter.ride-history');
     }
 }
