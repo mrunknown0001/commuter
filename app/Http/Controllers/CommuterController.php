@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\GeneralController;
 use Auth;
 
 use App\User;
@@ -101,6 +102,9 @@ class CommuterController extends Controller
         $user->email = $email;
         $user->save();
 
+        // add log
+        GeneralController::activity_log(Auth::user()->id, null, 'Profile Update', now());
+
         // redirect to the profile page
         return redirect()->route('commuter.profile')->with('success', 'Profile Successfully Updated!');
     }
@@ -111,6 +115,40 @@ class CommuterController extends Controller
     {
         // change password view for user/commuter
         return view('commuter.change-password');
+    }
+
+
+    // method use post change password
+    public function postChangePassword(Request $request)
+    {
+        // validate request
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|min:6|confirmed|max:50'
+        ]);
+
+
+        $old_password = $request['old_password'];
+        $password = $request['password'];
+
+
+        // check if the old password matches
+        if(password_verify($old_password, Auth::user()->password)) {
+            // save the new password
+            $user = User::find(Auth::user()->id);
+            $user->password = bcrypt($password);
+            $user->save();
+
+            // add log
+            GeneralController::activity_log(Auth::user()->id, null, 'Password Change', now());
+
+            // redirect to password change form, messaging password has changed
+            return redirect()->route('commuter.change.password')->with('success', 'Password Changed!');
+        }
+        else {
+            return redirect()->route('commuter.change.password')->with('error', 'Incorrent Old Password!');
+        }
+
     }
 
 

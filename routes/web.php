@@ -53,6 +53,10 @@ Route::group(['prefix' => 'c'], function () {
 	// route to show password change for user
 	Route::get('/password/change', 'CommuterController@changePassword')->name('commuter.change.password');
 
+	// route to post  password change for user
+	Route::post('/password/change', 'CommuterController@postChangePassword')->name('commuter.change.password.post');
+
+
 	// route to go to notification
 	Route::get('/notification', 'CommuterController@notification')->name('commuter.notification');
 
