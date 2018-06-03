@@ -11,6 +11,7 @@
 	<!-- <h3 class="text-center">My Profile</h3> -->
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
+			@include('includes.all')
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<strong><i class="fa fa-user"></i> My Profile</strong>

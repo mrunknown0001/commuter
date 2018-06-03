@@ -11,11 +11,13 @@
 	<!-- <h3 class="text-center">My Profile</h3> -->
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
+			@include('includes.all')
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<strong><i class="fa fa-user"></i> Update My Profile</strong>
 				</div>
 				<div class="panel-body">
+
 					<form class="form-horizontal" action="{{ route('commuter.profile.update.post') }}" method="POST" autocomplete="off">
 						{{ csrf_field() }}
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">

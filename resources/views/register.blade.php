@@ -7,14 +7,15 @@
     <h3 class="text-center">{{ env('app_name') }}</h3>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            @include('includes.success')
+            @include('includes.error')
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Commuter Registration</strong>
                 </div>
 
                 <div class="panel-body">
-                    @include('includes.success')
-                    @include('includes.error')
+                    
                     <form class="form-horizontal" method="POST" action="{{ route('register.submit') }}" autocomplete="off">
                         {{ csrf_field() }}
 

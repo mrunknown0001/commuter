@@ -48,8 +48,17 @@ class RegisterController extends Controller
 
     	if($email != Null && count($check_email) > 0) {
     		// return to designated view/page
-    		return redirect()->route('register')->with('error', 'Email is already used!');
+    		return redirect()->route('register')->with('error', 'Email ' . $email . ' is already used!');
     	}
+
+
+        // check if the mobile number is used by other user
+        $check_mobile = User::where('mobile_number', $mobile_number)->first();
+
+        if($mobile_number != Null && count($check_mobile) > 0) {
+            // return to designated view/page
+            return redirect()->route('register')->with('error', 'Mobile Number ' . $mobile_number . ' is already used!');
+        }
 
 
     	// create user

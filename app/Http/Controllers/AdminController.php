@@ -68,6 +68,13 @@ class AdminController extends Controller
             return redirect()->route('admin.register.driver')->with('error', 'Email ' . $email . ' is already used!')->withInput();
         }
 
+        $check_mobile = User::where('mobile_number', $mobile)->first();
+
+        if($mobile != Null && count($check_mobile) > 0) {
+            // return to designated view/page
+            return redirect()->route('admin.register.driver')->with('error', 'Mobile Number ' . $mobile . ' is already used!')->withInput();
+        }
+
 
         // save/register new driver info
         // driver is the default password for driver

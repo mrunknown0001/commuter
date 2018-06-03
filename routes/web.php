@@ -50,6 +50,9 @@ Route::group(['prefix' => 'c'], function () {
 	// route to update profile of the user
 	Route::post('/profile/update', 'CommuterController@postUpdateProfile')->name('commuter.profile.update.post');
 
+	// route to show password change for user
+	Route::get('/password/change', 'CommuterController@changePassword')->name('commuter.change.password');
+
 	// route to go to notification
 	Route::get('/notification', 'CommuterController@notification')->name('commuter.notification');
 
