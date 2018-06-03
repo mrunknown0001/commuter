@@ -12,6 +12,8 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
             @include('includes.success')
+            @include('includes.error')
+          
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<strong><i class="fa fa-key"></i> Change Password</strong>

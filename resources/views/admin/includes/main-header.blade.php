@@ -39,7 +39,7 @@
                     <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="col-xs-8 text-center">
-                    <a href="#" class="btn btn-default btn-flat">Change Password</a>
+                    <a href="{{ route('admin.change.password') }}" class="btn btn-default btn-flat">Change Password</a>
                   </div>
                 </div>
                 <!-- /.row -->

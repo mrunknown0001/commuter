@@ -75,8 +75,54 @@ class AdminController extends Controller
         $admin->save();
 
 
+        // log here
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Profile Update', now());
+
         // redirect route with succes message
         return redirect()->route('admin.profile')->with('success', 'Profile Updated!');
+    }
+
+
+    // method use view change password form
+    public function changePassword()
+    {
+        return view('admin.change-password');
+    }
+
+
+    // method use to post change password
+    public function postChangePassword(Request $request)
+    {
+
+        // validate form data
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|min:6|confirmed|max:50'
+        ]);
+
+        // assign values to variable
+        $old_password = $request['old_password'];
+        $password = $request['password'];
+
+
+        // check if old password match
+        if(password_verify($old_password, Auth::guard('admin')->user()->password)) {
+            // true
+            // save new password
+            $admin = Admin::find(Auth::guard('admin')->user()->id);
+            $admin->password = bcrypt($password);
+            $admin->save();
+
+            // log here
+            GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Password Change', now());
+
+
+            // redirect with success
+            return redirect()->route('admin.change.password')->with('success', 'Password changed!');
+        }
+
+        return redirect()->route('admin.change.password')->with('error', 'Incorrect Old Password');
+
     }
 
 

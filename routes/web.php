@@ -126,6 +126,14 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/profile/update', 'AdminController@postProfileUpdate')->name('admin.profile.update.post');
 
 
+	// route use to view change password form
+	Route::get('/password/change', 'AdminController@changePassword')->name('admin.change.password');
+
+
+	// route use to post change password
+	Route::post('/password/change', 'AdminController@postChangePassword')->name('admin.change.password.post');
+
+
 	Route::group(['prefix' => 'driver'], function () {
 		// add driver form
 		Route::get('/register', 'AdminController@registerDriver')->name('admin.register.driver');
