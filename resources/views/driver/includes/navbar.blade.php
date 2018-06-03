@@ -18,7 +18,7 @@
         
 
 
-        <li class="dropdown {{ route('driver.ride.request') == url()->current() || route('driver.ride.history') ? 'active' : '' }}">
+        <li class="dropdown {{ route('driver.ride.request') == url()->current() || route('driver.ride.history') == url()->current() ? 'active' : '' }}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-motorcycle"></i> Ride <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('driver.ride.request') }}">Ride Requests</a></li>
@@ -52,9 +52,11 @@
       <ul class="nav navbar-nav navbar-right">
         <!-- <li><a href="#"><i class="fa fa-bell"></i> Notification</a></li> -->
         <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }}">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('driver.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ route('driver.change.password') }}"><i class="fa fa-key"></i> Change Password</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>

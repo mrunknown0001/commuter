@@ -34,23 +34,20 @@
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-                <!-- <div class="row">
+                <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                    <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
                   </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
+                  <div class="col-xs-8 text-center">
+                    <a href="#" class="btn btn-default btn-flat">Change Password</a>
                   </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div> -->
+                </div>
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{ route('admin.profile', ['username' => Auth::guard('admin')->user()->username]) }}" class="btn btn-default btn-flat">Profile</a>
+                  <!-- <a href="{{ route('admin.profile', ['username' => Auth::guard('admin')->user()->username]) }}" class="btn btn-default btn-flat">Profile</a> -->
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Logout</a>

@@ -33,11 +33,16 @@
             <tr>
               <td>
               @if($log->admin_id != null)
-                {{ $log->admin->first_name }}
-                {{ $log->admin->last_name }}
+                {{ ucwords($log->admin->first_name) }}
+                {{ ucwords($log->admin->last_name) }}
               @else
-                {{ $log->user->first_name }}
-                {{ $log->user->last_name }}
+                {{ ucwords($log->user->first_name) }}
+                {{ ucwords($log->user->last_name) }}
+                @if($log->user->user_type == 1)
+                  :Commuter
+                @else
+                  :Driver
+                @endif
               @endif
               </td>
               <td>

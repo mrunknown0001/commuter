@@ -9,6 +9,7 @@ use App\Http\Controllers\GeneralController;
 
 use App\ActivityLog;
 use App\User;
+use App\Admin;
 
 class AdminController extends Controller
 {
@@ -27,9 +28,55 @@ class AdminController extends Controller
 
 
     // admin profile
-    public function profile($username = null)
+    public function profile()
     {
         return view('admin.profile');
+    }
+
+
+    // method use to show profile update form
+    public function profileUpdate()
+    {
+        return view('admin.update-profile');
+    }
+
+
+    // method use to post update profile
+    public function postProfileUpdate(Request $request)
+    {
+        // validate request data
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required'
+        ]);
+
+
+        // assign to variables
+        $first_name = $request['first_name'];
+        $last_name = $request['last_name'];
+        $email = $request['email'];
+
+        // check email availability
+        if($email != Auth::guard('admin')->user()->email) {
+            // check if the new email is used by other user
+            $check_email = Admin::whereEmail($email)->first();
+
+            if(count($check_email) > 0) {
+                // the new email is already used by other user
+                return redirect()->route('admin.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
+            }
+        }
+
+        // save update
+        $admin = Admin::find(Auth::guard('admin')->user()->id);
+        $admin->first_name = $first_name;
+        $admin->last_name = $last_name;
+        $admin->email = $email;
+        $admin->save();
+
+
+        // redirect route with succes message
+        return redirect()->route('admin.profile')->with('success', 'Profile Updated!');
     }
 
 

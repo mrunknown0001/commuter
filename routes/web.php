@@ -81,6 +81,21 @@ Route::group(['prefix' => 'd'], function () {
 	Route::get('/profile', 'DriverController@profile')->name('driver.profile');
 
 
+	// route use to profile update form
+	Route::get('/profile/update', 'DriverController@profileUpdate')->name('driver.profile.update');
+
+	// route use to post update profile
+	Route::post('/profile/update', 'DriverController@postProfileUpdate')->name('driver.profile.update.post');
+
+
+	// rotue use to go change password form
+	Route::get('/password/change', 'DriverController@changePassword')->name('driver.change.password');
+
+
+	// route use to post change password
+	Route::post('/password/change', 'DriverController@postChangePassword')->name('driver.change.password.post');
+
+
 	// route use to view ride request
 	Route::get('/ride/request', 'DriverController@rideRequest')->name('driver.ride.request');
 
@@ -100,7 +115,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 	// route to view profile of the admin
-	Route::get('/profile/{username}', 'AdminController@profile')->name('admin.profile');
+	Route::get('/profile', 'AdminController@profile')->name('admin.profile');
+
+
+	// route use to view profile update form
+	Route::get('/profile/update', 'AdminController@profileUpdate')->name('admin.profile.update');
+
+
+	// route use to post update profile
+	Route::post('/profile/update', 'AdminController@postProfileUpdate')->name('admin.profile.update.post');
 
 
 	Route::group(['prefix' => 'driver'], function () {
