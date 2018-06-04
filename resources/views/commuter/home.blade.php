@@ -4,7 +4,7 @@
 
 @section('content')
 	
-@include('commuter.includes.navbar')
+@include('commuter.includes.navbar2')
 
 <div class="container-fluid">
 		
@@ -15,4 +15,5 @@
 	
 
 </div>
+  
 @endsection

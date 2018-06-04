@@ -18,7 +18,7 @@ class CreateRidesTable extends Migration
             $table->string('ride_number')->unique();
             $table->integer('commuter_id')->unsigned();
             $table->foreign('commuter_id')->references('id')->on('users');
-            $table->integer('driver_id')->unsigned();
+            $table->integer('driver_id')->unsigned()->nullable();
             $table->foreign('driver_id')->references('id')->on('users');
             $table->integer('pickup_loc')->unsigned();
             $table->foreign('pickup_loc')->references('id')->on('locations');

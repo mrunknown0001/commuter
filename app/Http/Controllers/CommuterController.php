@@ -7,6 +7,7 @@ use App\Http\Controllers\GeneralController;
 use Auth;
 
 use App\User;
+use App\Location;
 
 class CommuterController extends Controller
 {
@@ -162,7 +163,18 @@ class CommuterController extends Controller
     // method use to request ride ride form
     public function requestRide()
     {
-        return view('commuter.request-ride');
+
+        // get the locations
+        $locations = Location::all();
+
+        return view('commuter.request-ride', ['locations' => $locations]);
+    }
+
+
+    // method use to post ride request
+    public function postRequestRide(Request $request)
+    {
+        return $request;
     }
 
 
