@@ -96,6 +96,10 @@ Route::group(['prefix' => 'd'], function () {
 	Route::post('/password/change', 'DriverController@postChangePassword')->name('driver.change.password.post');
 
 
+	// route use to view driver notification
+	Route::get('/notification', 'DriverController@notification')->name('driver.notification');
+
+
 	// route use to view ride request
 	Route::get('/ride/request', 'DriverController@rideRequest')->name('driver.ride.request');
 

@@ -50,7 +50,10 @@
       </form> -->
 
       <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="#"><i class="fa fa-bell"></i> Notification</a></li> -->
+        <li class="{{ route('driver.notification') == url()->current() ? 'active' : '' }}">
+          <a href="{{ route('driver.notification') }}"><i class="fa fa-bell"></i> Notification</a>
+        </li>
+
         <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
           <ul class="dropdown-menu">

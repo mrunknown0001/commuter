@@ -152,6 +152,13 @@ class DriverController extends Controller
     }
 
 
+    // method use to view notification
+    public function notification()
+    {
+        return view('driver.notification');
+    }
+
+
     // method to view ride request
     public function rideRequest()
     {
