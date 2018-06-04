@@ -175,6 +175,18 @@ class CommuterController extends Controller
     public function postRequestRide(Request $request)
     {
         return $request;
+
+        // validate request data
+
+        // assign request variables to data
+
+        // add other additional data
+
+        // other check and validation
+
+        // save ride request
+
+        // return messages
     }
 
 

@@ -16,12 +16,12 @@
                 background-color: #fff;
                 color: #636b6f;
                 font-weight: 100;
-                height: 100vh;
+                height: 80vh;
                 margin: 0;
             }
 
             .full-height {
-                height: 100vh;
+                height: 80vh;
             }
 
             .flex-center {
