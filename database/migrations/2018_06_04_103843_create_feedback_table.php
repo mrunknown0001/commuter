@@ -15,6 +15,14 @@ class CreateFeedbackTable extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('feedback_number');
+            $table->integer('commuter_id')->unsigned();
+            $table->foreign('commuter_id')->references('id')->on('users');
+            $table->integer('driver_id')->unsigned();
+            $table->foreign('driver_id')->references('id')->on('users');
+            $table->integer('ride_id')->unsigned();
+            $table->foreign('ride_id')->references('id')->on('rides');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
