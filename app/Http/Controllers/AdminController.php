@@ -23,6 +23,9 @@ class AdminController extends Controller
     // admin dashboard
     public function dashboard()
     {
+        /////////////////////////////////////////////////////
+        // get all data need to show in dashboard of admin //
+        /////////////////////////////////////////////////////
     	return view('admin.dashboard');
     }
 

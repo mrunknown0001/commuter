@@ -67,6 +67,10 @@ Route::group(['prefix' => 'c'], function () {
 	// route to submit ride request
 	Route::post('/ride/request', 'CommuterController@postRequestRide')->name('commuter.request.ride.post');
 
+
+	// route use to view active request ride
+	Route::get('/ride/request/active', 'CommuterController@activeRideRequest')->name('commuter.active.ride.request');
+
 	// route to view ride history of the commuter
 	Route::get('/ride/history', 'CommuterController@rideHistory')->name('commuter.ride.history');
 

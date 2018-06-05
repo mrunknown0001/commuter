@@ -26,6 +26,7 @@ class CreateReportsTable extends Migration
             $table->foreign('driver_cancel_id')->references('id')->on('driver_cancels');
             $table->integer('commuter_cancel_id')->unsigned()->nullable();
             $table->foreign('commuter_cancel_id')->references('id')->on('commuter_cancels');
+            $table->tinyInteger('viewed')->default(0);
             $table->timestamps();
         });
     }

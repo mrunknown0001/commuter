@@ -8,6 +8,13 @@ use Auth;
 
 use App\User;
 use App\Location;
+use App\Ride;
+use App\Passenger;
+use App\CommuterCancel;
+use App\Report;
+use App\Feedback;
+use App\Notification;
+
 
 class CommuterController extends Controller
 {
@@ -164,6 +171,20 @@ class CommuterController extends Controller
     public function requestRide()
     {
 
+        // check if the commuter has a ride
+        $active_ride = Ride::where('commuter_id', Auth::user()->id)
+                        ->where('driver_id', null)
+                        ->where('cancelled', 0)
+                        ->where('finished', 0)
+                        ->first();
+
+        if(count($active_ride) > 0) {
+            return redirect()->route('commuter.active.ride.request');
+        }
+
+        // verify the time interval if the commuter before, it can request a ride again (20mins)
+
+
         // get the locations
         $locations = Location::all();
 
@@ -171,22 +192,133 @@ class CommuterController extends Controller
     }
 
 
+
     // method use to post ride request
     public function postRequestRide(Request $request)
     {
-        return $request;
 
         // validate request data
+        $request->validate([
+            'pickup' => 'required',
+            'dropoff' => 'required',
+            'passenger1_id' => 'required',
+            'passenger1_name' => 'required'
+        ]);
 
         // assign request variables to data
+        $pickup = $request['pickup'];
+        $dropoff = $request['dropoff'];
+        $commuter = $request['commuter'];
+        $passenger1_id = $request['passenger1_id']; // Auth::user()->identification
+        $passenger2_id = $request['passenger2_id'];
+        $passenger3_id = $request['passenger3_id'];
+        $passenger4_id = $request['passenger4_id'];
+
+        $passenger1_name = $request['passenger1_name']; // Auth::user()->first_name . ' ' . Auth::user()->last_name
+        $passenger2_name = $request['passenger2_name'];
+        $passenger3_name = $request['passenger3_name'];
+        $passenger4_name = $request['passenger4_name'];
 
         // add other additional data
 
+
         // other check and validation
+        // pickup and dropoff is 1 and 2 only
+
+
+        // compute the total payment for the driver
+        // check if passenger 2 is on and 3,4 is off
+        if(!empty($passenger2_id) && empty($passenger3_id) && empty($passenger4_id)) {
+            // 30 total
+            // 15 each
+            $total = 30;
+            $each = 15;
+        }
+        else if(!empty($passenger2_id) && !empty($passenger3_id) && empty($passenger4_id)) {
+            // 30 total
+            // 10 each
+            $total = 30;
+            $each = 10;
+        }
+        else if(!empty($passenger2_id) && !empty($passenger3_id) && !empty($passenger4_id)) {
+            // 40 total
+            // 10 each
+            $total = 40;
+            $each = 10;
+        }
+        if(empty($passenger2_id) && !empty($passenger3_id) && empty($passenger4_id)) {
+            // 30 total
+            // 15 each
+            $total = 30;
+            $each = 15;
+        }
+        else if(empty($passenger2_id) && !empty($passenger3_id) && !empty($passenger4_id)) {
+            // 30 total
+            // 10 each
+            $total = 30;
+            $each = 10;
+        }
+        if(empty($passenger2_id) && empty($passenger3_id) && !empty($passenger4_id)) {
+            // 30 total
+            // 15 each
+            $total = 30;
+            $each = 15;
+        }
+        else if(!empty($passenger2_id) && empty($passenger3_id) && !empty($passenger4_id)) {
+            // 30 total
+            // 10 each
+            $total = 30;
+            $each = 10;
+        }
+        else {
+            $total = 30;
+            $each = 30;
+        }
+
+
+        // generate unique reference number for ride
+        // method from GeneralController
+        $ride_number = GeneralController::generate_ride_number();
+
 
         // save ride request
+        $ride = new Ride();
+        $ride->ride_number = $ride_number;
+        $ride->commuter_id = $commuter;
+        $ride->pickup_loc = $pickup;
+        $ride->drop_off_loc = $dropoff;
+        $ride->payment = $total;
+        $ride->each = $each;
+        $ride->save();
 
-        // return messages
+        // add passengers
+        $p = new Passenger();
+        $p->ride_id = $ride->id;
+        $p->passenger1 = $passenger1_id;
+        $p->passenger2 = $passenger2_id;
+        $p->passenger3 = $passenger3_id;
+        $p->passenger4 = $passenger4_id;
+        $p->passenger1_name = $passenger1_name;
+        $p->passenger2_name = $passenger2_name;
+        $p->passenger3_name = $passenger3_name;
+        $p->passenger4_name = $passenger4_name;
+        $p->save();
+
+        // add activity log record
+        GeneralController::activity_log(Auth::user()->id, null, 'Requested Ride', now());
+
+        // if posible notification
+
+        // return messages to the active ride of the commuter
+        return redirect()->route('commuter.active.ride.request')->with('success', 'Request Ride Posted!');
+
+    }
+
+
+    // method to view active request ride
+    public function activeRideRequest()
+    {
+        return view('commuter.active-ride-request');
     }
 
 

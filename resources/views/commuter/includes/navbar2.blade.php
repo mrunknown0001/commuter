@@ -18,12 +18,12 @@
         <li class="{{ route('commuter.home') == url()->current() ? 'active' : '' }}"><a href="{{ route('commuter.home') }}"><i class="fa fa-home"></i> Home</a></li>
 
 
-        <li class="dropdown {{ route('commuter.request.ride') == url()->current() || route('commuter.ride.history') == url()->current() ? 'active' : '' }}">
+        <li class="dropdown {{ route('commuter.request.ride') == url()->current() || route('commuter.ride.history') == url()->current() || route('commuter.active.ride.request') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-motorcycle"></i> Ride <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('commuter.request.ride') }}">Request Ride</a></li>
-            <!-- <li role="separator" class="divider"></li>
-            <li><a href="#">Active Ride</a></li> -->
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ route('commuter.active.ride.request') }}">Active Ride Request</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('commuter.ride.history') }}">Ride History</a></li>
           </ul>

@@ -9,7 +9,7 @@
 <div class="container-fluid">
 		
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<strong>Request Ride Form</strong>
@@ -18,7 +18,8 @@
 	                <form class="form-horizontal" method="POST" action="{{ route('commuter.request.ride.post') }}" autocomplete="off">
 	                    {{ csrf_field() }}
 
-
+						<input type="hidden" name="commuter" value="{{ Auth::user()->id }}">
+						
 	                    <div class="form-group">
 	                        <label for="pickup" class="col-md-3 control-label">From</label>
 
@@ -62,30 +63,75 @@
 	                    </div>
 
 	                    <div class="form-group">
-	                        <label for="passenger1" class="col-md-3 control-label">Passenger 1 &nbsp;</label>
+	                        <label for="passenger1_name" class="col-md-3 control-label">Passenger 1 Name &nbsp;</label>
 
 	                        <div class="col-md-9">
-	                            <input id="passenger1" type="text" class="form-control" value="{{ Auth::user()->identification }}" required disabled>
+	                            <input id="passenger1_name" type="text" class="form-control" value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" required disabled>
 								
-								<input type="hidden" name="passenger1" value="{{ Auth::user()->identification }}">
+								<input type="hidden" name="passenger1_name" value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}">
 
-	                            @if ($errors->has('passenger1'))
+	                            @if ($errors->has('passenger1_name'))
 	                                <span class="help-block">
-	                                    <strong>{{ $errors->first('passenger1') }}</strong>
+	                                    <strong>{{ $errors->first('passenger1_name') }}</strong>
 	                                </span>
 	                            @endif
 	                        </div>
 	                    </div>
 
 	                    <div class="form-group">
-	                        <label for="passenger2" class="col-md-3 control-label">Passenger 2 &nbsp;</label>
+	                        <label for="passenger1_id" class="col-md-3 control-label">Passenger 1 ID &nbsp;</label>
 
 	                        <div class="col-md-9">
-	                            <input id="passenger2" type="text" class="form-control" name="passenger2" value="">
+	                            <input id="passenger1_id" type="text" class="form-control" value="{{ Auth::user()->identification }}" required disabled>
+								
+								<input type="hidden" name="passenger1_id" value="{{ Auth::user()->identification }}">
 
-	                            @if ($errors->has('passenger2'))
+	                            @if ($errors->has('passenger1_id'))
 	                                <span class="help-block">
-	                                    <strong>{{ $errors->first('passenger2') }}</strong>
+	                                    <strong>{{ $errors->first('passenger1_id') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>
+
+	                    <div class="form-group">
+	                        <label for="passenger2_name" class="col-md-3 control-label">Passenger 2 Name &nbsp;</label>
+
+	                        <div class="col-md-9">
+	                            <input id="passenger2_name" type="text" class="form-control" name="passenger2_name" value="">
+
+	                            @if ($errors->has('passenger2_name'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('passenger2_name') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>	
+
+
+	                    <div class="form-group">
+	                        <label for="passenger2_id" class="col-md-3 control-label">Passenger 2 ID &nbsp;</label>
+
+	                        <div class="col-md-9">
+	                            <input id="passenger2_id" type="text" class="form-control" name="passenger2_id" value="">
+
+	                            @if ($errors->has('passenger2_id'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('passenger2_id') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>
+
+	                    <div class="form-group">
+	                        <label for="passenger3_name" class="col-md-3 control-label">Passenger 3 Name &nbsp;</label>
+
+	                        <div class="col-md-9">
+	                            <input id="passenger3_name" type="text" class="form-control" name="passenger3_name" >
+
+	                            @if ($errors->has('passenger3_name'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('passenger3_name') }}</strong>
 	                                </span>
 	                            @endif
 	                        </div>
@@ -93,14 +139,28 @@
 
 
 	                    <div class="form-group">
-	                        <label for="passenger3" class="col-md-3 control-label">Passenger 3 &nbsp;</label>
+	                        <label for="passenger3_id" class="col-md-3 control-label">Passenger 3 ID &nbsp;</label>
 
 	                        <div class="col-md-9">
-	                            <input id="passenger3" type="text" class="form-control" name="passenger3" >
+	                            <input id="passenger3_id" type="text" class="form-control" name="passenger3_id" >
 
-	                            @if ($errors->has('passenger3'))
+	                            @if ($errors->has('passenger3_id'))
 	                                <span class="help-block">
-	                                    <strong>{{ $errors->first('passenger3') }}</strong>
+	                                    <strong>{{ $errors->first('passenger3_id') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>
+
+	                    <div class="form-group">
+	                        <label for="passenger4_name" class="col-md-3 control-label">Passenger 4 Name &nbsp;</label>
+
+	                        <div class="col-md-9">
+	                            <input id="passenger4_name" type="text" class="form-control" name="passenger4_name" >
+
+	                            @if ($errors->has('passenger4_name'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('passenger4_name') }}</strong>
 	                                </span>
 	                            @endif
 	                        </div>
@@ -108,14 +168,14 @@
 
 
 	                    <div class="form-group">
-	                        <label for="passenger4" class="col-md-3 control-label">Passenger 4 &nbsp;</label>
+	                        <label for="passenger4_id" class="col-md-3 control-label">Passenger 4 ID &nbsp;</label>
 
 	                        <div class="col-md-9">
-	                            <input id="passenger4" type="text" class="form-control" name="passenger4" >
+	                            <input id="passenger4_id" type="text" class="form-control" name="passenger4_id" >
 
-	                            @if ($errors->has('passenger4'))
+	                            @if ($errors->has('passenger4_id'))
 	                                <span class="help-block">
-	                                    <strong>{{ $errors->first('passenger4') }}</strong>
+	                                    <strong>{{ $errors->first('passenger4_id') }}</strong>
 	                                </span>
 	                            @endif
 	                        </div>
@@ -125,7 +185,7 @@
 	                    <div class="form-group">
 	                        <div class="col-md-6 col-md-offset-3">
 	                            <button type="submit" class="btn btn-primary">
-	                                Finish &amp; Submit Request
+	                                Finalized &amp; Submit Request
 	                            </button>
 	                        </div>
 	                    </div>

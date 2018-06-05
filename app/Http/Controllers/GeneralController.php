@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\ActivityLog;
+use App\Ride;
 
 class GeneralController extends Controller
 {
@@ -21,4 +22,30 @@ class GeneralController extends Controller
     	$log->performed_on = $datetime;
     	$log->save();
     }
+
+
+
+    // method to generate unique reference number for rides
+    public static function generate_ride_number()
+    {
+        $number = 'r_' . mt_rand(000000, 999999) . uniqid(); // better than rand()
+
+        // call the same function if the barcode exists already
+        if (self::rideNumberExists($number)) {
+            return self::generate_ride_number();
+        }
+
+        // otherwise, it's valid and can be used
+        return  $number;
+    }
+
+
+    // method use to check the existence of reference number in database
+    private static function rideNumberExists($number) {
+        // query the database and return a boolean
+        // for instance, it might look like this in Laravel
+        return Ride::whereRideNumber($number)->exists();
+    }
+
+
 }

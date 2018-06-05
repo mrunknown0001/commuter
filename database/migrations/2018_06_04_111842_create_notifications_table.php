@@ -17,10 +17,12 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->integer('to')->unsigned();
             $table->foreign('to')->references('id')->on('users');
-            $table->tinyInteger('type'); // request ride accepted, ride cancelled by driver or commuter, etc
+            $table->string('type'); // request ride accepted, ride cancelled by driver or commuter, etc
             $table->integer('ride_id')->unsigned()->nullable();
             $table->foreign('ride_id')->references('id')->on('rides');
             $table->string('message')->nullable();
+            $table->tinyInteger('viewed')->default(0);
+            $table->string('url')->nullable(); // name of the route
             $table->timestamps();
         });
     }

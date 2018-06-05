@@ -24,18 +24,17 @@ class CreateRidesTable extends Migration
             $table->foreign('pickup_loc')->references('id')->on('locations');
             $table->integer('drop_off_loc')->unsigned();
             $table->foreign('drop_off_loc')->references('id')->on('locations');
-            $table->integer('passenger1')->nullable();
-            $table->integer('passenger2')->nullable();
-            $table->integer('passenger3')->nullable();
-            $table->integer('passenger4')->nullable();
             $table->integer('payment');
-            $table->tinyInteger('finished')->default(1);
+            $table->integer('each');
+            $table->tinyInteger('finalized')->default(1);
             $table->tinyInteger('accepted')->default(0);
             $table->timestamp('accepted_at')->nullable();
             $table->tinyInteger('current')->default(0); // same as with pickup
             $table->timestamp('current_at')->nullable();
             $table->tinyInteger('drop_off')->default(0);
             $table->timestamp('drop_off_at')->nullable();
+            $table->tinyInteger('cancelled')->default(0);
+            $table->tinyInteger('finished')->default(0);
             $table->timestamps();
         });
     }

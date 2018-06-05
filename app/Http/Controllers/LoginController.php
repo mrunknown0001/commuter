@@ -84,7 +84,7 @@ class LoginController extends Controller
             // logout admin guard
             Auth::guard('admin')->logout();
         }
-        else {
+        else if(Auth::check()) {
             // add log here
             GeneralController::activity_log(Auth::user()->id, null, 'Logout', now());
 
