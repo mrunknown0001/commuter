@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => 'Cruz',
                 'identification' => '11111',
                 'user_type' => 1,
+                'mobile_number' => '09156111111',
                 'password' => bcrypt('commuter')
             ],
             [
@@ -50,6 +51,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => 'Dela Cruz',
                 'identification' => '22222',
                 'user_type' => 1,
+                'mobile_number' => '09156222222',
                 'password' => bcrypt('commuter')
             ],
             [
@@ -57,6 +59,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => 'Leon',
                 'identification' => '55555',
                 'user_type' => 2,
+                'mobile_number' => '09106333333',
                 'password' => bcrypt('driver')
             ],
             [
@@ -64,6 +67,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => 'Driver',
                 'identification' => '99999',
                 'user_type' => 2,
+                'mobile_number' => '09106444444',
                 'password' => bcrypt('driver')
             ]
         ]);

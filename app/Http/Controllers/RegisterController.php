@@ -29,7 +29,7 @@ class RegisterController extends Controller
     		'first_name' => 'required|max:255',
     		'last_name' => 'required|max:255',
     		'identification' => 'required|unique:users|max:20',
-    		'mobile_number' => 'max:11',
+    		'mobile_number' => 'required|max:11',
     		'password' => 'required|min:6|confirmed|max:50'
     	]);
 
@@ -39,17 +39,17 @@ class RegisterController extends Controller
     	$last_name = $request['last_name'];
     	$id = $request['identification'];
     	$mobile_number = $request['mobile_number'];
-    	$email = $request['email'];
+    	// $email = $request['email'];
     	$password = bcrypt($request['password']);
 
 
     	// check if there is existing email used
-    	$check_email = User::whereEmail($email)->first();
+    	// $check_email = User::whereEmail($email)->first();
 
-    	if($email != Null && count($check_email) > 0) {
-    		// return to designated view/page
-    		return redirect()->route('register')->with('error', 'Email ' . $email . ' is already used!');
-    	}
+    	// if($email != Null && count($check_email) > 0) {
+    	// 	// return to designated view/page
+    	// 	return redirect()->route('register')->with('error', 'Email ' . $email . ' is already used!');
+    	// }
 
 
         // check if the mobile number is used by other user
@@ -67,7 +67,7 @@ class RegisterController extends Controller
     	$user->last_name = $last_name;
     	$user->identification = $id;
     	$user->mobile_number = $mobile_number;
-    	$user->email = $email;
+    	// $user->email = $email;
     	$user->password = $password;
     	$user->save();
 

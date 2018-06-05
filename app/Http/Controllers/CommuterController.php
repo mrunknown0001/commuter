@@ -53,14 +53,15 @@ class CommuterController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'identification' => 'required'
+            'identification' => 'required',
+            'mobile_number' => 'required'
         ]);
 
         // set request values to variables
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
         $id = $request['identification'];
-        $email = $request['email'];
+        // $email = $request['email'];
         $mobile_number = $request['mobile_number'];
 
         // check if existing unique values from database
@@ -90,15 +91,15 @@ class CommuterController extends Controller
         }
 
         // email
-        if($email != Auth::user()->email) {
-            // check if the new email is used by other user
-            $check_email = User::whereEmail($email)->first();
+        // if($email != Auth::user()->email) {
+        //     // check if the new email is used by other user
+        //     $check_email = User::whereEmail($email)->first();
 
-            if(count($check_email) > 0) {
-                // the new email is already used by other user
-                return redirect()->route('commuter.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
-            }
-        }
+        //     if(count($check_email) > 0) {
+        //         // the new email is already used by other user
+        //         return redirect()->route('commuter.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
+        //     }
+        // }
 
 
         // update/save the profile of the user
@@ -107,7 +108,7 @@ class CommuterController extends Controller
         $user->last_name = $last_name;
         $user->identification = $id;
         $user->mobile_number = $mobile_number;
-        $user->email = $email;
+        // $user->email = $email;
         $user->save();
 
         // add log

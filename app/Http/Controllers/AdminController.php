@@ -57,24 +57,24 @@ class AdminController extends Controller
         // assign to variables
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
-        $email = $request['email'];
+        // $email = $request['email'];
 
         // check email availability
-        if($email != Auth::guard('admin')->user()->email) {
-            // check if the new email is used by other user
-            $check_email = Admin::whereEmail($email)->first();
+        // if($email != Auth::guard('admin')->user()->email) {
+        //     // check if the new email is used by other user
+        //     $check_email = Admin::whereEmail($email)->first();
 
-            if(count($check_email) > 0) {
-                // the new email is already used by other user
-                return redirect()->route('admin.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
-            }
-        }
+        //     if(count($check_email) > 0) {
+        //         // the new email is already used by other user
+        //         return redirect()->route('admin.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
+        //     }
+        // }
 
         // save update
         $admin = Admin::find(Auth::guard('admin')->user()->id);
         $admin->first_name = $first_name;
         $admin->last_name = $last_name;
-        $admin->email = $email;
+        // $admin->email = $email;
         $admin->save();
 
 
@@ -144,7 +144,8 @@ class AdminController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'identification' => 'required|unique:users'
+            'identification' => 'required|unique:users',
+            'mobile_number' => 'required'
         ]);
 
         // store data in varabiels
@@ -152,17 +153,17 @@ class AdminController extends Controller
         $last_name = $request['last_name'];
         $id = $request['identification'];
         $mobile = $request['mobile_number'];
-        $email = $request['email'];
+        // $email = $request['email'];
 
 
         // other check
         // check if email/mobile number is already used
-        $check_email = User::whereEmail($email)->first();
+        // $check_email = User::whereEmail($email)->first();
 
-        if($email != Null && count($check_email) > 0) {
-            // return to designated view/page
-            return redirect()->route('admin.register.driver')->with('error', 'Email ' . $email . ' is already used!')->withInput();
-        }
+        // if($email != Null && count($check_email) > 0) {
+        //     // return to designated view/page
+        //     return redirect()->route('admin.register.driver')->with('error', 'Email ' . $email . ' is already used!')->withInput();
+        // }
 
         $check_mobile = User::where('mobile_number', $mobile)->first();
 
@@ -180,7 +181,7 @@ class AdminController extends Controller
         $driver->last_name = $last_name;
         $driver->identification = $id;
         $driver->mobile_number = $mobile;
-        $driver->email = $email;
+        // $driver->email = $email;
         $driver->user_type = 2;
         $driver->password = bcrypt('driver'); // driver is the default password for driver
         $driver->save();
