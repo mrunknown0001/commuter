@@ -76,6 +76,53 @@
                             </div>
                         </div>
 
+
+
+                        <div class="form-group{{ $errors->has('body_number') ? ' has-error' : '' }}">
+                            <label for="body_number" class="col-md-4 control-label">Body Number</label>
+
+                            <div class="col-md-6">
+                                <input id="body_number" type="text" class="form-control" name="body_number" value="{{ Auth::user()->driver_info->body_number }}" required>
+
+                                @if ($errors->has('body_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('body_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('plate_number') ? ' has-error' : '' }}">
+                            <label for="plate_number" class="col-md-4 control-label">Plate Number</label>
+
+                            <div class="col-md-6">
+                                <input id="plate_number" type="text" class="form-control" name="plate_number" value="{{ Auth::user()->driver_info->plate_number }}" required>
+
+                                @if ($errors->has('plate_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('plate_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('operator_name') ? ' has-error' : '' }}">
+                            <label for="operator_name" class="col-md-4 control-label">Operator Name</label>
+
+                            <div class="col-md-6">
+                                <input id="operator_name" type="text" class="form-control" name="operator_name" value="{{ Auth::user()->driver_info->operator_name }}" required>
+
+                                @if ($errors->has('operator_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('operator_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
 						<div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

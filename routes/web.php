@@ -40,6 +40,10 @@ Route::get('/admin/login', 'AdminLoginController@showAdminLoginForm')->name('adm
 Route::post('/admin/login', 'AdminLoginController@postAdminLogin')->name('admin.login.submit');
 
 
+// route to admin(guard registration)
+Route::get('/admin/registartion', 'RegisterController@adminRegistration')->name('admin.registartion');
+
+
 /*
  * Commuter
  * Controller Protected Middleware auth/user, commuter middleware

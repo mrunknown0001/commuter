@@ -24,6 +24,8 @@
 					<p><strong>Mobile Number: {{ Auth::user()->mobile_number == null ? 'Null' : Auth::user()->mobile_number }}</strong></p>
 					<hr>
 					<p><strong>Body Number: {{ Auth::user()->driver_info->body_number }}</strong></p>
+					<p><strong>Plate Number: {{ Auth::user()->driver_info->plate_number }}</strong></p>
+					<p><strong>Operator Name: {{ Auth::user()->driver_info->operator_name }}</strong></p>
 
 
 					<a href="{{ route('driver.profile.update') }}" class="btn btn-primary">Update Profile</a>

@@ -62,6 +62,22 @@
                         </div>
 
 
+                        <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
+                            <label for="mobile_number" class="col-md-4 control-label">Mobile Number</label>
+
+                            <div class="col-md-6">
+                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ old('mobile_number') }}" required>
+
+                                @if ($errors->has('mobile_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('mobile_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
                         <div class="form-group{{ $errors->has('body_number') ? ' has-error' : '' }}">
                             <label for="body_number" class="col-md-4 control-label">Body Number</label>
 
@@ -101,21 +117,6 @@
                                 @if ($errors->has('operator_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('operator_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
-                            <label for="mobile_number" class="col-md-4 control-label">Mobile Number</label>
-
-                            <div class="col-md-6">
-                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ old('mobile_number') }}" required>
-
-                                @if ($errors->has('mobile_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('mobile_number') }}</strong>
                                     </span>
                                 @endif
                             </div>

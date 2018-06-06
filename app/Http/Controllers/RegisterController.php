@@ -158,4 +158,13 @@ class RegisterController extends Controller
         return redirect()->route('driver.registration')->with('success', 'Registration Successful! You can now login!');
 
     }
+
+
+
+
+    // method to show admin registration
+    public function adminRegistration()
+    {
+        return view('admin-registration');
+    }
 }

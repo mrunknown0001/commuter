@@ -7,6 +7,8 @@ use App\Http\Controllers\GeneralController;
 use Auth;
 
 use App\User;
+use App\DriverInfo;
+
 class DriverController extends Controller
 {
     public function __construct()
@@ -45,7 +47,11 @@ class DriverController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'identification' => 'required'
+            'identification' => 'required',
+            'mobile_number' => 'required',
+            'body_number' => 'required',
+            'plate_number' => 'required',
+            'operator_name' => 'required'
         ]);
 
         // set request values to variables
@@ -54,6 +60,9 @@ class DriverController extends Controller
         $id = $request['identification'];
         // $email = $request['email'];
         $mobile_number = $request['mobile_number'];
+        $body_number = $request['body_number'];
+        $plate_number = $request['plate_number'];
+        $operator_name = $request['operator_name'];
 
         // check if existing unique values from database
         // check if the record for the user is the same
@@ -86,6 +95,8 @@ class DriverController extends Controller
         //         return redirect()->route('driver.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
         //     }
         // }
+        
+        // check body number, plate number
 
 
         // update/save the profile of the user
@@ -96,6 +107,13 @@ class DriverController extends Controller
         $user->mobile_number = $mobile_number;
         // $user->email = $email;
         $user->save();
+
+
+        $info = DriverInfo::find(Auth::user()->driver_info->id);
+        $info->body_number = $body_number;
+        $info->plate_number = $plate_number;
+        $info->operator_name = $operator_name;
+        $info->save();
 
         // add log
         GeneralController::activity_log(Auth::user()->id, null, 'Profile Update', now());
