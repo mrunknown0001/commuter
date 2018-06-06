@@ -50,13 +50,15 @@ class AdminController extends Controller
         // validate request data
         $request->validate([
             'first_name' => 'required',
-            'last_name' => 'required'
+            'last_name' => 'required',
+            'mobile_number' => 'required'
         ]);
 
 
         // assign to variables
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
+        $mobile_number = $request['mobile_number'];
         // $email = $request['email'];
 
         // check email availability
@@ -74,6 +76,7 @@ class AdminController extends Controller
         $admin = Admin::find(Auth::guard('admin')->user()->id);
         $admin->first_name = $first_name;
         $admin->last_name = $last_name;
+        $admin->mobile_number = $mobile_number;
         // $admin->email = $email;
         $admin->save();
 
@@ -128,70 +131,6 @@ class AdminController extends Controller
 
     }
 
-
-    // admin add driver method, show the add driver form
-    public function registerDriver()
-    {
-        return view('admin.register-driver');
-    }
-
-
-
-    // method to store new driver
-    public function postRegisterDriver(Request $request)
-    {
-        // validate data
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'identification' => 'required|unique:users',
-            'mobile_number' => 'required'
-        ]);
-
-        // store data in varabiels
-        $first_name = $request['first_name'];
-        $last_name = $request['last_name'];
-        $id = $request['identification'];
-        $mobile = $request['mobile_number'];
-        // $email = $request['email'];
-
-
-        // other check
-        // check if email/mobile number is already used
-        // $check_email = User::whereEmail($email)->first();
-
-        // if($email != Null && count($check_email) > 0) {
-        //     // return to designated view/page
-        //     return redirect()->route('admin.register.driver')->with('error', 'Email ' . $email . ' is already used!')->withInput();
-        // }
-
-        $check_mobile = User::where('mobile_number', $mobile)->first();
-
-        if($mobile != Null && count($check_mobile) > 0) {
-            // return to designated view/page
-            return redirect()->route('admin.register.driver')->with('error', 'Mobile Number ' . $mobile . ' is already used!')->withInput();
-        }
-
-
-        // save/register new driver info
-        // driver is the default password for driver
-        // user_type == 2
-        $driver = new User();
-        $driver->first_name = $first_name;
-        $driver->last_name = $last_name;
-        $driver->identification = $id;
-        $driver->mobile_number = $mobile;
-        // $driver->email = $email;
-        $driver->user_type = 2;
-        $driver->password = bcrypt('driver'); // driver is the default password for driver
-        $driver->save();
-
-        // save activity log
-        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Registered a Driver: ' . $driver->identification, now());
-
-        // redirect with message success
-        return redirect()->route('admin.register.driver')->with('success', 'Driver ' . $driver->identification . ' Successfully Registered!');
-    }
 
 
 

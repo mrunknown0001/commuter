@@ -17,9 +17,10 @@ class DatabaseSeeder extends Seeder
 
 		// admin user
         DB::table('admins')->insert([
-        	'username' => 'admin',
+        	'identification' => 'admin',
         	'first_name' => 'Admin',
         	'last_name' => 'Admin',
+            'mobile_number' => '09000000000',
         	'password' => bcrypt('control'),
         	'role' => 1,
             'active' => 1,
@@ -37,40 +38,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // commuter & driver
-        DB::table('users')->insert([
-            [
-                'first_name' => 'Juan',
-                'last_name' => 'Cruz',
-                'identification' => '11111',
-                'user_type' => 1,
-                'mobile_number' => '09156111111',
-                'password' => bcrypt('commuter')
-            ],
-            [
-                'first_name' => 'Juancho',
-                'last_name' => 'Dela Cruz',
-                'identification' => '22222',
-                'user_type' => 1,
-                'mobile_number' => '09156222222',
-                'password' => bcrypt('commuter')
-            ],
-            [
-                'first_name' => 'Jose',
-                'last_name' => 'Leon',
-                'identification' => '55555',
-                'user_type' => 2,
-                'mobile_number' => '09106333333',
-                'password' => bcrypt('driver')
-            ],
-            [
-                'first_name' => 'Chavit',
-                'last_name' => 'Driver',
-                'identification' => '99999',
-                'user_type' => 2,
-                'mobile_number' => '09106444444',
-                'password' => bcrypt('driver')
-            ]
-        ]);
+        // DB::table('users')->insert([
+        //     [
+        //         'first_name' => 'Juan',
+        //         'last_name' => 'Cruz',
+        //         'identification' => '11111',
+        //         'user_type' => 1,
+        //         'mobile_number' => '09156111111',
+        //         'password' => bcrypt('commuter')
+        //     ],
+        //     [
+        //         'first_name' => 'Juancho',
+        //         'last_name' => 'Dela Cruz',
+        //         'identification' => '22222',
+        //         'user_type' => 1,
+        //         'mobile_number' => '09156222222',
+        //         'password' => bcrypt('commuter')
+        //     ]
+        // ]);
 
 
         

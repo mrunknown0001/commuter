@@ -3,33 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Auth;
-use App\User;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GeneralController;
+
+use App\User;
+use App\DriverInfo;
 
 class RegisterController extends Controller
 {
     
-    public function showRegistration()
+    public function commuterRegistration()
     {
         // check if there is authenticated user
         if(Auth::check()) {
             return LoginController::check_user();
         }
     	// return the registration form view for the commuter
-    	return view('register');
+    	return view('commuter-registration');
     }
 
 
-    public function postRegistration(Request $request)
+    public function postCommuterRegistration(Request $request)
     {
     	// validate request data
     	$request->validate([
     		'first_name' => 'required|max:255',
     		'last_name' => 'required|max:255',
     		'identification' => 'required|unique:users|max:20',
-    		'mobile_number' => 'required|max:11',
+    		'mobile_number' => 'required|unique:users',
     		'password' => 'required|min:6|confirmed|max:50'
     	]);
 
@@ -40,7 +43,7 @@ class RegisterController extends Controller
     	$id = $request['identification'];
     	$mobile_number = $request['mobile_number'];
     	// $email = $request['email'];
-    	$password = bcrypt($request['password']);
+    	$password = $request['password'];
 
 
     	// check if there is existing email used
@@ -68,16 +71,91 @@ class RegisterController extends Controller
     	$user->identification = $id;
     	$user->mobile_number = $mobile_number;
     	// $user->email = $email;
-    	$user->password = $password;
+    	$user->password = bcrypt($password);
     	$user->save();
 
 
+        // mobile number check
+
+
         // add log here
-        GeneralController::activity_log($user->id, null, 'Register', now());
+        GeneralController::activity_log($user->id, null, 'Commuter Registration', now());
     	// return to designated page
     	// with success message
-    	return redirect()->route('register')->with('success', 'Registration Successful! You can now login!');
+    	return redirect()->route('commuter.registration')->with('success', 'Registration Successful! You can now login!');
     	
+
+    }
+
+
+
+    public function driverRegistration()
+    {
+        // check if there is authenticated user
+        if(Auth::check()) {
+            return LoginController::check_user();
+        }
+        // return the registration form view for the commuter
+        return view('driver-registration');
+    }
+
+
+
+    public function postDriverRegistration(Request $request)
+    {
+
+
+        // validate request data
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'identification' => 'required|unique:users|max:20',
+            'mobile_number' => 'required|unique:users',
+            'password' => 'required|min:6|confirmed|max:50',
+            'body_number' => 'required',
+            'plate_number' => 'required|unique:driver_infos',
+            'operator_name' => 'required'
+        ]);
+
+
+        // assign request data to variables
+        $first_name = $request['first_name'];
+        $last_name = $request['last_name'];
+        $id = $request['identification'];
+        $mobile_number = $request['mobile_number'];
+        $password = $request['password'];
+
+        $body_number = $request['body_number'];
+        $plate_number = $request['plate_number'];
+        $operator_name = $request['operator_name'];
+
+
+        // additional check
+
+
+        // save information on users and driver_infos
+        $user = new User();
+        $user->first_name = $first_name;
+        $user->last_name = $last_name;
+        $user->identification = $id;
+        $user->mobile_number = $mobile_number;
+        $user->user_type = 2;
+        $user->password = bcrypt($password);
+        $user->save();
+
+        $info = new DriverInfo();
+        $info->driver_id = $user->id;
+        $info->body_number = $body_number;
+        $info->plate_number = $plate_number;
+        $info->operator_name = $operator_name;
+        $info->save();
+
+
+        // log here
+        GeneralController::activity_log($user->id, null, 'Driver Registration', now());
+
+        // redirect message success
+        return redirect()->route('driver.registration')->with('success', 'Registration Successful! You can now login!');
 
     }
 }

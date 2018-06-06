@@ -19,7 +19,7 @@ class CreateAdminTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('identification')->unique();
             $table->tinyInteger('role')->default(2); // 1 for superadmin, 2 for regular admins
-            $table->string('mobile_number')->nullable();
+            $table->string('mobile_number')->nullable()->unique();
             // $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->tinyInteger('active')->default(1);

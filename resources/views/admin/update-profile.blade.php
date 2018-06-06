@@ -29,10 +29,10 @@
           <form class="form-horizontal" action="{{ route('admin.profile.update.post') }}" method="POST" autocomplete="off">
             {{ csrf_field() }}
               <div class="form-group">
-                  <label for="name" class="col-md-4 control-label">Username</label>
+                  <label for="name" class="col-md-4 control-label">ID</label>
 
                   <div class="col-md-6">
-                      <input id="username" type="text" class="form-control" name="username" value="{{ Auth::guard('admin')->user()->username }}" required disabled>
+                      <input id="identification" type="text" class="form-control" name="identification" value="{{ Auth::guard('admin')->user()->identification }}" required disabled>
 
                   </div>
               </div>
@@ -65,15 +65,15 @@
               </div>
 
 
-              <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                  <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+              <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
+                  <label for="email" class="col-md-4 control-label">Mobile Number</label>
 
                   <div class="col-md-6">
-                      <input id="email" type="email" class="form-control" name="email" value="{{ Auth::guard('admin')->user()->email }}" placeholder="Optional">
+                      <input id="mobile_number" type="mobile_number" class="form-control" name="mobile_number" value="{{ Auth::guard('admin')->user()->mobile_number }}" required>
 
-                      @if ($errors->has('email'))
+                      @if ($errors->has('mobile_number'))
                           <span class="help-block">
-                              <strong>{{ $errors->first('email') }}</strong>
+                              <strong>{{ $errors->first('mobile_number') }}</strong>
                           </span>
                       @endif
                   </div>

@@ -27,8 +27,8 @@
           </div>
           <div class="panel-body">
             <p><strong>{{ ucwords(Auth::guard('admin')->user()->first_name) }} {{ ucwords(Auth::guard('admin')->user()->first_name) }}</strong></p>
-            <p><strong>Username: {{ strtolower(Auth::guard('admin')->user()->username) }}</strong></p>
-            <p><strong>Email: {{ Auth::guard('admin')->user()->email != null ? strtolower(Auth::guard('admin')->user()->email) : 'Null'}}</strong></p>
+            <p><strong>ID: {{ strtolower(Auth::guard('admin')->user()->identification) }}</strong></p>
+            <p><strong>Mobile Number: {{ Auth::guard('admin')->user()->mobile_number != null ? strtolower(Auth::guard('admin')->user()->mobile_number) : 'Null'}}</strong></p>
 
             <a href="{{ route('admin.profile.update') }}" class="btn btn-success">Update Profile</a>
           </div>

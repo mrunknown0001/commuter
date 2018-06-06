@@ -19,7 +19,6 @@
 				<div class="panel-body">
 					<p><strong>{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }}</strong></p>
 					<p><strong>ID: {{ Auth::user()->identification }}</strong></p>
-					<p><strong>Email: {{ Auth::user()->email == null ? 'Null' : Auth::user()->email }}</strong></p>
 					<p><strong>Mobile Number: {{ Auth::user()->mobile_number == null ? 'Null' : Auth::user()->mobile_number }}</strong></p>
 
 					<a href="{{ route('commuter.profile.update') }}" class="btn btn-primary">Update Profile</a>

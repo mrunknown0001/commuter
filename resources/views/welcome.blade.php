@@ -64,7 +64,8 @@
 
                 <div class="links">
                     <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Commuter &amp; Driver Login</a>
-                    <a href="{{ route('register') }}" class="btn btn-lg btn-primary">Commuter Register</a>
+                    <a href="{{ route('commuter.registration') }}" class="btn btn-lg btn-primary">Commuter Registration</a>
+                    <a href="{{ route('driver.registration') }}" class="btn btn-lg btn-primary">Driver Registration</a>
                 </div>
             </div>
         </div>

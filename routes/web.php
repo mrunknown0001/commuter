@@ -7,10 +7,17 @@ Route::get('/logout', 'LoginController@logout')->name('logout');
 
 
 // Registration form for commuter only
-Route::get('/register', 'RegisterController@showRegistration')->name('register');
+Route::get('/registration/commuter', 'RegisterController@commuterRegistration')->name('commuter.registration');
 
 // post register for commuter only
-Route::post('/register', 'RegisterController@postRegistration')->name('register.submit');
+Route::post('/registration/commuter', 'RegisterController@postCommuterRegistration')->name('register.submit');
+
+
+// registration for driver
+Route::get('/registration/driver', 'RegisterController@driverRegistration')->name('driver.registration');
+
+// post registration for driver
+Route::post('/registration/driver', 'RegisterController@postDriverRegistration')->name('driver.registration.post');
 
 
 // Commuter and Diver Login Page
@@ -146,22 +153,13 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/password/change', 'AdminController@postChangePassword')->name('admin.change.password.post');
 
 
-	Route::group(['prefix' => 'driver'], function () {
-		// add driver form
-		Route::get('/register', 'AdminController@registerDriver')->name('admin.register.driver');
-
-		// post add driver
-		Route::post('/register', 'AdminController@postRegisterDriver')->name('admin.post.register.driver');
-
-		// view all driver
-		Route::get('/view/all', 'AdminController@viewAllDriver')->name('admin.view.all.driver');
-	});
+	// view all driver
+	Route::get('/driver/view/all', 'AdminController@viewAllDriver')->name('admin.view.all.driver');
 
 
-	Route::group(['prefix' => 'commuter'], function () {
-		// route to view all commuters
-		Route::get('/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
-	});
+	// route to view all commuters
+	Route::get('/commuter/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
+
 
 
 	// route use to view all successful rides

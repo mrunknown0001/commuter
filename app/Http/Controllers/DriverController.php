@@ -71,14 +71,9 @@ class DriverController extends Controller
         }
 
         // mobile
-        if($mobile_number != Auth::user()->mobile_number) {
-            // check if the new mobile number is used by other driver
-            $check_mobile = User::where('mobile_number', $mobile_number)->first();
+        if(GeneralController::check_mobile_number($mobile_number)) {
 
-            if(count($check_mobile) > 0) {
-                // the new mobile number is already used by other driver
-                return redirect()->route('driver.profile.update')->with('error', 'The new Mobile Number ' . $mobile_number . ', already used!');
-            }
+            return redirect()->route('driver.profile.update')->with('error', 'The new Mobile Number ' . $mobile_number . ', already used!');
         }
 
         // email

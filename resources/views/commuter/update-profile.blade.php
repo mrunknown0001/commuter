@@ -66,7 +66,7 @@
                             <label for="name" class="col-md-4 control-label">Mobile Number</label>
 
                             <div class="col-md-6">
-                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ Auth::user()->mobile_number }}" placeholder="Optional">
+                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ Auth::user()->mobile_number }}" required>
 
                                 @if ($errors->has('mobile_number'))
                                     <span class="help-block">
@@ -76,19 +76,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" placeholder="Optional">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 						<div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

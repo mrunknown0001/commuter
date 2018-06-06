@@ -34,4 +34,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\ActivityLog', 'user_id', 'id');
     }
+
+
+    // driver info for the driver
+    public function driver_info()
+    {
+        return $this->hasOne('App\DriverInfo', 'driver_id', 'id');
+    }
 }

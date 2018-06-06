@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use App\ActivityLog;
 use App\Ride;
@@ -46,6 +47,25 @@ class GeneralController extends Controller
         // for instance, it might look like this in Laravel
         return Ride::whereRideNumber($number)->exists();
     }
+
+
+
+    // method use to check existence of mobile number
+    // 
+    public static function check_mobile_number($mobile_number)
+    {
+        if($mobile_number != Auth::user()->mobile_number) {
+            // check if the new mobile number is used by other user
+            $check_mobile = User::where('mobile_number', $mobile_number)->first();
+
+            if(count($check_mobile) > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 
 }

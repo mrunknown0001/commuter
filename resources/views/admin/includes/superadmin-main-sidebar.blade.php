@@ -13,7 +13,7 @@
           </a>
         </li>
         
-        <li class="treeview {{ route('admin.register.driver') == url()->current() || route('admin.view.all.driver') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.driver') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Drivers</span>
             <span class="pull-right-container">
@@ -21,7 +21,6 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('admin.register.driver') }}"><i class="fa fa-circle-o"></i> Register Driver</a></li>
             <li><a href="{{ route('admin.view.all.driver') }}"><i class="fa fa-circle-o"></i> View All Drivers</a></li>
           </ul>
         </li>

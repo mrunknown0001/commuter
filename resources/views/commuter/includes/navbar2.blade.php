@@ -37,7 +37,7 @@
         </li>
 
         <li class="dropdown {{ route('commuter.profile') == url()->current() || route('commuter.profile.update') == url()->current() || route('commuter.change.password') == url()->current() ? 'active' : '' }}">
-          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span></a>
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('commuter.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
             <li role="separator" class="divider"></li>
