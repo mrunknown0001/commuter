@@ -16,8 +16,35 @@ class AdminController extends Controller
     public function __construct()
     {
     	// only admin can access
-    	$this->middleware(['auth:admin', 'admin']);
+    	$this->middleware('auth:admin');
     }
+
+
+
+
+    //////////////////////////////////////////
+    // all super admin method will go there //
+    //////////////////////////////////////////
+
+
+    // method to view all guard or admin
+    public function viewAllAdmin()
+    {
+        // get all the admin in the admins table
+        $admins = Admin::where('role', 2)
+                        ->orderBy('last_name', 'asc')
+                        ->paginate(15);
+
+        return view('admin.view-all-admins', ['admins' => $admins]);
+    }
+
+
+
+    ////////////////////////////////////////
+    // end of all methods of super admins //
+    ////////////////////////////////////////
+
+
 
 
     // admin dashboard

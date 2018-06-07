@@ -23,8 +23,8 @@
 <div class="wrapper">
 
   @include('admin.includes.main-header')
-  
-  @include('admin.includes.superadmin-main-sidebar')
+
+  @include('admin.includes.admin-main-sidebar')
 
   @yield('content')
 

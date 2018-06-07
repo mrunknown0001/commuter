@@ -58,11 +58,11 @@ class AdminLoginController extends Controller
         // check if what type of user
         // return to designated page
         // user type: 1 for commuter, 2 for the driver
-        if(Auth::guard('admin')->user()->role == 1) {
+        if(Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard');
         }
         else {
-            return "Guard";
+            return redirect()->route('login');
         }
     }
 

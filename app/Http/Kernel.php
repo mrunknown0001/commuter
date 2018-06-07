@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'commuter' => \App\Http\Middleware\CheckCommuter::class,
         'driver' => \App\Http\Middleware\CheckDriver::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
+        'super.admin' => \App\Http\Middleware\CheckSuperAdmin::class,
     ];
 }

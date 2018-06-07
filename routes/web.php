@@ -41,7 +41,7 @@ Route::post('/admin/login', 'AdminLoginController@postAdminLogin')->name('admin.
 
 
 // route to admin(guard registration)
-Route::get('/admin/registration', 'RegisterController@adminRegistration')->name('admin.registartion');
+Route::get('/admin/registration', 'RegisterController@adminRegistration')->name('admin.registration');
 
 
 // route to post register guard(admin)
@@ -137,6 +137,23 @@ Route::group(['prefix' => 'd'], function () {
  * Controller Protected Middleware admin guard
  */
 Route::group(['prefix' => 'admin'], function () {
+	/////////////////////////////
+	// super admin route group //
+	////////////////////////////
+	Route::group(['middleware' => 'super.admin'], function () {
+		// route to view all registered admins
+		Route::get('/admin/view/all', 'AdminController@viewAllAdmin')->name('admin.view.all.admin');
+
+		// route to view all admin logs
+
+
+		// route to view all available id for admins
+		
+	});
+	////////////////////////////////////
+	// end of super admin route group //
+	////////////////////////////////////
+
 	// route to go to dashboard of the admin
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
@@ -189,3 +206,4 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to go to activity log of the admin
 	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');
 });
+

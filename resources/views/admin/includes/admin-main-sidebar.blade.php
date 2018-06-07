@@ -5,13 +5,37 @@
 
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Super Admin</li>
+        <li class="header">
+        @if(Auth::guard('admin')->user()->role == 1)
+        Super Admin
+        @else
+        Navigation
+        @endif
+
+        </li>
 
         <li class="{{ route('admin.dashboard') == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.dashboard') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+
+        {{-- All Super Admin Menu will go there --}}
+        @if(Auth::guard('admin')->user()->role == 1)
+        <li class="treeview {{ route('admin.view.all.admin') == url()->current() ? 'active' : '' }}">
+          <a href="javascript:void(0)">
+            <i class="fa fa-users"></i> <span>Admins</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('admin.view.all.admin') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
+          </ul>
+        </li>
+        @endif
+        {{-- end of all super admin menu --}}
+
         
         <li class="treeview {{ route('admin.view.all.driver') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">

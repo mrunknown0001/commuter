@@ -10,6 +10,8 @@ use App\Http\Controllers\GeneralController;
 
 use App\User;
 use App\DriverInfo;
+use App\AdminId;
+use App\Admin;
 
 class RegisterController extends Controller
 {
@@ -63,7 +65,7 @@ class RegisterController extends Controller
 
         if($mobile_number != Null && count($check_mobile) > 0) {
             // return to designated view/page
-            return redirect()->route('register')->with('error', 'Mobile Number ' . $mobile_number . ' is already used!');
+            return redirect()->route('commuter.registration')->with('error', 'Mobile Number ' . $mobile_number . ' is already used!');
         }
 
 
@@ -188,23 +190,50 @@ class RegisterController extends Controller
     {
 
         // validate request data
+        $request->validate([
+            'identification' => 'required|unique:admins',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile_number' => 'required|unique:admins',
+            'password' => 'required|min:6|max:50|confirmed'
+        ]);
 
 
         // assign to variables
+        $id = $request['identification'];
+        $first_name = $request['first_name'];
+        $last_name = $request['last_name'];
+        $mobile_number = $request['mobile_number'];
+        $password = $request['password'];
 
 
-        // check 
+        // check if the id is known by system
+        $check_id = AdminId::where('identification', $id)->first();
+
+        if(count($check_id) < 1) {
+            // the id is not recognize by the system
+            return redirect()->route('admin.registration')->with('error', 'Identification Error!')->withInput(
+                                    $request->except(['identification', 'password'])
+                                );
+        }
 
 
-        // check data
 
-
-        // save user
+        // save admin user 
+        $admin = new Admin();
+        $admin->first_name = $first_name;
+        $admin->last_name = $last_name;
+        $admin->identification = $id;
+        $admin->mobile_number = $mobile_number;
+        $admin->password = bcrypt($password);
+        $admin->save();
 
 
         // activity log
+        GeneralController::activity_log(null, $admin->id, 'Admin Registration', now());
 
 
         // redirect with message
+        return redirect()->route('admin.registration')->with('success', 'Admin Registration Successful!');
     }
 }

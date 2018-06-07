@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class CheckAdmin
+class CheckSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,10 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
 
-        if(Auth::guard('admin')->user()->role != 2) {
+        if(Auth::guard('admin')->user()->role != 1) {
             return abort(403, 'Unauthorize Access');
         }
+
         return $next($request);
     }
 }
