@@ -39,7 +39,7 @@
 				<div class="box-footer">
 					<small><a href="{{ route('commuter.notification') }}">See Notification</a></small>
 					<div class="box-tools pull-right">
-						<span class="label label-danger">Cancel</span>
+						<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#id">Cancel</span>
 					</div>
 				</div>
 				<!-- box-footer -->
@@ -50,6 +50,30 @@
 			@endif
 
 		</div>
+	</div>
+
+
+
+	<div class="modal fade modal-danger" tabindex="-1" id="id" role="dialog">
+	    <div class="modal-dialog modal-dialog-centered" role="document">
+
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                <h4 class="modal-title">Confirmation</h4>
+	            </div>
+	            <div class="modal-body">
+	   				<p>Are You Sure You Want To Cancel?</p>
+	                
+	            </div>
+	            <div class="modal-footer">
+	            	<form action="#" method="POST">
+					<button class="btn btn-danger">Cancel</button>
+					</form>
+	            </div>
+	        </div>
+
+	    </div>
 	</div>
 	
 

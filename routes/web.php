@@ -86,6 +86,10 @@ Route::group(['prefix' => 'c'], function () {
 	// route use to view active request ride
 	Route::get('/ride/request/active', 'CommuterController@activeRideRequest')->name('commuter.active.ride.request');
 
+
+	// route to cancel ride request for the commuter // accepted or not accepted
+
+
 	// route to view ride history of the commuter
 	Route::get('/ride/history', 'CommuterController@rideHistory')->name('commuter.ride.history');
 
