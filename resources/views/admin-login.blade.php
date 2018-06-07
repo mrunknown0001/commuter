@@ -56,6 +56,8 @@
                         </div>
                     </div>
                 </form>
+
+                <p><a href="{{ route('admin.registartion') }}">Admin Registration</a></p>
             </div>            
         </div>
     </div>

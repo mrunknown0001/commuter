@@ -59,5 +59,69 @@ class DatabaseSeeder extends Seeder
 
 
         
+
+        DB::table('admin_ids')->insert([
+            [
+                'identification' => '2018-0001'
+            ],
+            [
+                'identification' => '2018-0002'
+            ],
+            [
+                'identification' => '2018-0003'
+            ],
+            [
+                'identification' => '2018-0004'
+            ],
+            [
+                'identification' => '2018-0005'
+            ],
+            [
+                'identification' => '2018-0006'
+            ],
+            [
+                'identification' => '2018-0007'
+            ],
+            [
+                'identification' => '2018-0008'
+            ],
+            [
+                'identification' => '2018-0009'
+            ],
+            [
+                'identification' => '2018-0010'
+            ],
+            [
+                'identification' => '2018-0011'
+            ],
+            [
+                'identification' => '2018-0012'
+            ],
+            [
+                'identification' => '2018-0013'
+            ],
+            [
+                'identification' => '2018-0014'
+            ],
+            [
+                'identification' => '2018-0015'
+            ],
+            [
+                'identification' => '2018-0016'
+            ],
+            [
+                'identification' => '2018-0017'
+            ],
+            [
+                'identification' => '2018-0018'
+            ],
+            [
+                'identification' => '2018-0019'
+            ],
+            [
+                'identification' => '2018-0020'
+            ]
+        ]);
+
     }
 }

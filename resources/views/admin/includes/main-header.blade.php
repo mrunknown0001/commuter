@@ -18,7 +18,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-caret-down"></i></span>
+              <i class="fa fa-user"></i></span>
               <!-- <img src="" class="user-image" alt="Admin"> -->
               <span class="hidden-xs">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
             </a>

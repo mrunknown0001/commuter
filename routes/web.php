@@ -41,7 +41,11 @@ Route::post('/admin/login', 'AdminLoginController@postAdminLogin')->name('admin.
 
 
 // route to admin(guard registration)
-Route::get('/admin/registartion', 'RegisterController@adminRegistration')->name('admin.registartion');
+Route::get('/admin/registration', 'RegisterController@adminRegistration')->name('admin.registartion');
+
+
+// route to post register guard(admin)
+Route::post('/admin/registration', 'RegisterController@postAdminRegistration')->name('admin.registration.post');
 
 
 /*

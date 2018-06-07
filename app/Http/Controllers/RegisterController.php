@@ -20,6 +20,9 @@ class RegisterController extends Controller
         if(Auth::check()) {
             return LoginController::check_user();
         }
+        else if(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
     	// return the registration form view for the commuter
     	return view('commuter-registration');
     }
@@ -95,6 +98,9 @@ class RegisterController extends Controller
         if(Auth::check()) {
             return LoginController::check_user();
         }
+        else if(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
         // return the registration form view for the commuter
         return view('driver-registration');
     }
@@ -164,7 +170,41 @@ class RegisterController extends Controller
 
     // method to show admin registration
     public function adminRegistration()
-    {
+    {        
+        // check if there is authenticated user
+        if(Auth::check()) {
+            return LoginController::check_user();
+        }
+        else if(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dahsboard');
+        }
+        
         return view('admin-registration');
+    }
+
+
+    // method use to register admin
+    public function postAdminRegistration(Request $request)
+    {
+
+        // validate request data
+
+
+        // assign to variables
+
+
+        // check 
+
+
+        // check data
+
+
+        // save user
+
+
+        // activity log
+
+
+        // redirect with message
     }
 }
