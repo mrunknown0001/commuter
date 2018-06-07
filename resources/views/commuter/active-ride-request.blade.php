@@ -11,26 +11,44 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			@include('includes.all')
-
+			
+			@if(count($active_ride) > 0)
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Active Ride Request</h3>
 					<div class="box-tools pull-right">
-						<!-- <span class="label label-primary">Label</span> -->
+						<!-- <span class="label label-danger">Cancel</span> -->
 					</div>
 					<!-- /.box-tools -->
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<p>Time of Request: {{ date('h:i:s a', strtotime($active_ride->created_at)) }}</p>
+					<p>
+					@if($active_ride->accepted == 0)
+					<span class="label label-warning">On Que</span>
+					@endif
+					</p>
+					<p>Reference Number: <strong>{{ strtoupper($active_ride->ride_number) }}</strong></p>
+					<p>Time of Request: <strong>{{ date('g:i:s a', strtotime($active_ride->created_at)) }}</strong></p>
+					<p>Date of Request: <strong>{{ date('l, F j, Y', strtotime($active_ride->created_at)) }}</strong></p>
+					<p>Pickup Location: <strong>{{ $active_ride->pickup_location->name }}</strong></p>
+					<p>Dropoff Location: <strong>{{ $active_ride->dropoff_location->name }}</strong></p>
+					<p>Amount: <strong>&#8369; {{ $active_ride->payment }}</strong></p>
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<small>Ride Request</small>
+					<small><a href="{{ route('commuter.notification') }}">See Notification</a></small>
+					<div class="box-tools pull-right">
+						<span class="label label-danger">Cancel</span>
+					</div>
 				</div>
 				<!-- box-footer -->
 			</div>
 			<!-- /.box -->
+			@else
+			<h3 class="text-center">No Active Ride</h3>
+			@endif
+
 		</div>
 	</div>
 	

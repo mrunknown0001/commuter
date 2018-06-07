@@ -322,7 +322,6 @@ class CommuterController extends Controller
                         ->where('finished', 0)
                         ->first();
 
-
         return view('commuter.active-ride-request', ['active_ride' => $active_ride]);
     }
 
