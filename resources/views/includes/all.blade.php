@@ -2,3 +2,4 @@
 @include('includes.errors')
 @include('includes.notice')
 @include('includes.success')
+@include('includes.info')

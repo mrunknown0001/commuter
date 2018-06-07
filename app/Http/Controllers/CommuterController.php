@@ -167,6 +167,25 @@ class CommuterController extends Controller
     public function requestRide()
     {
 
+        // check if the has more than 20 mins from the time of request
+        $last_ride = Ride::where('commuter_id', Auth::user()->id)
+                        ->where('cancelled', 1)
+                        ->where('finished', 1)
+                        ->orderBy('created_at', 'desc')
+                        ->first();
+
+        // check if ride is less than 20mins from time of request
+        $timeofrequest = date(strtotime($last_ride->created_at));
+        $timenow = date(strtotime(now()));
+
+        $difference = $timenow - $timeofrequest;
+
+        if($difference < 1200) {
+            // the time is less than 20 mins from time of request
+            return redirect()->route('commuter.home')->with('notice', 'You can Request after 20 minutes after your last ride request.');
+        }
+
+
         // check if the commuter has a ride
         $active_ride = Ride::where('commuter_id', Auth::user()->id)
                         ->where('driver_id', null)
@@ -315,6 +334,7 @@ class CommuterController extends Controller
     public function activeRideRequest()
     {
 
+
         // get the active requested ride by the commuter
         $active_ride = Ride::where('commuter_id', Auth::user()->id)
                         ->where('finalized', 1)
@@ -326,9 +346,42 @@ class CommuterController extends Controller
     }
 
 
+
+    // method use to cancel ride request 
+    public function cancelRideRequest(Request $request)
+    {
+        $id = $request['ride_id'];
+
+        // make ride cancelled and finished
+        $ride = Ride::find($id);
+        $ride->cancelled = 1;
+        $ride->finished = 1;
+        $ride->save();
+
+
+        // add notification
+        
+
+        // activity log here
+        GeneralController::activity_log(Auth::user()->id, null, 'Cancelled Ride Request', now());
+
+
+        // return to home page of commuter
+        return redirect()->route('commuter.active.ride.request')->with('success', 'Ride Request Cancelled!');
+
+
+    }
+
+
     // method use to view ride history of commuter
     public function rideHistory()
     {
-        return view('commuter.ride-history');
+        // get all ride request with finished status
+        $rides = Ride::where('commuter_id', Auth::user()->id)
+                        ->where('finished', 1)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('commuter.ride-history', ['rides' => $rides]);
     }
 }

@@ -16,4 +16,10 @@ class Ride extends Model
     	return $this->belongsTo('App\Location', 'drop_off_loc', 'id');
     }
 
+
+    public function driver()
+    {
+    	return $this->belongsTo('App\User', 'driver_id', 'id');
+    }
+
 }

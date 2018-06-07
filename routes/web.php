@@ -88,6 +88,7 @@ Route::group(['prefix' => 'c'], function () {
 
 
 	// route to cancel ride request for the commuter // accepted or not accepted
+	Route::post('/ride/request/cancel', 'CommuterController@cancelRideRequest')->name('commuter.cancel.ride.request');
 
 
 	// route to view ride history of the commuter
