@@ -10,6 +10,8 @@ use App\Http\Controllers\GeneralController;
 use App\ActivityLog;
 use App\User;
 use App\Admin;
+use App\Ride;
+use App\AdminId;
 
 class AdminController extends Controller
 {
@@ -39,6 +41,16 @@ class AdminController extends Controller
     }
 
 
+    // method use to view admin ids
+    public function viewAdminId()
+    {
+        // get all admin ids
+        $ids = AdminId::paginate(10);
+
+        return view('admin.view-all-admin-ids', ['ids' => $ids]);
+    }
+
+
 
     ////////////////////////////////////////
     // end of all methods of super admins //
@@ -50,10 +62,16 @@ class AdminController extends Controller
     // admin dashboard
     public function dashboard()
     {
-        /////////////////////////////////////////////////////
+
         // get all data need to show in dashboard of admin //
-        /////////////////////////////////////////////////////
-    	return view('admin.dashboard');
+        $rides = Ride::where('finished', 1)->get();
+        $commuters = User::where('user_type', 1)->get();
+        $drivers = User::where('user_type', 2)->get();
+        $current_rides = Ride::where('current', 1)
+                            ->where('finished', 0)
+                            ->get();
+
+    	return view('admin.dashboard', ['rides' => $rides, 'commuters' => $commuters, 'drivers' => $drivers, 'current_rides' => $current_rides]);
     }
 
 
@@ -221,7 +239,7 @@ class AdminController extends Controller
     // admin activity log
     public function activityLog()
     {
-        $logs = ActivityLog::orderBy('performed_on', 'desc')->paginate(15);
+        $logs = ActivityLog::where('admin_id', '!=', 1)->orderBy('performed_on', 'desc')->paginate(15);
 
         return view('admin.activity-log', ['logs' => $logs]);
     }

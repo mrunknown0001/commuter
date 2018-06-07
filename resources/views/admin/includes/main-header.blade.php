@@ -20,7 +20,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-user"></i></span>
               <!-- <img src="" class="user-image" alt="Admin"> -->
-              <span class="hidden-xs">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+              <span class="hidden-xs">{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -28,7 +28,7 @@
                 <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
 
                 <p>
-                  {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+                  {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}
                   <small>Member since {{ date('M Y',strtotime(Auth::user()->created_at)) }}</small>
                 </p>
               </li>

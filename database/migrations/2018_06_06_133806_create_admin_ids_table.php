@@ -16,6 +16,7 @@ class CreateAdminIdsTable extends Migration
         Schema::create('admin_ids', function (Blueprint $table) {
             $table->increments('id');
             $table->string('identification'); // for registration use
+            $table->tinyInteger('used')->default(0);
             $table->timestamps();
         });
     }

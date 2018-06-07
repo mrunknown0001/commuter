@@ -314,7 +314,16 @@ class CommuterController extends Controller
     // method to view active request ride
     public function activeRideRequest()
     {
-        return view('commuter.active-ride-request');
+
+        // get the active requested ride by the commuter
+        $active_ride = Ride::where('commuter_id', Auth::user()->id)
+                        ->where('finalized', 1)
+                        ->where('cancelled', 0)
+                        ->where('finished', 0)
+                        ->first();
+
+
+        return view('commuter.active-ride-request', ['active_ride' => $active_ride]);
     }
 
 

@@ -31,6 +31,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.view.all.admin') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
+            <li><a href="{{ route('admin.view.admin.id') }}"><i class="fa fa-circle-o"></i> View all Admin IDs</a></li>
           </ul>
         </li>
         @endif

@@ -208,7 +208,9 @@ class RegisterController extends Controller
 
 
         // check if the id is known by system
-        $check_id = AdminId::where('identification', $id)->first();
+        $check_id = AdminId::where('identification', $id)
+                        ->where('used', 0)
+                        ->first();
 
         if(count($check_id) < 1) {
             // the id is not recognize by the system
@@ -227,6 +229,12 @@ class RegisterController extends Controller
         $admin->mobile_number = $mobile_number;
         $admin->password = bcrypt($password);
         $admin->save();
+
+
+        // set admin id used 
+        $admin_id = AdminId::where('identification', $id)->first();
+        $admin_id->used = 1;
+        $admin_id->save();
 
 
         // activity log

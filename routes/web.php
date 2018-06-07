@@ -148,6 +148,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 		// route to view all available id for admins
+		Route::get('/admin/ids', 'AdminController@viewAdminId')->name('admin.view.admin.id');
 		
 	});
 	////////////////////////////////////
