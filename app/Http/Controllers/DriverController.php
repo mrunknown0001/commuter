@@ -8,6 +8,9 @@ use Auth;
 
 use App\User;
 use App\DriverInfo;
+use App\Ride;
+use App\Notification;
+use app\Report;
 
 class DriverController extends Controller
 {
@@ -175,7 +178,66 @@ class DriverController extends Controller
     // method to view ride request
     public function rideRequest()
     {
+        // check if the driver already accepted a ride request
+        // if ther is any, redirect to acceptedRide route with message
+
+
+
     	return view('driver.ride-request');
+    }
+
+
+
+    // method get data and load on ride request on driver
+    public function rideRequestNew()
+    {
+        // get all new active ride request
+        $rides = Ride::where('driver_id', null)
+                    ->where('cancelled', 0)
+                    ->where('finished', 0)
+                    ->orderBy('created_at', 'asc')
+                    ->get();
+
+        return view('driver.includes.ride-request-new', ['rides' => $rides]);
+    }
+
+
+    // method to accept ride request
+    public function acceptRideRequest(Request $request)
+    {
+        $id = $request['ride_id'];
+
+        // update the ride with needed data
+        $ride = Ride::find($id);
+        $ride->driver_id = Auth::user()->id;
+        $ride->accepted = 1;
+        $ride->accepted_at = now();
+        $ride->save();
+
+        // create notification for the user
+        $notification = new Notification();
+        $notification->to = $ride->commuter->id;
+        $notification->title = 'Request Ride Accepted';
+        $notification->ride_id = $ride->id;
+        $notification->message = 'Your Ride Request is Accepted by ' . Auth::user()->first_name . ' ' . Auth::user()->last_name;
+        $notification->url = "commuter.active.ride.request";
+        $notification->save();
+
+
+        // generate log for the activity
+        GeneralController::activity_log(Auth::user()->id, null, 'Accepted Ride Request: ' . $ride->ride_number, now());
+
+        // return message with success
+        return redirect()->route('driver.accept.ride')->with('success', 'You successfully accepted requested ride!');
+    }
+
+
+    // method use when there is accepted request by the driver
+    public function acceptedRide()
+    {
+        // get the accepted ride by the driver
+        
+        return view('driver.accepted-ride');
     }
 
 

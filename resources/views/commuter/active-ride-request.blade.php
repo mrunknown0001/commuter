@@ -24,7 +24,9 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<p>
-					@if($active_ride->accepted == 0)
+					@if($active_ride->accepted == 1)
+					<span class="label label-success">Accepted</span>
+					@else
 					<span class="label label-warning">On Que</span>
 					@endif
 					</p>

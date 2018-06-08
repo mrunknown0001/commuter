@@ -26,5 +26,19 @@
         @yield('content')
         
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        @if(Auth::check())
+        <script>
+            setInterval(function () {
+                $('.notification').load("{{ route('commuter.notification.new') }}");
+
+                $('#notif-badge').load("{{ route('commuter.notification.new.count') }}");
+
+
+                $('#ride-request').load("{{ route('driver.ride.request.new') }}");
+            }, 1000);
+
+            
+        </script>
+        @endif
     </body>
 </html>

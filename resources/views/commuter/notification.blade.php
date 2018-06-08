@@ -8,7 +8,13 @@
 
 <div class="container-fluid">
 		
-	<h3 class="text-center">Notification</h3>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="notification">
+				
+			</div>
+		</div>
+	</div>
 	
 
 </div>

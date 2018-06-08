@@ -75,6 +75,13 @@ Route::group(['prefix' => 'c'], function () {
 	// route to go to notification
 	Route::get('/notification', 'CommuterController@notification')->name('commuter.notification');
 
+
+	// route for load part of the notification
+	Route::get('/notification/new', 'GeneralController@notification')->name('commuter.notification.new');
+
+	// route for notification count
+	Route::get('/notification/new/count', 'GeneralController@notificationCount')->name('commuter.notification.new.count');
+
 	// route to request ride for commuter
 	Route::get('/ride/request', 'CommuterController@requestRide')->name('commuter.request.ride');
 
@@ -130,6 +137,21 @@ Route::group(['prefix' => 'd'], function () {
 
 	// route use to view ride request
 	Route::get('/ride/request', 'DriverController@rideRequest')->name('driver.ride.request');
+
+
+	// route to show data in ride request
+	Route::get('/ride/request/new', 'DriverController@rideRequestNew')->name('driver.ride.request.new');
+
+
+	// route to accept ride request
+	Route::post('/ride/request/accept', 'DriverController@acceptRideRequest')->name('driver.accept.ride.request');
+
+	Route::get('/ride/request/accept', function () {
+		return redirect()->route('driver.accepted.ride');
+	});
+
+	// route to view accepted request
+	Route::get('/ride/request/accepted', 'DriverController@acceptedRide')->name('driver.accepted.ride');
 
 
 	// route use to view ride history of the driver

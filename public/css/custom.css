@@ -44,3 +44,13 @@ a:active {
   border-color: #6f6f6f;
   text-align: center;
 }
+
+
+
+.round.hollow.red {
+    color: #ff0000;
+    background-color: #FFF;    
+    -webkit-box-shadow: 0px 0px 0px 3px #ff0000;
+    -moz-box-shadow: 0px 0px 0px 3px #ff0000;
+    box-shadow: 0px 0px 0px 3px #ff0000;
+}

@@ -7,6 +7,11 @@ use Auth;
 
 use App\ActivityLog;
 use App\Ride;
+use App\User;
+use App\Admin;
+use App\Report;
+use App\Notification;
+use App\Feedback;
 
 class GeneralController extends Controller
 {
@@ -61,6 +66,37 @@ class GeneralController extends Controller
             if(count($check_mobile) > 0) {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+
+
+    // method called for notification
+    public function notification()
+    {
+        $unread = Notification::where('to', Auth::user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->take(3)
+                            ->get();
+                            
+        // pass the data and design it in the view
+        return view('includes.notification-layout')->with(['unread' => $unread]);
+    }
+
+
+    // method use to displate count of the new notification
+    public function notificationCount()
+    {
+        $unread = Notification::where('to', Auth::user()->id)
+                            ->where('viewed', 0)
+                            ->get();
+
+        // return nothing if there is no unread notification
+        // return count($unread);
+        if(count($unread) > 0) {
+            return count($unread);
         }
 
         return false;

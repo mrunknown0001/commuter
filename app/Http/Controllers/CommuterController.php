@@ -159,6 +159,19 @@ class CommuterController extends Controller
     // method to view notifications
     public function notification()
     {
+
+        // make all notification read
+        $unread = Notification::where('to', Auth::user()->id)
+                                ->where('viewed', 0)
+                                ->get();
+
+        if(count($unread) > 0) {
+            foreach($unread as $u) {
+                $u->viewed = 1;
+                $u->save();
+            }
+        }
+
         return view('commuter.notification');
     }
 
@@ -173,22 +186,29 @@ class CommuterController extends Controller
                         ->where('finished', 1)
                         ->orderBy('created_at', 'desc')
                         ->first();
+        if(count($last_ride) > 0) {
 
-        // check if ride is less than 20mins from time of request
-        $timeofrequest = date(strtotime($last_ride->created_at));
-        $timenow = date(strtotime(now()));
+            // check if ride is less than 20mins from time of request
+            $timeofrequest = date(strtotime($last_ride->created_at));
+            $timenow = date(strtotime(now()));
 
-        $difference = $timenow - $timeofrequest;
 
-        if($difference < 1200) {
-            // the time is less than 20 mins from time of request
-            return redirect()->route('commuter.home')->with('notice', 'You can Request after 20 minutes after your last ride request.');
+            $difference = $timenow - $timeofrequest;
+
+
+            $next_request_time = $timeofrequest - 1200;
+
+
+            if($difference < 1200) {
+                // the time is less than 20 mins from time of request
+                return redirect()->route('commuter.home')->with('notice', 'You can Request 20 minutes after your last ride request. Next Time of Request: ' . date('g:i   ', strtotime($next_request_time)));
+            }
+
         }
 
 
         // check if the commuter has a ride
         $active_ride = Ride::where('commuter_id', Auth::user()->id)
-                        ->where('driver_id', null)
                         ->where('cancelled', 0)
                         ->where('finished', 0)
                         ->first();
@@ -354,6 +374,19 @@ class CommuterController extends Controller
 
         // make ride cancelled and finished
         $ride = Ride::find($id);
+
+        // check if the ride request is accepted by driver
+        // so that the commuter must pay the driver for the amount computed by the system
+        if($ride->driver_id != null) {
+            // create a notification for the driver that the ride has been cancelled by the commuter
+            // in this case the commuter must pay the amount to the driver
+            // the system will notify the driver and ask if the commuter payed the amount 
+            // if yes, its ok, if no, the driver can report the commuter
+
+        }
+
+        // save ride details
+        $ride->cancelled_by_commuter = 1;
         $ride->cancelled = 1;
         $ride->finished = 1;
         $ride->save();

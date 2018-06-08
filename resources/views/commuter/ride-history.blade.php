@@ -31,12 +31,14 @@
 								{{ strtoupper($ride->ride_number) }}
 							</td>
 							<td>
-							{{ date('l, F j, Y g:i:s a', strtotime($ride->performed_on)) }}
+							{{ date('l, F j, Y g:i:s a', strtotime($ride->created_at)) }}
 							</td>
 							<td>
 								<span class="label label-primary" style="cursor: pointer;" data-toggle="modal" data-target="#id-{{ $ride->id }}"><i class="fa fa-eye"></i> View</span>
+								@if($ride->cancelled_by_commuter != 1)
 								<a href="#" class="label label-success"><i class="fa fa-comments"></i> Feedback</a>
 								<a href="#" class="label label-danger"><i class="fa fa-flag"></i> Report</a>
+								@endif
 								{{-- Add Modal for Additional ride information --}}
 
 								<div class="modal fade modal-primary" tabindex="-1" id="id-{{ $ride->id }}" role="dialog">
@@ -61,7 +63,11 @@
 												<p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>
 												<p>
 													@if($ride->cancelled == 1)
-													<span class="label label-danger">Cancelled</span>
+														@if($ride->cancelled_by_commuter == 1)
+														<span class="label label-danger">Cancelled by You</span>
+														@else
+														<span class="label label-danger">Cancelled</span>
+														@endif
 													@else
 													<span class="label label-success">Finished</span>
 													@endif

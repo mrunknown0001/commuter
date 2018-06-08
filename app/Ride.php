@@ -22,4 +22,10 @@ class Ride extends Model
     	return $this->belongsTo('App\User', 'driver_id', 'id');
     }
 
+
+    public function commuter()
+    {
+        return $this->belongsTo('App\User', 'commuter_id', 'id');
+    }
+
 }

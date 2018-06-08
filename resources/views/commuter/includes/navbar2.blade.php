@@ -33,7 +33,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li class="{{ route('commuter.notification') == url()->current() ? 'active' : '' }}">
-          <a href="{{ route('commuter.notification') }}"><i class="fa fa-bell"></i> Notification</a>
+          <a href="{{ route('commuter.notification') }}"><i class="fa fa-bell"></i> Notification <span class="badge bg-red" id="notif-badge"></span></a>
         </li>
 
         <li class="dropdown {{ route('commuter.profile') == url()->current() || route('commuter.profile.update') == url()->current() || route('commuter.change.password') == url()->current() ? 'active' : '' }}">
