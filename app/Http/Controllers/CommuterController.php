@@ -380,7 +380,7 @@ class CommuterController extends Controller
         $rides = Ride::where('commuter_id', Auth::user()->id)
                         ->where('finished', 1)
                         ->orderBy('created_at', 'desc')
-                        ->paginate(15);
+                        ->paginate(5);
 
         return view('commuter.ride-history', ['rides' => $rides]);
     }

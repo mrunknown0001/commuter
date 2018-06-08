@@ -239,7 +239,9 @@ class AdminController extends Controller
     // admin activity log
     public function activityLog()
     {
-        $logs = ActivityLog::where('admin_id', '!=', 1)->orderBy('performed_on', 'desc')->paginate(15);
+        $logs = ActivityLog::where('admin_id', null)
+                        ->orderBy('performed_on', 'desc')
+                        ->paginate(15);
 
         return view('admin.activity-log', ['logs' => $logs]);
     }

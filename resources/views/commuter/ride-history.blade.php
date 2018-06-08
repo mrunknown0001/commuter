@@ -20,7 +20,6 @@
 						<thead>
 							<tr>
 								<th>Ride ID</th>
-								<th>Driver</th>
 								<th>Time &amp; Date</th>
 								<th>Action</th>
 							</tr>
@@ -32,17 +31,51 @@
 								{{ strtoupper($ride->ride_number) }}
 							</td>
 							<td>
-								@if($ride->driver_id != null)
-								{{ $ride->driver->first_name  . ' ' . $ride->driver->last_name }}
-								@else
-								N/A
-								@endif
-							</td>
-							<td>
 							{{ date('l, F j, Y g:i:s a', strtotime($ride->performed_on)) }}
 							</td>
 							<td>
-								<span class="label label-primary" style="cursor: pointer;"><i class="fa fa-eye"></i> View</span>
+								<span class="label label-primary" style="cursor: pointer;" data-toggle="modal" data-target="#id-{{ $ride->id }}"><i class="fa fa-eye"></i> View</span>
+								<a href="#" class="label label-success"><i class="fa fa-comments"></i> Feedback</a>
+								<a href="#" class="label label-danger"><i class="fa fa-flag"></i> Report</a>
+								{{-- Add Modal for Additional ride information --}}
+
+								<div class="modal fade modal-primary" tabindex="-1" id="id-{{ $ride->id }}" role="dialog">
+								    <div class="modal-dialog modal-dialog-centered" role="document">
+
+								        <div class="modal-content">
+								            <div class="modal-header">
+								                <button type="button" class="close" data-dismiss="modal">&times;</button>
+								                <h4 class="modal-title">Ride Information</h4>
+								            </div>
+								            <div class="modal-body">
+								   				<p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
+								   				<p>Pickup Location: <strong>{{ $ride->pickup_location->name }}</strong></p>
+								   				<p>Dropoff Location: <strong>{{ $ride->dropoff_location->name }}</strong></p>
+												<p>Driver: <strong>
+													@if($ride->driver_id != null)
+													{{ $ride->driver->first_name  . ' ' . $ride->driver->last_name }}
+													@else
+													N/A
+													@endif</strong>
+												</p>
+												<p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>
+												<p>
+													@if($ride->cancelled == 1)
+													<span class="label label-danger">Cancelled</span>
+													@else
+													<span class="label label-success">Finished</span>
+													@endif
+												</p>
+								                
+								            </div>
+								            <div class="modal-footer">
+								            	<small>Ride Information</small>
+								            </div>
+								        </div>
+
+								    </div>
+			</div>
+								{{-- End of modal--}}
 							</td>
 							</tr>
 							@endforeach
@@ -50,7 +83,9 @@
 					</table>
 				</div>
 				<div class="box-footer clearfix">
-					
+					<div class="box-tools pull-right">
+						{{ $rides->links() }}
+					</div>
 				</div>
 			</div>
 		</div>
