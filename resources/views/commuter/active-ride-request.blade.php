@@ -66,7 +66,7 @@
 			            	<form action="{{ route('commuter.cancel.ride.request') }}" method="POST">
 			            		{{ csrf_field() }}
 								<input type="hidden" name="ride_id" value="{{ $active_ride->id }}">
-								<button type="submit" class="btn btn-danger">Cancel</button>
+								<button type="submit" class="btn btn-danger">Cancel Request</button>
 			            		
 							</form>
 			            </div>

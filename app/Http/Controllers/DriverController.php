@@ -180,7 +180,14 @@ class DriverController extends Controller
     {
         // check if the driver already accepted a ride request
         // if ther is any, redirect to acceptedRide route with message
+        $ride = Ride::where('driver_id', Auth::user()->id)
+                    ->where('cancelled', 0)
+                    ->where('finished', 0)
+                    ->first();
 
+        if(count($ride) > 0) {
+            return redirect()->route('driver.accepted.ride');
+        }
 
 
     	return view('driver.ride-request');
@@ -236,8 +243,11 @@ class DriverController extends Controller
     public function acceptedRide()
     {
         // get the accepted ride by the driver
+        $ride = Ride::where('driver_id', Auth::user()->id)
+                    ->where('finished', 0)
+                    ->first();
         
-        return view('driver.accepted-ride');
+        return view('driver.accepted-ride', ['ride' => $ride]);
     }
 
 

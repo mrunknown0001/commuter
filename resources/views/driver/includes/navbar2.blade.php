@@ -33,7 +33,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li class="{{ route('driver.notification') == url()->current() ? 'active' : '' }}">
-          <a href="{{ route('driver.notification') }}"><i class="fa fa-bell"></i> Notification</a>
+          <a href="{{ route('driver.notification') }}"><i class="fa fa-bell"></i> Notification <span class="badge bg-red" id="notif-badge"></span></a></a>
         </li>
 
         <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }}">

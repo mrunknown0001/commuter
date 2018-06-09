@@ -35,7 +35,7 @@
 
 
                 $('#ride-request').load("{{ route('driver.ride.request.new') }}");
-            }, 1000);
+            }, 3000);
 
             
         </script>
