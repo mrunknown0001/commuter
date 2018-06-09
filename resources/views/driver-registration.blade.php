@@ -168,9 +168,13 @@
                             </div>
                         </div>
                     </form>
+                    <p>By registering in this app/site, you are agreeing to the <a href="javascript:void(0)" data-toggle="modal" data-target="#terms">Terms and Condition of the site.</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@include('includes.terms-and-condition')
+
 @endsection
