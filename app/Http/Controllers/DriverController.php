@@ -216,6 +216,15 @@ class DriverController extends Controller
 
         // update the ride with needed data
         $ride = Ride::find($id);
+
+
+        // check if the driver is null
+        if($ride->driver_id != null) {
+            // return the ride already accepted by other driver
+            return redirect()->route('driver.ride.request')->with('info', 'The ride is already accepted! Please wait for another request!');
+        }
+
+
         $ride->driver_id = Auth::user()->id;
         $ride->accepted = 1;
         $ride->accepted_at = now();
@@ -251,9 +260,52 @@ class DriverController extends Controller
     }
 
 
+
+    // method to move a ride status in pickup
+    public function ridePickup(Request $request)
+    {
+        $id = $request['id'];
+
+        // update to current at time of pickup
+        $ride = Ride::find($id);
+        $ride->current = 1;
+        $ride->current_at = now();
+        $ride->save();
+
+        // add activity log here
+        GeneralController::activity_log(Auth::user()->id, null, 'Driver Picks up the passenger. Ride Number: ' . $ride->ride_number, now());
+
+        return redirect()->route('driver.accepted.ride');
+    }
+
+
+    // method to drop off and finished the ride
+    public function rideDropoff(Request $request)
+    {
+        $id = $request['id'];
+
+        // update to current at time of pickup
+        $ride = Ride::find($id);
+        $ride->drop_off = 1;
+        $ride->drop_off_at = now();
+        $ride->finished = 1;
+        $ride->save();
+
+        // add activity log here
+        GeneralController::activity_log(Auth::user()->id, null, 'Driver drops the passenger. Ride Number: ' . $ride->ride_number, now());
+
+        return redirect()->route('driver.accepted.ride')->with('success', 'Ride Finished!');  
+    }
+
+
     // method use to view ride history
     public function rideHistory()
     {
-    	return view('driver.ride-history');
+        // find all ride involving the driver with finished status
+        $rides = Ride::where('driver_id', Auth::user()->id)
+                    ->where('finished', 1)
+                    ->paginate(5);
+
+    	return view('driver.ride-history', ['rides' => $rides]);
     }
 }

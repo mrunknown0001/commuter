@@ -196,12 +196,12 @@ class CommuterController extends Controller
             $difference = $timenow - $timeofrequest;
 
 
-            $next_request_time = $timeofrequest - 1200;
+            $next_request_time = strtotime("+20 minutes", strtotime($last_ride->created_at));
 
 
             if($difference < 1200) {
                 // the time is less than 20 mins from time of request
-                return redirect()->route('commuter.home')->with('notice', 'You can Request 20 minutes after your last ride request. Next Time of Request: ' . date('g:i   ', strtotime($next_request_time)));
+                return redirect()->route('commuter.home')->with('notice', 'You can Request 20 minutes after your last ride request. Next Time of Request: ' . date('g:i a', $next_request_time));
             }
 
         }

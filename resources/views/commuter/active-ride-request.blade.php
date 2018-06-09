@@ -25,7 +25,11 @@
 				<div class="box-body">
 					<p>
 					@if($active_ride->accepted == 1)
-					<span class="label label-success">Accepted</span>
+						@if($active_ride->current == 1)
+						<span class="label label-success">Current</span>
+						@else
+						<span class="label label-success">Accepted</span>
+						@endif
 					@else
 					<span class="label label-warning">On Que</span>
 					@endif
@@ -79,6 +83,7 @@
 
 			@else
 			<h3 class="text-center">No Active Ride</h3>
+			<p class="text-center"><a href="{{ route('commuter.request.ride') }}">Request Ride</a></p>
 			@endif
 
 		</div>

@@ -1,3 +1,4 @@
+@if(count($rides) > 0)
 @foreach($rides as $ride)
 <div class="box box-primary">
 	<div class="box-header with-border">
@@ -20,3 +21,6 @@
 	</div>
 </div>
 @endforeach
+@else
+<p class="text-center"><em>No Ride Request</em></p>
+@endif

@@ -86,6 +86,7 @@ Route::group(['prefix' => 'c'], function () {
 	Route::get('/ride/request', 'CommuterController@requestRide')->name('commuter.request.ride');
 
 
+
 	// route to submit ride request
 	Route::post('/ride/request', 'CommuterController@postRequestRide')->name('commuter.request.ride.post');
 
@@ -152,6 +153,14 @@ Route::group(['prefix' => 'd'], function () {
 
 	// route to view accepted request
 	Route::get('/ride/request/accepted', 'DriverController@acceptedRide')->name('driver.accepted.ride');
+
+
+	// route to move to pickup status of a ride
+	Route::post('/ride/request/pickup', 'DriverController@ridePickup')->name('driver.ride.pickup');
+
+
+	// route to finsihed the ride
+	Route::post('/ride/request/dropoff', 'DriverController@rideDropoff')->name('driver.ride.dropoff');
 
 
 	// route use to view ride history of the driver

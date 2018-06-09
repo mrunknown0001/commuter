@@ -15,9 +15,29 @@
 
 			@include('includes.all')
 			
-			<p class="text-center">
-			<button class="btn btn-primary btn-lg">Pick Up</button>
-			</p>
+			@if(count($ride) > 0)
+
+			@if($ride->accepted == 1)
+				@if($ride->current == 0)
+				<form action="{{ route('driver.ride.pickup') }}" method="POST">
+					{{ csrf_field() }}
+					<input type="hidden" name="id" value="{{ $ride->id }}">
+					<p class="text-center">
+					<button type="submit" class="btn btn-primary btn-lg">Pick Up</button>
+					</p>
+				</form>
+				@else
+				<form action="{{ route('driver.ride.dropoff') }}" method="POST">
+					{{ csrf_field() }}
+					<input type="hidden" name="id" value="{{ $ride->id }}">
+					<p class="text-center">
+					<button type="submit" class="btn btn-primary btn-lg">Drop Off</button>
+					</p>
+				</form>
+				@endif
+			
+			@endif
+
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Accepted Ride</h3>
@@ -35,6 +55,10 @@
 					</div>
 				</div>
 			</div>
+			
+			@else
+			<h3 class="text-center">No Ride Accepted!</h3>
+			@endif
 		</div>
 	</div>
 
