@@ -102,6 +102,10 @@ Route::group(['prefix' => 'c'], function () {
 	// route to view ride history of the commuter
 	Route::get('/ride/history', 'CommuterController@rideHistory')->name('commuter.ride.history');
 
+
+	// route to send feedback
+	Route::post('/ride/feedback', 'CommuterController@sendFeedback')->name('commuter.send.feedback');
+
 });
 
 

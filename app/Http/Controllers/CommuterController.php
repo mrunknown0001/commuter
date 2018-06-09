@@ -406,6 +406,44 @@ class CommuterController extends Controller
     }
 
 
+
+    // method use to add feedback to the driver or commuter
+    public function sendFeedback(Request $request)
+    {
+        // validate request data
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+
+        // assgin to variables
+        $id = $request['ride_id'];
+        $message = $request['message'];
+        $feedback_number = GeneralController::generate_feedback_number();
+
+
+        $ride = Ride::findOrFail($id);
+
+
+        // save
+        $feed = new Feedback();
+        $feed->feedback_number = $feedback_number;
+        $feed->commuter_id = Auth::user()->id;
+        $feed->driver_id = $ride->driver_id;
+        $feed->ride_id = $ride->id;
+        $feed->comment = $message;
+        $feed->save();
+
+
+        // activity log
+        GeneralController::activity_log(Auth::user()->id, null, 'Send Feedback to the ride: ' . $ride->ride_number, now());
+
+
+        // return message to the ride history
+        return redirect()->route('commuter.ride.history')->with('success', 'Feedback Send!');
+    }
+
+
     // method use to view ride history of commuter
     public function rideHistory()
     {

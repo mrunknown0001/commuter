@@ -36,7 +36,7 @@
 							<td>
 								<span class="label label-primary" style="cursor: pointer;" data-toggle="modal" data-target="#id-{{ $ride->id }}"><i class="fa fa-eye"></i> View</span>
 								@if($ride->cancelled_by_commuter != 1)
-								<a href="#" class="label label-danger"><i class="fa fa-flag"></i> Report</a>
+								<a href="javascript:void(0)" class="label label-danger" data-toggle="modal" data-target="#report-{{ $ride->id }}"><i class="fa fa-flag"></i> Report</a>
 								@endif
 								{{-- Add Modal for Additional ride information --}}
 
@@ -73,7 +73,35 @@
 								        </div>
 
 								    </div>
-			</div>
+								</div>
+								<div class="modal fade modal-danger" tabindex="-1" id="report-{{ $ride->id }}" role="dialog">
+								    <div class="modal-dialog modal-dialog-centered" role="document">
+
+								        <div class="modal-content">
+								            <div class="modal-header">
+								                <button type="button" class="close" data-dismiss="modal">&times;</button>
+								                <h4 class="modal-title">Report</h4>
+								            </div>
+								            <div class="modal-body">
+								 				<p>Report Commuter: {{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</p>
+								 				<form action="#" method="POST" role="form">
+													{{ csrf_field() }}
+													<div class="form-group">
+														<textarea id="message" name="message" class="form-control"></textarea>
+													</div>
+													<div class="form-group">
+														<button class="btn btn-danger">Send Report</button>
+													</div>
+								 				</form>
+								                
+								            </div>
+								            <div class="modal-footer">
+								            	<small>Report</small>
+								            </div>
+								        </div>
+
+								    </div>
+								</div>
 								{{-- End of modal--}}
 							</td>
 							</tr>

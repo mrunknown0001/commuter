@@ -104,4 +104,33 @@ class GeneralController extends Controller
 
 
 
+    // method use to generate unique feedback number
+    public static function generate_feedback_number()
+    {
+        $number = 'f_'.mt_rand(000000, 999999);
+
+        if(Feedback::whereFeedbackNumber($number)->exists()) {
+            return self::generate_feedback_number();
+        }
+
+        return $number;
+
+    }
+
+
+    // method use to generate unique feedback number
+    public static function generate_report_number()
+    {
+        $number = 'r_'.mt_rand(000000, 999999);
+
+        if(Report::whereReportNumber($number)->exists()) {
+            return self::generate_report_number();
+        }
+
+        return $number;
+
+    }
+
+
+
 }

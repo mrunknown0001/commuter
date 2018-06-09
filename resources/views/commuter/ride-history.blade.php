@@ -11,6 +11,7 @@
 	<!-- <h3 class="text-center">My Ride History</h3> -->
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+			@include('includes.all')
 			<div class="box box-primary">
 				<div class="box-header box-bordered">
 					<strong>Ride History</strong>
@@ -36,11 +37,11 @@
 							<td>
 								<span class="label label-primary" style="cursor: pointer;" data-toggle="modal" data-target="#id-{{ $ride->id }}"><i class="fa fa-eye"></i> View</span>
 								@if($ride->cancelled_by_commuter != 1)
-								<a href="#" class="label label-success"><i class="fa fa-comments"></i> Feedback</a>
-								<a href="#" class="label label-danger"><i class="fa fa-flag"></i> Report</a>
+								<a href="javascript:void(0)" class="label label-success" data-toggle="modal" data-target="#feedback-{{ $ride->id }}"><i class="fa fa-comments"></i> Feedback</a>
+								<a href="#" class="label label-danger" data-toggle="modal" data-target="#report-{{ $ride->id }}"><i class="fa fa-flag"></i> Report</a>
 								@endif
 								{{-- Add Modal for Additional ride information --}}
-
+								{{-- start of view modal --}}
 								<div class="modal fade modal-primary" tabindex="-1" id="id-{{ $ride->id }}" role="dialog">
 								    <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -80,7 +81,73 @@
 								        </div>
 
 								    </div>
-			</div>
+								</div>
+								{{-- end of view modal --}}
+								
+								@if($ride->driver_id != null)
+								{{-- start of feedback modal --}}
+								<div class="modal fade modal-success" tabindex="-1" id="feedback-{{ $ride->id }}" role="dialog">
+								    <div class="modal-dialog modal-dialog-centered" role="document">
+
+								        <div class="modal-content">
+								            <div class="modal-header">
+								                <button type="button" class="close" data-dismiss="modal">&times;</button>
+								                <h4 class="modal-title">Feedback</h4>
+								            </div>
+								            <div class="modal-body">
+								 				<p>Feedback on driver {{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}</p>
+								 				<form action="{{ route('commuter.send.feedback') }}" method="POST" role="form">
+													{{ csrf_field() }}
+													<input type="hidden" name="ride_id" value="{{ $ride->id }}">
+													<div class="form-group">
+														<textarea id="message" name="message" class="form-control" required autofocus></textarea>
+													</div>
+													<div class="form-group">
+														<button class="btn btn-success">Send Feedback</button>
+													</div>
+								 				</form>
+								            </div>
+								            <div class="modal-footer">
+								            	<small>Feedback</small>
+								            </div>
+								        </div>
+
+								    </div>
+								</div>
+								{{-- end of feedback modal --}}
+
+
+								{{-- start of report modal --}}
+								<div class="modal fade modal-danger" tabindex="-1" id="report-{{ $ride->id }}" role="dialog">
+								    <div class="modal-dialog modal-dialog-centered" role="document">
+
+								        <div class="modal-content">
+								            <div class="modal-header">
+								                <button type="button" class="close" data-dismiss="modal">&times;</button>
+								                <h4 class="modal-title">Report</h4>
+								            </div>
+								            <div class="modal-body">
+								 				<p>Report driver {{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}</p>
+								 				<form action="#" method="POST" role="form">
+													{{ csrf_field() }}
+													<div class="form-group">
+														<textarea id="message" name="message" class="form-control"></textarea>
+													</div>
+													<div class="form-group">
+														<button class="btn btn-danger">Send Report</button>
+													</div>
+								 				</form>
+								                
+								            </div>
+								            <div class="modal-footer">
+								            	<small>Report</small>
+								            </div>
+								        </div>
+
+								    </div>
+								</div>
+								{{-- end of report modal --}}
+								@endif
 								{{-- End of modal--}}
 							</td>
 							</tr>
