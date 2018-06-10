@@ -98,7 +98,7 @@ class CommuterController extends Controller
 
 
         // update/save the profile of the user
-        $user = User::find(Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
         $user->first_name = $first_name;
         $user->last_name = $last_name;
         $user->identification = $id;
@@ -139,7 +139,7 @@ class CommuterController extends Controller
         // check if the old password matches
         if(password_verify($old_password, Auth::user()->password)) {
             // save the new password
-            $user = User::find(Auth::user()->id);
+            $user = User::findOrFail(Auth::user()->id);
             $user->password = bcrypt($password);
             $user->save();
 
@@ -373,7 +373,7 @@ class CommuterController extends Controller
         $id = $request['ride_id'];
 
         // make ride cancelled and finished
-        $ride = Ride::find($id);
+        $ride = Ride::findOrFail($id);
 
         // check if the ride request is accepted by driver
         // so that the commuter must pay the driver for the amount computed by the system
@@ -449,13 +449,32 @@ class CommuterController extends Controller
     public function submitReport(Request $request)
     {
         // validate request data
-        return $request;
+        $request->validate([
+            'message' => 'required'
+        ]);
 
         // assign to variables
+        $id = $request['ride_id'];
+        $message = $request['message'];
+        $report_number = GeneralController::generate_report_number();
 
-        // check
+
+        $ride = Ride::findOrFail($id);
+
+        // save
+        $report = new Report();
+        $report->report_number = $report_number;
+        $report->complainant_id = Auth::user()->id;
+        $report->reported_user_id = $ride->driver_id; // in this case the reported user is the driver of the ride
+        $report->content = $message;
+        $report->save();
+        
+
+        // add activity log
+        GeneralController::activity_log(Auth::user()->id, null, 'Submitted Report on ride: ' . $ride->ride_number, now());
 
         // return to history with message
+        return redirect()->route('commuter.ride.history')->with('success', 'Report Submitted!');
     }
 
 
