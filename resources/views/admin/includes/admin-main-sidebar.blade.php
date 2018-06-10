@@ -62,7 +62,7 @@
           </ul>
         </li>
 
-        <li class="treeview {{ route('admin.rides.history') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.rides.history') == url()->current() || route('admin.ride.details', ['id' => '', 'ride_number' => '']) == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.rides.history') }}">
             <i class="fa fa-motorcycle"></i> <span>Rides</span>
             <span class="pull-right-container">

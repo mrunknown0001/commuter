@@ -21,6 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
+          @include('admin.includes.commuter-search')
           <table class="table table-hover">
             <thead>
               <tr>
@@ -32,7 +33,7 @@
               @foreach($commuters as $commuter)
               <tr>
                 <td>
-                  {{ strtoupper($commuter->last_name . ', ' . $commuter->first_name) }}
+                  <a href="{{ route('admin.view.commuter.details', ['id' => $commuter->id]) }}">{{ strtoupper($commuter->last_name . ', ' . $commuter->first_name) }}</a>
                 </td>
                 <td>
                   {{ $commuter->identification }}

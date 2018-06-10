@@ -28,4 +28,21 @@ class Ride extends Model
         return $this->belongsTo('App\User', 'commuter_id', 'id');
     }
 
+
+    public function feedback()
+    {
+        return $this->hasMany('App\Feedback', 'ride_id', 'id');
+    }
+
+    public function report()
+    {
+        return $this->hasMany('App\Report', 'ride_id', 'id');
+    }
+
+
+    public function passenger()
+    {
+        return $this->hasMany('App\Passenger', 'ride_id', 'id');
+    }
+
 }

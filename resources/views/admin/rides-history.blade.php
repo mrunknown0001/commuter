@@ -19,6 +19,40 @@
     <section class="content">
 
  
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Ride Number</th>
+              <th>Time &amp; Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($rides as $ride)
+            <tr>
+              <td>
+                {{ strtoupper($ride->ride_number) }}
+              </td>
+              <td>
+                {{ date('l, F j, Y g:i:s a', strtotime($ride->created_at)) }}
+              </td>
+              <td>
+                <a href="{{ route('admin.ride.details', ['id' => $ride->id, 'ride_number' => $ride->ride_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+
+        {{--<p class="text-center"><strong>{{ $rides->count() + $rides->perPage() * ($rides->currentPage() - 1) }} of {{ $rides->total() }} records</strong></p>--}}
+
+            <!-- Page Number render() -->
+            <div class="text-center"> {{ $rides->links() }}</div>
+      </div>
+    </div
 
 
     </section>

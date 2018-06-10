@@ -206,11 +206,40 @@ class AdminController extends Controller
     }
 
 
+    // method use to view details of commuter
+    public function viewCommuterDetails($id = null)
+    {
+        // get the info of the commuter
+        $commuter = User::findorfail($id);
+
+        return view('admin.commuter-details', ['commuter' => $commuter]);
+    }
+
+
 
     // method use to view all rides history
     public function ridesHistory()
     {
-        return view('admin.rides-history');
+        // get all data of finished rides and not cancelled
+        $rides = Ride::where('cancelled', 0)
+                    ->where('finished', 1)
+                    ->orderBy('updated_at', 'desc')
+                    ->paginate(15);
+
+        return view('admin.rides-history', ['rides' => $rides]);
+    }
+
+
+
+    // method use to view details of ride
+    public function rideDetails($id = null, $ride_number)
+    {
+        $ride = Ride::findorfail($id);
+
+        // other checking, check if the id and ride_number belongs to the same ride
+
+        return view('admin.ride-details', ['ride' => $ride]);
+
     }
 
 

@@ -225,9 +225,16 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/commuter/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
 
 
+	// route to view commuter details
+	Route::get('/commuter/{id}/details', 'AdminController@viewCommuterDetails')->name('admin.view.commuter.details');
+
 
 	// route use to view all successful rides
 	Route::get('/rides/history', 'AdminController@ridesHistory')->name('admin.rides.history');
+
+
+	// route use to view details of the ride
+	Route::get('/ride/{id}/{ride_number}/details', 'AdminController@rideDetails')->name('admin.ride.details');
 
 
 	// route use to view reports from commuters

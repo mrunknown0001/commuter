@@ -39,7 +39,7 @@
               {{ strtoupper($feedback->feedback_number) }}
             </td>
             <td>
-              {{ strtoupper($feedback->ride->ride_number) }}
+              <a href="{{ route('admin.ride.details', ['id' => $feedback->ride->id, 'ride_number' => $feedback->ride->ride_number]) }}">{{ strtoupper($feedback->ride->ride_number) }}</a>
             </td>
             <td>
               {{ ucwords($feedback->commuter->first_name . ' ' . $feedback->commuter->last_name) }}
