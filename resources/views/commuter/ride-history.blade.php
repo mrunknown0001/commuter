@@ -100,10 +100,10 @@
 													{{ csrf_field() }}
 													<input type="hidden" name="ride_id" value="{{ $ride->id }}">
 													<div class="form-group">
-														<textarea id="message" name="message" class="form-control" required autofocus></textarea>
+														<textarea id="message" name="message" class="form-control" required ></textarea>
 													</div>
 													<div class="form-group">
-														<button class="btn btn-success">Send Feedback</button>
+														<button type="submit" class="btn btn-success">Send Feedback</button>
 													</div>
 								 				</form>
 								            </div>
@@ -128,13 +128,14 @@
 								            </div>
 								            <div class="modal-body">
 								 				<p>Report driver {{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}</p>
-								 				<form action="#" method="POST" role="form">
+								 				<form action="{{ route('commuter.submit.report') }}" method="POST" role="form">
 													{{ csrf_field() }}
+													<input type="hidden" name="ride_id" id="ride_id" value="{{ $ride->id }}">
 													<div class="form-group">
-														<textarea id="message" name="message" class="form-control"></textarea>
+														<textarea id="message" name="message" class="form-control" required></textarea>
 													</div>
 													<div class="form-group">
-														<button class="btn btn-danger">Send Report</button>
+														<button type="submit" class="btn btn-danger">Send Report</button>
 													</div>
 								 				</form>
 								                

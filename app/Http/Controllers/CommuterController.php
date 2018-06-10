@@ -444,6 +444,21 @@ class CommuterController extends Controller
     }
 
 
+
+    // method us to submit ride 
+    public function submitReport(Request $request)
+    {
+        // validate request data
+        return $request;
+
+        // assign to variables
+
+        // check
+
+        // return to history with message
+    }
+
+
     // method use to view ride history of commuter
     public function rideHistory()
     {
@@ -455,4 +470,5 @@ class CommuterController extends Controller
 
         return view('commuter.ride-history', ['rides' => $rides]);
     }
+
 }
