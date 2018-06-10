@@ -20,6 +20,7 @@
 
       <div class="row">
         <div class="col-md-12">
+          @include('admin.includes.driver-search')
           <table class="table table-hover">
             <thead>
               <tr>
@@ -31,7 +32,7 @@
               @foreach($drivers as $driver)
               <tr>
                 <td>
-                  {{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}
+                  <a href="{{ route('driver.view.driver.details', ['id' => $driver->id]) }}">{{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}</a>
                 </td>
                 <td>
                   {{ $driver->identification }}

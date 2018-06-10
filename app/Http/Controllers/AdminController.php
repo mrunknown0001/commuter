@@ -193,6 +193,16 @@ class AdminController extends Controller
     }
 
 
+
+    // method use to view driver details
+    public function viewDriverDetails($id = null)
+    {
+        $driver = User::findorfail($id);
+
+        return view('admin.driver-details', ['driver' => $driver]);
+    }
+
+
     // method use to view all commuters
     public function viewAllCommuters()
     {
