@@ -14,7 +14,6 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
                 font-weight: 100;
                 height: 80vh;
                 margin: 0;

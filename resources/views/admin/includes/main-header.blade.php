@@ -20,7 +20,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-user"></i></span>
               <!-- <img src="" class="user-image" alt="Admin"> -->
-              <span class="hidden-xs">{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}
+              <span class="hidden-xs">{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }} <i class="fa fa-caret-down"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->

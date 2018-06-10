@@ -182,10 +182,10 @@ class CommuterController extends Controller
 
         // check if the has more than 20 mins from the time of request
         $last_ride = Ride::where('commuter_id', Auth::user()->id)
-                        ->where('cancelled', 1)
                         ->where('finished', 1)
                         ->orderBy('created_at', 'desc')
                         ->first();
+
         if(count($last_ride) > 0) {
 
             // check if ride is less than 20mins from time of request
@@ -209,7 +209,6 @@ class CommuterController extends Controller
 
         // check if the commuter has a ride
         $active_ride = Ride::where('commuter_id', Auth::user()->id)
-                        ->where('cancelled', 0)
                         ->where('finished', 0)
                         ->first();
 
@@ -466,6 +465,7 @@ class CommuterController extends Controller
         $report->report_number = $report_number;
         $report->complainant_id = Auth::user()->id;
         $report->reported_user_id = $ride->driver_id; // in this case the reported user is the driver of the ride
+        $report->ride_id = $ride->id;
         $report->content = $message;
         $report->save();
         

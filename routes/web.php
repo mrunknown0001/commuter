@@ -153,12 +153,8 @@ Route::group(['prefix' => 'd'], function () {
 	// route to accept ride request
 	Route::post('/ride/request/accept', 'DriverController@acceptRideRequest')->name('driver.accept.ride.request');
 
-	Route::get('/ride/request/accept', function () {
-		return redirect()->route('driver.accepted.ride');
-	});
-
 	// route to view accepted request
-	Route::get('/ride/request/accepted', 'DriverController@acceptedRide')->name('driver.accepted.ride');
+	Route::get('/ride/request/accept', 'DriverController@acceptedRide')->name('driver.accepted.ride');
 
 
 	// route to move to pickup status of a ride
@@ -244,6 +240,10 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to view feedbacks
 	Route::get('/feedbacks', 'AdminController@viewFeedbacks')->name('admin.view.feedbacks');
+
+
+	// route to view individual details of feedback
+	Route::get('/feedback/{id}/{feedback_number}', 'AdminController@viewFeedbackDetails')->name('admin.view.feedback.details');
 
 
 	// route to go to activity log of the admin

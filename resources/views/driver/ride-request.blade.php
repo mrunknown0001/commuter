@@ -11,9 +11,8 @@
 	<!-- <h3 class="text-center">Ride Reqest List</h3> -->
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<h3 class="text-center">Ride Request</h3>
 			<div id="ride-request">
-				
+				<p class="text-center"><em>Loading Ride Requests...</em></p>
 			</div>
 		</div>
 	</div>

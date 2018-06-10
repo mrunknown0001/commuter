@@ -11,6 +11,7 @@
 	<!-- <h3 class="text-center">My Ride History</h3> -->
 		<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+			@include('includes.all')
 			<div class="box box-primary">
 				<div class="box-header box-bordered">
 					<strong>Ride History</strong>

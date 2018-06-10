@@ -244,7 +244,7 @@ class DriverController extends Controller
         GeneralController::activity_log(Auth::user()->id, null, 'Accepted Ride Request: ' . $ride->ride_number, now());
 
         // return message with success
-        return redirect()->route('driver.accept.ride')->with('success', 'You successfully accepted requested ride!');
+        return redirect()->route('driver.accepted.ride')->with('success', 'You successfully accepted requested ride!');
     }
 
 
@@ -294,7 +294,7 @@ class DriverController extends Controller
         // add activity log here
         GeneralController::activity_log(Auth::user()->id, null, 'Driver drops the passenger. Ride Number: ' . $ride->ride_number, now());
 
-        return redirect()->route('driver.accepted.ride')->with('success', 'Ride Finished!');  
+        return redirect()->route('driver.ride.history')->with('success', 'Ride Finished!');  
     }
 
 

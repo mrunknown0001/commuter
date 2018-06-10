@@ -12,6 +12,8 @@ use App\User;
 use App\Admin;
 use App\Ride;
 use App\AdminId;
+use App\Feedback;
+use App\Report;
 
 class AdminController extends Controller
 {
@@ -20,7 +22,6 @@ class AdminController extends Controller
     	// only admin can access
     	$this->middleware('auth:admin');
     }
-
 
 
 
@@ -232,7 +233,33 @@ class AdminController extends Controller
     // method use to view feedbacks
     public function viewFeedbacks()
     {
-        return view('admin.feedbacks');
+        // get all the unread feedbacks
+        $feedbacks = Feedback::orderBy('created_at', 'desc')
+                            ->paginate(15);
+
+        return view('admin.feedbacks', ['feedbacks' => $feedbacks]);
+    }
+
+
+    // method use to view feddback details
+    public function viewFeedbackDetails($id = null, $feedback_number)
+    {
+        $feedback = Feedback::findorfail($id);
+
+        // add checking here if the 2 parameters not matched with the record
+        // if the id is not the number of feedback number
+
+        // make feedback viewed status
+        if($feedback->viewed == 0) {
+            $feedback->viewed = 1;
+            $feedback->save();
+        }
+
+        // add log the admin viewed the feedback
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin View Feedback', now());
+
+        // return to view
+        return view('admin.view-feedback', ['feedback' => $feedback]);
     }
 
 

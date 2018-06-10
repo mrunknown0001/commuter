@@ -12,6 +12,8 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			@include('includes.all')
+
+			@if(count($rides) > 0)
 			<div class="box box-primary">
 				<div class="box-header box-bordered">
 					<strong>Ride History</strong>
@@ -162,6 +164,9 @@
 					</div>
 				</div>
 			</div>
+			@else
+			<p class="text-center"><em>You haven't requested for a ride yet. <a href="{{ route('commuter.request.ride') }}">Request Ride</a></em></p>			
+			@endif
 		</div>
 	</div>
 	

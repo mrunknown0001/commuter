@@ -57,7 +57,7 @@
 			</div>
 			
 			@else
-			<h3 class="text-center">No Ride Accepted!</h3>
+			<p class="text-center"><em>No Ride Accepted. <a href="{{ route('driver.ride.request') }}">See Ride Request</a></em></p>
 			@endif
 		</div>
 	</div>
