@@ -467,6 +467,7 @@ class CommuterController extends Controller
         $report->reported_user_id = $ride->driver_id; // in this case the reported user is the driver of the ride
         $report->ride_id = $ride->id;
         $report->content = $message;
+        $report->user_type = 1;
         $report->save();
         
 

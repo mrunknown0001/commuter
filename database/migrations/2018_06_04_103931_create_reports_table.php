@@ -22,6 +22,7 @@ class CreateReportsTable extends Migration
             $table->foreign('reported_user_id')->references('id')->on('users');
             $table->integer('ride_id')->unsigned();
             $table->foreign('ride_id')->references('id')->on('rides');
+            $table->tinyInteger('user_type')->nullable();
             $table->string('reason')->nullable();
             $table->string('content')->nullable();
             $table->integer('driver_cancel_id')->unsigned()->nullable();

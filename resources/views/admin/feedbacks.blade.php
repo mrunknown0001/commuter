@@ -21,6 +21,7 @@
  
     <div class="row">
       <div class="col-md-12">
+        @if(count($feedbacks) > 0)
         <table class="table table-hover">
           <thead>
             <tr>
@@ -68,6 +69,9 @@
             <!-- Page Number render() -->
             <div class="text-center"> {{ $feedbacks->links() }}</div>
       </div>
+      @else
+      <p class="text-center"><em>No Feedbacks</em></p>
+      @endif
     </div>
 
 

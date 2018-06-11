@@ -20,6 +20,9 @@
 
       <div class="row">
         <div class="col-md-12">
+
+          @if(count($drivers) > 0)
+
           @include('admin.includes.driver-search')
           <table class="table table-hover">
             <thead>
@@ -47,6 +50,10 @@
 
               <!-- Page Number render() -->
               <div class="text-center"> {{ $drivers->links() }}</div>
+
+          @else
+          <p class="text-center"><em>No drivers registered</em></p>
+          @endif
         </div>
       </div>
 

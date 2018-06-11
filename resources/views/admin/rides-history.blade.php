@@ -21,6 +21,7 @@
  
     <div class="row">
       <div class="col-md-12">
+        @if(count($rides) > 0)
         <table class="table table-hover">
           <thead>
             <tr>
@@ -51,6 +52,10 @@
 
             <!-- Page Number render() -->
             <div class="text-center"> {{ $rides->links() }}</div>
+
+        @else
+        <p class="text-center"><em>No ride on database</em></p>
+        @endif
       </div>
     </div
 

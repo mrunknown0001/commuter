@@ -338,6 +338,7 @@ class DriverController extends Controller
         $report->reported_user_id = $ride->commuter_id;
         $report->ride_id = $ride->id;
         $report->content = $message;
+        $report->user_type = 2;
         $report->save();
 
 

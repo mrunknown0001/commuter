@@ -21,6 +21,9 @@
 
     <div class="row">
         <div class="col-md-12">
+
+          @if(count($commuters) > 0)
+
           @include('admin.includes.commuter-search')
           <table class="table table-hover">
             <thead>
@@ -48,6 +51,9 @@
 
               <!-- Page Number render() -->
               <div class="text-center"> {{ $commuters->links() }}</div>
+          @else 
+          <p class="text-center"><em>No commuters registered</em></p>
+          @endif
         </div>
       </div> 
 
