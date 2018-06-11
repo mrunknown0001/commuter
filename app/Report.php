@@ -16,4 +16,10 @@ class Report extends Model
     {
     	return $this->belongsTo('App\User', 'reported_user_id');
     }
+
+
+    public function ride()
+    {
+    	return $this->belongsTo('App\Ride', 'ride_id');
+    }
 }

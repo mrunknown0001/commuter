@@ -252,6 +252,10 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/reports/commuters', 'AdminController@commutersReports')->name('admin.commuters.reports');
 
 
+	// route to view details of report of comuter
+	Route::get('/report/commuter/{id}/{report_number}/view', 'AdminController@commuterReportView')->name('admin.commuter.report.view');
+
+
 	// route use to view reports from drivers
 	Route::get('/reports/drivers', 'AdminController@driversReports')->name('admin.drivers.reports');
 

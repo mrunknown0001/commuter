@@ -281,6 +281,25 @@ class AdminController extends Controller
 
 
 
+    // method use to view commuter report details
+    public function commuterReportView($id = null, $report_number = null)
+    {
+        // validate
+        $report = Report::findorfail($id);
+        $report->viewed = 1;
+        $report->save();
+
+        // assign to variables
+
+        // generate log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Viewed Report of Commuter', now());
+
+        // return to page with data
+        return view('admin.commuter-report-details', ['report' => $report]);
+    }
+
+
+
     // method use to view drivers reports
     public function driversReports()
     {

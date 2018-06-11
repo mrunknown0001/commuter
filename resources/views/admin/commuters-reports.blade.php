@@ -27,6 +27,7 @@
               <th>Report Number</th>
               <th>Commuter</th>
               <th>Time &amp; Date</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -43,7 +44,14 @@
                 {{ date('l, F j, Y g:i:s a', strtotime($report->created_at)) }}
               </td>
               <td>
-                <a href="#" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+                @if($report->viewed == 0)
+                <span class="badge bg-red">Unread</span>
+                @else
+                <span class="badge bg-blue">Viewed</span>
+                @endif
+              </td>
+              <td>
+                <a href="{{ route('admin.commuter.report.view', ['id' => $report->id, 'report_number' => $report->report_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
               </td>
             </tr>
             @endforeach
