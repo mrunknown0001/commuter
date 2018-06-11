@@ -23,8 +23,8 @@
       <div class="col-md-12">
         <p><a href="{{ url()->previous() }}">Back</a></p>
         <p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
-        <p>Commuter: <strong>{{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</strong></p>
-        <p>Driver: <strong>{{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}</strong></p>
+        <p>Commuter: <strong><a href="{{ route('admin.view.commuter.details', ['id' => $ride->commuter->id]) }}">{{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</a></strong></p>
+        <p>Driver: <strong><a href="{{ route('driver.view.driver.details', ['id' => $ride->driver->id]) }}">{{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}</a></strong></p>
         <p>Time &amp; Date: <strong>{{ date('l, F j, Y g:i:s a', strtotime($ride->created_at)) }}</strong></p>
         <p>Pickup Location: <strong>{{ $ride->pickup_location->name }}</strong></p>
         <p>Dropoff Location: <strong>{{ $ride->dropoff_location->name }}</strong></p>

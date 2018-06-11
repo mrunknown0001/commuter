@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-
+          <p><a href="{{ url()->previous() }}" class="">Back</a></p>
           <p>Name: <strong>{{ ucwords($driver->first_name . ' ' . $driver->last_name) }}</strong></p>
           <p>Identification: <strong>{{ $driver->identification }}</strong></p>
           <p>Mobile Number: <strong>{{ $driver->mobile_number }}</strong></p>

@@ -12,6 +12,8 @@
 		<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			@include('includes.all')
+
+			@if(count($rides) > 0)
 			<div class="box box-primary">
 				<div class="box-header box-bordered">
 					<strong>Ride History</strong>
@@ -50,7 +52,7 @@
 								                <h4 class="modal-title">Ride Information</h4>
 								            </div>
 								            <div class="modal-body">
-								            	<p>Commuter: <strong>{{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</strong>></p>
+								            	<p>Commuter: <strong>{{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</strong></p>
 								   				<p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
 								   				<p>Pickup Location: <strong>{{ $ride->pickup_location->name }}</strong></p>
 								   				<p>Dropoff Location: <strong>{{ $ride->dropoff_location->name }}</strong></p>
@@ -75,6 +77,7 @@
 
 								    </div>
 								</div>
+
 								<div class="modal fade modal-danger" tabindex="-1" id="report-{{ $ride->id }}" role="dialog">
 								    <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -85,10 +88,11 @@
 								            </div>
 								            <div class="modal-body">
 								 				<p>Report Commuter: {{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</p>
-								 				<form action="#" method="POST" role="form">
+								 				<form action="{{ route('driver.submit.report') }}" method="POST" role="form">
 													{{ csrf_field() }}
+													<input type="hidden" name="ride_id" value="{{ $ride->id }}">
 													<div class="form-group">
-														<textarea id="message" name="message" class="form-control"></textarea>
+														<textarea id="message" name="message" class="form-control" required></textarea>
 													</div>
 													<div class="form-group">
 														<button class="btn btn-danger">Send Report</button>
@@ -116,6 +120,9 @@
 					</div>
 				</div>
 			</div>
+			@else
+			<p class="text-center"><em>No Finished Rides</em></p>
+			@endif
 		</div>
 	</div>
 

@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-
+          <p><a href="{{ url()->previous() }}" class="">Back</a></p>
           <p>Name: <strong>{{ ucwords($commuter->first_name . ' ' . $commuter->last_name) }}</strong></p>
           <p>Identification: <strong>{{ $commuter->identification }}</strong></p>
           <p>Mobile Number: <strong>{{ $commuter->mobile_number }}</strong></p>

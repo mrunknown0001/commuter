@@ -21,7 +21,7 @@
         <li class="dropdown {{ route('driver.ride.request') == url()->current() || route('driver.ride.history') == url()->current() || route('driver.accept.ride.request') == url()->current()  ? 'active' : '' }}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-motorcycle"></i> Ride <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('driver.accepted.ride') }}"><i class="fa fa-circle-o"></i> Ride Requests</a></li>
+            <li><a href="{{ route('driver.ride.request') }}"><i class="fa fa-circle-o"></i> Ride Requests</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('driver.accept.ride.request') }}"><i class="fa fa-circle-o"></i> Accepted Ride</a></li>
             <li role="separator" class="divider"></li>

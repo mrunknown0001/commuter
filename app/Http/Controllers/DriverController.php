@@ -10,7 +10,7 @@ use App\User;
 use App\DriverInfo;
 use App\Ride;
 use App\Notification;
-use app\Report;
+use App\Report;
 
 class DriverController extends Controller
 {
@@ -307,5 +307,45 @@ class DriverController extends Controller
                     ->paginate(5);
 
     	return view('driver.ride-history', ['rides' => $rides]);
+    }
+
+
+    // method use to submit report by the driver
+    public function submitReport(Request $request)
+    {
+        // validate request data
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+
+        // assign request data to variables
+        $ride_id = $request['ride_id'];
+        $message = $request['message'];
+
+
+        $ride = Ride::findOrFail($ride_id);
+
+        $report_number = GeneralController::generate_report_number();
+
+        // checks
+
+
+        // save report to view by admin        
+        $report = new Report();
+        $report->report_number = $report_number;
+        $report->complainant_id = Auth::user()->id;
+        $report->reported_user_id = $ride->commuter_id;
+        $report->ride_id = $ride->id;
+        $report->content = $message;
+        $report->save();
+
+
+        // save log report
+        GeneralController::activity_log(Auth::user()->id, null, 'Driver Submitted Report', now());
+
+
+        // return message
+        return redirect()->route('driver.ride.history')->with('success', 'Report Submitted!');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title') Activity Log @endsection
+@section('title') Admin Log @endsection
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Activity Log
+        Admin Log
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-history"></i> Home</a></li>
-        <li class="active">Activity Log</li>
+        <li class="active">Admin Log</li>
       </ol>
     </section>
         <!-- Main content -->
@@ -37,13 +37,11 @@
                 {{ ucwords($log->admin->first_name) }}
                 {{ ucwords($log->admin->last_name) }}
               @else
+                {{ ucwords($log->user->first_name) }}
+                {{ ucwords($log->user->last_name) }}
                 @if($log->user->user_type == 1)
-                  <a href="{{ route('admin.view.commuter.details', ['id' => $log->user->id]) }}">{{ ucwords($log->user->first_name) }}
-                  {{ ucwords($log->user->last_name) }}</a>
                   :Commuter
                 @else
-                  <a href="{{ route('driver.view.driver.details', ['id' => $log->user->id]) }}">{{ ucwords($log->user->first_name) }}
-                  {{ ucwords($log->user->last_name) }}</a>
                   :Driver
                 @endif
               @endif
@@ -65,7 +63,7 @@
             <!-- Page Number render() -->
             <div class="text-center"> {{ $logs->links() }}</div>
         @else
-        <p class="text-center"><em>No Activity Logs</em></p>
+        <p class="text-center"><em>No Admin Logs</em></p>
         @endif
       </div>
     </div>

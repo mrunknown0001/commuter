@@ -167,6 +167,10 @@ Route::group(['prefix' => 'd'], function () {
 
 	// route use to view ride history of the driver
 	Route::get('/ride/history', 'DriverController@rideHistory')->name('driver.ride.history');
+
+
+	// route to send report 
+	Route::post('/ride/report', 'DriverController@submitReport')->name('driver.submit.report');
 });
 
 
@@ -187,6 +191,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 		// route to view all available id for admins
 		Route::get('/admin/ids', 'AdminController@viewAdminId')->name('admin.view.admin.id');
+
+		// route to view admin logs
+		Route::get('/admin/logs', 'AdminController@viewAdminLogs')->name('admin.view.admin.logs');
 		
 	});
 	////////////////////////////////////

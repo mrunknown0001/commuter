@@ -20,6 +20,7 @@
 
     <div class="row">
         <div class="col-md-12">
+          @if(count($admins) > 0)
           <table class="table table-hover">
             <thead>
               <tr>
@@ -46,6 +47,9 @@
 
               <!-- Page Number render() -->
               <div class="text-center"> {{ $admins->links() }}</div>
+          @else
+          <p class="text-center"><em>No Registered Admins</em></p>
+          @endif
         </div>
       </div> 
 

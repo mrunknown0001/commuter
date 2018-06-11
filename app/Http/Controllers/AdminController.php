@@ -52,6 +52,18 @@ class AdminController extends Controller
     }
 
 
+    // method use to view adin logs
+    public function viewAdminLogs()
+    {
+        // admin logs
+        $logs = ActivityLog::where('user_id', null)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('admin.admin-log', ['logs' => $logs]);
+    }
+
+
 
     ////////////////////////////////////////
     // end of all methods of super admins //
