@@ -18,7 +18,48 @@
         <!-- Main content -->
     <section class="content">
 
- 
+    <div class="row">
+      <div class="col-md-12">
+        @if(count($reports) > 0)
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Report Number</th>
+              <th>Commuter</th>
+              <th>Time &amp; Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($reports as $report)
+            <tr>
+              <td>
+                {{ strtoupper($report->report_number) }}
+              </td>
+              <td>
+                {{ ucwords($report->complainant->first_name . ' ' . $report->complainant->last_name) }}
+              </td>
+              <td>
+                {{ date('l, F j, Y g:i:s a', strtotime($report->created_at)) }}
+              </td>
+              <td>
+                <a href="#" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+
+        {{--<p class="text-center"><strong>{{ $reports->count() + $reports->perPage() * ($reports->currentPage() - 1) }} of {{ $reports->total() }} records</strong></p>--}}
+
+            <!-- Page Number render() -->
+            <div class="text-center"> {{ $reports->links() }}</div>
+        @else
+        <p class="text-center"><em>No Commuter Report</em></p>
+        @endif
+      </div>
+    </div>
 
     </section>
     <!-- /.content -->

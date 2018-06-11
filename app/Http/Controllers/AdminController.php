@@ -269,7 +269,14 @@ class AdminController extends Controller
     // method use to view commutes reports
     public function commutersReports()
     {
-        return view('admin.commuters-reports');
+        // get all commuters report
+        // user type == 1
+        
+        $reports = Report::where('user_type', 1)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('admin.commuters-reports', ['reports' => $reports]);
     }
 
 
@@ -277,6 +284,10 @@ class AdminController extends Controller
     // method use to view drivers reports
     public function driversReports()
     {
+        // get all driver report
+        // user type == 2
+
+
         return view('admin.drivers-reports');
     }
 
