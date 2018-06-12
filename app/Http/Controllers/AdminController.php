@@ -305,9 +305,30 @@ class AdminController extends Controller
     {
         // get all driver report
         // user type == 2
+        $reports = Report::where('user_type', 2)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('admin.drivers-reports', ['reports' => $reports]);
+    }
 
 
-        return view('admin.drivers-reports');
+
+    // method use to view driver report detils
+    public function driverReportView($id = null, $report_number = null)
+    {
+        // validate
+        $report = Report::findorfail($id);
+        $report->viewed = 1;
+        $report->save();
+
+        // assign to variables
+
+        // generate log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Viewed Report of Commuter', now());
+
+        // return to page with data
+        return view('admin.driver-report-details', ['report' => $report]);
     }
 
 

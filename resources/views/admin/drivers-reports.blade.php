@@ -19,6 +19,56 @@
     <section class="content">
 
  
+     <div class="row">
+      <div class="col-md-12">
+        @if(count($reports) > 0)
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Report Number</th>
+              <th>Driver</th>
+              <th>Time &amp; Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($reports as $report)
+            <tr>
+              <td>
+                {{ strtoupper($report->report_number) }}
+              </td>
+              <td>
+                {{ ucwords($report->complainant->first_name . ' ' . $report->complainant->last_name) }}
+              </td>
+              <td>
+                {{ date('l, F j, Y g:i:s a', strtotime($report->created_at)) }}
+              </td>
+              <td>
+                @if($report->viewed == 0)
+                <span class="badge bg-red">Unread</span>
+                @else
+                <span class="badge bg-blue">Viewed</span>
+                @endif
+              </td>
+              <td>
+                <a href="{{ route('admin.driver.report.view', ['id' => $report->id, 'report_number' => $report->report_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+
+        {{--<p class="text-center"><strong>{{ $reports->count() + $reports->perPage() * ($reports->currentPage() - 1) }} of {{ $reports->total() }} records</strong></p>--}}
+
+            <!-- Page Number render() -->
+            <div class="text-center"> {{ $reports->links() }}</div>
+        @else
+        <p class="text-center"><em>No Drivers Report</em></p>
+        @endif
+      </div>
+    </div>
 
 
     </section>

@@ -29,6 +29,11 @@
           <p>Body Number: <strong>{{ strtoupper($driver->driver_info->body_number) }}</strong></p>
           <p>Plate Number: <strong>{{ strtoupper($driver->driver_info->plate_number) }}</strong></p>
           <p>Operator: <strong>{{ ucwords($driver->driver_info->operator_name) }}</strong></p>
+          <hr>
+          <p>Report Made: <strong>{{ count($driver->report) }}</strong></p>
+          <hr>
+          <p><span class="badge bg-blue"><i class="fa fa-comments"></i> Feedback: {{ count($driver->feedback) }}</span></p>
+          <p><span class="badge bg-red"><i class="fa fa-flag"></i> Report: {{ count($driver->complaint) }}</span></p>
 
         </div>
       </div> 

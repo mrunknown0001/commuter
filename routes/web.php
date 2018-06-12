@@ -260,6 +260,10 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/reports/drivers', 'AdminController@driversReports')->name('admin.drivers.reports');
 
 
+	// route to view driver report details
+	Route::get('/report/{id}/{report_number}/view', 'AdminController@driverReportView')->name('admin.driver.report.view');
+
+
 	// route to view feedbacks
 	Route::get('/feedbacks', 'AdminController@viewFeedbacks')->name('admin.view.feedbacks');
 

@@ -25,7 +25,11 @@
           <p>Name: <strong>{{ ucwords($commuter->first_name . ' ' . $commuter->last_name) }}</strong></p>
           <p>Identification: <strong>{{ $commuter->identification }}</strong></p>
           <p>Mobile Number: <strong>{{ $commuter->mobile_number }}</strong></p>
-
+          <hr>
+          <p>Feedback Made: <strong>{{ count($commuter->comment) }}</strong></p>
+          <p>Report Made: <strong>{{ count('$commuter->report') }}</strong></p>
+          <hr>
+          <p><span class="badge bg-red"><i class="fa fa-flag"></i> Reports: {{ count($commuter->complaint) }}</span></p>
         </div>
       </div> 
 

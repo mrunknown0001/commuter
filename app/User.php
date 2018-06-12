@@ -41,4 +41,29 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\DriverInfo', 'driver_id', 'id');
     }
+
+
+    public function complaint()
+    {
+        return $this->hasMany('App\Report', 'reported_user_id');
+    }
+
+
+    public function report()
+    {
+        return $this->hasMany('App\Report', 'complainant_id');
+    }
+
+
+    public function feedback()
+    {
+        return $this->hasMany('App\Feedback', 'driver_id');
+    }
+
+
+    public function comment()
+    {
+        return $this->hasMany('App\Feedback', 'commuter_id');
+    }
+
 }
