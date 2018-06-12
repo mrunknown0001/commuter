@@ -366,7 +366,7 @@ class CommuterController extends Controller
 
 
 
-    // method use to cancel ride request 
+    // method use to cancel ride request by the commuter
     public function cancelRideRequest(Request $request)
     {
         $id = $request['ride_id'];
@@ -381,17 +381,23 @@ class CommuterController extends Controller
             // in this case the commuter must pay the amount to the driver
             // the system will notify the driver and ask if the commuter payed the amount 
             // if yes, its ok, if no, the driver can report the commuter
+            // create notification for the user
+            $notification = new Notification();
+            $notification->to = $ride->driver->id;
+            $notification->title = 'Accepted Request Ride Cancelled by Commuter';
+            $notification->ride_id = $ride->id;
+            $notification->message = 'Your Accepted Ride Request is cancelled  by ' . Auth::user()->first_name . ' ' . Auth::user()->last_name;
+            $notification->url = "driver.ride.history";
+            $notification->save();
 
         }
+
 
         // save ride details
         $ride->cancelled_by_commuter = 1;
         $ride->cancelled = 1;
         $ride->finished = 1;
         $ride->save();
-
-
-        // add notification
         
 
         // activity log here

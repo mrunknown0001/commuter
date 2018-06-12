@@ -171,6 +171,17 @@ class DriverController extends Controller
     // method use to view notification
     public function notification()
     {
+        
+        $unread = Notification::where('to', Auth::user()->id)
+                                ->where('viewed', 0)
+                                ->get();
+
+        if(count($unread) > 0) {
+            foreach($unread as $u) {
+                $u->viewed = 1;
+                $u->save();
+            }
+        }
         return view('driver.notification');
     }
 
@@ -304,6 +315,7 @@ class DriverController extends Controller
         // find all ride involving the driver with finished status
         $rides = Ride::where('driver_id', Auth::user()->id)
                     ->where('finished', 1)
+                    ->orderBy('created_at', 'desc')
                     ->paginate(5);
 
     	return view('driver.ride-history', ['rides' => $rides]);

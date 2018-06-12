@@ -77,7 +77,10 @@ class AdminController extends Controller
     {
 
         // get all data need to show in dashboard of admin //
-        $rides = Ride::where('finished', 1)->get();
+        $rides = Ride::where('finished', 1)
+                        ->where('cancelled', 0)
+                        ->get();
+                        
         $commuters = User::where('user_type', 1)->get();
         $drivers = User::where('user_type', 2)->get();
         $current_rides = Ride::where('current', 1)
