@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<div id="ride-request">
-				<p class="text-center"><em>Loading Ride Requests...</em></p>
+				<p class="text-center"><i class="fa fa-spinner fa-spin"></i> <em>Loading Ride Requests...</em></p>
 			</div>
 		</div>
 	</div>
