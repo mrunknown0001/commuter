@@ -157,6 +157,10 @@ Route::group(['prefix' => 'd'], function () {
 	Route::get('/ride/request/accept', 'DriverController@acceptedRide')->name('driver.accepted.ride');
 
 
+	// route to cancel accepted request
+	Route::post('/ride/request/cancel', 'DriverController@cancelRideRequest')->name('driver.cancel.ride.request');
+
+
 	// route to move to pickup status of a ride
 	Route::post('/ride/request/pickup', 'DriverController@ridePickup')->name('driver.ride.pickup');
 

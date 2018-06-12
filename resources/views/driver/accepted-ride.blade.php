@@ -59,6 +59,36 @@
 			@else
 			<p class="text-center"><em>No Ride Accepted. <a href="{{ route('driver.ride.request') }}">See Ride Request</a></em></p>
 			@endif
+
+			{{-- Start of modal cancel --}}
+			<div class="modal fade modal-danger" tabindex="-1" id="id" role="dialog">
+			    <div class="modal-dialog modal-dialog-centered" role="document">
+
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Confirmation</h4>
+			            </div>
+			            <div class="modal-body">
+			   				<p>Are You Sure You Want To Cancel?</p>
+
+			                
+			            </div>
+			            <div class="modal-footer">
+			            	<form action="{{ route('driver.cancel.ride.request') }}" method="POST">
+			            		{{ csrf_field() }}
+								<input type="hidden" name="ride_id" value="{{ $ride->id }}">
+								<button type="submit" class="btn btn-danger">Cancel Ride</button>
+			            		
+							</form>
+			            </div>
+			        </div>
+
+			    </div>
+			</div>
+			{{-- End of modal cancel --}}
+
+
 		</div>
 	</div>
 

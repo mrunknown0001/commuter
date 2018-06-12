@@ -271,6 +271,38 @@ class DriverController extends Controller
     }
 
 
+    // method use to cancel accepted ride request
+    public function cancelRideRequest(Request $request)
+    {
+        $id = $request['ride_id'];
+
+        $ride = Ride::findOrFail($id);
+
+        // notification for the commuter
+        $notification = new Notification();
+        $notification->to = $ride->commuter->id;
+        $notification->title = 'Your Ride Request Cancelled by Driver';
+        $notification->ride_id = $ride->id;
+        $notification->message = 'Your Requested Ride is cancelled  by ' . Auth::user()->first_name . ' ' . Auth::user()->last_name;
+        $notification->url = "commuter.ride.history";
+        $notification->save();
+
+        // save the ride
+        $ride->cancelled = 1;
+        $ride->finished = 1;
+        $ride->save();
+
+        // activity log
+        GeneralController::activity_log(Auth::user()->id, null, 'You Cancelled a ride', now());
+
+
+        // return and message for the driver
+        return redirect()->route('driver.ride.history')->with('success', 'Ride Successfully Cancelled');
+
+
+    }
+
+
 
     // method to move a ride status in pickup
     public function ridePickup(Request $request)
