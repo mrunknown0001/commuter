@@ -256,6 +256,15 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/rides/history', 'AdminController@ridesHistory')->name('admin.rides.history');
 
 
+	// route use to view current Rides
+	Route::get('/rides/current', 'AdminController@currentRides')->name('admin.current.rides');
+
+
+
+	// route use to view cancelled rides
+	Route::get('/rides/cancelled', 'AdminController@cancelledRides')->name('admin.cancelled.rides');
+
+
 	// route use to view details of the ride
 	Route::get('/ride/{id}/{ride_number}/details', 'AdminController@rideDetails')->name('admin.ride.details');
 

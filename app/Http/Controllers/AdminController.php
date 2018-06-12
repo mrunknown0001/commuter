@@ -275,6 +275,33 @@ class AdminController extends Controller
     }
 
 
+    // method use to view current rides
+    public function currentRides()
+    {
+        $rides = Ride::where('current', 1)
+                    ->where('cancelled', 0)
+                    ->where('finished', 0)
+                    ->orderBy('updated_at', 'desc')
+                    ->paginate(15);
+
+        return view('admin.current-rides', ['rides' => $rides]);
+    }
+
+
+
+    // method use to view cancelled rides
+    public function cancelledRides()
+    {
+        // get all cancelled rides
+        $rides = Ride::where('cancelled', 1)
+                    ->where('finished', 1)
+                    ->orderBy('updated_at', 'desc')
+                    ->paginate(15);
+
+        return view('admin.cancelled-rides', ['rides' => $rides]);
+    }
+
+
 
     // method use to view all rides history
     public function ridesHistory()

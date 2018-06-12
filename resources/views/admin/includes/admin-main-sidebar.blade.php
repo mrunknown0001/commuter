@@ -63,7 +63,7 @@
           </ul>
         </li>
 
-        <li class="treeview {{ route('admin.rides.history') == url()->current() || route('admin.ride.details', ['id' => '', 'ride_number' => '']) == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.rides.history') == url()->current() || route('admin.cancelled.rides') == url()->current() || route('admin.current.rides') == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.rides.history') }}">
             <i class="fa fa-motorcycle"></i> <span>Rides</span>
             <span class="pull-right-container">
@@ -71,6 +71,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ route('admin.current.rides') }}"><i class="fa fa-circle-o"></i> Current Rides</a></li>
+            <li><a href="{{ route('admin.cancelled.rides') }}"><i class="fa fa-circle-o"></i> Cancelled Rides</a></li>
             <li><a href="{{ route('admin.rides.history') }}"><i class="fa fa-circle-o"></i> Rides History</a></li>
           </ul>
         </li>

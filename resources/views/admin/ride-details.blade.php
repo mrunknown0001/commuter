@@ -28,8 +28,20 @@
         <p>Time &amp; Date: <strong>{{ date('l, F j, Y g:i:s a', strtotime($ride->created_at)) }}</strong></p>
         <p>Pickup Location: <strong>{{ $ride->pickup_location->name }}</strong></p>
         <p>Dropoff Location: <strong>{{ $ride->dropoff_location->name }}</strong></p>
-        <p>Pickup Time: <strong>{{ date('g:i:s a', strtotime($ride->current_at)) }}</strong></p>
-        <p>Dropoff Time: <strong>{{ date('g:i:s a', strtotime($ride->drop_off_at)) }}</strong></p>
+        <p>Pickup Time: 
+          @if($ride->current_at == null)
+          N/A
+          @else
+          <strong>{{ date('g:i:s a', strtotime($ride->current_at)) }}</strong>
+          @endif
+        </p>
+        <p>Dropoff Time: 
+          @if($ride->drop_off_at == null)
+          N/A
+          @else
+          <strong>{{ date('g:i:s a', strtotime($ride->drop_off_at)) }}</strong>
+          @endif
+        </p>
         <p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>
         <p>
           <span class="badge bg-blue"><i class="fa fa-comments"></i> {{ count($ride->feedback) }}</span>
