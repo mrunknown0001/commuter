@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-6">
       <!-- search form -->
-      <form action="#" method="get" role="form">
+      <form action="{{ route('admin.search.commuter') }}" method="get" role="form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search name or id...">
           <span class="input-group-btn">

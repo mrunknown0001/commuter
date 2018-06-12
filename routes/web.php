@@ -232,12 +232,20 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/driver/view/all', 'AdminController@viewAllDriver')->name('admin.view.all.driver');
 
 
+	// route to search drivers
+	Route::get('/driver/search', 'AdminController@searchDriver')->name('admin.search.driver');
+
+
 	// route to view driver details
 	Route::get('/driver/{id}/details', 'AdminController@viewDriverDetails')->name('driver.view.driver.details');
 
 
 	// route to view all commuters
 	Route::get('/commuter/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
+
+
+	// route to search commuters
+	Route::get('/commuter/search', 'AdminController@searchCommuter')->name('admin.search.commuter');
 
 
 	// route to view commuter details

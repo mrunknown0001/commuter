@@ -208,6 +208,23 @@ class AdminController extends Controller
     }
 
 
+    // method use to search driver
+    public function searchDriver(Request $request)
+    {
+        $q = $request['q'];
+
+        // find all related keyword on the database
+        $drivers = User::where('user_type', 2)
+                        ->where('first_name', "like", "$q%")
+                        ->orwhere('last_name', "like", "%$q%")
+                        ->orwhere('identification', "like", "%$q%")
+                        ->orderBy('last_name', 'asc')
+                        ->paginate(5);
+
+        return view('admin.driver-search-results', ['drivers' => $drivers, 'term' => $q]);       
+    }
+
+
 
     // method use to view driver details
     public function viewDriverDetails($id = null)
@@ -228,6 +245,23 @@ class AdminController extends Controller
                         ->paginate(15);
 
         return view('admin.view-all-commuters', ['commuters' => $commuters]);
+    }
+
+
+    // method use to search commuters
+    public function searchCommuter(Request $request)
+    {
+        $q = $request['q'];
+
+        // find all related keyword on the database
+        $commuters = User::where('user_type', 1)
+                        ->where('first_name', "like", "$q%")
+                        ->orwhere('last_name', "like", "%$q%")
+                        ->orwhere('identification', "like", "%$q%")
+                        ->orderBy('last_name', 'asc')
+                        ->paginate(5);
+
+        return view('admin.commuter-search-results', ['commuters' => $commuters, 'term' => $q]);
     }
 
 
