@@ -374,6 +374,13 @@ class CommuterController extends Controller
         // make ride cancelled and finished
         $ride = Ride::findOrFail($id);
 
+
+        // check if the ride belongs to the owner
+        if($ride->commuter_id != Auth::user()->id) {
+            abort(406);
+        }
+
+
         // check if the ride request is accepted by driver
         // so that the commuter must pay the driver for the amount computed by the system
         if($ride->driver_id != null) {
@@ -429,6 +436,11 @@ class CommuterController extends Controller
 
         $ride = Ride::findOrFail($id);
 
+        // check if the ride is not belong to the user
+        if($ride->commuter_id != Auth::user()->id) {
+            abort(406);
+        }
+
 
         // save
         $feed = new Feedback();
@@ -465,6 +477,11 @@ class CommuterController extends Controller
 
 
         $ride = Ride::findOrFail($id);
+
+        // check if the ride is belongs to the user
+        if($ride->commuter_id != Auth::user()->id) {
+            abort(406);
+        }
 
         // save
         $report = new Report();

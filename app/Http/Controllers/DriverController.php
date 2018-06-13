@@ -226,7 +226,7 @@ class DriverController extends Controller
         $id = $request['ride_id'];
 
         // update the ride with needed data
-        $ride = Ride::find($id);
+        $ride = Ride::findorfail($id);
 
 
         // check if the driver is null
@@ -278,6 +278,11 @@ class DriverController extends Controller
 
         $ride = Ride::findOrFail($id);
 
+        // check if the driver accepted this ride
+        if($ride->driver_id != Auth::user()->id) {
+            abort(406);
+        }
+
         // notification for the commuter
         $notification = new Notification();
         $notification->to = $ride->commuter->id;
@@ -311,6 +316,13 @@ class DriverController extends Controller
 
         // update to current at time of pickup
         $ride = Ride::find($id);
+
+        // check if the ride belongs to the driver that he/she accept
+        if($ride->driver_id != Auth::user()->id) {
+            abort(406);
+        }
+
+
         $ride->current = 1;
         $ride->current_at = now();
         $ride->save();
@@ -329,6 +341,12 @@ class DriverController extends Controller
 
         // update to current at time of pickup
         $ride = Ride::find($id);
+
+        // check if the ride accepted by the driver
+        if($ride->driver_id != Auth::user()->id) {
+            abort(406);
+        }
+
         $ride->drop_off = 1;
         $ride->drop_off_at = now();
         $ride->finished = 1;
@@ -369,6 +387,12 @@ class DriverController extends Controller
 
 
         $ride = Ride::findOrFail($ride_id);
+
+
+        // check if the ride belongs to the driver
+        if($ride->driver_id != Auth::user()->id) {
+            abort(406);
+        }
 
         $report_number = GeneralController::generate_report_number();
 
