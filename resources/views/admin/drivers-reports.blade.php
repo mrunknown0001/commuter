@@ -39,7 +39,7 @@
                 {{ strtoupper($report->report_number) }}
               </td>
               <td>
-                {{ ucwords($report->complainant->first_name . ' ' . $report->complainant->last_name) }}
+                <a href="{{ route('driver.view.driver.details', ['id' => $report->complainant->id]) }}">{{ ucwords($report->complainant->first_name . ' ' . $report->complainant->last_name) }}</a>
               </td>
               <td>
                 {{ date('l, F j, Y g:i:s a', strtotime($report->created_at)) }}
