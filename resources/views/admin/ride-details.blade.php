@@ -22,6 +22,15 @@
     <div class="row">
       <div class="col-md-12">
         <p><a href="{{ url()->previous() }}">Back</a></p>
+
+        @if($ride->cancelled == 1)
+          @if($ride->cancelled_by_commuter == 1)
+          <p><span class="label label-danger">Cancelled by Commuter</span></p>
+          @else
+          <p><span class="label label-danger">Cancelled by Driver</span></p>
+          @endif
+        @endif
+
         <p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
         <p>Commuter: <strong><a href="{{ route('admin.view.commuter.details', ['id' => $ride->commuter->id]) }}">{{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</a></strong></p>
         <p>Driver: <strong><a href="{{ route('driver.view.driver.details', ['id' => $ride->driver->id]) }}">{{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}</a></strong></p>

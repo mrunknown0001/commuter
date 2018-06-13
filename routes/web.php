@@ -252,6 +252,14 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/commuter/{id}/details', 'AdminController@viewCommuterDetails')->name('admin.view.commuter.details');
 
 
+	// route to block user (commuter and driver)
+	Route::post('/block/user', 'AdminController@blockUser')->name('admin.block.user');
+
+
+	// route to unbloc user (commuter and driver)
+	Route::post('/unblock/user', 'AdminController@unblockUser')->name('admin.unblock.user');
+
+
 	// route use to view all successful rides
 	Route::get('/rides/history', 'AdminController@ridesHistory')->name('admin.rides.history');
 

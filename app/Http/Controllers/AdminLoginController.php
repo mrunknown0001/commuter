@@ -39,7 +39,7 @@ class AdminLoginController extends Controller
         $password = $request['password'];
 
     	// Auth::guard('admin')->attempt($credentials)
-    	if(Auth::guard('admin')->attempt(['identification' => $id, 'password' => $password])) {
+    	if(Auth::guard('admin')->attempt(['identification' => $id, 'password' => $password, 'active' => 1])) {
             // add log here
             GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Login', now());
 

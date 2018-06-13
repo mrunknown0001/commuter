@@ -200,7 +200,6 @@ class AdminController extends Controller
     {
         // get all drivers in pagination form
         $drivers = User::where('user_type', 2)
-                        ->where('active', 1)
                         ->orderBy('last_name', 'asc')
                         ->paginate(15);
 
@@ -235,12 +234,13 @@ class AdminController extends Controller
     }
 
 
+
+
     // method use to view all commuters
     public function viewAllCommuters()
     {
         // get all drivers in pagination form
         $commuters = User::where('user_type', 1)
-                        ->where('active', 1)
                         ->orderBy('last_name', 'asc')
                         ->paginate(15);
 
@@ -272,6 +272,42 @@ class AdminController extends Controller
         $commuter = User::findorfail($id);
 
         return view('admin.commuter-details', ['commuter' => $commuter]);
+    }
+
+
+    // method use to block user
+    public function blockUser(Request $request)
+    {
+        $id = $request['id'];
+
+        $user = User::findorfail($id);
+        $user->active = 0;
+        $user->save();
+
+        // activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Block User: ' . $user->identification, now());
+
+
+        // return to dashboard
+        return redirect()->route('admin.dashboard')->with('success', 'User Blocked!');
+    }
+
+
+    // method use to unblock user
+    public function unblockUser(Request $request)
+    {
+        $id = $request['id'];
+
+        $user = User::findorfail($id);
+        $user->active = 1;
+        $user->save();
+
+        // activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Unnlock User: ' . $user->identification, now());
+
+
+        // return to dashboard
+        return redirect()->route('admin.dashboard')->with('success', 'User Unblocked!');
     }
 
 
