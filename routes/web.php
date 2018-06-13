@@ -281,6 +281,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/reports/commuters', 'AdminController@commutersReports')->name('admin.commuters.reports');
 
 
+
 	// route to view details of report of comuter
 	Route::get('/report/commuter/{id}/{report_number}/view', 'AdminController@commuterReportView')->name('admin.commuter.report.view');
 
@@ -291,6 +292,16 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to view driver report details
 	Route::get('/report/{id}/{report_number}/view', 'AdminController@driverReportView')->name('admin.driver.report.view');
+
+
+
+	// route to view all report related to the ride
+	Route::get('/ride/{id}/reports', 'AdminController@viewRideReport')->name('admin.view.ride.report');
+
+
+
+	// route use to view feedback for the rreports
+	Route::get('/ride/{id}/feedbacks', 'AdminController@viewRideFeedback')->name('admin.view.ride.feedback');
 
 
 	// route to view feedbacks

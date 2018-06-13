@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Cache;
 
 use App\Http\Controllers\GeneralController;
 
@@ -17,12 +18,18 @@ use App\Report;
 
 class AdminController extends Controller
 {
+
     public function __construct()
     {
     	// only admin can access
     	$this->middleware('auth:admin');
     }
 
+
+    public function index()
+    {
+        $value = Cache::get('key');
+    }
 
 
     //////////////////////////////////////////
@@ -282,7 +289,7 @@ class AdminController extends Controller
         // get the info of the commuter
         $commuter = User::findorfail($id);
 
-        if($driver->user_type != 1) {
+        if($commuter->user_type != 1) {
             // return to commuter
             return redirect()->route('admin.view.all.driver');
         }
@@ -458,6 +465,26 @@ class AdminController extends Controller
         // return to page with data
         return view('admin.driver-report-details', ['report' => $report]);
     }
+
+
+
+    // method use to view ride reports
+    public function viewRideReport($id = null)
+    {
+        $ride = Ride::findorfail($id);
+
+        return view('admin.ride-reports', ['ride' => $ride]);
+    }
+
+
+    // method use to view ride feedbacks
+    public function viewRideFeedback($id = null)
+    {
+        $ride = Ride::findorfail($id);
+
+        return view('admin.ride-feedbacks', ['ride' => $ride]);
+    }
+
 
 
     // method use to view feedbacks

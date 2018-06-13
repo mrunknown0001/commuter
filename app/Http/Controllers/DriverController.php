@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\GeneralController;
 use Auth;
+use Illuminate\Support\Facades\Cache;
+
+use App\Http\Controllers\GeneralController;
 
 use App\User;
 use App\DriverInfo;
@@ -18,6 +20,13 @@ class DriverController extends Controller
     {
     	$this->middleware(['auth', 'driver']);
     }
+
+
+    public function index()
+    {
+        $value = Cache::get('key');
+    }
+
 
 
     // method use to go to home page of the driver

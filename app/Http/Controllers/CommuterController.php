@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\GeneralController;
 use Auth;
+use Illuminate\Support\Facades\Cache;
+
+use App\Http\Controllers\GeneralController;
 
 use App\User;
 use App\Location;
@@ -22,6 +24,12 @@ class CommuterController extends Controller
 	{
 		$this->middleware(['auth', 'commuter']);
 	}
+
+    public function index()
+    {
+        $value = Cache::get('key');
+    }
+
 
 
     // method to go to home page of the commuter

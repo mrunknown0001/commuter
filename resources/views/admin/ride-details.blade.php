@@ -53,8 +53,8 @@
         </p>
         <p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>
         <p>
-          <span class="badge bg-blue"><i class="fa fa-comments"></i> Feedback {{ count($ride->feedback) }}</span>
-          <span class="badge bg-red"><i class="fa fa-flag"></i> Report {{ count($ride->report) }}</span>
+          <a href="{{ route('admin.view.ride.feedback', ['id' => $ride->id]) }}" class="badge bg-blue"><i class="fa fa-comments"></i> Feedback {{ count($ride->feedback) }}</a>
+          <a href="{{ route('admin.view.ride.report', ['id' => $ride->id]) }}" class="badge bg-red"><i class="fa fa-flag"></i> Report {{ count($ride->report) }}</a>
         </p>
         <p>Passenger(s): <strong>{{ count($ride->passenger) }}</strong></p>
 
