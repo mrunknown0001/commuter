@@ -375,7 +375,11 @@ class AdminController extends Controller
     {
         $ride = Ride::findorfail($id);
 
+
         // other checking, check if the id and ride_number belongs to the same ride
+        if($ride->ride_number != $ride_number) {
+            return redirect()->back();
+        }
 
         return view('admin.ride-details', ['ride' => $ride]);
 
@@ -436,6 +440,13 @@ class AdminController extends Controller
     {
         // validate
         $report = Report::findorfail($id);
+
+
+        // check the report number belongs to the report
+        if($report->report_number != $report_number) {
+            return redirect()->back();
+        }
+
         $report->viewed = 1;
         $report->save();
 
@@ -467,6 +478,9 @@ class AdminController extends Controller
 
         // add checking here if the 2 parameters not matched with the record
         // if the id is not the number of feedback number
+        if($feedback->feedback_number != $feedback_number) {
+            return redirect()->back();
+        }
 
         // make feedback viewed status
         if($feedback->viewed == 0) {
