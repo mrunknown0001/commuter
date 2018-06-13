@@ -220,6 +220,10 @@ class AdminController extends Controller
                         ->orderBy('last_name', 'asc')
                         ->paginate(5);
 
+
+        // add log for search
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Searched: ' . $q, now());
+
         return view('admin.driver-search-results', ['drivers' => $drivers, 'term' => $q]);       
     }
 
@@ -229,6 +233,11 @@ class AdminController extends Controller
     public function viewDriverDetails($id = null)
     {
         $driver = User::findorfail($id);
+
+        if($driver->user_type != 2) {
+            // return to commuter
+            return redirect()->route('admin.view.all.commuters');
+        }
 
         return view('admin.driver-details', ['driver' => $driver]);
     }
@@ -261,6 +270,8 @@ class AdminController extends Controller
                         ->orderBy('last_name', 'asc')
                         ->paginate(5);
 
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Searched: ' . $q, now());
+
         return view('admin.commuter-search-results', ['commuters' => $commuters, 'term' => $q]);
     }
 
@@ -270,6 +281,12 @@ class AdminController extends Controller
     {
         // get the info of the commuter
         $commuter = User::findorfail($id);
+
+        if($driver->user_type != 1) {
+            // return to commuter
+            return redirect()->route('admin.view.all.driver');
+        }
+
 
         return view('admin.commuter-details', ['commuter' => $commuter]);
     }
