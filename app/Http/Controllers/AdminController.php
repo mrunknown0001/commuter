@@ -260,6 +260,17 @@ class AdminController extends Controller
 
 
 
+    // method use to view feedback received by driver
+    public function viewDriverFeedback($id = null)
+    {
+        $driver = User::findorfail($id);
+
+        return view('admin.driver-feedback', ['driver' => $driver]);
+    }
+
+
+
+
     // method use to view all commuters
     public function viewAllCommuters()
     {

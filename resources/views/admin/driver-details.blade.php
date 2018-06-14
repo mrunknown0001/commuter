@@ -39,7 +39,7 @@
           <hr>
           <p>Report Made: <strong><a href="{{ route('admin.view.driver.report', ['id' => $driver->id]) }}">{{ count($driver->report) }}</strong></a></p>
           <hr>
-          <p><a href="javascript:void(0)" class="badge bg-blue"><i class="fa fa-comments"></i> Feedback: {{ count($driver->feedback) }}</a></p>
+          <p><a href="{{ route('admin.view.driver.feedback', ['id' => $driver->id]) }}" class="badge bg-blue"><i class="fa fa-comments"></i> Feedback: {{ count($driver->feedback) }}</a></p>
           <p><a href="{{ route('admin.view.driver.complaint', ['id' => $driver->id]) }}" class="badge bg-red"><i class="fa fa-flag"></i> Report: {{ count($driver->complaint) }}</a></p>
 
           <hr>
