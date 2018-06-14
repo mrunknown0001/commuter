@@ -41,9 +41,11 @@
                     {{ strtoupper($f->feedback_number) }}
                   </td>
                   <td>
-                    
+                    <a href="{{ route('admin.view.commuter.details', ['id' => $f->commuter->id]) }}">{{ ucwords($f->commuter->first_name . ' ' . $f->commuter->last_name) }}</a>
                   </td>
-                  <td></td>
+                  <td>
+                    <a href="{{ route('admin.view.feedback.details', ['id' => $f->id, 'feedback_number' => $f->feedback_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+                  </td>
                 </tr>
                 @endforeach
               </tbody>

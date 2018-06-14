@@ -43,10 +43,10 @@
               <a href="{{ route('admin.ride.details', ['id' => $feedback->ride->id, 'ride_number' => $feedback->ride->ride_number]) }}">{{ strtoupper($feedback->ride->ride_number) }}</a>
             </td>
             <td>
-              {{ ucwords($feedback->commuter->first_name . ' ' . $feedback->commuter->last_name) }}
+              <a href="{{ route('admin.view.commuter.details', ['id' => $feedback->commuter->id]) }}">{{ ucwords($feedback->commuter->first_name . ' ' . $feedback->commuter->last_name) }}</a>
             </td>
             <td>
-              {{ ucwords($feedback->driver->first_name . ' ' . $feedback->driver->last_name) }}
+              <a href="{{ route('admin.view.driver.details', ['id' => $feedback->driver->id]) }}">{{ ucwords($feedback->driver->first_name . ' ' . $feedback->driver->last_name) }}</a>
             </td>
             <td>
               @if($feedback->viewed == 0)

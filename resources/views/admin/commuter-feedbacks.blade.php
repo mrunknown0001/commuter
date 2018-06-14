@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-md-12">
 
-          @if(count($commuter->feedback) > 0)
+          @if(count($commuter->comment) > 0)
 
             
             <table class="table table-hover">
@@ -33,16 +33,16 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($commuter->feedback as $f)
+                @foreach($commuter->comment as $c)
                 <tr>
                   <td>
-                    {{ strtoupper($f->feedback_number) }}
+                    {{ strtoupper($c->feedback_number) }}
                   </td>
                   <td>
-                    {{ ucwords($f->driver->first_name . ' ' . $r->driver->last_name) }}
+                    <a href="{{ route('admin.view.driver.details', ['id' => $c->driver->id]) }}">{{ ucwords($c->driver->first_name . ' ' . $c->driver->last_name) }}</a>
                   </td>
                   <td>
-                    <a href="{{ route('admin.view.feedback.details', ['id' => $f->id, 'feedback_number' => $f->feedback_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+                    <a href="{{ route('admin.view.feedback.details', ['id' => $c->id, 'feedback_number' => $c->feedback_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
                   </td>
                 </tr>
                 @endforeach

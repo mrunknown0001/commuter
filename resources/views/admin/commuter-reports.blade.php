@@ -41,7 +41,7 @@
                     {{ strtoupper($r->report_number) }}
                   </td>
                   <td>
-                    {{ ucwords($r->reported->first_name . ' ' . $r->reported->last_name) }}
+                    <a href="{{ route('admin.view.driver.details', ['id' => $r->reported->id]) }}">{{ ucwords($r->reported->first_name . ' ' . $r->reported->last_name) }}</a>
                   </td>
                   <td>
                     <a href="{{ route('admin.commuter.report.view', ['id' => $r->id, 'report_number' => $r->report_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
