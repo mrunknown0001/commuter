@@ -237,7 +237,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 	// route to view driver details
-	Route::get('/driver/{id}/details', 'AdminController@viewDriverDetails')->name('driver.view.driver.details');
+	Route::get('/driver/{id}/details', 'AdminController@viewDriverDetails')->name('admin.view.driver.details');
 
 
 	// route to view all commuters
@@ -250,6 +250,18 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to view commuter details
 	Route::get('/commuter/{id}/details', 'AdminController@viewCommuterDetails')->name('admin.view.commuter.details');
+
+
+	// rotue to view commuter reposts
+	Route::get('/commuter/{id}/reports', 'AdminController@viewCommuterReport')->name('admin.view.commuter.report');
+
+
+	// route to view commuter feedback
+	Route::get('/commuter/{id}/feedbacks', 'AdminController@viewCommuterFeedback')->name('admin.view.commuter.feedback');
+
+
+	// route to view commuter complaint
+	Route::get('/commuter/{id}/complaint', 'AdminController@viewCommuterComplaint')->name('admin.view.commuter.complaint');
 
 
 	// route to block user (commuter and driver)
@@ -282,7 +294,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
-	// route to view details of report of comuter
+	// route to view details of report of commuter
 	Route::get('/report/commuter/{id}/{report_number}/view', 'AdminController@commuterReportView')->name('admin.commuter.report.view');
 
 

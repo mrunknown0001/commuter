@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ env('app_name') }}</title>
+        <title>Commuter Queuing System</title>
 
         <!-- Bootstrap 3.3.7 -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
@@ -58,7 +58,7 @@
 
             <div class="content">
                 <div class="m-b-md">
-                    <h1>{{ env('app_name') }}</h1>
+                    <h1>Commuter Monitoring System</h1>
                 </div>
 
                 <div class="links">

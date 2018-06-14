@@ -24,7 +24,7 @@
         <p><a href="{{ url()->previous() }}">Back</a></p>
         <p>Ride Number: <strong><a href="{{ route('admin.ride.details', ['id' => $report->ride->id, 'ride_number' =>$report->ride->ride_number]) }}">{{ strtoupper($report->ride->ride_number) }}</a></strong></p>
         <p>Complainant: <strong><a href="{{ route('admin.view.commuter.details', ['id' => $report->complainant->id]) }}">{{ ucwords($report->complainant->first_name . ' ' . $report->complainant->last_name) }}</a></strong></p>
-        <p>Reported Driver: <strong><a href="{{ route('driver.view.driver.details', ['id' => $report->reported->id]) }}">{{ ucwords($report->reported->first_name . ' ' . $report->reported->last_name) }}</a></strong></p>
+        <p>Reported Driver: <strong><a href="{{ route('admin.view.driver.details', ['id' => $report->reported->id]) }}">{{ ucwords($report->reported->first_name . ' ' . $report->reported->last_name) }}</a></strong></p>
         <div class="box box-danger">
           <div class="box-header with-border">
             <strong>Content</strong>

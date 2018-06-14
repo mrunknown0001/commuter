@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="text-center">{{ env('app_name') }}</h3>
+    <h3 class="text-center">Commuter Queuing System</h3>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @include('includes.success')

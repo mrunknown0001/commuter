@@ -42,7 +42,7 @@
                   {{ ucwords($log->user->last_name) }}</a>
                   :Commuter
                 @else
-                  <a href="{{ route('driver.view.driver.details', ['id' => $log->user->id]) }}">{{ ucwords($log->user->first_name) }}
+                  <a href="{{ route('admin.view.driver.details', ['id' => $log->user->id]) }}">{{ ucwords($log->user->first_name) }}
                   {{ ucwords($log->user->last_name) }}</a>
                   :Driver
                 @endif

@@ -33,10 +33,10 @@
           <p>Identification: <strong>{{ $commuter->identification }}</strong></p>
           <p>Mobile Number: <strong>{{ $commuter->mobile_number }}</strong></p>
           <hr>
-          <p>Feedback Made: <strong>{{ count($commuter->comment) }}</strong></p>
-          <p>Report Made: <strong>{{ count('$commuter->report') }}</strong></p>
+          <p>Feedback Made: <strong><a href="{{ route('admin.view.commuter.feedback', ['id' => $commuter->id]) }}">{{ count($commuter->comment) }}</a></strong></p>
+          <p>Report Made: <strong><a href="{{ route('admin.view.commuter.report', ['id' => $commuter->id]) }}">{{ count('$commuter->report') }}</a></strong></p>
           <hr>
-          <p><span class="badge bg-red"><i class="fa fa-flag"></i> Reports: {{ count($commuter->complaint) }}</span></p>
+          <p><a href="{{ route('admin.view.commuter.complaint', ['id' => $commuter->id]) }}"><span class="badge bg-red"><i class="fa fa-flag"></i> Reports: {{ count($commuter->complaint) }}</span></a></p>
           <hr>
           @if($commuter->active == 1)
           <p><a href="javascript:void(0)" class="badge bg-red" data-toggle="modal" data-target="#block">Block Commuter</a></p>

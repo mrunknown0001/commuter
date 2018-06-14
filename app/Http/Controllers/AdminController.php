@@ -299,6 +299,36 @@ class AdminController extends Controller
     }
 
 
+    // method use to view report 
+    public function viewCommuterReport($id = null)
+    {
+        $commuter = User::findorfail($id);
+
+        return view('admin.commuter-reports', ['commuter' => $commuter]);
+    }
+
+
+
+    // method use to view feedback 
+    public function viewCommuterFeedback($id = null)
+    {
+        $commuter = User::findorfail($id);
+
+        return view('admin.commuter-feedbacks', ['commuter' => $commuter]);
+    }
+
+
+
+    // method use to view commuter complaint
+    public function viewcommuterComplaint($id = null)
+    {
+        $commuter = User::findorfail($id);
+
+        return view('admin.commuter-complaint', ['commuter' => $commuter]);
+    }
+
+
+
     // method use to block user
     public function blockUser(Request $request)
     {

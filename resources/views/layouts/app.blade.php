@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('title') | {{ env('app_name') }}</title>
+        <title>@yield('title') | Commuter Monitoring System</title>
 
         <!--Admin Theme-->
         <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
