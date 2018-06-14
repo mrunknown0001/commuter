@@ -240,6 +240,15 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/driver/{id}/details', 'AdminController@viewDriverDetails')->name('admin.view.driver.details');
 
 
+	// route to view driver report made
+	Route::get('/driver/{id}/reports', 'AdminController@viewDriverReport')->name('admin.view.driver.report');
+
+
+
+	// route to view driver complaint
+	Route::get('/driver/{id}/complaint', 'AdminController@viewDriverComplaint')->name('admin.view.driver.complaint');
+
+
 	// route to view all commuters
 	Route::get('/commuter/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
 

@@ -127,25 +127,13 @@ class AdminController extends Controller
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
         $mobile_number = $request['mobile_number'];
-        // $email = $request['email'];
 
-        // check email availability
-        // if($email != Auth::guard('admin')->user()->email) {
-        //     // check if the new email is used by other user
-        //     $check_email = Admin::whereEmail($email)->first();
-
-        //     if(count($check_email) > 0) {
-        //         // the new email is already used by other user
-        //         return redirect()->route('admin.profile.update')->with('error', 'The new Email ' . $email . ', already used!');
-        //     }
-        // }
 
         // save update
         $admin = Admin::find(Auth::guard('admin')->user()->id);
         $admin->first_name = $first_name;
         $admin->last_name = $last_name;
         $admin->mobile_number = $mobile_number;
-        // $admin->email = $email;
         $admin->save();
 
 
@@ -247,6 +235,26 @@ class AdminController extends Controller
         }
 
         return view('admin.driver-details', ['driver' => $driver]);
+    }
+
+
+
+    // method use to view driver report made
+    public function viewDriverReport($id = null)
+    {
+        $driver = User::findorfail($id);
+
+        return view('admin.driver-reports', ['driver' => $driver]);
+    }
+
+
+
+    // method use to view complaint on driver
+    public function viewDriverComplaint($id = null)
+    {
+        $driver = User::findorfail($id);
+
+        return view('admin.driver-complaint', ['driver' => $driver]);
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title') Commuter Complaint @endsection
+@section('title') Driver Reports @endsection
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Complaint for <a href="{{ route('admin.view.commuter.details', ['id' => $commuter->id]) }}">{{ ucwords($commuter->first_name . ' ' . $commuter->last_name) }}</a>
+        Driver Reports By <a href="{{ route('admin.view.driver.details', ['id' => $driver->id]) }}">{{ ucwords($driver->first_name . ' ' . $driver->last_name) }}</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-users"></i> Home</a></li>
-        <li class="active">Commuters</li>
+        <li class="active">Drivers</li>
       </ol>
     </section>
         <!-- Main content -->
@@ -23,28 +23,28 @@
         <div class="col-md-12">
           <p><a href="{{ url()->previous() }}" class="">Back</a></p>
 
-          @if(count($commuter->complaint) > 0)
+          @if(count($driver->report) > 0)
 
             
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th>Report Number</th>
-                  <th>Complainant</th>
+                  <th>Commuter</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($commuter->complaint as $c)
+                @foreach($driver->report as $r)
                 <tr>
                   <td>
-                    {{ strtoupper($c->report_number) }}
+                    {{ strtoupper($r->report_number) }}
                   </td>
                   <td>
-                    <a href="{{ route('admin.view.driver.details', ['id' => $c->complainant->id]) }}">{{ ucwords($c->complainant->first_name . ' ' . $c->complainant->last_name) }}</a>
+                    {{ ucwords($r->reported->first_name . ' ' . $r->reported->last_name) }}
                   </td>
                   <td>
-                    <a href="{{ route('admin.driver.report.view', ['id' => $c->id, 'report_number' => $c->report_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
+                    <a href="{{ route('admin.driver.report.view', ['id' => $r->id, 'report_number' => $r->report_number]) }}" class="label label-primary"><i class="fa fa-eye"></i> View</a>
                   </td>
                 </tr>
                 @endforeach
@@ -53,7 +53,7 @@
             
           @else
         
-            <p class="text-center"><em>No Report by this commuter</em></p>
+            <p class="text-center"><em>No Report by this driver</em></p>
           @endif
 
         </div>

@@ -31,7 +31,7 @@
                 <div class="box-body">
                   <p>Commuter: <a href="{{ route('admin.view.commuter.details', ['id' => $r->commuter->id]) }}">{{ ucwords($r->commuter->first_name . ' ' . $r->commuter->last_name) }}</a></p>
 
-                  <p>Message: {{ $r->message }}</p>
+                  <p>Message: {{ $r->comment }}</p>
                 </div>
                 <div class="box-footer">
                   <small>Feedback</small>

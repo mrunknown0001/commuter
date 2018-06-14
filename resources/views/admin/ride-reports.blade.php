@@ -33,7 +33,7 @@
                   @if($r->user_type == 1) 
                   <p>Complainant: <a href="{{ route('admin.view.commuter.details', ['id' => $r->complainant->id]) }}">{{ ucwords($r->complainant->first_name . ' ' . $r->complainant->last_name) }}</a> (Commuter)</p>
                   @else
-                  <p>Complainant: <a href="{{ route('driver.view.driver.details', ['id' => $r->complainant->id]) }}">{{ ucwords($r->complainant->first_name . ' ' . $r->complainant->last_name) }}</a> (Driver)</p>
+                  <p>Complainant: <a href="{{ route('admin.view.driver.details', ['id' => $r->complainant->id]) }}">{{ ucwords($r->complainant->first_name . ' ' . $r->complainant->last_name) }}</a> (Driver)</p>
                   @endif
                   <p>Conent: {{ $r->content }}</p>
                 </div>
