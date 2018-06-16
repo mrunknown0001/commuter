@@ -1,72 +1,60 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Commuter Queuing System</title>
-
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                font-weight: 100;
-                height: 80vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 80vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-
-            <div class="content">
-                <div class="m-b-md">
-                    <h1>Commuter Monitoring System</h1>
-                </div>
-
-                <div class="links">
-                    <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Commuter &amp; Driver Login</a>
-                    <a href="{{ route('commuter.registration') }}" class="btn btn-lg btn-primary">Commuter Registration</a>
-                    <a href="{{ route('driver.registration') }}" class="btn btn-lg btn-primary">Driver Registration</a>
-                </div>
-            </div>
-        </div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to Commuter Monitoring System</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style type="text/css">
+      .masthead {
+        min-height: 30rem;
+        position: relative;
+        display: table;
+        width: 100%;
+        height: auto;
+        padding-top: 20rem;
+        padding-bottom: 8rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .masthead h1 {
+        font-size: 4rem;
+        margin: 0;
+        padding: 0;
+      }
+      @media (min-width: 992px) {
+        .masthead {
+          height: 100vh;
+        }
+        .masthead h1 {
+          font-size: 5.5rem;
+        }
+      }
+      @media (max-width: 600px) {
+        li {
+            height: 30px;
+            line-height: 30px;
+            padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead d-flex">
+      <div class="container text-center my-auto">
+        <h1 class="">Commuter Queuing System</h1>
+        <h3 class="mb-5">
+        </h3>
+        <ul class="list-inline">
+          <li><a href="{{ route('login') }}" class="btn btn-primary">Commuter &amp; Driver Login</a></li>
+          <li><a href="{{ route('commuter.registration') }}" class="btn btn-primary">Commuter Registration</a></li>
+          <li><a href="{{ route('driver.registration') }}" class="btn btn-primary">Driver Registration</a></li>
+        </ul>
+      </div>
+      <div class="overlay"></div>
+    </header>
+  </body>
 </html>
