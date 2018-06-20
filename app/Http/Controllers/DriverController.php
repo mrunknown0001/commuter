@@ -275,6 +275,11 @@ class DriverController extends Controller
         $ride = Ride::where('driver_id', Auth::user()->id)
                     ->where('finished', 0)
                     ->first();
+
+
+        if(count($ride) < 1) {
+            return redirect()->route('driver.ride.request');
+        }
         
         return view('driver.accepted-ride', ['ride' => $ride]);
     }
