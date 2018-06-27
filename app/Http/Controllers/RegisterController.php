@@ -87,7 +87,7 @@ class RegisterController extends Controller
         GeneralController::activity_log($user->id, null, 'Commuter Registration', now());
     	// return to designated page
     	// with success message
-    	return redirect()->route('commuter.registration')->with('success', 'Registration Successful! You can now login!');
+    	return redirect()->route('login')->with('success', 'Registration Successful! You can now login!');
     	
 
     }
@@ -163,7 +163,7 @@ class RegisterController extends Controller
         GeneralController::activity_log($user->id, null, 'Driver Registration', now());
 
         // redirect message success
-        return redirect()->route('driver.registration')->with('success', 'Registration Successful! You can now login!');
+        return redirect()->route('login')->with('success', 'Registration Successful! You can now login!');
 
     }
 
@@ -242,6 +242,6 @@ class RegisterController extends Controller
 
 
         // redirect with message
-        return redirect()->route('admin.registration')->with('success', 'Admin Registration Successful!');
+        return redirect()->route('admin.login')->with('success', 'Admin Registration Successful!');
     }
 }

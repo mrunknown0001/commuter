@@ -39,6 +39,8 @@
 					<p>Date of Request: <strong>{{ date('l, F j, Y', strtotime($active_ride->created_at)) }}</strong></p>
 					<p>Pickup Location: <strong>{{ $active_ride->pickup_location->name }}</strong></p>
 					<p>Dropoff Location: <strong>{{ $active_ride->dropoff_location->name }}</strong></p>
+					<p>Driver: <strong>{{ ucwords($active_ride->driver->first_name . ' ' . $active_ride->driver->last_name) }}</strong></p>
+					<p>Body Number: <strong>{{ strtoupper($active_ride->driver->driver_info->body_number) }}</strong></p>
 					<p>Amount: <strong>&#8369; {{ $active_ride->payment }}</strong></p>
 				</div>
 				<!-- /.box-body -->

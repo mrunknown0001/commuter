@@ -463,7 +463,9 @@ class AdminController extends Controller
     {
         // validate
         $report = Report::findorfail($id);
-        $report->viewed = 1;
+        if(Auth::guard('admin')->user()->id != 1){
+            $report->viewed = 1;
+        }
         $report->save();
 
         // assign to variables
@@ -503,7 +505,9 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        $report->viewed = 1;
+        if(Auth::guard('admin')->user()->id != 1){
+            $report->viewed = 1;
+        }
         $report->save();
 
         // assign to variables
@@ -560,7 +564,9 @@ class AdminController extends Controller
 
         // make feedback viewed status
         if($feedback->viewed == 0) {
-            $feedback->viewed = 1;
+            if(Auth::guard('admin')->user()->id != 1){
+                $feedback->viewed = 1;
+            }
             $feedback->save();
         }
 
