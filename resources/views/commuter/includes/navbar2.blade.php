@@ -36,8 +36,8 @@
           <a href="{{ route('commuter.notification') }}"><i class="fa fa-bell"></i> Notification <span class="badge bg-red" id="notif-badge"></span></a>
         </li>
 
-        <li class="dropdown {{ route('commuter.profile') == url()->current() || route('commuter.profile.update') == url()->current() || route('commuter.change.password') == url()->current() ? 'active' : '' }}">
-          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
+        <li class="dropdown {{ route('commuter.profile') == url()->current() || route('commuter.profile.update') == url()->current() || route('commuter.change.password') == url()->current() || route('commuter.profile.image.upload') == url()->current() ? 'active' : '' }} user-menu">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="@if(Auth::user()->avatar) {{ asset('uploads/images/'.Auth::user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="user-image" alt="User Image"> {{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('commuter.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
             <li role="separator" class="divider"></li>

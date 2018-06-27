@@ -16,6 +16,7 @@ use App\CommuterCancel;
 use App\Report;
 use App\Feedback;
 use App\Notification;
+use App\Avatar;
 
 
 class CommuterController extends Controller
@@ -119,6 +120,40 @@ class CommuterController extends Controller
 
         // redirect to the profile page
         return redirect()->route('commuter.profile')->with('success', 'Profile Successfully Updated!');
+    }
+
+
+    // method use to show image upload
+    public function uploadProfileImage()
+    {
+        return view('commuter.upload-profile-image');
+    }
+
+
+    // method use to save upload image
+    public function postUploadProfileImage(Request $request)
+    {
+        // get current time and append the upload file extension to it,
+        // then put that name to $photoName variable.
+        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+
+        /*
+        talk the select file and move it public directory and make avatars
+        folder if doesn't exsit then give it that unique name.
+        */
+        $request->image->move(public_path('uploads/images'), $photoname);
+
+        // save photoname to database
+        $avatar = new Avatar();
+        $avatar->user_id = Auth::user()->id;
+        $avatar->avatar = $photoname;
+        $avatar->save();
+
+        // ad dactivity log
+        GeneralController::activity_log(Auth::user()->id, null, 'Upload Profile Image', now());
+
+        //return to profile
+        return redirect()->route('commuter.profile')->with('success', 'Profile Image Uploaded!');
     }
 
 

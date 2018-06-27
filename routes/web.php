@@ -65,6 +65,12 @@ Route::group(['prefix' => 'c'], function () {
 	// route to update profile of the user
 	Route::post('/profile/update', 'CommuterController@postUpdateProfile')->name('commuter.profile.update.post');
 
+	// route to upload image form
+	Route::get('/profile/image/upload', 'CommuterController@uploadProfileImage')->name('commuter.profile.image.upload');
+
+	// route to save uplaod image
+	Route::post('/profile/image/upload', 'CommuterController@postUploadProfileImage')->name('commuter.profile.image.upload.post');
+
 	// route to show password change for user
 	Route::get('/password/change', 'CommuterController@changePassword')->name('commuter.change.password');
 

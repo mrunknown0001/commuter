@@ -22,6 +22,7 @@
 					<p><strong>Mobile Number: {{ Auth::user()->mobile_number == null ? 'Null' : Auth::user()->mobile_number }}</strong></p>
 
 					<a href="{{ route('commuter.profile.update') }}" class="btn btn-primary">Update Profile</a>
+					<a href="{{ route('commuter.profile.image.upload') }}" class="btn btn-primary">Upload Image</a>
 				</div>
 			</div>
 		</div>
