@@ -143,11 +143,20 @@ class CommuterController extends Controller
         */
         $request->image->move(public_path('uploads/images'), $photoname);
 
+
+        $avatar = Avatar::where('user_id', Auth::user()->id)->first();
+
         // save photoname to database
-        $avatar = new Avatar();
-        $avatar->user_id = Auth::user()->id;
-        $avatar->avatar = $photoname;
-        $avatar->save();
+        if(count($avatar) < 1) {
+            $avatar = new Avatar();
+            $avatar->user_id = Auth::user()->id;
+            $avatar->avatar = $photoname;
+            $avatar->save();
+        }
+        else {
+            $avatar->avatar = $photoname;
+            $avatar->save();
+        }
 
         // ad dactivity log
         GeneralController::activity_log(Auth::user()->id, null, 'Upload Profile Image', now());

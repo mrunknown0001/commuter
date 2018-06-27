@@ -18,14 +18,14 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-user"></i></span>
-              <!-- <img src="" class="user-image" alt="Admin"> -->
+              
+              <img src="@if(Auth::guard('admin')->user()->avatar) {{ asset('uploads/images/'.Auth::guard('admin')->user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }} <i class="fa fa-caret-down"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
+                <img src="@if(Auth::guard('admin')->user()->avatar) {{ asset('uploads/images/'.Auth::guard('admin')->user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="img-circle" alt="User Image">
 
                 <p>
                   {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}

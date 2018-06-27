@@ -135,6 +135,13 @@ Route::group(['prefix' => 'd'], function () {
 	// route use to post update profile
 	Route::post('/profile/update', 'DriverController@postProfileUpdate')->name('driver.profile.update.post');
 
+	// route to show image upload form
+	Route::get('/profile/image/upload', 'DriverController@uploadProfileImage')->name('driver.profile.upload.image');
+
+
+	// route to save upload image
+	Route::post('/profile/image/upload', 'DriverController@postUploadProfileImage')->name('driver.profile.upload.image.post');
+
 
 	// rotue use to go change password form
 	Route::get('/password/change', 'DriverController@changePassword')->name('driver.change.password');
@@ -224,6 +231,14 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route use to post update profile
 	Route::post('/profile/update', 'AdminController@postProfileUpdate')->name('admin.profile.update.post');
+
+
+	// rotue to view upload image form
+	Route::get('/profile/image/upload', 'AdminController@uploadProfileImage')->name('admin.profile.image.upload');
+
+
+	// route to save upload image
+	Route::post('/profile/image/upload', 'AdminController@postUploadProfileImage')->name('admin.profile.image.upload.post');
 
 
 	// route use to view change password form

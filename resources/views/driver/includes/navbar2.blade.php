@@ -36,14 +36,16 @@
           <a href="{{ route('driver.notification') }}"><i class="fa fa-bell"></i> Notification <span class="badge bg-red" id="notif-badge"></span></a></a>
         </li>
 
-        <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }}">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
+        <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }} user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="@if(Auth::user()->avatar) {{ asset('uploads/images/'.Auth::user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="user-image" alt="User Image">{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><a href=""></a></li>
             <li><a href="{{ route('driver.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('driver.change.password') }}"><i class="fa fa-key"></i> Change Password</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a href=""></a></li>
           </ul>
         </li>
       </ul>

@@ -13,6 +13,7 @@ use App\DriverInfo;
 use App\Ride;
 use App\Notification;
 use App\Report;
+use App\Avatar;
 
 class DriverController extends Controller
 {
@@ -134,6 +135,47 @@ class DriverController extends Controller
         return redirect()->route('driver.profile')->with('success', 'Profile Successfully Updated!');
     }
 
+
+    // method use to show upload imageform
+    public function uploadProfileImage()
+    {
+        return view('driver.upload-profile-image');
+    }
+
+
+    // method use to save uploaded image
+    public function postUploadProfileImage(Request $request)
+    {
+        // get current time and append the upload file extension to it,
+        // then put that name to $photoName variable.
+        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+
+        /*
+        talk the select file and move it public directory and make avatars
+        folder if doesn't exsit then give it that unique name.
+        */
+        $request->image->move(public_path('uploads/images'), $photoname);
+
+        $avatar = Avatar::where('user_id', Auth::user()->id)->first();
+
+        // save photoname to database
+        if(count($avatar) < 1) {
+            $avatar = new Avatar();
+            $avatar->user_id = Auth::user()->id;
+            $avatar->avatar = $photoname;
+            $avatar->save();
+        }
+        else {
+            $avatar->avatar = $photoname;
+            $avatar->save();
+        }
+
+        // ad dactivity log
+        GeneralController::activity_log(Auth::user()->id, null, 'Upload Profile Image', now());
+
+        //return to profile
+        return redirect()->route('driver.profile')->with('success', 'Profile Image Uploaded!');
+    }
 
 
     // method use to view change password form

@@ -33,4 +33,10 @@ class Admin extends Authenticatable
     {
         return $this->hasMany('App\ActivityLog', 'admin_id', 'id');
     }
+
+
+    public function avatar()
+    {
+        return $this->hasOne('App\Avatar', 'admin_id');
+    }
 }

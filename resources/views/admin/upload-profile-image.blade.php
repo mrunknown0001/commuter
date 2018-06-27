@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title') Profile @endsection
+@section('title') Upload Profile Image @endsection
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -23,15 +23,18 @@
         @include('includes.success')
         <div class="panel panel-success">
           <div class="panel-heading">
-            <strong><i class="fa fa-user"></i> My Profile</strong>
+            <strong><i class="fa fa-user"></i> Upload Profile Image</strong>
           </div>
           <div class="panel-body">
-            <p><strong>{{ ucwords(Auth::guard('admin')->user()->first_name) }} {{ ucwords(Auth::guard('admin')->user()->first_name) }}</strong></p>
-            <p><strong>ID: {{ strtolower(Auth::guard('admin')->user()->identification) }}</strong></p>
-            <p><strong>Mobile Number: {{ Auth::guard('admin')->user()->mobile_number != null ? strtolower(Auth::guard('admin')->user()->mobile_number) : 'Null'}}</strong></p>
-
-            <a href="{{ route('admin.profile.update') }}" class="btn btn-success">Update Profile</a>
-            <a href="{{ route('admin.profile.image.upload') }}" class="btn btn-success">Upload Profile Image</a>
+          <form action="{{ route('admin.profile.image.upload.post') }}" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-group">
+              <input type="file" name="image" id="image" accept="image/x-png,image/gif,image/jpeg">
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Upload Image</button>
+            </div>
+          </form>
           </div>
         </div>
       </div>
