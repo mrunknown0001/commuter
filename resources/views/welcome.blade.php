@@ -8,6 +8,15 @@
     <title>Welcome to Commuter Monitoring System</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/full-bg.css') }}">
+    <style type="text/css">
+      li a {
+        margin-top: 15px;
+      }
+      h1 {
+        color: #fff;
+        text-shadow: 2px 2px 4px #000000;
+      }
+    </style>
   </head>
   <body>
 
