@@ -16,6 +16,9 @@
         color: #fff;
         text-shadow: 2px 2px 4px #000000;
       }
+      .container {
+        margin-top: 250px;
+      }
     </style>
   </head>
   <body>
@@ -23,7 +26,7 @@
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-md-offset-3">
             <h1>Commuter Monitoring System</h1>
             <ul class="list-inline">
               <li><a href="{{ route('login') }}" class="btn btn-primary">Commuter &amp; Driver Login</a></li>
