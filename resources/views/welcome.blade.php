@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <div class="home-content">
-              <h1 class="white-text">{{ env('app_name') }}</h1>
+              <h1 class="white-text">Commuter Queuing System</h1>
               <!-- <p class="white-text">App Description</p> -->
               <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Commuter &amp; Driver Login</a>
               <a href="{{ route('commuter.registration') }}" class="btn btn-primary btn-lg">Commuter Registration</a>
