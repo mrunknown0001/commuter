@@ -60,17 +60,10 @@ class CommuterController extends Controller
 
         // validate request
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'identification' => 'required',
             'mobile_number' => 'required'
         ]);
 
-        // set request values to variables
-        $first_name = $request['first_name'];
-        $last_name = $request['last_name'];
-        $id = $request['identification'];
-        // $email = $request['email'];
+
         $mobile_number = $request['mobile_number'];
 
         // check if existing unique values from database
@@ -108,9 +101,9 @@ class CommuterController extends Controller
 
         // update/save the profile of the user
         $user = User::findOrFail(Auth::user()->id);
-        $user->first_name = $first_name;
-        $user->last_name = $last_name;
-        $user->identification = $id;
+        // $user->first_name = $first_name;
+        // $user->last_name = $last_name;
+        // $user->identification = $id;
         $user->mobile_number = $mobile_number;
         // $user->email = $email;
         $user->save();

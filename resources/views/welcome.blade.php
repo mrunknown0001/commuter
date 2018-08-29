@@ -53,7 +53,6 @@
               <!-- <p class="white-text">App Description</p> -->
               <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Commuter &amp; Driver Login</a>
               <a href="{{ route('commuter.registration') }}" class="btn btn-primary btn-lg">Commuter Registration</a>
-              <a href="{{ route('driver.registration') }}" class="btn btn-primary btn-lg">Driver Registration</a>
             </div>
           </div>
 

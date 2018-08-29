@@ -9,15 +9,17 @@ Route::get('/logout', 'LoginController@logout')->name('logout');
 // Registration form for commuter only
 Route::get('/registration/commuter', 'RegisterController@commuterRegistration')->name('commuter.registration');
 
+Route::get('/registration/commuter/check', 'RegisterController@checkCommuterRegistration')->name('check.commuter.registration');
+
 // post register for commuter only
 Route::post('/registration/commuter', 'RegisterController@postCommuterRegistration')->name('register.submit');
 
 
-// registration for driver
-Route::get('/registration/driver', 'RegisterController@driverRegistration')->name('driver.registration');
+// // registration for driver
+// Route::get('/registration/driver', 'RegisterController@driverRegistration')->name('driver.registration');
 
-// post registration for driver
-Route::post('/registration/driver', 'RegisterController@postDriverRegistration')->name('driver.registration.post');
+// // post registration for driver
+// Route::post('/registration/driver', 'RegisterController@postDriverRegistration')->name('driver.registration.post');
 
 
 // Commuter and Diver Login Page
@@ -272,6 +274,12 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to view feedback recieved by driver
 	Route::get('/driver/{id}/feedback', 'AdminController@viewDriverFeedback')->name('admin.view.driver.feedback');
 
+
+	// route to add student in the record by admin
+	Route::get('/commuter/add', 'AdminController@addCommuter')->name('admin.add.commuter');
+
+	// route to save student record for verification purposes
+	Route::post('/commuter/add', 'AdminController@postAddCommuter')->name('admin.add.commuter.post');
 
 	// route to view all commuters
 	Route::get('/commuter/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');

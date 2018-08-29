@@ -18,11 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->tinyInteger('user_type')->default(1); // 1 for commuters, 2 for drivers
-            $table->string('identification');
+            $table->string('identification'); // student number
             $table->string('mobile_number')->nullable();
             // $table->string('email')->nullable();
-            $table->string('password');
-            $table->tinyInteger('active')->default(1); // 1 for active users, 0 for deactivated users
+            $table->string('password')->nullable();
+            $table->tinyInteger('active')->default(0); // 1 for active users, 0 for deactivated users
+            $table->tinyInteger('registered')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -24,7 +24,7 @@
                             <label for="name" class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
-                                <input id="first_name" type="text" class="form-control" name="first_name" value="{{ Auth::user()->first_name }}" required autofocus>
+                                <input id="first_name" type="text" class="form-control" name="first_name" value="{{ Auth::user()->first_name }}" disabled>
 
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -38,7 +38,7 @@
                             <label for="name" class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ Auth::user()->last_name }}" required>
+                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ Auth::user()->last_name }}" disabled>
 
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -52,7 +52,7 @@
                             <label for="name" class="col-md-4 control-label">Identification</label>
 
                             <div class="col-md-6">
-                                <input id="identification" type="text" class="form-control" name="identification" value="{{ Auth::user()->identification }}" required>
+                                <input id="identification" type="text" class="form-control" name="identification" value="{{ Auth::user()->identification }}" disabled>
 
                                 @if ($errors->has('identification'))
                                     <span class="help-block">

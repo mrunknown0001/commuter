@@ -47,6 +47,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Driver Registration</a></li>
             <li><a href="{{ route('admin.view.all.driver') }}"><i class="fa fa-circle-o"></i> View All Drivers</a></li>
           </ul>
         </li>
@@ -59,6 +60,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ route('admin.add.commuter') }}"><i class="fa fa-circle-o"></i> Add Student Commuter</a></li>
             <li><a href="{{ route('admin.view.all.commuters') }}"><i class="fa fa-circle-o"></i> View All Commuters</a></li>
           </ul>
         </li>

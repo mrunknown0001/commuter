@@ -313,6 +313,36 @@ class AdminController extends Controller
     }
 
 
+    // method use to add student commuter to the system for validation
+    public function addCommuter()
+    {
+        return view('admin.commuter-add-record');
+    }
+
+
+    // method use to save student record to the system
+    public function postAddCommuter(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'identification' => 'required|unique:users'
+        ]);
+
+        $fn = $request['first_name'];
+        $ln = $request['last_name'];
+        $id = $request['identification'];
+
+        $new = new User();
+        $new->first_name = $fn;
+        $new->last_name = $ln;
+        $new->identification = $id;
+        $new->save();
+
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added New Commuter');
+
+        return redirect()->back()->with('success', 'Success! Commuter Added!');
+    }
 
 
     // method use to view all commuters
