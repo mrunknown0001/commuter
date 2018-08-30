@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-
+          @include('includes.all')
           @if(count($commuters) > 0)
 
           @include('admin.includes.commuter-search')
@@ -30,6 +30,7 @@
               <tr>
                 <th>Name</th>
                 <th>ID</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -40,6 +41,9 @@
                 </td>
                 <td>
                   {{ $commuter->identification }}
+                </td>
+                <td>
+                  <a href="{{ route('admin.update.commuter', ['id' => $commuter->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </td>
               </tr>
               @endforeach

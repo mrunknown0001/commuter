@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function report()
     {
-        return $this->hasMany('App\Report', 'complainant_id');
+        return $this->hasMany('App\Report', 'complainant_id', 'id');
     }
 
 

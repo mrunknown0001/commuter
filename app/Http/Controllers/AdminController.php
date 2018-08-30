@@ -345,6 +345,50 @@ class AdminController extends Controller
     }
 
 
+    // method use to upate commuter details
+    public function upateCommuter($id = null)
+    {
+        $commuter = User::findorfail($id);
+
+        return view('admin.commuter-update-record', ['commuter' => $commuter]);
+    }
+
+
+    // method use to save update in commuter details
+    public function postUpdateCommuter(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'identification' => 'required'
+        ]);
+
+        $fn = $request['first_name'];
+        $ln = $request['last_name'];
+        $id = $request['identification'];
+        $commuter_id = $request['commuter_id'];
+
+        $commuter = User::findorfail($commuter_id);
+
+        // check id
+        $check_id = User::where('identification', $id)->first();
+
+        if(count($check_id) > 0 && $check_id->id != $commuter->id) {
+            return redirect()->back()->with('error', 'Identification already exists!');
+        }
+
+        $commuter->first_name = $fn;
+        $commuter->last_name = $ln;
+        $commuter->identification = $id;
+        $commuter->save();
+
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Updated Commuter Details');
+
+        return redirect()->route('admin.view.all.commuters')->with('success', 'Admin saved commuter record!');
+
+    }
+
+
     // method use to view all commuters
     public function viewAllCommuters()
     {

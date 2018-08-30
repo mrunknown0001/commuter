@@ -30,6 +30,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Register Admin</a></li>
             <li><a href="{{ route('admin.view.all.admin') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
             <li><a href="{{ route('admin.view.admin.id') }}"><i class="fa fa-circle-o"></i> View all Admin IDs</a></li>
             <li><a href="{{ route('admin.view.admin.logs') }}"><i class="fa fa-circle-o"></i> View All Admin Logs</a></li>

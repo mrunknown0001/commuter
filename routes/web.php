@@ -281,6 +281,16 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to save student record for verification purposes
 	Route::post('/commuter/add', 'AdminController@postAddCommuter')->name('admin.add.commuter.post');
 
+	// route to update commuter detail
+	Route::get('/commuter/{id}/update', 'AdminController@upateCommuter')->name('admin.update.commuter');
+
+	// route to save update on commuter
+	Route::post('/commuter/update', 'AdminController@postUpdateCommuter')->name('admin.update.commuter.post');
+
+	Route::get('/commuter/update', function () {
+		return abort(404);
+	});
+
 	// route to view all commuters
 	Route::get('/commuter/view/all', 'AdminController@viewAllCommuters')->name('admin.view.all.commuters');
 
