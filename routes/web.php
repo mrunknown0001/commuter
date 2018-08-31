@@ -9,6 +9,10 @@ Route::get('/logout', 'LoginController@logout')->name('logout');
 // Registration form for commuter only
 Route::get('/registration/commuter', 'RegisterController@commuterRegistration')->name('commuter.registration');
 
+Route::get('/registration/commuter/verification', 'RegisterController@verifyCommuterRegistration')->name('verify.commuter.registration');
+
+Route::get('/registraton/commuter/verification/code', 'RegisterController@codeVerification')->name('code.verification.registration');
+
 Route::get('/registration/commuter/check', 'RegisterController@checkCommuterRegistration')->name('check.commuter.registration');
 
 // post register for commuter only

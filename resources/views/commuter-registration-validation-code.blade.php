@@ -16,20 +16,14 @@
 
                 <div class="panel-body">
                     
-                    <form class="form-horizontal" method="get" action="{{ route('check.commuter.registration') }}" autocomplete="off">
+                    <form class="form-horizontal" method="get" action="{{ route('code.verification.registration') }}" autocomplete="off">
                         {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                            <label for="identification" class="col-md-4 control-label">Identification</label>
+                        <input type="hidden" name="commuter_id" value="{{ $commuter->id }}">
+                        <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
+                            <label for="code" class="col-md-4 control-label">Enter Verification Code</label>
 
                             <div class="col-md-6">
-                                <input id="identification" type="text" class="form-control" name="identification" required>
-
-                                @if ($errors->has('identification'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('identification') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="code" type="text" class="form-control" name="code" required placeholder="Enter Verification Code">
                             </div>
                         </div>
 

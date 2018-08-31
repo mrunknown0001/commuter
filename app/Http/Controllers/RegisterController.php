@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\SmsController;
 
 use App\User;
 use App\DriverInfo;
 use App\AdminId;
 use App\Admin;
+use App\UserCode;
 
 class RegisterController extends Controller
 {
@@ -41,7 +43,97 @@ class RegisterController extends Controller
             return redirect()->back()->with('error', 'Identification not found!');
         }
 
-        return view('commuter-registration-check', ['commuter' => $commuter]);
+        if($commuter->registered == 1) {
+            return redirect()->back()->with('error', 'Commuter already registered! If it\'s you, please report to admin');
+        }
+
+
+
+        return view('commuter-registration-validation', ['commuter' => $commuter]);
+    }
+
+
+    public function verifyCommuterRegistration(Request $request)
+    {
+        // validate mobile number
+        $request->validate([
+            'mobile_number' => ['required'], ['unique:users'], ['regex:/^[0-9]+$/']
+        ]);
+
+        $commuter_id = $request['commuter_id'];
+        $mobile_number = $request['mobile_number'];
+
+        $commuter = User::findorfail($commuter_id);
+
+        if(count($commuter) < 1) {
+            return redirect()->back()->with('error', 'Identification not found!');
+        }
+
+        if($commuter->registered == 1) {
+            return redirect()->back()->with('error', 'Commuter already registered! If it\'s you, please report to admin');
+        }
+
+        // save number to user
+        $commuter->mobile_number = $mobile_number;
+        $commuter->save();
+
+        // create validation code
+        // last for 5 mins
+        $code = new UserCode();
+        $code->user_id = $commuter->id;
+        $code->code = substr(uniqid(), 0, 5);
+        $code->expiration = date(strtotime(now())) + 300; // for 5 mins exp
+        $code->save();
+
+
+        // send the code here
+        
+
+        return view('commuter-registration-validation-code', ['commuter' => $commuter]);
+    }
+
+
+    public function codeVerification(Request $request)
+    {
+        $request->validate([
+            'code' => 'required'
+        ]);
+
+        $commuter_id = $request['commuter_id'];
+        $code = $request['code'];
+
+        $commuter = User::findorfail($commuter_id);
+
+        if(count($commuter) < 1) {
+            return redirect()->back()->with('error', 'Identification not found!');
+        }
+
+        if($commuter->registered == 1) {
+            return redirect()->back()->with('error', 'Commuter already registered! If it\'s you, please report to admin');
+        }
+
+        // check code if valid
+        $check = UserCode::where('user_id', $commuter->id)
+                        ->where('used', 0)
+                        ->first();
+
+        if(count($check) < 1) {
+            return redirect()->route('commuter.registration')->with('error', 'Error! Please Try Again!');
+        }
+
+        $check->used = 1;
+        $check->save();
+
+        // check the code and the expiration time
+        if(strtoupper($check->code) == strtoupper($code) && $check->expiration > date(strtotime(now()))) {
+            return view('commuter-registration-check', ['commuter' => $commuter]);
+        }
+        else {
+            return redirect()->route('commuter.registration')->with('error', 'Invalid or Expired Code! Please Try Again!'); 
+        }
+
+        return redirect()->route('commuter.registration')->with('error', 'Error! Please Try Again!');
+
     }
 
 
