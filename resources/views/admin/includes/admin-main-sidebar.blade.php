@@ -17,7 +17,7 @@
 
         {{-- All Super Admin Menu will go there --}}
         @if(Auth::guard('admin')->user()->role == 1)
-        <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.id') == url()->current() || route('admin.view.admin.logs') == url()->current() || route('admin.add.admin') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.logs') == url()->current() || route('admin.add.admin') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Admins</span>
             <span class="pull-right-container">
@@ -27,7 +27,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.add.admin') }}"><i class="fa fa-circle-o"></i> Register Admin</a></li>
             <li><a href="{{ route('admin.view.all.admin') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
-            <li><a href="{{ route('admin.view.admin.id') }}"><i class="fa fa-circle-o"></i> View all Admin IDs</a></li>
+            {{--<li><a href="{{ route('admin.view.admin.id') }}"><i class="fa fa-circle-o"></i> View all Admin IDs</a></li>--}}
             <li><a href="{{ route('admin.view.admin.logs') }}"><i class="fa fa-circle-o"></i> View All Admin Logs</a></li>
           </ul>
         </li>
@@ -35,7 +35,7 @@
         {{-- end of all super admin menu --}}
 
         
-        <li class="treeview {{ route('admin.view.all.driver') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.driver') == url()->current() || route('admin.add.driver') == url()->current()  ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Drivers</span>
             <span class="pull-right-container">
@@ -43,7 +43,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Driver Registration</a></li>
+            <li><a href="{{ route('admin.add.driver') }}"><i class="fa fa-circle-o"></i> Driver Registration</a></li>
             <li><a href="{{ route('admin.view.all.driver') }}"><i class="fa fa-circle-o"></i> View All Drivers</a></li>
           </ul>
         </li>

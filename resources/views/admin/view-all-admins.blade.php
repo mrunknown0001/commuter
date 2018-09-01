@@ -25,7 +25,8 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>ID</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -34,8 +35,11 @@
                 <td>
                   {{ strtoupper($admin->last_name . ', ' . $admin->first_name) }}
                 </td>
-                <td>
+                <td class="text-center">
                   {{ $admin->identification }}
+                </td>
+                <td class="text-center">
+                  <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </td>
               </tr>
               @endforeach

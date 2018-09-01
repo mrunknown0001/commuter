@@ -264,6 +264,9 @@ Route::group(['prefix' => 'admin'], function () {
 	// view all driver
 	Route::get('/driver/view/all', 'AdminController@viewAllDriver')->name('admin.view.all.driver');
 
+	// route to add driver
+	Route::get('/driver/add', 'AdminController@addDriver')->name('admin.add.driver');
+
 
 	// route to search drivers
 	Route::get('/driver/search', 'AdminController@searchDriver')->name('admin.search.driver');

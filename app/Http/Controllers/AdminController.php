@@ -286,6 +286,13 @@ class AdminController extends Controller
     }
 
 
+    // method use to add driver
+    public function addDriver()
+    {
+        return view('admin.driver-add');
+    }
+
+
     // method use to search driver
     public function searchDriver(Request $request)
     {
