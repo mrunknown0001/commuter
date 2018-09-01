@@ -72,6 +72,46 @@ class AdminController extends Controller
     }
 
 
+    // method use to add admin
+    public function addAdmin()
+    {
+        return view('admin.admin-add');
+    }
+
+
+    // method use to save new admin
+    public function postAddAdmin(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => 'required|unique:admins,identification',
+            'mobile_number' => 'required|unique:admins'
+        ]);
+
+        $fn = $request['first_name'];
+        $ln = $request['last_name'];
+        $username = $request['username'];
+        $mobile = $request['mobile_number'];
+
+        // save new admin, the defaul password is password
+        $admin = new Admin();
+        $admin->first_name = $fn;
+        $admin->last_name = $ln;
+        $admin->identification = $username;
+        $admin->mobile_number = $mobile;
+        $admin->password = bcrypt('password');
+        $admin->save();
+
+        // activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added new Admin Guard', now());
+
+
+        // return with success
+        return redirect()->route('admin.view.all.admin')->with('succes', 'Admin Added. Default password: password');
+    }
+
+
 
     ////////////////////////////////////////
     // end of all methods of super admins //

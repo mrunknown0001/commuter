@@ -6,12 +6,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">
-        @if(Auth::guard('admin')->user()->role == 1)
-        Super Admin
-        @else
-        Navigation
-        @endif
-
+        Menu
         </li>
 
         <li class="{{ route('admin.dashboard') == url()->current() ? 'active' : '' }}">
@@ -22,7 +17,7 @@
 
         {{-- All Super Admin Menu will go there --}}
         @if(Auth::guard('admin')->user()->role == 1)
-        <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.id') == url()->current() || route('admin.view.admin.logs') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.id') == url()->current() || route('admin.view.admin.logs') == url()->current() || route('admin.add.admin') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Admins</span>
             <span class="pull-right-container">
@@ -30,7 +25,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Register Admin</a></li>
+            <li><a href="{{ route('admin.add.admin') }}"><i class="fa fa-circle-o"></i> Register Admin</a></li>
             <li><a href="{{ route('admin.view.all.admin') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
             <li><a href="{{ route('admin.view.admin.id') }}"><i class="fa fa-circle-o"></i> View all Admin IDs</a></li>
             <li><a href="{{ route('admin.view.admin.logs') }}"><i class="fa fa-circle-o"></i> View All Admin Logs</a></li>

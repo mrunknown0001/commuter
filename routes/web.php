@@ -217,6 +217,12 @@ Route::group(['prefix' => 'admin'], function () {
 
 		// route to view admin logs
 		Route::get('/admin/logs', 'AdminController@viewAdminLogs')->name('admin.view.admin.logs');
+
+		// route to add admin (guard)
+		Route::get('/admin/add', 'AdminController@addAdmin')->name('admin.add.admin');
+
+		// route to save new admin
+		Route::post('/admin/add', 'AdminController@postAddAdmin')->name('admin.add.admin.post');
 		
 	});
 	////////////////////////////////////
