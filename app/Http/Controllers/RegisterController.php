@@ -79,14 +79,25 @@ class RegisterController extends Controller
 
         // create validation code
         // last for 5 mins
-        $code = new UserCode();
-        $code->user_id = $commuter->id;
-        $code->code = substr(uniqid(), 0, 5);
-        $code->expiration = date(strtotime(now())) + 300; // for 5 mins exp
-        $code->save();
+        $user_code = UserCode::where('user_id', $commuter->id)
+                            ->where('used', 0)
+                            ->first();
+
+        if(count($user_code) < 1) {
+
+            $code = new UserCode();
+            $code->user_id = $commuter->id;
+            $code->code = substr(uniqid(), 0, 5);
+            $code->expiration = date(strtotime(now())) + 300; // for 5 mins exp
+            $code->save();
+
+            $message = 'Your Registration Code is ' . strtoupper($code->code);
+
+            // send the code here
+            SmsController::sendSms($commuter->mobile_number, $message);
+        }
 
 
-        // send the code here
         
 
         return view('commuter-registration-validation-code', ['commuter' => $commuter]);

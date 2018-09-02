@@ -42,7 +42,7 @@
                   {{ $driver->identification }}
                 </td>
                 <td class="text-center">
-                  <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                  <a href="{{ route('admin.update.driver', ['id' => $driver->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </td>
               </tr>
               @endforeach

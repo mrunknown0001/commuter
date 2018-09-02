@@ -230,6 +230,10 @@ Route::group(['prefix' => 'admin'], function () {
 		// route to save update admin info
 		Route::post('/admin/update', 'AdminController@postUpdateAdmin')->name('admin.update.admin.post');
 
+		Route::get('/admin/update', function () {
+			return abort(404);
+		});
+
 		
 	});
 	////////////////////////////////////
@@ -276,6 +280,11 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to save new driver
 	Route::post('/driver/add', 'AdminController@postAddDriver')->name('admin.add.driver.post');
+
+	// route to update driver
+	Route::get('/driver/{id}/update', 'AdminController@updateDriver')->name('admin.update.driver');
+
+	Route::post('/driver/update', 'AdminController@postUpdateDriver')->name('admin.update.driver.post');
 
 
 	// route to search drivers

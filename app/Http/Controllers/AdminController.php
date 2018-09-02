@@ -385,6 +385,7 @@ class AdminController extends Controller
         $info = new DriverInfo();
         $info->driver_id = $driver->id;
         $info->plate_number = $plate_number;
+        $info->body_number = $body_number;
         $info->operator_name = $operator;
         $info->license = $license;
         $info->save();
@@ -395,6 +396,70 @@ class AdminController extends Controller
         // add to return message
         return redirect()->back()->with('success', 'New Driver Added!');
 
+    }
+
+
+    // method use to update driver info
+    public function updateDriver($id = null)
+    {
+        $driver = User::findorfail($id);
+
+        return view('admin.driver-update', ['driver' => $driver]);
+    }
+
+
+    // method use to save update on driver
+    public function postUpdateDriver(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile_number' => 'required',
+            'body_number' => 'required',
+            'plate_number' => 'required'
+        ]);
+
+        $driver_id = $request['driver_id'];
+        $fn = $request['first_name'];
+        $ln = $request['last_name'];
+        $username = $request['username'];
+        $mobile = $request['mobile_number'];
+        $body_number = $request['body_number'];
+        $plate_number = $request['plate_number'];
+        $license = $request['license_number'];
+        $operator = $request['operator'];
+
+        $driver = User::findorfail($driver_id);
+
+        // add validation
+
+        $driver->first_name = $fn;
+        $driver->last_name = $ln;
+        $driver->identification = $username;
+        $driver->mobile_number = $mobile;
+        $driver->password = bcrypt('password');
+        $driver->save();
+
+        // driver avatar
+        $avatar = Avatar::where('user_id', $driver->id)->first();
+        $avatar->user_id = $driver->id;
+        $avatar->avatar = null;
+        $avatar->save();
+
+        // add in driver_infos table
+        $info = DriverInfo::where('driver_id', $driver->id)->first();
+        $info->driver_id = $driver->id;
+        $info->plate_number = $plate_number;
+        $info->body_number = $body_number;
+        $info->operator_name = $operator;
+        $info->license = $license;
+        $info->save();
+
+        // add to activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Driver Details Updated', now());
+
+        // add to return message
+        return redirect()->back()->with('success', 'Driver Details Updated!');
     }
 
 

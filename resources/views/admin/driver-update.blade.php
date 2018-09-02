@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add Driver
+        Update Driver
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-user"></i> Home</a></li>
@@ -22,19 +22,20 @@
         <div class="col-md-12">
           @include('includes.all')
 
-          <form action="{{ route('admin.add.driver.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+          <form action="{{ route('admin.update.driver.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
             {{ csrf_field() }}
+            <input type="hidden" name="driver_id" value="{{ $driver->id }}">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Firstname</label>
-                  <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Enter Firstname" required>
+                  <input type="text" name="first_name" id="first_name" value="{{ $driver->first_name }}" class="form-control" placeholder="Enter Firstname" required>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Lastname</label>
-                  <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter Lastname" required="">
+                  <input type="text" name="last_name" id="last_name" value="{{ $driver->last_name }}" class="form-control" placeholder="Enter Lastname" required="">
                 </div>
               </div>
             </div>
@@ -42,13 +43,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Username</label>
-                  <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username" required>
+                  <input type="text" name="username" id="username" value="{{ $driver->identification }}" class="form-control" placeholder="Enter Username" required readonly="">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Mobile Number</label>
-                  <input type="text" name="mobile_number" id="mobile_number" class="form-control" placeholder="Enter Mobile Number" required>
+                  <input type="text" name="mobile_number" id="mobile_number" value="{{ $driver->mobile_number }}" class="form-control" placeholder="Enter Mobile Number" required>
                 </div>
               </div>
             </div>
@@ -56,13 +57,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Operator</label>
-                  <input type="text" name="operator" id="operator" class="form-control" placeholder="Enter Operator Name" required>
+                  <input type="text" name="operator" id="operator" value="{{ $driver->driver_info->operator_name }}" class="form-control" placeholder="Enter Operator Name" required>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Body Number</label>
-                  <input type="text" name="body_number" id="body_number" class="form-control" placeholder="Enter Body Number of Vehicle" required>
+                  <input type="text" name="body_number" id="body_number" value="{{ $driver->driver_info->body_number }}" class="form-control" placeholder="Enter Body Number of Vehicle" required>
                 </div>
               </div>
             </div>
@@ -70,20 +71,20 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Plate Number</label>
-                  <input type="text" name="plate_number" id="plate_number" class="form-control" placeholder="Enter Plate Number" required>
+                  <input type="text" name="plate_number" id="plate_number" value="{{ $driver->driver_info->plate_number }}" class="form-control" placeholder="Enter Plate Number" required>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>License</label>
-                  <input type="text" name="license_number" id="license_number" class="form-control" placeholder="Enter License Number" required>
+                  <input type="text" name="license_number" id="license_number" value="{{ $driver->driver_info->license }}" class="form-control" placeholder="Enter License Number" required>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Driver</button>
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Driver Info</button>
                 </div>
               </div>
             </div>

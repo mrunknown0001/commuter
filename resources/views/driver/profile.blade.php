@@ -28,8 +28,8 @@
 					<p><strong>Operator Name: {{ Auth::user()->driver_info->operator_name }}</strong></p>
 
 
-					<a href="{{ route('driver.profile.update') }}" class="btn btn-primary">Update Profile</a>
-					<a href="{{ route('driver.profile.upload.image') }}" class="btn btn-primary">Upload Image</a>
+					{{--<a href="{{ route('driver.profile.update') }}" class="btn btn-primary">Update Profile</a>
+					<a href="{{ route('driver.profile.upload.image') }}" class="btn btn-primary">Upload Image</a>--}}
 				</div>
 			</div>
 		</div>
