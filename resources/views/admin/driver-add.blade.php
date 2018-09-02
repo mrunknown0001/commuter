@@ -22,7 +22,7 @@
         <div class="col-md-12">
           @include('includes.all')
 
-          <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
+          <form action="{{ route('admin.add.driver.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
             {{ csrf_field() }}
             <div class="row">
               <div class="col-md-4">
@@ -55,18 +55,24 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
+                  <label>Operator</label>
+                  <input type="text" name="operator" id="operator" class="form-control" placeholder="Enter Operator Name" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
                   <label>Body Number</label>
                   <input type="text" name="body_number" id="body_number" class="form-control" placeholder="Enter Body Number of Vehicle" required>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Plate Number</label>
                   <input type="text" name="plate_number" id="plate" class="form-control" placeholder="Enter Plate Number" required>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label>License</label>

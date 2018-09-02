@@ -27,8 +27,9 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Username</th>
+                <th class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -37,8 +38,11 @@
                 <td>
                   <a href="{{ route('admin.view.driver.details', ['id' => $driver->id]) }}">{{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}</a>
                 </td>
-                <td>
+                <td class="text-center">
                   {{ $driver->identification }}
+                </td>
+                <td class="text-center">
+                  <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </td>
               </tr>
               @endforeach

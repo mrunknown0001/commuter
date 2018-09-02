@@ -17,9 +17,10 @@ class CreateDriverInfosTable extends Migration
             $table->increments('id');
             $table->integer('driver_id')->unsigned();
             $table->foreign('driver_id')->references('id')->on('users');
-            $table->string('body_number');
-            $table->string('plate_number');
-            $table->string('operator_name');
+            $table->string('body_number')->nullable();
+            $table->string('plate_number')->nullable();
+            $table->string('license')->nullable();
+            $table->string('operator_name')->nullable();
             $table->timestamps();
         });
     }

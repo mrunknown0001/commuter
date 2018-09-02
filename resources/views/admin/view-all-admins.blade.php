@@ -25,7 +25,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th class="text-center">ID</th>
+                <th class="text-center">Username</th>
                 <th class="text-center">Action</th>
               </tr>
             </thead>
@@ -39,7 +39,7 @@
                   {{ $admin->identification }}
                 </td>
                 <td class="text-center">
-                  <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                  <a href="{{ route('admin.update.admin', ['id' => $admin->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </td>
               </tr>
               @endforeach

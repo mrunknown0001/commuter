@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->tinyInteger('user_type')->default(1); // 1 for commuters, 2 for drivers
-            $table->string('identification'); // student number
+            $table->string('identification'); // student number/username for driver
             $table->string('mobile_number')->nullable();
             // $table->string('email')->nullable();
             $table->string('password')->nullable();

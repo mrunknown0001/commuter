@@ -18,10 +18,10 @@
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                        <label for="identification" class="col-md-3 control-label">ID</label>
+                        <label for="identification" class="col-md-3 control-label">ID/Username</label>
 
                         <div class="col-md-9">
-                            <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" required autofocus>
+                            <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" id="identification" placeholder="Enter ID/Username" required autofocus>
 
                             @if ($errors->has('identification'))
                                 <span class="help-block">
@@ -35,7 +35,7 @@
                         <label for="password" class="col-md-3 control-label">Password &nbsp;</label>
 
                         <div class="col-md-9">
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required>
 
                             @if ($errors->has('password'))
                                 <span class="help-block">

@@ -16,6 +16,7 @@ use App\AdminId;
 use App\Feedback;
 use App\Report;
 use App\Avatar;
+use App\DriverInfo;
 
 class AdminController extends Controller
 {
@@ -103,12 +104,61 @@ class AdminController extends Controller
         $admin->password = bcrypt('password');
         $admin->save();
 
+        // admin avatar
+        $avatar = new Avatar();
+        $avatar->admin_id = $admin->id;
+        $avatar->save();
+
         // activity log
         GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added new Admin Guard', now());
 
 
         // return with success
         return redirect()->route('admin.view.all.admin')->with('succes', 'Admin Added. Default password: password');
+    }
+
+
+    // method use to update admin
+    public function updateAdmin($id = null)
+    {
+        $admin = Admin::findorfail($id);
+
+        return view('admin.admin-update', ['admin' => $admin]);
+    }
+
+
+    // method use to save update on admin
+    public function postUpdateAdmin(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile_number' => 'required'
+        ]);
+
+        $admin_id = $request['admin_id'];
+        $first_name = $request['first_name'];
+        $last_name = $request['last_name'];
+        $mobile = $request['mobile_number'];
+
+        $admin = Admin::findorfail($admin_id);
+
+        $check_mobile = Admin::where('mobile_number', $mobile)->first();
+
+        if(count($check_mobile) > 0 && $check_mobile->id != $admin->id) {
+            return redirect()->back()->with('error', 'Mobile Number Already Used!');
+        }
+
+        $admin->first_name = $first_name;
+        $admin->last_name = $last_name;
+        $admin->mobile_number = $mobile;
+        $admin->save();
+
+        // add to activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Update Admin Guard', now());
+
+        // add return message
+        return redirect()->back()->with('success', 'Admin Detail Updated!');
     }
 
 
@@ -290,6 +340,61 @@ class AdminController extends Controller
     public function addDriver()
     {
         return view('admin.driver-add');
+    }
+
+
+    // method use to save new driver
+    public function postAddDriver(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => 'required|unique:users,identification',
+            'mobile_number' => 'required|unique:users',
+            'body_number' => 'required|min:3|max:10|unique:driver_infos',
+            'plate_number' => 'required|unique:driver_infos'
+        ]);
+
+        $fn = $request['first_name'];
+        $ln = $request['last_name'];
+        $username = $request['username'];
+        $mobile = $request['mobile_number'];
+        $body_number = $request['body_number'];
+        $plate_number = $request['plate_number'];
+        $license = $request['license_number'];
+        $operator = $request['operator'];
+
+        // add users table the driver 
+        $driver = new User();
+        $driver->first_name = $fn;
+        $driver->last_name = $ln;
+        $driver->identification = $username;
+        $driver->mobile_number = $mobile;
+        $driver->password = bcrypt('password');
+        $driver->user_type = 2;
+        $driver->active = 1;
+        $driver->registered = 1;
+        $driver->save();
+
+        // driver avatar
+        $avatar = new Avatar();
+        $avatar->user_id = $driver->id;
+        $avatar->save();
+
+        // add in driver_infos table
+        $info = new DriverInfo();
+        $info->driver_id = $driver->id;
+        $info->plate_number = $plate_number;
+        $info->operator_name = $operator;
+        $info->license = $license;
+        $info->save();
+
+        // add to activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added New Driver', now());
+
+        // add to return message
+        return redirect()->back()->with('success', 'New Driver Added!');
+
     }
 
 

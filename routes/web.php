@@ -223,6 +223,13 @@ Route::group(['prefix' => 'admin'], function () {
 
 		// route to save new admin
 		Route::post('/admin/add', 'AdminController@postAddAdmin')->name('admin.add.admin.post');
+
+		// route to update admin (guard) detail
+		Route::get('/admin/{id}/update', 'AdminController@updateAdmin')->name('admin.update.admin');
+
+		// route to save update admin info
+		Route::post('/admin/update', 'AdminController@postUpdateAdmin')->name('admin.update.admin.post');
+
 		
 	});
 	////////////////////////////////////
@@ -266,6 +273,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to add driver
 	Route::get('/driver/add', 'AdminController@addDriver')->name('admin.add.driver');
+
+	// route to save new driver
+	Route::post('/driver/add', 'AdminController@postAddDriver')->name('admin.add.driver.post');
 
 
 	// route to search drivers

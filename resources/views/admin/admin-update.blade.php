@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add Admin (Guard)
+        Update Admin (Guard)
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-user"></i> Home</a></li>
@@ -22,37 +22,38 @@
         <div class="col-md-12">
           @include('includes.all')
 
-          <form action="{{ route('admin.add.admin.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+          <form action="{{ route('admin.update.admin.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
             {{ csrf_field() }}
+            <input type="hidden" name="admin_id" value="{{ $admin->id }}">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Firstname</label>
-                  <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Enter Firstname" >
+                  <input type="text" name="first_name" id="first_name" value="{{ $admin->first_name }}" class="form-control" placeholder="Enter Firstname" >
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Lastname</label>
-                  <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter Lastname">
+                  <input type="text" name="last_name" id="last_name" value="{{ $admin->last_name }}" class="form-control" placeholder="Enter Lastname">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <label>Username</label>
-                <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">
+                <input type="text" name="username" id="username" value="{{ $admin->identification }}" class="form-control" placeholder="Enter Username" readonly="">
               </div>
               <div class="col-md-4">
                 <label>Mobile Number</label>
-                <input type="text" name="mobile_number" id="mobile_number" class="form-control" placeholder="Enter Mobile Number">
+                <input type="text" name="mobile_number" id="mobile_number" value="{{ $admin->mobile_number }}" class="form-control" placeholder="Enter Mobile Number">
               </div>
             </div>
             <p></p>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Admin</button>
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Admin Details</button>
                 </div>
               </div>
             </div>
