@@ -6,7 +6,7 @@
 <div class="container">
 <h3 class="text-center">Commuter Queuing System</h3>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-6 col-md-offset-3">
         @include('includes.error')
         @include('includes.success')
         <div class="panel panel-primary">
@@ -67,6 +67,7 @@
                         </div>
                     </div>
                 </form>
+                <p><a href="{{ route('forgot.account') }}">Forgot Account?</a></p>
             </div>            
         </div>
     </div>

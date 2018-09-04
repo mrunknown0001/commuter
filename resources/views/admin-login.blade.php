@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </form>
-
+                <p><a href="#">Forgot Account?</a></p>
                 {{--<p><a href="{{ route('admin.registration') }}">Admin Registration</a></p>--}}
             </div>            
         </div>

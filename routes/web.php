@@ -54,6 +54,13 @@ Route::get('/admin/registration', 'RegisterController@adminRegistration')->name(
 Route::post('/admin/registration', 'RegisterController@postAdminRegistration')->name('admin.registration.post');
 
 
+// route to forgot account
+Route::get('/forgot/account', 'ForgotAccountController@forgotAccount')->name('forgot.account');
+
+// route to verifiy details entered/send sms code with the retrieval code 
+Route::get('/forgot/account/verifiy', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
+
+
 /*
  * Commuter
  * Controller Protected Middleware auth/user, commuter middleware
