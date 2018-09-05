@@ -132,11 +132,12 @@ class RegisterController extends Controller
             return redirect()->route('commuter.registration')->with('error', 'Error! Please Try Again!');
         }
 
-        $check->used = 1;
-        $check->save();
-
         // check the code and the expiration time
         if(strtoupper($check->code) == strtoupper($code) && $check->expiration > date(strtotime(now()))) {
+            
+            $check->used = 1;
+            $check->save();
+
             return view('commuter-registration-check', ['commuter' => $commuter]);
         }
         else {
