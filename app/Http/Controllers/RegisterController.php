@@ -87,7 +87,7 @@ class RegisterController extends Controller
 
             $code = new UserCode();
             $code->user_id = $commuter->id;
-            $code->code = substr(uniqid(), 0, 5);
+            $code->code = GeneralController::generateRandomString(5, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
             $code->expiration = date(strtotime(now())) + 300; // for 5 mins exp
             $code->save();
 

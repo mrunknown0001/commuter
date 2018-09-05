@@ -58,7 +58,10 @@ Route::post('/admin/registration', 'RegisterController@postAdminRegistration')->
 Route::get('/forgot/account', 'ForgotAccountController@forgotAccount')->name('forgot.account');
 
 // route to verifiy details entered/send sms code with the retrieval code 
-Route::get('/forgot/account/verifiy', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
+Route::get('/forgot/account/verify', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
+
+// route to verify sent code
+Route::get('/form/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
 
 
 /*
