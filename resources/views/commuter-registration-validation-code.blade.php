@@ -26,6 +26,9 @@
                                 <input id="code" type="text" class="form-control" name="code" required placeholder="Enter Verification Code">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <p class="text-center">Verification code sent to your mobile number.</p>
+                        </div>
 
 
                         <div class="form-group">

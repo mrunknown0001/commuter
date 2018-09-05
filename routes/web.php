@@ -61,7 +61,10 @@ Route::get('/forgot/account', 'ForgotAccountController@forgotAccount')->name('fo
 Route::get('/forgot/account/verify', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
 
 // route to verify sent code
-Route::get('/form/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
+Route::get('/forgot/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
+
+// route to change password of the account
+Route::post('/forgot/account/change/password', 'ForgotAccountController@postForgotAccountChangePassword')->name('forgot.account.change.password');
 
 
 /*

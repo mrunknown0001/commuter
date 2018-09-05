@@ -37,6 +37,16 @@ class ForgotAccountController extends Controller
     		return redirect()->back()->with('error', 'User not found!');
     	}
 
+    	if($user->registered == 0) {
+    		return redirect()->back()->with('error', 'User not active or registered!');
+    	}
+
+    	// delete old code
+    	$old_code = UserRetrievalCode::where('user_id', $user->id)->where('used', 0)->first();
+    	if(count($old_code) > 0) {
+    		$old_code->delete();
+    	}
+
     	$code = GeneralController::generateRandomString(5, '1234567890');
 
     	$message = 'The retrieval code for the account ' . strtoupper($user->identification) . ' is ' . $code . '. This code is valid for 5minutes.';
@@ -64,8 +74,49 @@ class ForgotAccountController extends Controller
     // method use to verify code entered by user
     public function forgotAccountVerifyCode(Request $request)
     {
-    	return $request->validate([
+    	$request->validate([
     		'code' => 'required'
     	]);
+
+    	$code = $request['code'];
+    	$user_id = $request['user_id'];
+
+    	$user = User::findorfail($user_id);
+
+    	// validate code
+    	$check_code = UserRetrievalCode::where('user_id', $user->id)
+    					->where('code', $code)
+    					->where('used', 0)
+    					->where('expiration', '>', strtotime(now()))
+    					->first();
+
+    	if(count($check_code) < 1) {
+    		return redirect()->back()->with('error', 'Invalide Code!');
+    	}
+
+    	$check_code->used = 1;
+    	$check_code->save();
+
+    	// return to password change if all is validated an ok
+    	return view('forgot-account-change-password', ['user' => $user]);
+    }
+
+
+    // method use to change password of the forgotten account
+    public function postForgotAccountChangePassword(Request $request)
+    {
+    	$request->validate([
+    		'password' => 'required|confirmed'
+    	]);
+
+    	$password = $request['password'];
+    	$user_id = $request['user_id'];
+
+    	$user = User::findorfail($user_id);
+
+    	$user->password = bcrypt($password);
+    	$user->save();
+
+    	return redirect()->route('login')->with('success', 'Account Retrieved!');
     }
 }
