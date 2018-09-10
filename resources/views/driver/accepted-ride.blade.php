@@ -63,6 +63,7 @@
 				<div class="box-footer">
 
 					<div class="box-tools pull-right">
+						<span class="label label-danger" style="cursor: pointer;"><i class="fa fa-flag"></i> Report Commuter</span>
 						<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#id">Cancel</span>
 					</div>
 				</div>
