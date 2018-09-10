@@ -44,7 +44,19 @@
 				</div>
 				<div class="box-body">
 					<p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
-					<p>Commuter: <strong>{{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}</strong></p>
+					<p>Commuters:</p>
+					<ul>
+						<li>{{ ucwords($ride->passenger[0]->passenger1_name) }}</li>
+						@if($ride->passenger[0]->passenger2_name)
+						<li>{{ ucwords($ride->passenger[0]->passenger2_name) }}</li>
+						@endif
+						@if($ride->passenger[0]->passenger3_name)
+						<li>{{ ucwords($ride->passenger[0]->passenger3_name) }}</li>
+						@endif
+						@if($ride->passenger[0]->passenger4_name)
+						<li>{{ ucwords($ride->passenger[0]->passenger4_name) }}</li>
+						@endif
+					</ul>
 					<p>Pickup Location: <strong>{{ $ride->pickup_location->name }}</strong></p>
 					<p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>
 				</div>

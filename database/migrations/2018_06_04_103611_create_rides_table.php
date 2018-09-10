@@ -22,7 +22,7 @@ class CreateRidesTable extends Migration
             $table->foreign('driver_id')->references('id')->on('users');
             $table->integer('pickup_loc')->unsigned();
             $table->foreign('pickup_loc')->references('id')->on('locations');
-            $table->integer('drop_off_loc')->unsigned();
+            $table->integer('drop_off_loc')->unsigned()->nullable();
             $table->foreign('drop_off_loc')->references('id')->on('locations');
             $table->integer('payment');
             $table->integer('each');
@@ -32,6 +32,7 @@ class CreateRidesTable extends Migration
             $table->tinyInteger('current')->default(0); // same as with pickup
             $table->timestamp('current_at')->nullable();
             $table->tinyInteger('drop_off')->default(0);
+            $table->tinyInteger('drop_off_conrimation')->default(0);
             $table->timestamp('drop_off_at')->nullable();
             $table->tinyInteger('cancelled')->default(0);
             $table->tinyInteger('cancelled_by_commuter')->default(0);
