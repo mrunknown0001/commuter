@@ -23,6 +23,7 @@ class CreateFeedbackTable extends Migration
             $table->integer('ride_id')->unsigned();
             $table->foreign('ride_id')->references('id')->on('rides');
             $table->string('comment')->nullable();
+            $table->integer('rating')->nullable();
             $table->tinyInteger('viewed')->default(0);
             $table->timestamps();
         });

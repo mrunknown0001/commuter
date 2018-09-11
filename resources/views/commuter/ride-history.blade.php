@@ -107,6 +107,10 @@
 														<textarea id="message" name="message" class="form-control" required ></textarea>
 													</div>
 													<div class="form-group">
+												        <input name="rating" id="input-21b" value="0" type="text" class="rating" data-min=0 data-max=5 data-step=1 data-size="sm" required title="Rating is Required">
+        
+													</div>
+													<div class="form-group">
 														<button type="submit" class="btn btn-success">Send Feedback</button>
 													</div>
 								 				</form>

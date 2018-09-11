@@ -500,13 +500,15 @@ class CommuterController extends Controller
     {
         // validate request data
         $request->validate([
-            'message' => 'required'
+            'message' => 'required',
+            'rating' => 'required'
         ]);
 
 
         // assgin to variables
         $id = $request['ride_id'];
         $message = $request['message'];
+        $rating = $request['rating'];
         $feedback_number = GeneralController::generate_feedback_number();
 
 
@@ -525,6 +527,7 @@ class CommuterController extends Controller
         $feed->driver_id = $ride->driver_id;
         $feed->ride_id = $ride->id;
         $feed->comment = $message;
+        $feed->rating = $rating;
         $feed->save();
 
 

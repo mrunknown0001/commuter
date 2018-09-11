@@ -21,6 +21,8 @@
 
         <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
 
+        <link rel="stylesheet" type="text/css" href="{{ asset('rating/css/star-rating.min.css') }}">
+        <script type="text/javascript" src="{{ asset('rating/js/star-rating.min.js') }}"></script>
     </head>
     <body class="skin-blue-light">
         @yield('content')
