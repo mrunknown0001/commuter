@@ -459,7 +459,38 @@ class CommuterController extends Controller
         // return to home page of commuter
         return redirect()->route('commuter.active.ride.request')->with('success', 'Ride Request Cancelled!');
 
+    }
 
+
+    // method use to confirm drop off 
+    public function rideDropoffConfirm($id = null)
+    {
+        // get ride id
+        $ride = Ride::findOrFail($id);
+
+        if($ride->drop_off_conrimation == 1) {
+            return redirect()->route('commuter.home')->with('info', 'Ride Confirmed Already!');
+        }
+
+        // return to dashboard
+        return view('commuter.drop-off-confirm', ['ride' => $ride]);
+    }
+
+
+    // method use to accept ride drop off
+    public function postRideDropoffConfirm(Request $request)
+    {
+        $ride_id = $request['ride_id'];
+
+        $ride = Ride::findOrFail($ride_id);
+
+        $ride->drop_off_conrimation = 1;
+        $ride->finished = 1;
+        $ride->save();
+
+        GeneralController::activity_log(Auth::user()->id, null, 'Ride Drop Off Confirmed', now());
+
+        return redirect()->route('commuter.home')->with('success', 'Ride Drop Off Confirmed!');
     }
 
 

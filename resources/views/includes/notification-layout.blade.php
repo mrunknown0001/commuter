@@ -5,7 +5,11 @@
 	<h4><i class="icon fa fa-info"></i> {{ ucwords($u->title) }}</h4>
 	<p>{{ ucwords($u->message) }}</p>
 	<p>Time &amp; Date: {{ date('l, F j, Y g:i:s a', strtotime($u->created_at)) }}</p>
+	@if($u->url == "")
 	<p><a href="{{ route($u->url) }}">Link to view</a></p>
+	@else
+	<p><a href="{{ route($u->url, ['id' => $u->ride_id]) }}">Link to view</a></p>
+	@endif
 </div>
 @endforeach
 @else

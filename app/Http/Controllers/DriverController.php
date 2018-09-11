@@ -405,13 +405,20 @@ class DriverController extends Controller
 
         $ride->drop_off = 1;
         $ride->drop_off_at = now();
-        $ride->finished = 1;
         $ride->save();
+
+        // add to notification for drop off confirmation
+        $notif = new Notification();
+        $notif->to = $ride->commuter_id;
+        $notif->ride_id = $ride->id;
+        $notif->message = 'Drop Off Confirmation';
+        $notif->url = "commuter.ride.dropoff.confirm"; //named
+        $notif->save();
 
         // add activity log here
         GeneralController::activity_log(Auth::user()->id, null, 'Driver drops the passenger. Ride Number: ' . $ride->ride_number, now());
 
-        return redirect()->route('driver.ride.history')->with('success', 'Ride Finished!');  
+        return redirect()->route('driver.ride.history')->with('info', 'Waiting for Commuter Confirmation!');  
     }
 
 

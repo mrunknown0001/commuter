@@ -133,6 +133,12 @@ Route::group(['prefix' => 'c'], function () {
 	// rout to send report
 	Route::post('/ride/report', 'CommuterController@submitReport')->name('commuter.submit.report');
 
+	// route to confirm drop off from driver
+	Route::get('/ride/{id}/dropoff/confirm', 'CommuterController@rideDropoffConfirm')->name('commuter.ride.dropoff.confirm');
+
+	// route to accept confirmation
+	Route::post('/ride/dropoff/confirm', 'CommuterController@postRideDropoffConfirm')->name('commuter.ride.dropoff.confirm.post');
+
 });
 
 
