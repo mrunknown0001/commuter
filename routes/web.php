@@ -430,6 +430,10 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/feedback/{id}/{feedback_number}', 'AdminController@viewFeedbackDetails')->name('admin.view.feedback.details');
 
 
+	// route to view location management
+	Route::get('/locations', 'AdminController@locations')->name('admin.locations');
+
+
 	// route to go to activity log of the admin
 	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');
 });

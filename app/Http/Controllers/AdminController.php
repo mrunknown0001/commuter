@@ -17,6 +17,7 @@ use App\Feedback;
 use App\Report;
 use App\Avatar;
 use App\DriverInfo;
+use App\Location;
 
 class AdminController extends Controller
 {
@@ -910,6 +911,15 @@ class AdminController extends Controller
 
         // return to view
         return view('admin.view-feedback', ['feedback' => $feedback]);
+    }
+
+
+    // method use to view locations
+    public function locations()
+    {
+        $locations = Location::get();
+
+        return view('admin.locations', ['locations' => $locations]);
     }
 
 
