@@ -63,7 +63,7 @@
 				<div class="box-footer">
 
 					<div class="box-tools pull-right">
-						<span class="label label-danger" style="cursor: pointer;"><i class="fa fa-flag"></i> Report Commuter</span>
+						<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#report"><i class="fa fa-flag"></i> Report Commuter</span>
 						<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#id">Cancel</span>
 					</div>
 				</div>
@@ -100,6 +100,34 @@
 			    </div>
 			</div>
 			{{-- End of modal cancel --}}
+
+			{{-- Start of report and cancel of ride if the commuter not appear in the meeting/pickup place --}}
+			<div class="modal fade modal-danger" tabindex="-1" id="report" role="dialog">
+			    <div class="modal-dialog modal-dialog-centered" role="document">
+
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			                <h4 class="modal-title">Report &amp; Cancel Ride</h4>
+			            </div>
+			            <div class="modal-body">
+			   				<p>Are You Sure You Want To Cancel and Report to Admin?</p>
+
+			                
+			            </div>
+			            <div class="modal-footer">
+			            	<form action="{{ route('driver.cancel.report.commuter.post') }}" method="POST">
+			            		{{ csrf_field() }}
+								<input type="hidden" name="ride_id" value="{{ $ride->id }}">
+								<button type="submit" class="btn btn-danger">Report &amp; Cancel Ride</button>
+			            		
+							</form>
+			            </div>
+			        </div>
+
+			    </div>
+			</div>
+			{{-- End of modal --}}
 
 
 		</div>

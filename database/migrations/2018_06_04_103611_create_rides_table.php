@@ -36,6 +36,7 @@ class CreateRidesTable extends Migration
             $table->timestamp('drop_off_at')->nullable();
             $table->tinyInteger('cancelled')->default(0);
             $table->tinyInteger('cancelled_by_commuter')->default(0);
+            $table->tinyInteger('commuter_unappearance')->default(0);
             $table->tinyInteger('finished')->default(0);
             $table->timestamps();
         });

@@ -213,6 +213,10 @@ Route::group(['prefix' => 'd'], function () {
 
 	// route to send report 
 	Route::post('/ride/report', 'DriverController@submitReport')->name('driver.submit.report');
+
+
+	// route to cancel and report the commuter to admin
+	Route::post('/ride/report/commuter/cancel', 'DriverController@postCancelReportCommuter')->name('driver.cancel.report.commuter.post');
 });
 
 

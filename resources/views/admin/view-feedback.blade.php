@@ -33,6 +33,13 @@
           </div>
           <div class="box-body">
             <p>{{ $feedback->comment }}</p>
+            <p>Commuter Rating: 
+              <span class="fa fa-star {{ $feedback->rating >= 1 ? 'checked' : '' }}"></span>
+              <span class="fa fa-star {{ $feedback->rating >= 2 ? 'checked' : '' }}"></span>
+              <span class="fa fa-star {{ $feedback->rating >= 3 ? 'checked' : '' }}"></span>
+              <span class="fa fa-star {{ $feedback->rating >= 4 ? 'checked' : '' }}"></span>
+              <span class="fa fa-star {{ $feedback->rating >= 5 ? 'checked' : '' }}"></span>
+            </p>
           </div>
           <div class="box-footer">
             <small>Feedback Content</small>

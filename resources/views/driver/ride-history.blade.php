@@ -64,6 +64,8 @@
 														@else
 														<span class="label label-danger">Cancelled by You</span>
 														@endif
+													@elseif($ride->commuter_unappearance == 1)
+													<span class="label label-danger">Cancelled by Driver Due to Unappearance of Commuter in Pickup Location</span>
 													@else
 													<span class="label label-success">Finished</span>
 													@endif

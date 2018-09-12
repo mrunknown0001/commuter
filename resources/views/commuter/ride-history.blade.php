@@ -40,9 +40,14 @@
 								<span class="label label-primary" style="cursor: pointer;" data-toggle="modal" data-target="#id-{{ $ride->id }}"><i class="fa fa-eye"></i> View</span>
 								@if($ride->cancelled_by_commuter != 1)
 									@if($ride->cancelled == 0)
+									@if($ride->commuter_unappearance != 1)
 									<a href="javascript:void(0)" class="label label-success" data-toggle="modal" data-target="#feedback-{{ $ride->id }}"><i class="fa fa-comments"></i> Feedback</a>
 									@endif
+									@endif
+								@if($ride->commuter_unappearance != 1)
 								<a href="#" class="label label-danger" data-toggle="modal" data-target="#report-{{ $ride->id }}"><i class="fa fa-flag"></i> Report</a>
+								@endif
+
 								@endif
 								{{-- Add Modal for Additional ride information --}}
 								{{-- start of view modal --}}
@@ -73,6 +78,8 @@
 														@else
 														<span class="label label-danger">Cancelled by Driver</span>
 														@endif
+													@elseif($ride->commuter_unappearance == 1)
+													<span class="label label-danger">Cancelled by Driver Due to your Unappearance in Pickup Location</span>
 													@else
 													<span class="label label-success">Finished</span>
 													@endif

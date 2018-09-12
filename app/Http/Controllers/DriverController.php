@@ -480,4 +480,34 @@ class DriverController extends Controller
         // return message
         return redirect()->route('driver.ride.history')->with('success', 'Report Submitted!');
     }
+
+
+    // method use to report and cancel and report to admin
+    public function postCancelReportCommuter(Request $request)
+    {
+        $ride_id = $request['ride_id'];
+
+        $ride = Ride::findorfail($ride_id);
+
+        // mark ride has no commuter appearance and finished
+        $ride->commuter_unappearance = 1;
+        $ride->finished = 1;
+        $ride->save();
+
+        // add report to admin that the commuter not appeared in pickup location
+        $report_number = GeneralController::generate_report_number();
+
+        $report = new Report();
+        $report->report_number = $report_number;
+        $report->complainant_id = Auth::user()->id;
+        $report->reported_user_id = $ride->commuter_id;
+        $report->ride_id = $ride->id;
+        $report->content = 'The Commuter Not Appeared in Pickup Location';
+        $report->user_type = 2;
+        $report->save();
+
+        GeneralController::activity_log(Auth::user()->id, null, 'Driver cancel ride as commuter not appeared', now());
+
+        return redirect()->route('driver.home')->with('info', 'Commuter Reported to Admin for No Appearance');
+    }
 }
