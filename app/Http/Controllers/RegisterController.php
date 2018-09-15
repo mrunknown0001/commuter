@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
         $identification = $request['identification'];
 
-        $commuter = User::whereIdentification($identification)->first();
+        $commuter = User::where('identification', $identification)->first();
 
         if(count($commuter) < 1) {
             return redirect()->back()->with('error', 'Identification not found!');
