@@ -23,7 +23,7 @@
                             <label for="name" class="col-md-4 control-label">Identification</label>
 
                             <div class="col-md-6">
-                                <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" required autofocus>
+                                <input id="identification" type="text" class="form-control" name="identification" value="" required autofocus>
 
                                 @if ($errors->has('identification'))
                                     <span class="help-block">
