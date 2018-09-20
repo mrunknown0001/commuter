@@ -37,7 +37,7 @@ class RegisterController extends Controller
         //     'identification' => 'required'
         // ]);
 
-        $identification = $request['identification'];
+        return $identification = $request['identification'];
 
         $commuter = User::where('identification', $identification)->first();
 

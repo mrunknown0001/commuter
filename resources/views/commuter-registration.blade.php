@@ -23,7 +23,7 @@
                             <label for="identification" class="col-md-4 control-label">Identification</label>
 
                             <div class="col-md-6">
-                                <input name="identification" id="identification" type="text" class="form-control"  required>
+                                <input type="text" name="identification" id="identification" class="form-control"  required>
 
                                 @if ($errors->has('identification'))
                                     <span class="help-block">
