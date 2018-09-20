@@ -1,77 +1,74 @@
 <?php
-
-Route::get('/', 'LoginController@showWelcome')->name('welcome');
-
-
-Route::get('/logout', 'LoginController@logout')->name('logout');
+Route::group(['middleware' => 'prevent-back-history'], function ()  {
 
 
-// Registration form for commuter only
-Route::get('/registration/commuter', 'RegisterController@commuterRegistration')->name('commuter.registration');
+	Route::get('/', 'LoginController@showWelcome')->name('welcome');
 
-Route::get('/registration/commuter/verification', 'RegisterController@verifyCommuterRegistration')->name('verify.commuter.registration');
+	// Registration form for commuter only
+	Route::get('/registration/commuter', 'RegisterController@commuterRegistration')->name('commuter.registration');
 
-Route::get('/registraton/commuter/verification/code', 'RegisterController@codeVerification')->name('code.verification.registration');
+	Route::get('/registration/commuter/verification', 'RegisterController@verifyCommuterRegistration')->name('verify.commuter.registration');
 
-Route::get('/registration/commuter/check', 'RegisterController@checkCommuterRegistration')->name('check.commuter.registration');
+	Route::get('/registraton/commuter/verification/code', 'RegisterController@codeVerification')->name('code.verification.registration');
 
-// post register for commuter only
-Route::post('/registration/commuter', 'RegisterController@postCommuterRegistration')->name('register.submit');
+	Route::get('/registration/commuter/check', 'RegisterController@checkCommuterRegistration')->name('check.commuter.registration');
 
-
-// // registration for driver
-// Route::get('/registration/driver', 'RegisterController@driverRegistration')->name('driver.registration');
-
-// // post registration for driver
-// Route::post('/registration/driver', 'RegisterController@postDriverRegistration')->name('driver.registration.post');
+	// post register for commuter only
+	Route::post('/registration/commuter', 'RegisterController@postCommuterRegistration')->name('register.submit');
 
 
-// Commuter and Diver Login Page
-Route::get('/login', 'LoginController@showLogin')->name('login');
+	// Commuter and Diver Login Page
+	Route::get('/login', 'LoginController@showLogin')->name('login');
 
 
-// post login for commuter and driver
-Route::post('/login', 'LoginController@postLogin')->name('login.submit');
+	// post login for commuter and driver
+	Route::post('/login', 'LoginController@postLogin')->name('login.submit');
 
 
-// admin login redirect to login page and url
-Route::get('/admin', function () {
-	return redirect()->route('admin.login');
+	// admin login redirect to login page and url
+	Route::get('/admin', function () {
+		return redirect()->route('admin.login');
+	});
+
+	// admin login form
+	Route::get('/admin/login', 'AdminLoginController@showAdminLoginForm')->name('admin.login');
+
+	// post admin login form
+	Route::post('/admin/login', 'AdminLoginController@postAdminLogin')->name('admin.login.submit');
+
+
+	// route to admin(guard registration)
+	Route::get('/admin/registration', 'RegisterController@adminRegistration')->name('admin.registration');
+
+
+	// route to post register guard(admin)
+	Route::post('/admin/registration', 'RegisterController@postAdminRegistration')->name('admin.registration.post');
+
+
+	// route to forgot account
+	Route::get('/forgot/account', 'ForgotAccountController@forgotAccount')->name('forgot.account');
+
+	// route to verifiy details entered/send sms code with the retrieval code 
+	Route::get('/forgot/account/verify', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
+
+	// route to verify sent code
+	Route::get('/forgot/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
+
+	// route to change password of the account
+	Route::post('/forgot/account/change/password', 'ForgotAccountController@postForgotAccountChangePassword')->name('forgot.account.change.password');
+
+
+// end of rotue grooup middlware
 });
-
-// admin login form
-Route::get('/admin/login', 'AdminLoginController@showAdminLoginForm')->name('admin.login');
-
-// post admin login form
-Route::post('/admin/login', 'AdminLoginController@postAdminLogin')->name('admin.login.submit');
-
-
-// route to admin(guard registration)
-Route::get('/admin/registration', 'RegisterController@adminRegistration')->name('admin.registration');
-
-
-// route to post register guard(admin)
-Route::post('/admin/registration', 'RegisterController@postAdminRegistration')->name('admin.registration.post');
-
-
-// route to forgot account
-Route::get('/forgot/account', 'ForgotAccountController@forgotAccount')->name('forgot.account');
-
-// route to verifiy details entered/send sms code with the retrieval code 
-Route::get('/forgot/account/verify', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
-
-// route to verify sent code
-Route::get('/forgot/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
-
-// route to change password of the account
-Route::post('/forgot/account/change/password', 'ForgotAccountController@postForgotAccountChangePassword')->name('forgot.account.change.password');
+	
+Route::get('/logout', 'LoginController@logout')->name('logout');
 
 
 /*
  * Commuter
  * Controller Protected Middleware auth/user, commuter middleware
  */
-Route::group(['prefix' => 'c'], function () {
+Route::group(['prefix' => 'c', 'middleware' => 'prevent-back-history'], function () {
 	// home page of the commuter
 	Route::get('/home', 'CommuterController@home')->name('commuter.home');
 
@@ -146,7 +143,7 @@ Route::group(['prefix' => 'c'], function () {
  * Driver
  * Controller Protected Middleware auth/user, driver middleware
  */
-Route::group(['prefix' => 'd'], function () {
+Route::group(['prefix' => 'd', 'middleware' => 'prevent-back-history'], function () {
 	// home page of the drivers
 	Route::get('/home', 'DriverController@home')->name('driver.home');
 
@@ -224,7 +221,7 @@ Route::group(['prefix' => 'd'], function () {
  * Admin
  * Controller Protected Middleware admin guard
  */
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], function () {
 	/////////////////////////////
 	// super admin route group //
 	////////////////////////////

@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'driver' => \App\Http\Middleware\CheckDriver::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'super.admin' => \App\Http\Middleware\CheckSuperAdmin::class,
+        'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
     ];
 }
