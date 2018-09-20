@@ -36,7 +36,6 @@ class RegisterController extends Controller
         // $request->validate([
         //     'identification' => 'required'
         // ]);
-        return $request->identification;
 
         $identification = $request['identification'];
 
