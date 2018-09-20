@@ -17,7 +17,7 @@
     </section>
         <!-- Main content -->
     <section class="content">
-
+    @include('includes.all')
     <div class="row">
         <div class="col-md-12">
           @if(count($admins) > 0)

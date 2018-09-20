@@ -17,6 +17,9 @@
     </section>
         <!-- Main content -->
     <section class="content">
+      <p>
+        <a href="{{ route('admin.view.all.admin') }}" class="btn btn-success"> Back to Admins</a>
+      </p>
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-md-12">
@@ -53,7 +56,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Admin Details</button>
+                  <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Save Admin Details</button>
                 </div>
               </div>
             </div>

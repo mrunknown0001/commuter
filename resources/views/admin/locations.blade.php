@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-md-12">
           <p>
-            <a href="#" class="btn btn-primary">Add Location</a>
+            <a href="{{ route('admin.add.location') }}" class="btn btn-primary">Add Location</a>
           </p>
           @include('includes.all')
         </div>

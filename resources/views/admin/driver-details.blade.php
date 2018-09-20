@@ -22,6 +22,9 @@
     <div class="row">
         <div class="col-md-12">
           <p><a href="{{ url()->previous() }}" class="">Back</a></p>
+          <div class="img-thumbnail">
+            <img src="{{ asset('uploads/images/'. $driver->avatar->avatar) }}" class="img-circle" alt="User Image" width="250" height="250">
+          </div>
           <p>
             @if($driver->active == 1)
             <span class="badge bg-green">Active</span>

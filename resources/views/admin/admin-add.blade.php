@@ -40,19 +40,30 @@
             </div>
             <div class="row">
               <div class="col-md-4">
-                <label>Username</label>
-                <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">                  
+                </div>
+
               </div>
               <div class="col-md-4">
-                <label>Mobile Number</label>
-                <input type="text" name="mobile_number" id="mobile_number" class="form-control" placeholder="Enter Mobile Number">
+                <div class="form-group">
+                  <label>Mobile Number</label>
+                  <input type="text" name="mobile_number" id="mobile_number" class="form-control" placeholder="Enter Mobile Number">
+                </div>
               </div>
             </div>
-            <p></p>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Admin</button>
+                  <input type="file" name="image" id="image" accept="image/x-png,image/gif,image/jpeg" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Admin</button>
                 </div>
               </div>
             </div>

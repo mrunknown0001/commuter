@@ -434,6 +434,13 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/locations', 'AdminController@locations')->name('admin.locations');
 
 
+	// route to add location
+	Route::get('/location/add', 'AdminController@addLocation')->name('admin.add.location');
+
+	// route to save location
+	Route::post('/location/add', 'AdminController@postAddLocation')->name('admin.add.location.post');
+
+
 	// route to go to activity log of the admin
 	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');
 });

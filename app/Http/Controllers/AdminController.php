@@ -105,10 +105,20 @@ class AdminController extends Controller
         $admin->password = bcrypt('password');
         $admin->save();
 
-        // admin avatar
+        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+
+        /*
+        talk the select file and move it public directory and make avatars
+        folder if doesn't exsit then give it that unique name.
+        */
+        $request->image->move(public_path('uploads/images'), $photoname);
+
+        // save photoname to database
         $avatar = new Avatar();
         $avatar->admin_id = $admin->id;
+        $avatar->avatar = $photoname;
         $avatar->save();
+
 
         // activity log
         GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added new Admin Guard', now());
@@ -377,10 +387,22 @@ class AdminController extends Controller
         $driver->registered = 1;
         $driver->save();
 
-        // driver avatar
+
+
+        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+
+        /*
+        talk the select file and move it public directory and make avatars
+        folder if doesn't exsit then give it that unique name.
+        */
+        $request->image->move(public_path('uploads/images'), $photoname);
+
+        // save photoname to database
         $avatar = new Avatar();
         $avatar->user_id = $driver->id;
+        $avatar->avatar = $photoname;
         $avatar->save();
+
 
         // add in driver_infos table
         $info = new DriverInfo();
@@ -917,9 +939,41 @@ class AdminController extends Controller
     // method use to view locations
     public function locations()
     {
-        $locations = Location::get();
+        $locations = Location::orderBy('name', 'asc')->get();
 
         return view('admin.locations', ['locations' => $locations]);
+    }
+
+
+    // method use to add location
+    public function addLocation()
+    {
+        return view('admin.location-add');
+    }
+
+
+    // method use to save location
+    public function postAddLocation(Request $request)
+    {
+        $request->validate([
+            'location' => 'required|unique:locations,name'
+        ]);
+
+        $loc = $request['location'];
+
+        // save new location
+        $location = new Location();
+        $location->name = $loc;
+        $location->save();
+
+
+        // save to activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added Location', now());
+
+
+        // set return response
+        return redirect()->back()->with('success', 'Location Added');
+
     }
 
 

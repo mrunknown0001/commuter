@@ -83,7 +83,14 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Driver</button>
+                  <input type="file" name="image" id="image" accept="image/x-png,image/gif,image/jpeg" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Driver</button>
                 </div>
               </div>
             </div>
