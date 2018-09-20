@@ -977,6 +977,41 @@ class AdminController extends Controller
     }
 
 
+    // method use to update location
+    public function updateLocation($id = null)
+    {
+        $location = Location::findorfail($id);
+
+        return view('admin.location-update', ['location' => $location]);
+    }
+
+
+    // method use to save update on location
+    public function postUpdateLocation(Request $request)
+    {
+        $loc_id = $request['location_id'];
+        $location = $request['location'];
+
+        $loc_check = Location::where('name', $location)->first();
+
+        $loc = Location::findorfail($loc_id);
+
+        // additional check here
+        if(count($loc_check) > 0 && $loc_check->id != $loc->id) {
+            return redirect()->back()->with('error', 'Location Name Already in the System');
+        }
+
+        $loc->name = $location;
+        $loc->save();
+
+        // add to activity log
+        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Updated Location', now());
+
+        // return response
+        return redirect()->route('admin.locations')->with('success', 'Location Updated!');
+    }
+
+
     // admin activity log
     public function activityLog()
     {

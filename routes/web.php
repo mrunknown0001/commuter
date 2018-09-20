@@ -441,6 +441,18 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/location/add', 'AdminController@postAddLocation')->name('admin.add.location.post');
 
 
+	// route to update location
+	Route::get('/location/{id}/update', 'AdminController@updateLocation')->name('admin.update.location');
+
+
+	// route to save update location
+	Route::post('/location/upadte', 'AdminController@postUpdateLocation')->name('admin.update.location.post');
+
+	Route::get('/location/upadte', function () {
+		return abort(404);
+	});
+
+
 	// route to go to activity log of the admin
 	Route::get('/activity-log', 'AdminController@activityLog')->name('admin.activity.log');
 });

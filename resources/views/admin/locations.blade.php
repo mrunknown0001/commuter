@@ -39,7 +39,7 @@
               <tr>
                 <td class="text-center">{{ ucwords($l->name) }}</td>
                 <th class="text-center">
-                  <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                  <a href="{{ route('admin.update.location', ['id' => $l->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </th>
               </tr>
               @endforeach
