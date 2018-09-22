@@ -34,13 +34,11 @@ class RegisterController extends Controller
     public function checkCommuterRegistration(Request $request)
     {
 
-        return $request;
-
         $request->validate([
             'id' => 'required'
         ]);
 
-        return $identification = $request['id'];
+        $identification = $request['id'];
 
         $commuter = User::where('identification', $identification)->first();
 
