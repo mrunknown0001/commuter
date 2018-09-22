@@ -34,6 +34,8 @@ class RegisterController extends Controller
     public function checkCommuterRegistration(Request $request)
     {
 
+        return $request;
+
         $request->validate([
             'id' => 'required'
         ]);
