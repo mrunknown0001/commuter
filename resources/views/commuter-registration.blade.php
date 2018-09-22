@@ -17,6 +17,7 @@
                 <div class="panel-body">
                     
                     <form class="form-horizontal" method="get" action="{{ route('check.commuter.registration') }}" autocomplete="off">
+                        {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                             <label for="id" class="col-md-4 control-label">Identification</label>
 
