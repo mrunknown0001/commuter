@@ -17,15 +17,15 @@
                 <div class="panel-body">
                     
                     <form class="form-horizontal" method="get" action="{{ route('check.commuter.registration') }}" autocomplete="off">
-                        <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                            <label for="identification" class="col-md-4 control-label">Identification</label>
+                        <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                            <label for="id" class="col-md-4 control-label">Identification</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="identification" id="identification" class="form-control"  required>
+                                <input type="text" name="id" id="id" class="form-control"  required>
 
-                                @if ($errors->has('identification'))
+                                @if ($errors->has('id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('identification') }}</strong>
+                                        <strong>{{ $errors->first('id') }}</strong>
                                     </span>
                                 @endif
                             </div>

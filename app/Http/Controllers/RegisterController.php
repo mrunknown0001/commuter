@@ -35,10 +35,10 @@ class RegisterController extends Controller
     {
 
         $request->validate([
-            'identification' => 'required'
+            'id' => 'required'
         ]);
 
-        return $identification = $request['identification'];
+        return $identification = $request['id'];
 
         $commuter = User::where('identification', $identification)->first();
 
