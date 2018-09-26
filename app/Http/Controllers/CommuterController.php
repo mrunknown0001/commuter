@@ -593,4 +593,25 @@ class CommuterController extends Controller
         return view('commuter.ride-history', ['rides' => $rides]);
     }
 
+
+
+
+    // method use to load modal for drop off confirmation
+    public function rideDropoffPrompt()
+    {
+        $ride = Ride::where('commuter_id', Auth::user()->id)
+                        ->where('finished', 0)
+                        ->where('current', 1)
+                        ->first();
+
+        if(count($ride) < 1) {
+            return null;
+        }
+
+        if(strtotime($ride->current_at) < strtotime(now()) + 600) {
+            return view('includes.modal-ride-drop-off-prompt', ['ride' => $ride]);
+        }
+
+    }
+
 }

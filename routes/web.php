@@ -106,6 +106,9 @@ Route::group(['prefix' => 'c', 'middleware' => 'prevent-back-history'], function
 	// route to request ride for commuter
 	Route::get('/ride/request', 'CommuterController@requestRide')->name('commuter.request.ride');
 
+	// route to load modal for 
+	Route::get('/ride/dropoff/prompt', 'CommuterController@rideDropoffPrompt')->name('commuter.dropoff.prompt');
+
 
 
 	// route to submit ride request

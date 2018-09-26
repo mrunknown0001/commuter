@@ -28,6 +28,7 @@
         @yield('content')
         
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <div id="drop-off-prompt"></div>
         @if(Auth::check())
         <script>
             setInterval(function () {
@@ -39,7 +40,13 @@
                 $('#ride-request').load("{{ route('driver.ride.request.new') }}");
             }, 3000);
 
-            
+            setInterval(function () {
+                // load modal if current time is 10mins later, controlled in controller
+                $('#drop-off-prompt').load("{{ route('commuter.dropoff.prompt') }}");
+
+                // $("#dropOffPrompt").modal("show");
+            }, 5000);
+
         </script>
         @endif
     </body>
