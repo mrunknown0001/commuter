@@ -15,7 +15,7 @@ class SmsController extends Controller
         $parameters = array(
             'apikey' => '8f934d4c8d91337dc98445e52faf85ab', //Your API KEY
             'number' =>  $number,
-            'message' => $message,
+            'message' => 'CampusGrabber ' . $message,
             'sendername' => 'CLLRTrading' // sender name
         );
         curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
