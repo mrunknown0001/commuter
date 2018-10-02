@@ -41,10 +41,12 @@
             }, 3000);
 
             setInterval(function () {
+                var status = 0;
                 // load modal if current time is 10mins later, controlled in controller
                 $('#drop-off-prompt').load("{{ route('commuter.dropoff.prompt') }}");
 
-                // $("#dropOffPrompt").modal("show");
+
+                $("#dropOffPrompt").modal("show");
             }, 5000);
 
         </script>

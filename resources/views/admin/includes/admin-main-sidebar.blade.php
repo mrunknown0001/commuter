@@ -26,6 +26,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.add.admin') }}"><i class="fa fa-circle-o"></i> Register Admin</a></li>
+            <li><a href="{{ route('admin.import.admins') }}"><i class="fa fa-circle-o"></i> Import Admins</a></li>
             <li><a href="{{ route('admin.view.all.admin') }}"><i class="fa fa-circle-o"></i> View All Admins</a></li>
             {{--<li><a href="{{ route('admin.view.admin.id') }}"><i class="fa fa-circle-o"></i> View all Admin IDs</a></li>--}}
             <li><a href="{{ route('admin.view.admin.logs') }}"><i class="fa fa-circle-o"></i> View All Admin Logs</a></li>
@@ -44,6 +45,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.add.driver') }}"><i class="fa fa-circle-o"></i> Driver Registration</a></li>
+            <li><a href="{{ route('admin.import.driver') }}"><i class="fa fa-circle-o"></i> Import Drivers</a></li>
             <li><a href="{{ route('admin.view.all.driver') }}"><i class="fa fa-circle-o"></i> View All Drivers</a></li>
           </ul>
         </li>
@@ -57,6 +59,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.add.commuter') }}"><i class="fa fa-circle-o"></i> Add Student Commuter</a></li>
+            <li><a href="{{ route('admin.import.student.commuter') }}"><i class="fa fa-circle-o"></i> Import Student Commuters</a></li>
             <li><a href="{{ route('admin.view.all.commuters') }}"><i class="fa fa-circle-o"></i> View All Commuters</a></li>
           </ul>
         </li>

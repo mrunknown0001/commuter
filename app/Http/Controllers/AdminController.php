@@ -129,6 +129,13 @@ class AdminController extends Controller
     }
 
 
+    // method use to import admins
+    public function importAdmins()
+    {
+        return 'view for import of admins';
+    }
+
+
     // method use to update admin
     public function updateAdmin($id = null)
     {
@@ -422,6 +429,13 @@ class AdminController extends Controller
     }
 
 
+    // method use to import driver
+    public function importDriver()
+    {
+        return 'view for the import in driver';
+    }
+
+
     // method use to update driver info
     public function updateDriver($id = null)
     {
@@ -582,6 +596,13 @@ class AdminController extends Controller
         GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added New Commuter');
 
         return redirect()->back()->with('success', 'Success! Commuter Added!');
+    }
+
+
+    // method use to import stduent commuter 
+    public function importStudentCommuter()
+    {
+        return 'view for the importt of the student commuter';
     }
 
 

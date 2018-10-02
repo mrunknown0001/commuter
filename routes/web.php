@@ -247,6 +247,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 		// route to save new admin
 		Route::post('/admin/add', 'AdminController@postAddAdmin')->name('admin.add.admin.post');
 
+		// route to import admins
+		Route::get('/admin/import', 'AdminController@importAdmins')->name('admin.import.admins');
+
 		// route to update admin (guard) detail
 		Route::get('/admin/{id}/update', 'AdminController@updateAdmin')->name('admin.update.admin');
 
@@ -304,6 +307,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// route to save new driver
 	Route::post('/driver/add', 'AdminController@postAddDriver')->name('admin.add.driver.post');
 
+	// route to import driver 
+	Route::get('/driver/import', 'AdminController@importDriver')->name('admin.import.driver');
+
 	// route to update driver
 	Route::get('/driver/{id}/update', 'AdminController@updateDriver')->name('admin.update.driver');
 
@@ -335,6 +341,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 
 	// route to save student record for verification purposes
 	Route::post('/commuter/add', 'AdminController@postAddCommuter')->name('admin.add.commuter.post');
+
+	// route to import student commuters
+	Route::get('/commuter/import', 'AdminController@importStudentCommuter')->name('admin.import.student.commuter');
 
 	// route to update commuter detail
 	Route::get('/commuter/{id}/update', 'AdminController@upateCommuter')->name('admin.update.commuter');
