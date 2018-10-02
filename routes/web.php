@@ -431,22 +431,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 
 
 	// route to view location management
-	Route::get('/locations', 'AdminController@locations')->name('admin.locations');
+	// Route::get('/locations', 'AdminController@locations')->name('admin.locations');
 
 
 	// route to add location
-	Route::get('/location/add', 'AdminController@addLocation')->name('admin.add.location');
+	// Route::get('/location/add', 'AdminController@addLocation')->name('admin.add.location');
 
 	// route to save location
-	Route::post('/location/add', 'AdminController@postAddLocation')->name('admin.add.location.post');
+	// Route::post('/location/add', 'AdminController@postAddLocation')->name('admin.add.location.post');
 
 
 	// route to update location
-	Route::get('/location/{id}/update', 'AdminController@updateLocation')->name('admin.update.location');
+	// Route::get('/location/{id}/update', 'AdminController@updateLocation')->name('admin.update.location');
 
 
 	// route to save update location
-	Route::post('/location/upadte', 'AdminController@postUpdateLocation')->name('admin.update.location.post');
+	// Route::post('/location/upadte', 'AdminController@postUpdateLocation')->name('admin.update.location.post');
 
 	Route::get('/location/upadte', function () {
 		return abort(404);

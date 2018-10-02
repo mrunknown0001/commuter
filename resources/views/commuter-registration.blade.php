@@ -19,10 +19,10 @@
                     <form class="form-horizontal" method="get" action="{{ route('check.commuter.registration') }}" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
-                            <label for="id" class="col-md-4 control-label">Identification</label>
+                            <label for="id" class="col-md-4 control-label">Student Number</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="id" id="id" class="form-control"  required>
+                                <input type="text" name="id" id="id" class="form-control" placeholder="Enter Student Number" required>
 
                                 @if ($errors->has('id'))
                                     <span class="help-block">

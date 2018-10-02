@@ -95,11 +95,11 @@
           </a>
         </li>
 
-        <li class="{{ route('admin.locations') == url()->current() ? 'active' : '' }}">
+        {{--<li class="{{ route('admin.locations') == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.locations') }}">
             <i class="fa fa-map-marker"></i> <span>Locations</span>
           </a>
-        </li>
+        </li>--}}
 
         <li class="{{ route('admin.activity.log') == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.activity.log') }}">

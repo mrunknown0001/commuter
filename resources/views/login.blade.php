@@ -19,10 +19,10 @@
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                        <label for="identification" class="col-md-3 control-label">ID/Username</label>
+                        <label for="identification" class="col-md-3 control-label">Student Number/Username</label>
 
                         <div class="col-md-9">
-                            <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" id="identification" placeholder="Enter ID/Username" required autofocus>
+                            <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" id="identification" placeholder="Enter Student Number/Username" required autofocus>
 
                             @if ($errors->has('identification'))
                                 <span class="help-block">
