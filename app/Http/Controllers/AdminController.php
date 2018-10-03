@@ -602,7 +602,7 @@ class AdminController extends Controller
     // method use to import stduent commuter 
     public function importStudentCommuter()
     {
-        return 'view for the importt of the student commuter';
+        return view('admin.commuter-import-record');
     }
 
 
