@@ -310,6 +310,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// route to import driver 
 	Route::get('/driver/import', 'AdminController@importDriver')->name('admin.import.driver');
 
+	// route to save import driver
+	Route::post('/driver/import', 'AdminController@postImportDriver')->name('admin.import.driver.post');
+
 	// route to update driver
 	Route::get('/driver/{id}/update', 'AdminController@updateDriver')->name('admin.update.driver');
 
@@ -344,6 +347,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 
 	// route to import student commuters
 	Route::get('/commuter/import', 'AdminController@importStudentCommuter')->name('admin.import.student.commuter');
+
+	// route to save import student commuters
+	Route::post('/commuter/import', 'AdminController@postImportStudentCommuter')->name('admin.import.student.commuter.post');
 
 	// route to update commuter detail
 	Route::get('/commuter/{id}/update', 'AdminController@upateCommuter')->name('admin.update.commuter');

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Cache;
+use Excel;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\UploadedFile;
+use DB;
 
 use App\Http\Controllers\GeneralController;
 
@@ -432,7 +436,93 @@ class AdminController extends Controller
     // method use to import driver
     public function importDriver()
     {
-        return 'view for the import in driver';
+        return view('admin.driver-import-record');
+    }
+
+
+    // method use to save import driver
+    public function postImportDriver(Request $request)
+    {
+        if(Input::hasFile('drivers')){
+            $path = Input::file('drivers')->getRealPath();
+            $data[] = Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+                    // $reader->get();
+                    // $reader->skipColumns(1);
+                })->get();
+        }
+        else {
+            return redirect()->back()->with('error', 'Error! Please Try Again! No file found!');
+        }
+
+        $drivers = [];
+        $info = [];
+
+        $last_driver = DriverInfo::orderBy('id', 'desc')->first(['id']);
+        if(count($last_driver) > 0) {
+            $ref_id = $last_driver->id + 1;
+        }
+        else {
+            $ref_id = 1;
+        }
+
+        foreach ($data as $value) {
+            
+            foreach ($value as $row) {
+                if($row->username != null) {
+
+                    // check each student number if it is already in database
+                    $check_username = User::where('identification', $row->username)->first();
+
+                    if(!$row->username) {
+                        return redirect()->back()->with('error', 'Error Occurred! Please Use Excel for Importing Commuter');
+                    }
+
+
+                    if(!empty($check_username)) {
+                        return redirect()->back()->with('error', 'Driver Exist! Please Remove Driver with Username: ' . $row->username . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
+                    }
+                    else {
+                        // for users table
+                        $drivers[] = [
+                                'identification' => $row->username,
+                                'last_name' => $row->lastname,
+                                'first_name' => $row->firstname,
+                                'user_type' => 2,
+                                'identification' => $row->username,
+                                'mobile_number' => $row->mobile_number
+                            ];
+
+                        $info[] = [
+                            'driver_id' => $ref_id,
+                            'body_number' => $row->body_number,
+                            'plate_number' => $row->plate_number,
+                            'license' => $row->license_number,
+                            'operator_name' => $row->operator
+                        ];
+                    }
+
+
+                }
+
+                $ref_id += 1;
+            }
+            
+        }
+
+        // insert in users and student_infos tables
+        if(!empty($drivers)) {
+            // insert data to users
+            DB::table('users')->insert($drivers);
+
+            DB::table('driver_infos')->insert($info);
+
+            GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Imported Drivers');
+
+            return redirect()->route('admin.view.all.driver')->with('success', 'Imported Drivers');
+        }
+
+
+        return redirect()->back()->with('error', 'Error Occurred! Please Try Again Later!');
     }
 
 
@@ -603,6 +693,73 @@ class AdminController extends Controller
     public function importStudentCommuter()
     {
         return view('admin.commuter-import-record');
+    }
+
+
+    // method use to save imported student commuter
+    public function postImportStudentCommuter(Request $request)
+    {
+
+        if(Input::hasFile('commuters')){
+            $path = Input::file('commuters')->getRealPath();
+            $data[] = Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+                    // $reader->get();
+                    // $reader->skipColumns(1);
+                })->get();
+        }
+        else {
+            return redirect()->back()->with('error', 'Error! Please Try Again! No file found!');
+        }
+
+        $commuters = [];
+
+        foreach ($data as $value) {
+            
+            foreach ($value as $row) {
+                if($row->student_number != null) {
+
+                    // check each student number if it is already in database
+                    $check_student_number = User::where('identification', $row->student_number)->first();
+
+                    if(!$row->student_number) {
+                        return redirect()->back()->with('error', 'Error Occurred! Please Use Excel for Importing Commuter');
+                    }
+
+
+                    if(!empty($check_student_number)) {
+                        return redirect()->back()->with('error', 'Student Exist! Please Remove Student with Student Number: ' . $row->student_number . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
+                    }
+                    else {
+                        // for users table
+                        $commuters[] = [
+                                'identification' => $row->student_number,
+                                'last_name' => $row->lastname,
+                                'first_name' => $row->firstname
+                            ];
+                    }
+
+
+                }
+
+            }
+            
+        }
+
+
+        // insert in users and student_infos tables
+        if(!empty($commuters)) {
+            // insert data to users
+            DB::table('users')->insert($commuters);
+
+            GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Imported Student Commuter');
+
+            return redirect()->route('admin.view.all.commuters')->with('success', 'Imported Commuter');
+        }
+
+
+        return redirect()->back()->with('error', 'Error Occurred! Please Try Again Later!');
+
+
     }
 
 

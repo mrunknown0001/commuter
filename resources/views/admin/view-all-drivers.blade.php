@@ -20,6 +20,7 @@
 
       <div class="row">
         <div class="col-md-12">
+          @include('includes.all')
 
           @if(count($drivers) > 0)
 

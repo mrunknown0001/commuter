@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title') Commuter Record @endsection
+@section('title') Driver Record @endsection
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Import Commuter Records
+        Import Driver Records
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-users"></i> Home</a></li>
-        <li class="active">Commuter Record</li>
+        <li class="active">Driver Record</li>
       </ol>
     </section>
         <!-- Main content -->
@@ -21,11 +21,11 @@
     <div class="row">
       <div class="col-md-6">
         @include('includes.all')
-        <form action="{{ route('admin.import.student.commuter.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        <form action="{{ route('admin.import.driver.post') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
           {{ csrf_field() }}
           <div class="form-group">
-            <label>Upload Commuter</label>
-            <input type="file" name="commuters" id="commuters" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <label>Upload Driver</label>
+            <input type="file" name="drivers" id="drivers" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Records</button>

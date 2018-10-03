@@ -36,7 +36,7 @@
         {{-- end of all super admin menu --}}
 
         
-        <li class="treeview {{ route('admin.view.all.driver') == url()->current() || route('admin.add.driver') == url()->current()  ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.driver') == url()->current() || route('admin.add.driver') == url()->current() || route('admin.import.driver') == url()->current()  ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Drivers</span>
             <span class="pull-right-container">
@@ -50,7 +50,7 @@
           </ul>
         </li>
 
-        <li class="treeview {{ route('admin.view.all.commuters') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.commuters') == url()->current() || route('admin.import.student.commuter') == url()->current() || route('admin.add.commuter') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Commuters</span>
             <span class="pull-right-container">
