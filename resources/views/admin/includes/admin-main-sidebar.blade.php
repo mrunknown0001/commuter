@@ -17,7 +17,7 @@
 
         {{-- All Super Admin Menu will go there --}}
         @if(Auth::guard('admin')->user()->role == 1)
-        <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.logs') == url()->current() || route('admin.add.admin') == url()->current() ? 'active' : '' }}">
+        <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.logs') == url()->current() || route('admin.add.admin') == url()->current() || route('admin.import.admins') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Admins</span>
             <span class="pull-right-container">

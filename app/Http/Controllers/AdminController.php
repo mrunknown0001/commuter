@@ -136,7 +136,74 @@ class AdminController extends Controller
     // method use to import admins
     public function importAdmins()
     {
-        return 'view for import of admins';
+        return view('admin.admin-import-record');
+    }
+
+
+    // method use to save import admins
+    public function postImportAdmins(Request $request)
+    {
+        if(Input::hasFile('admins')){
+            $path = Input::file('admins')->getRealPath();
+            $data[] = Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+                    // $reader->get();
+                    // $reader->skipColumns(1);
+                })->get();
+        }
+        else {
+            return redirect()->back()->with('error', 'Error! Please Try Again! No file found!');
+        }
+
+
+        $admins = [];
+
+        foreach ($data as $value) {
+            
+            foreach ($value as $row) {
+                if($row->username != null) {
+
+                    // check each student number if it is already in database
+                    $check_username = Admin::where('identification', $row->username)->first();
+
+                    if(!$row->username) {
+                        return redirect()->back()->with('error', 'Error Occurred! Please Use Excel for Importing Commuter');
+                    }
+
+
+                    if(!empty($check_username)) {
+                        return redirect()->back()->with('error', 'Admin Exist! Please Remove Admin with Username: ' . $row->username . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
+                    }
+                    else {
+                        // for users table
+                        $admins[] = [
+                                'identification' => $row->username,
+                                'last_name' => $row->lastname,
+                                'first_name' => $row->firstname,
+                                'role' => 2,
+                                'mobile_number' => $row->mobile_number,
+                                'password' => bcrypt('password')
+                            ];
+
+                    }
+
+                }
+            }
+            
+        }
+
+        // insert in users and student_infos tables
+        if(!empty($admins)) {
+            // insert data to users
+            DB::table('admins')->insert($admins);
+
+            GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Super Admin Imported Admins');
+
+            return redirect()->route('admin.view.all.driver')->with('success', 'Imported Admins');
+        }
+
+
+        return redirect()->route('admin.view.all.admin')->with('error', 'Error Occurred! Please Try Again Later!');
+
     }
 
 
@@ -488,8 +555,8 @@ class AdminController extends Controller
                                 'last_name' => $row->lastname,
                                 'first_name' => $row->firstname,
                                 'user_type' => 2,
-                                'identification' => $row->username,
-                                'mobile_number' => $row->mobile_number
+                                'mobile_number' => $row->mobile_number,
+                                'password' => bcrypt('password')
                             ];
 
                         $info[] = [

@@ -250,6 +250,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 		// route to import admins
 		Route::get('/admin/import', 'AdminController@importAdmins')->name('admin.import.admins');
 
+		// route to save import admins
+		Route::post('/admin/import', 'AdminController@postImportAdmins')->name('admin.import.admins.post');
+
 		// route to update admin (guard) detail
 		Route::get('/admin/{id}/update', 'AdminController@updateAdmin')->name('admin.update.admin');
 
