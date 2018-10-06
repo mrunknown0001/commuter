@@ -203,7 +203,7 @@ class AdminController extends Controller
 
             GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Super Admin Imported Admins');
 
-            return redirect()->route('admin.view.all.driver')->with('success', 'Imported Admins');
+            return redirect()->route('admin.view.all.admin')->with('success', 'Imported Admins');
         }
 
 
