@@ -56,7 +56,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <input type="file" name="image" id="image" accept="image/x-png,image/gif,image/jpeg" required>
+                  <input type="file" name="image" id="image" accept="image/x-png,image/gif,image/jpeg" >
                 </div>
               </div>
             </div>

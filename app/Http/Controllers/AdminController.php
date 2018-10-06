@@ -109,13 +109,18 @@ class AdminController extends Controller
         $admin->password = bcrypt('password');
         $admin->save();
 
-        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+        $photoname = null;
 
-        /*
-        talk the select file and move it public directory and make avatars
-        folder if doesn't exsit then give it that unique name.
-        */
-        $request->image->move(public_path('uploads/images'), $photoname);
+        if($request->image) {
+
+            $photoname = time().'.'.$request->image->getClientOriginalExtension();
+            /*
+            talk the select file and move it public directory and make avatars
+            folder if doesn't exsit then give it that unique name.
+            */
+            $request->image->move(public_path('uploads/images'), $photoname);
+
+        }
 
         // save photoname to database
         $avatar = new Avatar();
@@ -465,15 +470,18 @@ class AdminController extends Controller
         $driver->registered = 1;
         $driver->save();
 
+        $photoname = null;
 
+        if($request->image) {
 
-        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+            $photoname = time().'.'.$request->image->getClientOriginalExtension();
+            /*
+            talk the select file and move it public directory and make avatars
+            folder if doesn't exsit then give it that unique name.
+            */
+            $request->image->move(public_path('uploads/images'), $photoname);
 
-        /*
-        talk the select file and move it public directory and make avatars
-        folder if doesn't exsit then give it that unique name.
-        */
-        $request->image->move(public_path('uploads/images'), $photoname);
+        }
 
         // save photoname to database
         $avatar = new Avatar();
