@@ -37,7 +37,7 @@
             <input type="text"  name="identification" value="{{ $commuter->identification }}" class="form-control" placeholder="Enter Student Number/Identification" required>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Record</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Update Record</button>
           </div>
         </form>
       </div>

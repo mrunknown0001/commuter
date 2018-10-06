@@ -36,7 +36,7 @@
             <input type="text"  name="identification" class="form-control" placeholder="Enter Student Number/Identification" required>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Record</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Record</button>
           </div>
         </form>
       </div>

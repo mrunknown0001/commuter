@@ -43,7 +43,7 @@
                   {{ $commuter->identification }}
                 </td>
                 <td>
-                  <a href="{{ route('admin.update.commuter', ['id' => $commuter->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                  <a href="{{ route('admin.update.commuter', ['id' => $commuter->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Update</a>
                 </td>
               </tr>
               @endforeach

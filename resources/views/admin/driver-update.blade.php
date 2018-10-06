@@ -84,7 +84,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Driver Info</button>
+                  <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Save Driver Info</button>
                 </div>
               </div>
             </div>
