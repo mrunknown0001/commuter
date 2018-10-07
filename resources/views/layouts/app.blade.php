@@ -48,7 +48,7 @@
 
                 // check if there is current ride
                 // ask if already drop off
-            }, 5000);
+            }, 600000);
 
         </script>
         @endif
