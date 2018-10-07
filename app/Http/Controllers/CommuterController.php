@@ -629,6 +629,9 @@ class CommuterController extends Controller
             ->where('finished', 0)
             ->first();
 
+        $notifs = DB::table('notifications')->where('ride_id', $ride->id)
+                        ->update(['viewed' => 1]);
+
         if(count($ride) > 0) {
             // redirect to yes or no pick up confrimation
             return view('commuter.ride-pickup-confirm', ['ride' => $ride]);
