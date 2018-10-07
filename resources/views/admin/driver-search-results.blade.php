@@ -35,7 +35,7 @@
               @foreach($drivers as $driver)
               <tr>
                 <td>
-                  <a href="{{ route('driver.view.driver.details', ['id' => $driver->id]) }}">{{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}</a>
+                  <a href="{{ route('admin.view.driver.details', ['id' => $driver->id]) }}">{{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}</a>
                 </td>
                 <td>
                   {{ $driver->identification }}
