@@ -41,12 +41,13 @@
             }, 3000);
 
             setInterval(function () {
-                var status = 0;
-                // load modal if current time is 10mins later, controlled in controller
-                $('#drop-off-prompt').load("{{ route('commuter.dropoff.prompt') }}");
+                // check if there is accepted ride request for the current user
+                // and create notification for pickup confirmation
+                $.get("{{ route('commuter.create.pickup.notification') }}");
 
 
-                $("#dropOffPrompt").modal("show");
+                // check if there is current ride
+                // ask if already drop off
             }, 5000);
 
         </script>

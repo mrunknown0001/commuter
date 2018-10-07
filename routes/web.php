@@ -133,11 +133,25 @@ Route::group(['prefix' => 'c', 'middleware' => 'prevent-back-history'], function
 	// rout to send report
 	Route::post('/ride/report', 'CommuterController@submitReport')->name('commuter.submit.report');
 
+
+	// route to ask commuter if the driver already pick them up
+	Route::get('/ride/pickup/confirm', 'CommuterController@ridePickupConfirm')->name('commuter.ride.pickup.confirm');
+
+	// route to confirm pickup
+	Route::post('/ride/pickup/confirm', 'CommuterController@postRidePickupConfirm')->name('commuter.ride.pick.confirm.post');
+
 	// route to confirm drop off from driver
-	Route::get('/ride/{id}/dropoff/confirm', 'CommuterController@rideDropoffConfirm')->name('commuter.ride.dropoff.confirm');
+	Route::get('/ride/dropoff/confirm', 'CommuterController@rideDropoffConfirm')->name('commuter.ride.dropoff.confirm');
 
 	// route to accept confirmation
 	Route::post('/ride/dropoff/confirm', 'CommuterController@postRideDropoffConfirm')->name('commuter.ride.dropoff.confirm.post');
+
+
+	// route to create notification for current/pickup ride
+	Route::get('/ride/pickup/notification/create', 'GeneralController@createPickupNotification')->name('commuter.create.pickup.notification');
+
+	// route to create notification for drop off ride
+	
 
 });
 

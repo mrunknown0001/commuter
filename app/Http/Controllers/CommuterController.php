@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Cache;
+use DB;
 
 use App\Http\Controllers\GeneralController;
 
@@ -600,8 +601,9 @@ class CommuterController extends Controller
     public function rideDropoffPrompt()
     {
         $ride = Ride::where('commuter_id', Auth::user()->id)
+                        ->where('accepted', 1)
+                        ->where('current', 0)
                         ->where('finished', 0)
-                        ->where('current', 1)
                         ->first();
 
         if(count($ride) < 1) {
@@ -612,6 +614,52 @@ class CommuterController extends Controller
             return view('includes.modal-ride-drop-off-prompt', ['ride' => $ride]);
         }
 
+    }
+
+
+
+    // method use to confirm pickup
+    public function ridePickupConfirm()
+    {
+        $commuter = Auth::user();
+
+        $ride = Ride::where('commuter_id', $commuter->id)
+            ->where('accepted', 1)
+            ->where('current', 0)
+            ->where('finished', 0)
+            ->first();
+
+        if(count($ride) > 0) {
+            // redirect to yes or no pick up confrimation
+            return view('commuter.ride-pickup-confirm', ['ride' => $ride]);
+
+        }
+        else {
+            // rediret to cashboard
+            // with message info
+            // the ride is already picked-up
+            return redirect()->route('commuter.active.ride.request')->with('info', 'You have already pickedup!');
+        }
+    }
+
+
+    // method use to make as pickup by the commuter
+    public function postRidePickupConfirm(Request $request)
+    {
+        $id = $request['id'];
+
+        $ride = Ride::findOrFail($id);
+
+        // mark as pickup
+        $ride->current = 1;
+        $ride->current_at = now();
+        $ride->save();
+
+        // remove all notification with ride id
+        $notifs = DB::table('notifications')->where('ride_id', $ride->id)
+                        ->update(['viewed' => 1]);
+
+        return redirect()->route('commuter.request.ride');
     }
 
 }

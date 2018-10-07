@@ -103,6 +103,31 @@ class GeneralController extends Controller
     }
 
 
+    // method use to create notification pickup
+    public function createPickupNotification()
+    {
+        $commuter = Auth::user();
+
+        // check if there is an active accepted ride
+        $ride = Ride::where('commuter_id', $commuter->id)
+                    ->where('accepted', 1)
+                    ->where('current', 0)
+                    ->where('finished', 0)
+                    ->first();
+
+        if(count($ride) > 0) {
+            // do create notification
+            $notif = new Notification();
+            $notif->to = $commuter->id;
+            $notif->title = 'Pickup Confirmation';
+            $notif->ride_id = $ride->id;
+            $notif->message = 'Are you already picked-up by the driver?';
+            $notif->url = 'commuter.ride.pickup.confirm';
+            $notif->save();
+        }
+    }
+
+
 
     // method use to generate unique feedback number
     public static function generate_feedback_number()
