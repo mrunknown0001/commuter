@@ -564,7 +564,8 @@ class AdminController extends Controller
                                 'first_name' => $row->firstname,
                                 'user_type' => 2,
                                 'mobile_number' => $row->mobile_number,
-                                'password' => bcrypt('password')
+                                'password' => bcrypt('password'),
+                                'active' => 1
                             ];
 
                         $info[] = [
