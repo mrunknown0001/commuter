@@ -151,6 +151,7 @@ Route::group(['prefix' => 'c', 'middleware' => 'prevent-back-history'], function
 	Route::get('/ride/pickup/notification/create', 'GeneralController@createPickupNotification')->name('commuter.create.pickup.notification');
 
 	// route to create notification for drop off ride
+	Route::get('/ride/dropoff/notification/create', 'GeneralController@createDropoffNotification')->name('commuter.create.dropoff.notification');
 	
 
 });

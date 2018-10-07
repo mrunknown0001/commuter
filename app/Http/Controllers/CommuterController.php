@@ -464,35 +464,35 @@ class CommuterController extends Controller
 
 
     // method use to confirm drop off 
-    public function rideDropoffConfirm($id = null)
-    {
-        // get ride id
-        $ride = Ride::findOrFail($id);
+    // public function rideDropoffConfirm($id = null)
+    // {
+    //     // get ride id
+    //     $ride = Ride::findOrFail($id);
 
-        if($ride->drop_off_conrimation == 1) {
-            return redirect()->route('commuter.home')->with('info', 'Ride Confirmed Already!');
-        }
+    //     if($ride->drop_off_conrimation == 1) {
+    //         return redirect()->route('commuter.home')->with('info', 'Ride Confirmed Already!');
+    //     }
 
-        // return to dashboard
-        return view('commuter.drop-off-confirm', ['ride' => $ride]);
-    }
+    //     // return to dashboard
+    //     return view('commuter.drop-off-confirm', ['ride' => $ride]);
+    // }
 
 
-    // method use to accept ride drop off
-    public function postRideDropoffConfirm(Request $request)
-    {
-        $ride_id = $request['ride_id'];
+    // // method use to accept ride drop off
+    // public function postRideDropoffConfirm(Request $request)
+    // {
+    //     $ride_id = $request['ride_id'];
 
-        $ride = Ride::findOrFail($ride_id);
+    //     $ride = Ride::findOrFail($ride_id);
 
-        $ride->drop_off_conrimation = 1;
-        $ride->finished = 1;
-        $ride->save();
+    //     $ride->drop_off_conrimation = 1;
+    //     $ride->finished = 1;
+    //     $ride->save();
 
-        GeneralController::activity_log(Auth::user()->id, null, 'Ride Drop Off Confirmed', now());
+    //     GeneralController::activity_log(Auth::user()->id, null, 'Ride Drop Off Confirmed', now());
 
-        return redirect()->route('commuter.home')->with('success', 'Ride Drop Off Confirmed!');
-    }
+    //     return redirect()->route('commuter.home')->with('success', 'Ride Drop Off Confirmed!');
+    // }
 
 
 
@@ -629,10 +629,15 @@ class CommuterController extends Controller
             ->where('finished', 0)
             ->first();
 
-        $notifs = DB::table('notifications')->where('ride_id', $ride->id)
-                        ->update(['viewed' => 1]);
+        if(count($ride) < 1) {
+            return redirect()->route('commuter.active.ride.request')->with('info', 'You have already pickedup!'); 
+        }
+
 
         if(count($ride) > 0) {
+            $notifs = DB::table('notifications')->where('ride_id', $ride->id)
+                        ->update(['viewed' => 1]);
+
             // redirect to yes or no pick up confrimation
             return view('commuter.ride-pickup-confirm', ['ride' => $ride]);
 
@@ -664,5 +669,57 @@ class CommuterController extends Controller
 
         return redirect()->route('commuter.request.ride');
     }
+
+
+    // method use to drop off confirmation
+    public function rideDropoffConfirm()
+    {
+        $commuter = Auth::user();
+
+        $ride = Ride::where('commuter_id', $commuter->id)
+            ->where('accepted', 1)
+            ->where('current', 1)
+            ->where('finished', 0)
+            ->first();
+
+        if(count($ride) < 1) {
+            return redirect()->route('commuter.active.ride.request')->with('info', 'You have already dropoff!'); 
+        }
+
+        if(count($ride) > 0) {
+            $notifs = DB::table('notifications')->where('ride_id', $ride->id)
+                        ->update(['viewed' => 1]);
+                        
+            // redirect to yes or no pick up confrimation
+            return view('commuter.ride-dropoff-confirm', ['ride' => $ride]);
+
+        }
+        else {
+            // rediret to cashboard
+            // with message info
+            // the ride is already picked-up
+            return redirect()->route('commuter.active.ride.request')->with('info', 'You have already dropoff!');
+        }
+    }
+
+
+    // method use to confirm drop off
+    public function postRideDropoffConfirm(Request $request)
+    {
+        $id = $request['id'];
+
+        $ride = Ride::findOrFail($id);
+
+        // mark ride as finished
+        $ride->drop_off = 1;
+        $ride->drop_off_conrimation = 1;
+        $ride->finished = 1;
+        $ride->save();
+
+        // return to home with info message
+        return redirect()->route('commuter.home')->with('success', 'Success! Ride Saved!');
+    }
+
+
 
 }

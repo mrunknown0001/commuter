@@ -45,6 +45,8 @@
                 // and create notification for pickup confirmation
                 $.get("{{ route('commuter.create.pickup.notification') }}");
 
+                $.get("{{ route('commuter.create.dropoff.notification') }}");
+
 
                 // check if there is current ride
                 // ask if already drop off
