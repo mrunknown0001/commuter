@@ -37,8 +37,12 @@
               <td>
                 {{ strtoupper($ride->ride_number) }}
               </td>
-              <td></td>
-              <td></td>
+              <td>
+                {{ ucwords($ride->commuter->first_name . ' ' . $ride->commuter->last_name) }}
+              </td>
+              <td>
+                {{ ucwords($ride->driver->first_name . ' ' . $ride->driver->last_name) }}
+              </td>
               <td>
                 {{ date('l, F j, Y g:i:s a', strtotime($ride->created_at)) }}
               </td>
