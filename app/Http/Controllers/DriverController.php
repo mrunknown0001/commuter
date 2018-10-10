@@ -411,6 +411,7 @@ class DriverController extends Controller
         $notif = new Notification();
         $notif->to = $ride->commuter_id;
         $notif->ride_id = $ride->id;
+        $notif->title = 'Dropoff Confirmation';
         $notif->message = 'Drop Off Confirmation';
         $notif->url = "commuter.ride.dropoff.confirm"; //named
         $notif->save();
