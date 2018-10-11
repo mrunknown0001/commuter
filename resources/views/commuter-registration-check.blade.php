@@ -31,7 +31,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password (Atleast 6 Characters)" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -45,7 +45,7 @@
                             <label for="password_confirmation" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Re-Enter Password" required>
                             </div>
                         </div>
 

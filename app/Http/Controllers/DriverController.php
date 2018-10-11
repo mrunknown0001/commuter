@@ -33,6 +33,16 @@ class DriverController extends Controller
     // method use to go to home page of the driver
     public function home()
     {
+
+        $ride = Ride::where('driver_id', Auth::user()->id)
+                    ->where('cancelled', 0)
+                    ->where('finished', 0)
+                    ->first();
+
+        if(count($ride) > 0) {
+            return redirect()->route('driver.accepted.ride');
+        }
+        
     	return view('driver.home');
     }
 
