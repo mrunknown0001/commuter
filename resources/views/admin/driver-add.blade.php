@@ -56,7 +56,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Operator</label>
-                  <input type="text" name="operator" id="operator" class="form-control" placeholder="Enter Operator Name" required>
+                  <input type="text" name="operator" id="operator" class="form-control" placeholder="Enter Operator Name">
                 </div>
               </div>
               <div class="col-md-4">
