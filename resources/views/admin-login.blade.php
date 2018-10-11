@@ -13,7 +13,7 @@
                 <strong>Admin Login</strong>
             </div>
             <div class="panel-body">
-                
+                @include('includes.all')
                 <form class="form-horizontal" method="POST" action="{{ route('admin.login.submit') }}" autocomplete="off">
                     {{ csrf_field() }}
 
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </form>
-                <p><a href="#">Forgot Account?</a></p>
+                <p><a href="{{ route("forgot.admin.account") }}">Forgot Account?</a></p>
                 {{--<p><a href="{{ route('admin.registration') }}">Admin Registration</a></p>--}}
             </div>            
         </div>

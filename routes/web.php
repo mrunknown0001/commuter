@@ -57,6 +57,18 @@ Route::group(['middleware' => 'prevent-back-history'], function ()  {
 	// route to change password of the account
 	Route::post('/forgot/account/change/password', 'ForgotAccountController@postForgotAccountChangePassword')->name('forgot.account.change.password');
 
+	// route to forgot admin account
+	Route::get('/forgot/admin/account', 'ForgotAccountController@forgotAdminAccount')->name('forgot.admin.account');
+
+	// route to validate and get send notification code for admin
+	Route::get('/forgot/admin/account/code', 'ForgotAccountController@sendAdminCode')->name('send.code.admin');
+
+	// route to verify code
+	Route::get('/forgot/admin/verifiy/code', 'ForgotAccountController@verifyAdminCode')->name('verify.admin.code');
+
+	// route to change password
+	Route::post('/forgot/admin/account/change/password', 'ForgotAccountController@postForgotAdminChangePassword')->name('forgot.admin.change.password.post');
+
 
 // end of rotue grooup middlware
 });
