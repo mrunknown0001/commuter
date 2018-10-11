@@ -37,7 +37,7 @@
         </li>
 
         <li class="dropdown {{ route('driver.profile') == url()->current() ? 'active' : '' }} user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="@if(Auth::user()->avatar) {{ asset('uploads/images/'.Auth::user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="user-image" alt="User Image">{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="@if(Auth::user()->avatar && Auth::user()->avatar->avatar != null) {{ asset('uploads/images/'.Auth::user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="user-image" alt="User Image">{{ ucwords(Auth::user()->first_name) }} {{ ucwords(Auth::user()->last_name) }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href=""></a></li>
             <li><a href="{{ route('driver.profile') }}"><i class="fa fa-user"></i> Profile</a></li>
