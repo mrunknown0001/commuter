@@ -68,7 +68,8 @@
     myWindow.document.write("<html>");
     myWindow.document.write("<head>");
     myWindow.document.write("</head>");
-    myWindow.document.write("<h2>Commuter Reported</h2>");
+    myWindow.document.write("<body>");
+    myWindow.document.write("<h2>Commuter Report</h2>");
     myWindow.document.write("<p>Ride Number: ");
     myWindow.document.write(rideNumber);
     myWindow.document.write("</p>");
@@ -85,6 +86,7 @@
     myWindow.document.write("<p>");
     myWindow.document.write(content);
     myWindow.document.write("</p>");
+    myWindow.document.write("</body>");
     myWindow.document.write("</html>");
     myWindow.document.close();
     myWindow.focus();
