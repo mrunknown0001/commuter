@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-          <p><a href="{{ url()->previous() }}" class="">Back</a></p>
+          <p><a href="{{ route('admin.view.all.commuters') }}" class="">Go to Commuters</a></p>
           <p>
             @if($commuter->active == 1)
             <span class="badge bg-green">Active</span>

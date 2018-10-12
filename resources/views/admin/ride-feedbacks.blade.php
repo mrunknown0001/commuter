@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-          <p><a href="{{ url()->previous() }}" class="">Back</a></p>
+          <p><a href="{{ route('admin.view.feedbacks') }}" class="">Back to Feedbacks</a></p>
           @if(count($ride->feedback) > 0)
             @foreach($ride->feedback as $r)
               <div class="box box-primary">

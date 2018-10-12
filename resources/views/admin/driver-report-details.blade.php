@@ -21,10 +21,13 @@
  
     <div class="row">
       <div class="col-md-12">
-        <p><a href="{{ url()->previous() }}">Back</a></p>
+        <p><a href="{{ route('admin.drivers.reports') }}">Back to Driver Reports</a></p>
         <p>Ride Number: <strong><a href="{{ route('admin.ride.details', ['id' => $report->ride->id, 'ride_number' => $report->ride->ride_number]) }}">{{ strtoupper($report->ride->ride_number) }}</a></strong></p>
         <p>Complainant: <strong><a href="{{ route('admin.view.driver.details', ['id' => $report->complainant->id]) }}">{{ ucwords($report->complainant->first_name . ' ' . $report->complainant->last_name) }}</a></strong></p>
         <p>Reported Commuter: <strong><a href="{{ route('admin.view.commuter.details', ['id' => $report->reported->id]) }}"> {{ ucwords($report->reported->first_name . ' ' . $report->reported->last_name) }}</a></strong></p>
+
+        <p><button class="btn btn-success"><i class="fa fa-print"></i></button></p>
+        
         <div class="box box-danger">
           <div class="box-header with-border">
             <strong>Content</strong>
