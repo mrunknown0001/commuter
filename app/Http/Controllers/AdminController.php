@@ -1275,4 +1275,14 @@ class AdminController extends Controller
 
         return view('admin.activity-log', ['logs' => $logs]);
     }
+
+
+    public function printActivityLog()
+    {
+        $logs = ActivityLog::where('admin_id', null)
+                        ->orderBy('performed_on', 'desc')
+                        ->paginate(15);
+
+        return view('admin.activity-logs-print', ['logs' => $logs]);
+    }
 }

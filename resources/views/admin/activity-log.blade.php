@@ -21,6 +21,7 @@
     <div class="row">
       <div class="col-md-12">
         @if(count($logs) > 0)
+        <a href="{{ route('admin.print.activity.log') }}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-print"></i> Print Activity</a>
         <table class="table table-hover">
           <thead>
             <tr>
