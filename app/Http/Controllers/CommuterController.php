@@ -64,6 +64,7 @@ class CommuterController extends Controller
             'mobile_number' => 'required'
         ]);
 
+        // $id = $request['identification'];
 
         $mobile_number = $request['mobile_number'];
 
@@ -72,15 +73,15 @@ class CommuterController extends Controller
         // if not, check if the new record is already used by other user
         // return necessary message to the user
         // identification
-        if($id != Auth::user()->identification) {
-            // check if the new id is used by other user
-            $check_id = User::whereIdentification($id)->first();
+        // if($id != Auth::user()->identification) {
+        //     // check if the new id is used by other user
+        //     $check_id = User::whereIdentification($id)->first();
 
-            if(count($check_id) > 0) {
-                // the new id is already used by other user
-                return redirect()->route('commuter.profile.update')->with('error', 'The new Identification ' . $id . ', already used!');
-            }
-        }
+        //     if(count($check_id) > 0) {
+        //         // the new id is already used by other user
+        //         return redirect()->route('commuter.profile.update')->with('error', 'The new Identification ' . $id . ', already used!');
+        //     }
+        // }
 
         // mobile
         if(GeneralController::check_mobile_number($mobile_number)) {
