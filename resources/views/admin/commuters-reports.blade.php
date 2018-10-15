@@ -19,6 +19,20 @@
     <section class="content">
 
     <div class="row">
+      <div class="col-md-6">
+          <form action="#" method="get" role="form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search User">
+              <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
+                    </button>
+                  </span>
+            </div>
+          </form>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-12">
         @if(count($reports) > 0)
         <table class="table table-hover">

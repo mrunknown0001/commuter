@@ -18,6 +18,23 @@
         <!-- Main content -->
     <section class="content">
 
+        <div class="row">
+          <div class="col-md-5">
+              <form action="#" method="get" role="form">
+                <div class="input-group">
+                  <input type="text" name="q" class="form-control" placeholder="Search Admin">
+                  <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
+                        </button>
+                      </span>
+                </div>
+              </form>
+          </div>
+          <div class="col-md-3">
+            <a href="#" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
+          </div>
+        </div>
+
     <div class="row">
       <div class="col-md-12">
         @if(count($logs) > 0)
