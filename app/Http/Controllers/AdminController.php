@@ -1285,4 +1285,40 @@ class AdminController extends Controller
 
         return view('admin.activity-logs-print', ['logs' => $logs]);
     }
+
+
+    // method use to search activity log
+    public function searchActivityLog(Request $request)
+    {
+        $keyword = $request['q']; 
+
+        // search user
+        $users = DB::table('users')
+            ->join('activity_logs', 'users.id', '=', 'activity_logs.user_id')
+            ->where('first_name', "like", "%$keyword%")
+            ->orwhere('last_name', "like", "%$keyword%")
+            ->orwhere('identification', "like", "%$keyword%")
+            ->orderBy('last_name', 'asc')
+            ->paginate(15);
+
+
+        // return to view
+        return view('admin.activity-log-search-result', ['logs' => $users, 'keyword' => $keyword]);
+    }
+
+
+    // method use to print activity log in search result
+    public function printSearchActivityLog($keyword = null)
+    {
+        // search user
+        $users = DB::table('users')
+            ->join('activity_logs', 'users.id', '=', 'activity_logs.user_id')
+            ->where('first_name', "like", "%$keyword%")
+            ->orwhere('last_name', "like", "%$keyword%")
+            ->orwhere('identification', "like", "%$keyword%")
+            ->orderBy('last_name', 'asc')
+            ->paginate(15);
+
+        return view('admin.activity-logs-print-search', ['logs' => $users]);
+    }
 }

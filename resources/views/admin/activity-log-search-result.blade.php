@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title') Activity Log @endsection
+@section('title') Activity Log Search Result @endsection
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Activity Log
+        Activity Log Search Result: {{ $keyword }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-history"></i> Home</a></li>
@@ -36,7 +36,7 @@
               </form>
           </div>
           <div class="col-md-3">
-            <a href="{{ route('admin.print.activity.log') }}" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
+            <a href="{{ route('admin.print.search.activity.log', ['keyword' => $keyword]) }}" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
           </div>
         </div>
 
@@ -52,20 +52,12 @@
             @foreach($logs as $log)
             <tr>
               <td>
-              @if($log->admin_id != null)
-                {{ ucwords($log->admin->first_name) }}
-                {{ ucwords($log->admin->last_name) }}
-              @else
-                @if($log->user->user_type == 1)
-                  <a href="{{ route('admin.view.commuter.details', ['id' => $log->user->id]) }}">{{ ucwords($log->user->first_name) }}
-                  {{ ucwords($log->user->last_name) }}</a>
+                {{ ucwords($log->first_name . ' ' . $log->last_name) }}
+                @if($log->user_type == 1)
                   :Commuter
                 @else
-                  <a href="{{ route('admin.view.driver.details', ['id' => $log->user->id]) }}">{{ ucwords($log->user->first_name) }}
-                  {{ ucwords($log->user->last_name) }}</a>
                   :Driver
                 @endif
-              @endif
               </td>
               <td>
                 {{ ucwords($log->action_performed) }}
@@ -84,7 +76,7 @@
             <!-- Page Number render() -->
             <div class="text-center"> {{ $logs->links() }}</div>
         @else
-        <p class="text-center"><em>No Activity Logs</em></p>
+        <p class="text-center"><em>No Activity Logs for the search for {{ $keyword }}</em></p>
         @endif
       </div>
     </div>
