@@ -86,7 +86,7 @@ class AdminController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->get();
 
-        
+        return view('admin.admin-logs-print', ['logs' => $logs]);
     }
 
 
