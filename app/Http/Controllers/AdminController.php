@@ -1119,6 +1119,21 @@ class AdminController extends Controller
     }
 
 
+    // method use to search driver reports
+    public function searchDriversReports(Request $request)
+    {
+        $keyword = $request['keyword'];
+
+        $users = User::where('first_name', "like", "%$keyword%")
+            ->orwhere('last_name', "like", "%$keyword%")
+            ->orwhere('identification', "like", "%$keyword%")
+            ->orderBy('last_name', 'asc')
+            ->paginate(15);
+
+        return view('admin.drivers-reports-search-result', ['users' => $users, 'keyword' => $keyword]);
+    }
+
+
 
     // method use to view driver report detils
     public function driverReportView($id = null, $report_number = null)

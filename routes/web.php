@@ -457,7 +457,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	Route::get('/reports/drivers', 'AdminController@driversReports')->name('admin.drivers.reports');
 
 
-	// route to search
+	// route to search drivers reports
+	Route::get('/reports/driver/search', 'AdminController@searchDriversReports')->name('admin.drivers.search.reports');
 
 
 	// route to view driver report details
