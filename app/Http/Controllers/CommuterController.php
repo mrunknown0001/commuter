@@ -243,7 +243,7 @@ class CommuterController extends Controller
             $difference = $timenow - $timeofrequest;
 
 
-            $next_request_time = strtotime("+20 minutes", strtotime($last_ride->created_at));
+            $next_request_time = strtotime("+15 minutes", strtotime($last_ride->created_at));
 
 
             if($difference < 1200) {
