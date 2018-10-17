@@ -15,8 +15,6 @@
           </a>
         </li>
 
-        {{-- All Super Admin Menu will go there --}}
-        @if(Auth::guard('admin')->user()->role == 1)
         <li class="treeview {{ route('admin.view.all.admin') == url()->current() || route('admin.view.admin.logs') == url()->current() || route('admin.add.admin') == url()->current() || route('admin.import.admins') == url()->current() ? 'active' : '' }}">
           <a href="javascript:void(0)">
             <i class="fa fa-users"></i> <span>Admins</span>
@@ -32,8 +30,6 @@
             <li><a href="{{ route('admin.view.admin.logs') }}"><i class="fa fa-circle-o"></i> View All Admin Logs</a></li>
           </ul>
         </li>
-        @endif
-        {{-- end of all super admin menu --}}
 
         
         <li class="treeview {{ route('admin.view.all.driver') == url()->current() || route('admin.add.driver') == url()->current() || route('admin.import.driver') == url()->current()  ? 'active' : '' }}">

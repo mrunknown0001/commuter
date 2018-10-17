@@ -255,7 +255,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	/////////////////////////////
 	// super admin route group //
 	////////////////////////////
-	Route::group(['middleware' => 'super.admin'], function () {
+	// Route::group(['middleware' => 'super.admin'], function () {
 		// route to view all registered admins
 		Route::get('/admin/view/all', 'AdminController@viewAllAdmin')->name('admin.view.all.admin');
 
@@ -300,7 +300,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 		});
 
 		
-	});
+	// });
 	////////////////////////////////////
 	// end of super admin route group //
 	////////////////////////////////////
