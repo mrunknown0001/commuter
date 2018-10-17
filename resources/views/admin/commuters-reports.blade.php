@@ -20,11 +20,11 @@
 
     <div class="row">
       <div class="col-md-6">
-          <form action="#" method="get" role="form">
+          <form action="{{ route('admin.search.commuter.report') }}" method="get" role="form" autocomplete="off">
             <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search User">
+              <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search User">
               <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
+                    <button type="submit" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
                     </button>
                   </span>
             </div>

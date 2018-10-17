@@ -1069,6 +1069,21 @@ class AdminController extends Controller
     }
 
 
+    // method use to search commuter reports
+    public function searchCommuterReports(Request $request)
+    {
+        $keyword = $request['keyword'];
+
+        $users = User::where('first_name', "like", "%$keyword%")
+            ->orwhere('last_name', "like", "%$keyword%")
+            ->orwhere('identification', "like", "%$keyword%")
+            ->orderBy('last_name', 'asc')
+            ->paginate(15);
+
+        return view('admin.commuters-reports-search-result', ['users' => $users, 'keyword' => $keyword]);
+    }
+
+
 
     // method use to view commuter report details
     public function commuterReportView($id = null, $report_number = null)

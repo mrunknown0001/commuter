@@ -444,6 +444,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	Route::get('/reports/commuters', 'AdminController@commutersReports')->name('admin.commuters.reports');
 
 
+	// route to search commuter report
+	Route::get('/reports/commuters/search', 'AdminController@searchCommuterReports')->name('admin.search.commuter.report');
+
+
 
 	// route to view details of report of commuter
 	Route::get('/report/commuter/{id}/{report_number}/view', 'AdminController@commuterReportView')->name('admin.commuter.report.view');
