@@ -47,7 +47,7 @@
               </thead>
               <tbody>
                 @foreach($users as $user)
-                  @if(count($user->report) > 0)
+                  @if(count($user->report) > 0 && $user->user_type == 1)
                     @foreach($user->report as $r)
                     <tr>
                       <td>
