@@ -78,6 +78,35 @@ class AdminController extends Controller
     }
 
 
+    // method use to print all activity of admins
+    public function printAdminLogs()
+    {
+        // admin logs
+        $logs = ActivityLog::where('user_id', null)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        
+    }
+
+
+    // method use to search admin logs
+    public function searchAdminLogs(Request $request)
+    {
+        $keyword = $request['keyword'];
+
+        $admins = DB::table('admins')
+                    ->join('activity_logs', 'admins.id', '=', 'activity_logs.admin_id')
+                    ->where('first_name', "like", "%$keyword%")
+                    ->orwhere('last_name', "like", "%$keyword%")
+                    ->orwhere('identification', "like", "%$keyword%")
+                    ->orderBy('last_name', 'asc')
+                    ->paginate(15);
+
+        return view('admin.admin-log-search-result', ['admins' => $admins, 'keyword' => $keyword]);
+    }
+
+
     // method use to add admin
     public function addAdmin()
     {

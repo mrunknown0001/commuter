@@ -268,6 +268,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 		// route to view admin logs
 		Route::get('/admin/logs', 'AdminController@viewAdminLogs')->name('admin.view.admin.logs');
 
+		// route to print all admin logs
+		Route::get('/admin/logs/print', 'AdminController@printAdminLogs')->name('admin.print.admin.logs');
+
+		// route to search admin logs
+		Route::get('/admin/logs/search', 'AdminController@searchAdminLogs')->name('admin.search.admin.logs');
+
 		// route to add admin (guard)
 		Route::get('/admin/add', 'AdminController@addAdmin')->name('admin.add.admin');
 

@@ -20,18 +20,18 @@
 
         <div class="row">
           <div class="col-md-5">
-              <form action="#" method="get" role="form">
+              <form action="{{ route('admin.search.admin.logs') }}" method="get" role="form" autocomplete="off">
                 <div class="input-group">
-                  <input type="text" name="q" class="form-control" placeholder="Search Admin">
+                  <input type="text" name="keyword" class="form-control" placeholder="Search Admin" required>
                   <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
+                        <button type="submit" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
                         </button>
                       </span>
                 </div>
               </form>
           </div>
           <div class="col-md-3">
-            <a href="#" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
+            <a href="{{ route('admin.print.admin.logs') }}" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
           </div>
         </div>
 

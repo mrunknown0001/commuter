@@ -22,7 +22,7 @@
       <div class="col-md-6">
           <form action="{{ route('admin.search.commuter.report') }}" method="get" role="form" autocomplete="off">
             <div class="input-group">
-              <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search User">
+              <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search User" required>
               <span class="input-group-btn">
                     <button type="submit" id="search-btn" class="btn btn-success"><i class="fa fa-search"></i>
                     </button>
