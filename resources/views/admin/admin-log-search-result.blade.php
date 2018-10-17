@@ -31,7 +31,7 @@
               </form>
           </div>
           <div class="col-md-3">
-            <a href="#" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
+            <a href="{{ route('admin.print.search.result.admin.logs', ['keyword' => $keyword]) }}" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Activity</a>
           </div>
         </div>
 

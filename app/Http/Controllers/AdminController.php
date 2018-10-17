@@ -107,6 +107,21 @@ class AdminController extends Controller
     }
 
 
+    // method use to print admin search result
+    public function printSearchResultAdmin($keyword = null)
+    {
+        $admins = DB::table('admins')
+                    ->join('activity_logs', 'admins.id', '=', 'activity_logs.admin_id')
+                    ->where('first_name', "like", "%$keyword%")
+                    ->orwhere('last_name', "like", "%$keyword%")
+                    ->orwhere('identification', "like", "%$keyword%")
+                    ->orderBy('last_name', 'asc')
+                    ->get();
+
+        return view('admin.admin-logs-search-result-print', ['logs' => $admins]);
+    }
+
+
     // method use to add admin
     public function addAdmin()
     {
