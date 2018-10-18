@@ -29,7 +29,7 @@
 
                 <p>
                   {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}
-                  <small>Member since {{ date('M Y',strtotime(Auth::user()->created_at)) }}</small>
+                  <small>Member since {{ Auth::user()->created_at ? date('M Y',strtotime(Auth::user()->created_at)) : 'October 2018' }}</small>
                 </p>
               </li>
               <!-- Menu Body -->
