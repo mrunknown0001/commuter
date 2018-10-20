@@ -60,7 +60,7 @@ class RegisterController extends Controller
     {
         // validate mobile number
         $request->validate([
-            'mobile_number' => ['required'], ['unique:users'], ['regex:/^[0-9]+$/']
+            'mobile_number' => 'required|unique:users|numeric|digits:11'
         ]);
 
         $commuter_id = $request['commuter_id'];

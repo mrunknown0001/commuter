@@ -43,7 +43,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Username</label>
-                  <input type="text" name="username" id="username" value="{{ $driver->identification }}" class="form-control" placeholder="Enter Username" required readonly="">
+                  <input type="text" name="username" id="username" value="{{ $driver->identification }}" class="form-control" placeholder="Enter Username" required >
                 </div>
               </div>
               <div class="col-md-4">

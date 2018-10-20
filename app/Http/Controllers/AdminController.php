@@ -136,7 +136,7 @@ class AdminController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'username' => 'required|unique:admins,identification',
-            'mobile_number' => 'required|unique:admins'
+            'mobile_number' => 'required|unique:admins|numeric|digits:11'
         ]);
 
         $fn = $request['first_name'];
@@ -488,7 +488,7 @@ class AdminController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'username' => 'required|unique:users,identification',
-            'mobile_number' => 'required|unique:users',
+            'mobile_number' => 'required|unique:users|numeric|digits:11',
             'body_number' => 'required|min:3|max:10|unique:driver_infos',
             'plate_number' => 'required|unique:driver_infos'
         ]);
@@ -661,7 +661,7 @@ class AdminController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'mobile_number' => 'required',
+            'mobile_number' => 'required|numeric|digits:11',
             'body_number' => 'required',
             'plate_number' => 'required'
         ]);
