@@ -29,7 +29,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>ID</th>
+                <th>Student Number</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -40,7 +40,7 @@
                   <a href="{{ route('admin.view.commuter.details', ['id' => $commuter->id]) }}">{{ strtoupper($commuter->last_name . ', ' . $commuter->first_name) }}</a>
                 </td>
                 <td>
-                  {{ $commuter->identification }}
+                  {{ $commuter->student_number }}
                 </td>
                 <td>
                   <a href="{{ route('admin.update.commuter', ['id' => $commuter->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Update</a>

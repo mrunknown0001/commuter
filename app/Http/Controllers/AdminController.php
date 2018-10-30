@@ -48,7 +48,7 @@ class AdminController extends Controller
     public function viewAllAdmin()
     {
         // get all the admin in the admins table
-        $admins = Admin::where('role', 2)
+        $admins = Admin::where('id', '!=', 1)
                         ->orderBy('last_name', 'asc')
                         ->paginate(15);
 
@@ -135,7 +135,7 @@ class AdminController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required|unique:admins,identification',
+            'username' => 'required|unique:admins,username',
             'mobile_number' => 'required|unique:admins|numeric|digits:11'
         ]);
 
@@ -148,7 +148,7 @@ class AdminController extends Controller
         $admin = new Admin();
         $admin->first_name = $fn;
         $admin->last_name = $ln;
-        $admin->identification = $username;
+        $admin->username = $username;
         $admin->mobile_number = $mobile;
         $admin->password = bcrypt('password');
         $admin->save();
@@ -212,7 +212,7 @@ class AdminController extends Controller
                 if($row->username != null) {
 
                     // check each student number if it is already in database
-                    $check_username = Admin::where('identification', $row->username)->first();
+                    $check_username = Admin::where('username', $row->username)->first();
 
                     if(!$row->username) {
                         return redirect()->back()->with('error', 'Error Occurred! Please Use Excel for Importing Commuter');
@@ -225,10 +225,9 @@ class AdminController extends Controller
                     else {
                         // for users table
                         $admins[] = [
-                                'identification' => $row->username,
+                                'username' => $row->username,
                                 'last_name' => $row->lastname,
                                 'first_name' => $row->firstname,
-                                'role' => 2,
                                 'mobile_number' => $row->mobile_number,
                                 'password' => bcrypt('password')
                             ];
@@ -487,7 +486,7 @@ class AdminController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required|unique:users,identification',
+            'username' => 'required|unique:users,username',
             'mobile_number' => 'required|unique:users|numeric|digits:11',
             'body_number' => 'required|min:3|max:10|unique:driver_infos',
             'plate_number' => 'required|unique:driver_infos'
@@ -506,7 +505,7 @@ class AdminController extends Controller
         $driver = new User();
         $driver->first_name = $fn;
         $driver->last_name = $ln;
-        $driver->identification = $username;
+        $driver->username = $username;
         $driver->mobile_number = $mobile;
         $driver->password = bcrypt('password');
         $driver->user_type = 2;
@@ -590,7 +589,7 @@ class AdminController extends Controller
                 if($row->username != null) {
 
                     // check each student number if it is already in database
-                    $check_username = User::where('identification', $row->username)->first();
+                    $check_username = User::where('username', $row->username)->first();
 
                     if(!$row->username) {
                         return redirect()->back()->with('error', 'Error Occurred! Please Use Excel for Importing Commuter');
@@ -603,7 +602,7 @@ class AdminController extends Controller
                     else {
                         // for users table
                         $drivers[] = [
-                                'identification' => $row->username,
+                                'username' => $row->username,
                                 'last_name' => $row->lastname,
                                 'first_name' => $row->firstname,
                                 'user_type' => 2,
@@ -682,7 +681,7 @@ class AdminController extends Controller
 
         $driver->first_name = $fn;
         $driver->last_name = $ln;
-        $driver->identification = $username;
+        $driver->username = $username;
         $driver->mobile_number = $mobile;
         $driver->password = bcrypt('password');
         $driver->save();
@@ -790,17 +789,17 @@ class AdminController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'identification' => 'required|unique:users'
+            'student_number' => 'required|unique:users,student_number'
         ]);
 
         $fn = $request['first_name'];
         $ln = $request['last_name'];
-        $id = $request['identification'];
+        $id = $request['student_number'];
 
         $new = new User();
         $new->first_name = $fn;
         $new->last_name = $ln;
-        $new->identification = $id;
+        $new->student_number = $id;
         $new->save();
 
         GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added New Commuter');
@@ -839,7 +838,7 @@ class AdminController extends Controller
                 if($row->student_number != null) {
 
                     // check each student number if it is already in database
-                    $check_student_number = User::where('identification', $row->student_number)->first();
+                    $check_student_number = User::where('student_number', $row->student_number)->first();
 
                     if(!$row->student_number) {
                         return redirect()->back()->with('error', 'Error Occurred! Please Use Excel for Importing Commuter');
@@ -852,7 +851,7 @@ class AdminController extends Controller
                     else {
                         // for users table
                         $commuters[] = [
-                                'identification' => $row->student_number,
+                                'student_number' => $row->student_number,
                                 'last_name' => $row->lastname,
                                 'first_name' => $row->firstname
                             ];
@@ -898,26 +897,26 @@ class AdminController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'identification' => 'required'
+            'student_number' => 'required'
         ]);
 
         $fn = $request['first_name'];
         $ln = $request['last_name'];
-        $id = $request['identification'];
+        $id = $request['student_number'];
         $commuter_id = $request['commuter_id'];
 
         $commuter = User::findorfail($commuter_id);
 
         // check id
-        $check_id = User::where('identification', $id)->first();
+        $check_id = User::where('student_number', $id)->first();
 
         if(count($check_id) > 0 && $check_id->id != $commuter->id) {
-            return redirect()->back()->with('error', 'Identification already exists!');
+            return redirect()->back()->with('error', 'Student Number already exists!');
         }
 
         $commuter->first_name = $fn;
         $commuter->last_name = $ln;
-        $commuter->identification = $id;
+        $commuter->student_number = $id;
         $commuter->save();
 
         GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Updated Commuter Details');

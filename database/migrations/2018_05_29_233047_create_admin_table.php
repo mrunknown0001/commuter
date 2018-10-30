@@ -15,15 +15,11 @@ class CreateAdminTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('admin_id')->unsigned()->nullable();
-            $table->foreign('admin_id')->references('id')->on('admin_ids');
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('identification')->unique();
-            $table->tinyInteger('role')->default(2); // 1 for superadmin, 2 for regular admins
-            $table->string('mobile_number')->nullable()->unique();
-            // $table->string('email')->unique()->nullable();
-            $table->string('password');
+            $table->string('first_name', 30)->nullable();
+            $table->string('last_name', 30)->nullable();
+            $table->string('username', 20)->unique();
+            $table->string('mobile_number', 11)->nullable()->unique();
+            $table->string('password', 70);
             $table->tinyInteger('active')->default(1);
             $table->rememberToken();
             $table->timestamps();

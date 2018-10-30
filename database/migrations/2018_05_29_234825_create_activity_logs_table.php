@@ -19,7 +19,7 @@ class CreateActivityLogsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('admin_id')->unsigned()->nullable();
             $table->foreign('admin_id')->references('id')->on('admins');
-            $table->string('action_performed');
+            $table->string('action_performed', 200);
             $table->timestamp('performed_on');
             $table->timestamps();
         });

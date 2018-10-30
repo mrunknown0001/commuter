@@ -36,11 +36,11 @@
             <tbody>
               @foreach($drivers as $driver)
               <tr>
-                <td>
+                <td class="text-center">
                   <a href="{{ route('admin.view.driver.details', ['id' => $driver->id]) }}">{{ strtoupper($driver->last_name . ', ' . $driver->first_name) }}</a>
                 </td>
                 <td class="text-center">
-                  {{ $driver->identification }}
+                  {{ $driver->username }}
                 </td>
                 <td class="text-center">
                   <a href="{{ route('admin.update.driver', ['id' => $driver->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Update</a>

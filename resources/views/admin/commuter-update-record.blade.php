@@ -33,8 +33,8 @@
             <input type="text" name="last_name" value="{{ $commuter->last_name }}" class="form-control" placeholder="Enter Lastname" required>
           </div>
           <div class="form-group">
-            <label>Enter Student Number/Identification</label>
-            <input type="text"  name="identification" value="{{ $commuter->identification }}" class="form-control" placeholder="Enter Student Number/Identification" required>
+            <label>Enter Student Number</label>
+            <input type="text"  name="student_number" value="{{ $commuter->student_number }}" class="form-control" placeholder="Enter Student Number" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Update Record</button>

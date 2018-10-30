@@ -21,10 +21,10 @@ class CreatePassengersTable extends Migration
             $table->integer('passenger2')->nullable();
             $table->integer('passenger3')->nullable();
             $table->integer('passenger4')->nullable();
-            $table->string('passenger1_name')->nullable();
-            $table->string('passenger2_name')->nullable();
-            $table->string('passenger3_name')->nullable();
-            $table->string('passenger4_name')->nullable();
+            $table->string('passenger1_name', 60)->nullable();
+            $table->string('passenger2_name', 60)->nullable();
+            $table->string('passenger3_name', 60)->nullable();
+            $table->string('passenger4_name', 60)->nullable();
             $table->timestamps();
         });
     }

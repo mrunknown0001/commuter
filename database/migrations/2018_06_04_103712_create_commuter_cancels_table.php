@@ -15,7 +15,7 @@ class CreateCommuterCancelsTable extends Migration
     {
         Schema::create('commuter_cancels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('reference_number');
+            $table->string('reference_number', 10);
             $table->integer('ride_id')->unsigned();
             $table->foreign('ride_id')->references('id')->on('rides');
             $table->timestamp('requested_at')->nullable();

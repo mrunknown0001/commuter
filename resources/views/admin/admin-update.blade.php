@@ -45,7 +45,7 @@
             <div class="row">
               <div class="col-md-4">
                 <label>Username</label>
-                <input type="text" name="username" id="username" value="{{ $admin->identification }}" class="form-control" placeholder="Enter Username" readonly="">
+                <input type="text" name="username" id="username" value="{{ $admin->username }}" class="form-control" placeholder="Enter Username" readonly="">
               </div>
               <div class="col-md-4">
                 <label>Mobile Number</label>

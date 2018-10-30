@@ -36,7 +36,7 @@
                   {{ strtoupper($admin->last_name . ', ' . $admin->first_name) }}
                 </td>
                 <td class="text-center">
-                  {{ $admin->identification }}
+                  {{ $admin->username }}
                 </td>
                 <td class="text-center">
                   <a href="{{ route('admin.update.admin', ['id' => $admin->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Update</a>

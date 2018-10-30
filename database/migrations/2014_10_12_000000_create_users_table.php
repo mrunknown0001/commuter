@@ -15,12 +15,12 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name', 30);
+            $table->string('last_name', 30);
             $table->tinyInteger('user_type')->default(1); // 1 for commuters, 2 for drivers
-            $table->string('identification'); // student number/username for driver
-            $table->string('mobile_number')->nullable();
-            // $table->string('email')->nullable();
+            $table->string('student_number', 10)->nullable()->unique(); // for students
+            $table->string('username', 20)->nullable()->unique();
+            $table->string('mobile_number', 11)->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('active')->default(0); // 1 for active users, 0 for deactivated users
             $table->tinyInteger('registered')->default(0);
