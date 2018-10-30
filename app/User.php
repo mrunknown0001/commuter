@@ -49,12 +49,6 @@ class User extends Authenticatable
     }
 
 
-    public function report()
-    {
-        return $this->hasMany('App\Report', 'complainant_id', 'id');
-    }
-
-
     public function feedback()
     {
         return $this->hasMany('App\Feedback', 'driver_id');

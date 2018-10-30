@@ -34,11 +34,6 @@ class Ride extends Model
         return $this->hasMany('App\Feedback', 'ride_id', 'id');
     }
 
-    public function report()
-    {
-        return $this->hasMany('App\Report', 'ride_id', 'id');
-    }
-
 
     public function passenger()
     {
