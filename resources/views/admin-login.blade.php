@@ -17,15 +17,15 @@
                 <form class="form-horizontal" method="POST" action="{{ route('admin.login.submit') }}" autocomplete="off">
                     {{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                        <label for="identification" class="col-md-3 control-label">Username</label>
+                    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                        <label for="username" class="col-md-3 control-label">Username</label>
 
                         <div class="col-md-9">
-                            <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" placeholder="Enter Username" required autofocus>
+                            <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Enter Username" required autofocus>
 
-                            @if ($errors->has('identification'))
+                            @if ($errors->has('username'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('identification') }}</strong>
+                                    <strong>{{ $errors->first('username') }}</strong>
                                 </span>
                             @endif
                         </div>

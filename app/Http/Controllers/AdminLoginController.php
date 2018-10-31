@@ -29,17 +29,17 @@ class AdminLoginController extends Controller
 
     	// validate admin credential input
     	$request->validate([
-            'identification' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
 
         // assign to variables
-        $id = $request['identification'];
+        $id = $request['username'];
         $password = $request['password'];
 
     	// Auth::guard('admin')->attempt($credentials)
-    	if(Auth::guard('admin')->attempt(['identification' => $id, 'password' => $password, 'active' => 1])) {
+    	if(Auth::guard('admin')->attempt(['username' => $id, 'password' => $password, 'active' => 1])) {
             // add log here
             GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Login', now());
 

@@ -16,17 +16,17 @@
 
                 <div class="panel-body">
                     
-                    <form class="form-horizontal" method="get" action="{{ route('check.commuter.registration') }}" autocomplete="off">
+                    <form class="form-horizontal" method="post" action="{{ route('commuter.registration.post') }}" autocomplete="off">
                         {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
-                            <label for="id" class="col-md-4 control-label">Student Number</label>
+                        <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
+                            <label for="student_number" class="col-md-4 control-label">Student Number</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="id" id="id" class="form-control" placeholder="Enter Student Number" required>
+                                <input type="text" name="student_number" id="student_number" class="form-control" placeholder="Enter Student Number" required>
 
-                                @if ($errors->has('id'))
+                                @if ($errors->has('student_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('id') }}</strong>
+                                        <strong>{{ $errors->first('student_number') }}</strong>
                                     </span>
                                 @endif
                             </div>

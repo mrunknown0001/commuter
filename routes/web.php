@@ -7,14 +7,20 @@ Route::group(['middleware' => 'prevent-back-history'], function ()  {
 	// Registration form for commuter only
 	Route::get('/registration/commuter', 'RegisterController@commuterRegistration')->name('commuter.registration');
 
+	Route::post('/registration/commuter', 'RegisterController@postRegisterCommuter')->name('commuter.registration.post');
+
+
 	Route::get('/registration/commuter/verification', 'RegisterController@verifyCommuterRegistration')->name('verify.commuter.registration');
 
 	Route::get('/registraton/commuter/verification/code', 'RegisterController@codeVerification')->name('code.verification.registration');
 
 	Route::get('/registration/commuter/check', 'RegisterController@checkCommuterRegistration')->name('check.commuter.registration');
 
+
+
+
 	// post register for commuter only
-	Route::post('/registration/commuter', 'RegisterController@postCommuterRegistration')->name('register.submit');
+	Route::post('/registration/commuter/submit', 'RegisterController@postCommuterRegistration')->name('register.submit');
 
 
 	// Commuter and Diver Login Page
