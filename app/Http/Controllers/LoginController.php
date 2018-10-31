@@ -43,7 +43,7 @@ class LoginController extends Controller
 
 
     	// authenticate user
-    	if(Auth::attempt(['student_number' => $id, 'password' => $password, 'active' => 1], 1)) {
+    	if(Auth::attempt(['student_number' => $id, 'password' => $password, 'active' => 1], 1) || Auth::attempt(['username' => $id, 'password' => $password, 'active' => 1], 1)) {
             // add log here
             GeneralController::activity_log(Auth::user()->id, null, 'Login', now());
     		// login success

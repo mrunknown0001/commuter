@@ -77,19 +77,6 @@
           </ul>
         </li>
 
-       <li class="treeview">
-          <a href="#">
-            <i class="fa fa-flag"></i> <span>Reports</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ route('admin.commuters.reports') }}"><i class="fa fa-circle-o"></i> <span>Commuters Reports</span></a></li>
-            <li><a href="{{ route('admin.drivers.reports') }}"><i class="fa fa-circle-o"></i> <span>Drivers Reports</span></a></li>
-          </ul>
-        </li>
-
 
         <li class="">
           <a href="{{ route('admin.view.feedbacks') }}">

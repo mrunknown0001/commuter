@@ -62,6 +62,18 @@
 	                        </div>
 	                    </div>
 
+						<div class="form-group">
+							<label for="type" class="col-md-3 control-label">Select Type</label>
+							<div class="col-md-9">
+								<select name="type" id="type" class="form-control" required>
+									<option value="1">Solo</option>
+									<option value="2">Mix</option>
+									<option value="3">Group</option>
+								</select>								
+							</div>
+
+						</div>
+
 	                    <div class="form-group">
 	                        <label for="passenger1_name" class="col-md-3 control-label">Passenger 1 Name &nbsp;</label>
 
@@ -82,9 +94,9 @@
 	                        <label for="passenger1_id" class="col-md-3 control-label">Passenger 1 ID &nbsp;</label>
 
 	                        <div class="col-md-9">
-	                            <input id="passenger1_id" type="text" class="form-control" value="{{ Auth::user()->identification }}" required disabled>
+	                            <input id="passenger1_id" type="text" class="form-control" value="{{ Auth::user()->student_number }}" required disabled>
 								
-								<input type="hidden" name="passenger1_id" value="{{ Auth::user()->identification }}">
+								<input type="hidden" name="passenger1_id" value="{{ Auth::user()->id }}">
 
 	                            @if ($errors->has('passenger1_id'))
 	                                <span class="help-block">

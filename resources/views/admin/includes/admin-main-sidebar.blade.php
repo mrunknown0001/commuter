@@ -74,20 +74,6 @@
           </ul>
         </li>
 
-       <li class="treeview {{ route('admin.commuters.reports') == url()->current() || route('admin.drivers.reports') == url()->current() ? 'active' : '' }}">
-          <a href="#">
-            <i class="fa fa-flag"></i> <span>Reports</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ route('admin.commuters.reports') }}"><i class="fa fa-circle-o"></i> <span>Commuters Reports</span></a></li>
-            <li><a href="{{ route('admin.drivers.reports') }}"><i class="fa fa-circle-o"></i> <span>Drivers Reports</span></a></li>
-          </ul>
-        </li>
-
-
         <li class="{{ route('admin.view.feedbacks') == url()->current() ? 'active' : '' }}">
           <a href="{{ route('admin.view.feedbacks') }}">
             <i class="fa fa-comments"></i> <span>Feedbacks</span>
