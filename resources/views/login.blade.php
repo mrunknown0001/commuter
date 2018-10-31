@@ -18,15 +18,15 @@
                 <form class="form-horizontal" method="POST" action="{{ route('login.submit') }}" autocomplete="off">
                     {{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                        <label for="identification" class="col-md-3 control-label">Student Number/Username</label>
+                    <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
+                        <label for="student_number" class="col-md-3 control-label">Student Number/Username</label>
 
                         <div class="col-md-9">
-                            <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" id="identification" placeholder="Enter Student Number/Username" required autofocus>
+                            <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" id="student_number" placeholder="Enter Student Number/Username" required autofocus>
 
-                            @if ($errors->has('identification'))
+                            @if ($errors->has('student_number'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('identification') }}</strong>
+                                    <strong>{{ $errors->first('student_number') }}</strong>
                                 </span>
                             @endif
                         </div>

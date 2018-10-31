@@ -22,6 +22,10 @@ Route::group(['middleware' => 'prevent-back-history'], function ()  {
 	// post register for commuter only
 	Route::post('/registration/commuter/submit', 'RegisterController@postCommuterRegistration')->name('register.submit');
 
+	Route::get('/registration/commuter/submit', function () {
+		return redirect()->route('commuter.registration');
+	});
+
 
 	// Commuter and Diver Login Page
 	Route::get('/login', 'LoginController@showLogin')->name('login');

@@ -32,18 +32,18 @@ class LoginController extends Controller
 
     	// validate inputs
     	$request->validate([
-    		'identification' => 'required',
+    		'student_number' => 'required',
     		'password' => 'required|min:6'
     	]);
     	
 
     	// assign values to variable
-    	$id = $request['identification'];
+    	$id = $request['student_number'];
     	$password = $request['password'];
 
 
     	// authenticate user
-    	if(Auth::attempt(['identification' => $id, 'password' => $password, 'active' => 1], 1)) {
+    	if(Auth::attempt(['student_number' => $id, 'password' => $password, 'active' => 1], 1)) {
             // add log here
             GeneralController::activity_log(Auth::user()->id, null, 'Login', now());
     		// login success

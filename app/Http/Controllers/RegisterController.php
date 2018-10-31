@@ -50,12 +50,12 @@ class RegisterController extends Controller
 
         // check if registered
         if($student->registered == 1) {
-            return redirect()->back()->with('info', 'Student Already Registered!');
+            return redirect()->back()->with('error', 'Student Already Registered!');
         }
 
         // if no, enter detail of student
         // return to input password
-        return 'return to input details of student';
+        return view('commuter-registration-add-details', ['student' => $student]);
     }
 
 
