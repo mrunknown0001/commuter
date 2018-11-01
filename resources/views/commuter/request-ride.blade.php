@@ -66,9 +66,9 @@
 							<label for="type" class="col-md-3 control-label">Select Type</label>
 							<div class="col-md-9">
 								<select name="type" id="type" class="form-control" required>
-									<option value="1">Solo</option>
-									<option value="2">Mix</option>
-									<option value="3">Group</option>
+									<option value="solo">Solo</option>
+									<option value="mix">Mix</option>
+									<option value="group">Group</option>
 								</select>								
 							</div>
 

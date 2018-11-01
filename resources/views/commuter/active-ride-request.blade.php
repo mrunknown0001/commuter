@@ -35,6 +35,7 @@
 					@endif
 					</p>
 					<p>Reference Number: <strong>{{ strtoupper($active_ride->ride_number) }}</strong></p>
+					<p>Type: <strong>{{ strtoupper($active_ride->type) }}</strong></p>
 					<p>Time of Request: <strong>{{ date('g:i:s a', strtotime($active_ride->created_at)) }}</strong></p>
 					<p>Date of Request: <strong>{{ date('l, F j, Y', strtotime($active_ride->created_at)) }}</strong></p>
 					<p>Pickup Location: <strong>{{ $active_ride->pickup_location->name }}</strong></p>

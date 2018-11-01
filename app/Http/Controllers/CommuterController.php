@@ -283,10 +283,12 @@ class CommuterController extends Controller
             'pickup' => 'required',
             'dropoff' => 'required',
             'passenger1_id' => 'required',
-            'passenger1_name' => 'required'
+            'passenger1_name' => 'required',
+            'type' => 'required'
         ]);
 
         // assign request variables to data
+        $type = $request['type'];
         $pickup = $request['pickup'];
         $dropoff = $request['dropoff'];
         $commuter = $request['commuter'];
@@ -365,6 +367,7 @@ class CommuterController extends Controller
         // save ride request
         $ride = new Ride();
         $ride->ride_number = $ride_number;
+        $ride->type = $type;
         $ride->commuter_id = $commuter;
         $ride->pickup_loc = $pickup;
         $ride->drop_off_loc = $dropoff;

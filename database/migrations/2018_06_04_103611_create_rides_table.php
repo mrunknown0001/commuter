@@ -16,6 +16,7 @@ class CreateRidesTable extends Migration
         Schema::create('rides', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ride_number', 10)->unique();
+            $table->string('type', 5);
             $table->integer('commuter_id')->unsigned();
             $table->foreign('commuter_id')->references('id')->on('users');
             $table->integer('driver_id')->unsigned()->nullable();

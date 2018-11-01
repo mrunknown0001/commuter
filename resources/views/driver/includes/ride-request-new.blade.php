@@ -6,6 +6,7 @@
 	</div>
 	<div class="box-body">
 		<p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
+		<p>Type: <strong>{{ strtoupper($ride->type) }}</strong></p>
 		<p>Pickup Location: <strong>{{ $ride->pickup_location->name }}</strong></p>
 		<!-- <p>Dropoff Location: <strong>{{ $ride->dropoff_location->name }}</strong></p> -->
 		<p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>

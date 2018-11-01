@@ -34,7 +34,7 @@ class GeneralController extends Controller
     // method to generate unique reference number for rides
     public static function generate_ride_number()
     {
-        $number = 'r_' . mt_rand(000000, 999999) . uniqid(); // better than rand()
+        $number = date('m') . date('y') . mt_rand(000000, 999999); // better than rand()
 
         // call the same function if the barcode exists already
         if (self::rideNumberExists($number)) {
