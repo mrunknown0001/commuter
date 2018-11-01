@@ -40,10 +40,10 @@
           <p>Plate Number: <strong>{{ strtoupper($driver->driver_info->plate_number) }}</strong></p>
           <p>Operator: <strong>{{ ucwords($driver->driver_info->operator_name) }}</strong></p>
           <hr>
-          <p>Report Made: <strong><a href="{{ route('admin.view.driver.report', ['id' => $driver->id]) }}">{{ count($driver->report) }}</strong></a></p>
+     
           <hr>
           <p><a href="{{ route('admin.view.driver.feedback', ['id' => $driver->id]) }}" class="badge bg-blue"><i class="fa fa-comments"></i> Feedback: {{ count($driver->feedback) }}</a></p>
-          <p><a href="{{ route('admin.view.driver.complaint', ['id' => $driver->id]) }}" class="badge bg-red"><i class="fa fa-flag"></i> Report: {{ count($driver->complaint) }}</a></p>
+
 
           <hr>
           @if($driver->active == 1)

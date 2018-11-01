@@ -14,7 +14,6 @@ use App\Location;
 use App\Ride;
 use App\Passenger;
 use App\CommuterCancel;
-use App\Report;
 use App\Feedback;
 use App\Notification;
 use App\Avatar;
@@ -544,43 +543,43 @@ class CommuterController extends Controller
 
 
     // method us to submit ride 
-    public function submitReport(Request $request)
-    {
-        // validate request data
-        $request->validate([
-            'message' => 'required'
-        ]);
+    // public function submitReport(Request $request)
+    // {
+    //     // validate request data
+    //     $request->validate([
+    //         'message' => 'required'
+    //     ]);
 
-        // assign to variables
-        $id = $request['ride_id'];
-        $message = $request['message'];
-        $report_number = GeneralController::generate_report_number();
+    //     // assign to variables
+    //     $id = $request['ride_id'];
+    //     $message = $request['message'];
+    //     $report_number = GeneralController::generate_report_number();
 
 
-        $ride = Ride::findOrFail($id);
+    //     $ride = Ride::findOrFail($id);
 
-        // check if the ride is belongs to the user
-        if($ride->commuter_id != Auth::user()->id) {
-            abort(406);
-        }
+    //     // check if the ride is belongs to the user
+    //     if($ride->commuter_id != Auth::user()->id) {
+    //         abort(406);
+    //     }
 
-        // save
-        $report = new Report();
-        $report->report_number = $report_number;
-        $report->complainant_id = Auth::user()->id;
-        $report->reported_user_id = $ride->driver_id; // in this case the reported user is the driver of the ride
-        $report->ride_id = $ride->id;
-        $report->content = $message;
-        $report->user_type = 1;
-        $report->save();
+    //     // save
+    //     $report = new Report();
+    //     $report->report_number = $report_number;
+    //     $report->complainant_id = Auth::user()->id;
+    //     $report->reported_user_id = $ride->driver_id; // in this case the reported user is the driver of the ride
+    //     $report->ride_id = $ride->id;
+    //     $report->content = $message;
+    //     $report->user_type = 1;
+    //     $report->save();
         
 
-        // add activity log
-        GeneralController::activity_log(Auth::user()->id, null, 'Submitted Report on ride: ' . $ride->ride_number, now());
+    //     // add activity log
+    //     GeneralController::activity_log(Auth::user()->id, null, 'Submitted Report on ride: ' . $ride->ride_number, now());
 
-        // return to history with message
-        return redirect()->route('commuter.ride.history')->with('success', 'Report Submitted!');
-    }
+    //     // return to history with message
+    //     return redirect()->route('commuter.ride.history')->with('success', 'Report Submitted!');
+    // }
 
 
     // method use to view ride history of commuter

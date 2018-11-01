@@ -45,7 +45,7 @@
 									@endif
 									@endif
 								@if($ride->commuter_unappearance != 1)
-								<a href="#" class="label label-danger" data-toggle="modal" data-target="#report-{{ $ride->id }}"><i class="fa fa-flag"></i> Report</a>
+								
 								@endif
 
 								@endif

@@ -12,7 +12,6 @@ use App\User;
 use App\DriverInfo;
 use App\Ride;
 use App\Notification;
-use App\Report;
 use App\Avatar;
 
 class DriverController extends Controller
@@ -461,78 +460,78 @@ class DriverController extends Controller
 
 
     // method use to submit report by the driver
-    public function submitReport(Request $request)
-    {
-        // validate request data
-        $request->validate([
-            'message' => 'required'
-        ]);
+    // public function submitReport(Request $request)
+    // {
+    //     // validate request data
+    //     $request->validate([
+    //         'message' => 'required'
+    //     ]);
 
 
-        // assign request data to variables
-        $ride_id = $request['ride_id'];
-        $message = $request['message'];
+    //     // assign request data to variables
+    //     $ride_id = $request['ride_id'];
+    //     $message = $request['message'];
 
 
-        $ride = Ride::findOrFail($ride_id);
+    //     $ride = Ride::findOrFail($ride_id);
 
 
-        // check if the ride belongs to the driver
-        if($ride->driver_id != Auth::user()->id) {
-            abort(406);
-        }
+    //     // check if the ride belongs to the driver
+    //     if($ride->driver_id != Auth::user()->id) {
+    //         abort(406);
+    //     }
 
-        $report_number = GeneralController::generate_report_number();
+    //     $report_number = GeneralController::generate_report_number();
 
-        // checks
-
-
-        // save report to view by admin        
-        $report = new Report();
-        $report->report_number = $report_number;
-        $report->complainant_id = Auth::user()->id;
-        $report->reported_user_id = $ride->commuter_id;
-        $report->ride_id = $ride->id;
-        $report->content = $message;
-        $report->user_type = 2;
-        $report->save();
+    //     // checks
 
 
-        // save log report
-        GeneralController::activity_log(Auth::user()->id, null, 'Driver Submitted Report', now());
+    //     // save report to view by admin        
+    //     $report = new Report();
+    //     $report->report_number = $report_number;
+    //     $report->complainant_id = Auth::user()->id;
+    //     $report->reported_user_id = $ride->commuter_id;
+    //     $report->ride_id = $ride->id;
+    //     $report->content = $message;
+    //     $report->user_type = 2;
+    //     $report->save();
 
 
-        // return message
-        return redirect()->route('driver.ride.history')->with('success', 'Report Submitted!');
-    }
+    //     // save log report
+    //     GeneralController::activity_log(Auth::user()->id, null, 'Driver Submitted Report', now());
 
 
-    // method use to report and cancel and report to admin
-    public function postCancelReportCommuter(Request $request)
-    {
-        $ride_id = $request['ride_id'];
+    //     // return message
+    //     return redirect()->route('driver.ride.history')->with('success', 'Report Submitted!');
+    // }
 
-        $ride = Ride::findorfail($ride_id);
 
-        // mark ride has no commuter appearance and finished
-        $ride->commuter_unappearance = 1;
-        $ride->finished = 1;
-        $ride->save();
+    // // method use to report and cancel and report to admin
+    // public function postCancelReportCommuter(Request $request)
+    // {
+    //     $ride_id = $request['ride_id'];
 
-        // add report to admin that the commuter not appeared in pickup location
-        $report_number = GeneralController::generate_report_number();
+    //     $ride = Ride::findorfail($ride_id);
 
-        $report = new Report();
-        $report->report_number = $report_number;
-        $report->complainant_id = Auth::user()->id;
-        $report->reported_user_id = $ride->commuter_id;
-        $report->ride_id = $ride->id;
-        $report->content = 'The Commuter Not Appeared in Pickup Location';
-        $report->user_type = 2;
-        $report->save();
+    //     // mark ride has no commuter appearance and finished
+    //     $ride->commuter_unappearance = 1;
+    //     $ride->finished = 1;
+    //     $ride->save();
 
-        GeneralController::activity_log(Auth::user()->id, null, 'Driver cancel ride as commuter not appeared', now());
+    //     // add report to admin that the commuter not appeared in pickup location
+    //     $report_number = GeneralController::generate_report_number();
 
-        return redirect()->route('driver.home')->with('info', 'Commuter Reported to Admin for No Appearance');
-    }
+    //     $report = new Report();
+    //     $report->report_number = $report_number;
+    //     $report->complainant_id = Auth::user()->id;
+    //     $report->reported_user_id = $ride->commuter_id;
+    //     $report->ride_id = $ride->id;
+    //     $report->content = 'The Commuter Not Appeared in Pickup Location';
+    //     $report->user_type = 2;
+    //     $report->save();
+
+    //     GeneralController::activity_log(Auth::user()->id, null, 'Driver cancel ride as commuter not appeared', now());
+
+    //     return redirect()->route('driver.home')->with('info', 'Commuter Reported to Admin for No Appearance');
+    // }
 }

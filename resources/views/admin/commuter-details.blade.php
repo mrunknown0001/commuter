@@ -34,9 +34,9 @@
           <p>Mobile Number: <strong>{{ $commuter->mobile_number }}</strong></p>
           <hr>
           <p>Feedback Made: <strong><a href="{{ route('admin.view.commuter.feedback', ['id' => $commuter->id]) }}">{{ count($commuter->comment) }}</a></strong></p>
-          <p>Report Made: <strong><a href="{{ route('admin.view.commuter.report', ['id' => $commuter->id]) }}">{{ count('$commuter->report') }}</a></strong></p>
+          
           <hr>
-          <p><a href="{{ route('admin.view.commuter.complaint', ['id' => $commuter->id]) }}"><span class="badge bg-red"><i class="fa fa-flag"></i> Reports: {{ count($commuter->complaint) }}</span></a></p>
+
           <hr>
           @if($commuter->active == 1)
           <p><a href="javascript:void(0)" class="badge bg-red" data-toggle="modal" data-target="#block">Block Commuter</a></p>

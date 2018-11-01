@@ -18,7 +18,6 @@ use App\Admin;
 use App\Ride;
 use App\AdminId;
 use App\Feedback;
-use App\Report;
 use App\Avatar;
 use App\DriverInfo;
 use App\Location;
@@ -747,12 +746,12 @@ class AdminController extends Controller
 
 
     // method use to view driver report made
-    public function viewDriverReport($id = null)
-    {
-        $driver = User::findorfail($id);
+    // public function viewDriverReport($id = null)
+    // {
+    //     $driver = User::findorfail($id);
 
-        return view('admin.driver-reports', ['driver' => $driver]);
-    }
+    //     return view('admin.driver-reports', ['driver' => $driver]);
+    // }
 
 
 
@@ -974,12 +973,12 @@ class AdminController extends Controller
 
 
     // method use to view report 
-    public function viewCommuterReport($id = null)
-    {
-        $commuter = User::findorfail($id);
+    // public function viewCommuterReport($id = null)
+    // {
+    //     $commuter = User::findorfail($id);
 
-        return view('admin.commuter-reports', ['commuter' => $commuter]);
-    }
+    //     return view('admin.commuter-reports', ['commuter' => $commuter]);
+    // }
 
 
 
@@ -1099,120 +1098,121 @@ class AdminController extends Controller
 
 
     // method use to view commutes reports
-    public function commutersReports()
-    {
-        // get all commuters report
-        // user type == 1
+    // public function commutersReports()
+    // {
+    //     // get all commuters report
+    //     // user type == 1
         
-        $reports = Report::where('user_type', 1)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(15);
+    //     $reports = Report::where('user_type', 1)
+    //                     ->orderBy('created_at', 'desc')
+    //                     ->paginate(15);
 
-        return view('admin.commuters-reports', ['reports' => $reports]);
-    }
+    //     return view('admin.commuters-reports', ['reports' => $reports]);
+    // }
+
 
 
     // method use to search commuter reports
-    public function searchCommuterReports(Request $request)
-    {
-        $keyword = $request['keyword'];
+    // public function searchCommuterReports(Request $request)
+    // {
+    //     $keyword = $request['keyword'];
 
-        $users = User::where('first_name', "like", "%$keyword%")
-            ->orwhere('last_name', "like", "%$keyword%")
-            ->orwhere('identification', "like", "%$keyword%")
-            ->orderBy('last_name', 'asc')
-            ->paginate(15);
+    //     $users = User::where('first_name', "like", "%$keyword%")
+    //         ->orwhere('last_name', "like", "%$keyword%")
+    //         ->orwhere('identification', "like", "%$keyword%")
+    //         ->orderBy('last_name', 'asc')
+    //         ->paginate(15);
 
-        return view('admin.commuters-reports-search-result', ['users' => $users, 'keyword' => $keyword]);
-    }
-
-
-
-    // method use to view commuter report details
-    public function commuterReportView($id = null, $report_number = null)
-    {
-        // validate
-        $report = Report::findorfail($id);
-        if(Auth::guard('admin')->user()->id != 1){
-            $report->viewed = 1;
-        }
-        $report->save();
-
-        // assign to variables
-
-        // generate log
-        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Viewed Report of Commuter', now());
-
-        // return to page with data
-        return view('admin.commuter-report-details', ['report' => $report]);
-    }
+    //     return view('admin.commuters-reports-search-result', ['users' => $users, 'keyword' => $keyword]);
+    // }
 
 
 
-    // method use to view drivers reports
-    public function driversReports()
-    {
-        // get all driver report
-        // user type == 2
-        $reports = Report::where('user_type', 2)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(15);
+    // // method use to view commuter report details
+    // public function commuterReportView($id = null, $report_number = null)
+    // {
+    //     // validate
+    //     $report = Report::findorfail($id);
+    //     if(Auth::guard('admin')->user()->id != 1){
+    //         $report->viewed = 1;
+    //     }
+    //     $report->save();
 
-        return view('admin.drivers-reports', ['reports' => $reports]);
-    }
+    //     // assign to variables
 
+    //     // generate log
+    //     GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Viewed Report of Commuter', now());
 
-    // method use to search driver reports
-    public function searchDriversReports(Request $request)
-    {
-        $keyword = $request['keyword'];
-
-        $users = User::where('first_name', "like", "%$keyword%")
-            ->orwhere('last_name', "like", "%$keyword%")
-            ->orwhere('identification', "like", "%$keyword%")
-            ->orderBy('last_name', 'asc')
-            ->paginate(15);
-
-        return view('admin.drivers-reports-search-result', ['users' => $users, 'keyword' => $keyword]);
-    }
+    //     // return to page with data
+    //     return view('admin.commuter-report-details', ['report' => $report]);
+    // }
 
 
 
-    // method use to view driver report detils
-    public function driverReportView($id = null, $report_number = null)
-    {
-        // validate
-        $report = Report::findorfail($id);
+    // // method use to view drivers reports
+    // public function driversReports()
+    // {
+    //     // get all driver report
+    //     // user type == 2
+    //     $reports = Report::where('user_type', 2)
+    //                     ->orderBy('created_at', 'desc')
+    //                     ->paginate(15);
+
+    //     return view('admin.drivers-reports', ['reports' => $reports]);
+    // }
 
 
-        // check the report number belongs to the report
-        if($report->report_number != $report_number) {
-            return redirect()->back();
-        }
+    // // method use to search driver reports
+    // public function searchDriversReports(Request $request)
+    // {
+    //     $keyword = $request['keyword'];
 
-        if(Auth::guard('admin')->user()->id != 1){
-            $report->viewed = 1;
-        }
-        $report->save();
+    //     $users = User::where('first_name', "like", "%$keyword%")
+    //         ->orwhere('last_name', "like", "%$keyword%")
+    //         ->orwhere('identification', "like", "%$keyword%")
+    //         ->orderBy('last_name', 'asc')
+    //         ->paginate(15);
 
-        // assign to variables
-
-        // generate log
-        GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Viewed Report of Commuter', now());
-
-        // return to page with data
-        return view('admin.driver-report-details', ['report' => $report]);
-    }
+    //     return view('admin.drivers-reports-search-result', ['users' => $users, 'keyword' => $keyword]);
+    // }
 
 
 
-    // method use to view ride reports
-    public function viewRideReport($id = null)
-    {
-        $ride = Ride::findorfail($id);
+    // // method use to view driver report detils
+    // public function driverReportView($id = null, $report_number = null)
+    // {
+    //     // validate
+    //     $report = Report::findorfail($id);
 
-        return view('admin.ride-reports', ['ride' => $ride]);
-    }
+
+    //     // check the report number belongs to the report
+    //     if($report->report_number != $report_number) {
+    //         return redirect()->back();
+    //     }
+
+    //     if(Auth::guard('admin')->user()->id != 1){
+    //         $report->viewed = 1;
+    //     }
+    //     $report->save();
+
+    //     // assign to variables
+
+    //     // generate log
+    //     GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Viewed Report of Commuter', now());
+
+    //     // return to page with data
+    //     return view('admin.driver-report-details', ['report' => $report]);
+    // }
+
+
+
+    // // method use to view ride reports
+    // public function viewRideReport($id = null)
+    // {
+    //     $ride = Ride::findorfail($id);
+
+    //     return view('admin.ride-reports', ['ride' => $ride]);
+    // }
 
 
     // method use to view ride feedbacks
