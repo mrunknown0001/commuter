@@ -246,9 +246,9 @@ class CommuterController extends Controller
             $next_request_time = strtotime("+15 minutes", strtotime($last_ride->created_at));
 
 
-            if($difference < 1200) {
-                // the time is less than 20 mins from time of request
-                return redirect()->route('commuter.home')->with('notice', 'You can Request 20 minutes after your last ride request. Next Time of Request: ' . date('g:i a', $next_request_time));
+            if($difference < 900) {
+                // the time is less than 15 mins from time of request
+                return redirect()->route('commuter.home')->with('notice', 'You can Request 15 minutes after your last ride request. Next Time of Request: ' . date('g:i a', $next_request_time));
             }
 
         }
@@ -505,14 +505,12 @@ class CommuterController extends Controller
     {
         // validate request data
         $request->validate([
-            'message' => 'required',
             'rating' => 'required'
         ]);
 
 
         // assgin to variables
         $id = $request['ride_id'];
-        $message = $request['message'];
         $rating = $request['rating'];
         $feedback_number = GeneralController::generate_feedback_number();
 
@@ -531,7 +529,6 @@ class CommuterController extends Controller
         $feed->commuter_id = Auth::user()->id;
         $feed->driver_id = $ride->driver_id;
         $feed->ride_id = $ride->id;
-        $feed->comment = $message;
         $feed->rating = $rating;
         $feed->save();
 

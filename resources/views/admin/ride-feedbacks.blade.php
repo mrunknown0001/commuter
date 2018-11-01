@@ -31,8 +31,6 @@
                 <div class="box-body">
                   <p>Commuter: <a href="{{ route('admin.view.commuter.details', ['id' => $r->commuter->id]) }}">{{ ucwords($r->commuter->first_name . ' ' . $r->commuter->last_name) }}</a></p>
 
-                  <p>Message: {{ $r->comment }}</p>
-
                   <p>Commuter Rating: 
                     <span class="fa fa-star {{ $r->rating >= 1 ? 'checked' : '' }}"></span>
                     <span class="fa fa-star {{ $r->rating >= 2 ? 'checked' : '' }}"></span>

@@ -253,6 +253,7 @@ class DriverController extends Controller
         // check if the driver already accepted a ride request
         // if ther is any, redirect to acceptedRide route with message
         $ride = Ride::where('driver_id', Auth::user()->id)
+                    ->where('type', '!=', 'mix')
                     ->where('cancelled', 0)
                     ->where('finished', 0)
                     ->first();
@@ -270,6 +271,11 @@ class DriverController extends Controller
     // method get data and load on ride request on driver
     public function rideRequestNew()
     {
+
+        // if the driver accepted mix type of ride request
+        // the next ride will only show a mix type of request
+
+
         // get all new active ride request
         $rides = Ride::where('driver_id', null)
                     ->where('cancelled', 0)
@@ -284,6 +290,14 @@ class DriverController extends Controller
     // method to accept ride request
     public function acceptRideRequest(Request $request)
     {
+        // check if ride is solo and group proceed to accept ride
+
+
+        // if mix the driver and commuter will be waiting for another 
+        // commuter/requester with mix type
+
+
+
         $id = $request['ride_id'];
 
         // update the ride with needed data

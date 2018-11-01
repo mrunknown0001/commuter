@@ -110,9 +110,9 @@
 								 				<form action="{{ route('commuter.send.feedback') }}" method="POST" role="form">
 													{{ csrf_field() }}
 													<input type="hidden" name="ride_id" value="{{ $ride->id }}">
-													<div class="form-group">
+													{{--<div class="form-group">
 														<textarea id="message" name="message" class="form-control" required ></textarea>
-													</div>
+													</div>--}}
 													<div class="form-group">
 												        <input name="rating" id="input-21b" value="0" type="text" class="rating" data-min=0 data-max=5 data-step=1 data-size="sm" required title="Rating is Required">
         

@@ -44,6 +44,7 @@
 				</div>
 				<div class="box-body">
 					<p>Ride Number: <strong>{{ strtoupper($ride->ride_number) }}</strong></p>
+					<p>Type: <strong>{{ strtoupper($ride->type) }}</strong></p>
 					<p>Commuters:</p>
 					<ul>
 						<li>{{ ucwords($ride->passenger[0]->passenger1_name) }}</li>
@@ -63,7 +64,7 @@
 				<div class="box-footer">
 
 					<div class="box-tools pull-right">
-						<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#report"><i class="fa fa-flag"></i> Report Commuter</span>
+						{{--<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#report"><i class="fa fa-flag"></i> Report Commuter</span>--}}
 						<span class="label label-danger" style="cursor: pointer;" data-toggle="modal" data-target="#id">Cancel</span>
 					</div>
 				</div>
