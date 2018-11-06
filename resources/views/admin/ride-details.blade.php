@@ -21,7 +21,7 @@
  
     <div class="row">
       <div class="col-md-12">
-        <p><a href="{{ url()->previous() }}">Back</a></p>
+        <p><a href="{{ route('admin.rides.history') }}">Back to Ride History</a></p>
 
         @if($ride->cancelled == 1)
           @if($ride->cancelled_by_commuter == 1)
@@ -54,7 +54,7 @@
         <p>Amount: <strong>&#8369; {{ $ride->payment }}</strong></p>
         <p>
           <a href="{{ route('admin.view.ride.feedback', ['id' => $ride->id]) }}" class="badge bg-blue"><i class="fa fa-comments"></i> Feedback {{ count($ride->feedback) }}</a>
-          <a href="{{ route('admin.view.ride.report', ['id' => $ride->id]) }}" class="badge bg-red"><i class="fa fa-flag"></i> Report {{ count($ride->report) }}</a>
+          {{-- <a href="{{ route('admin.view.ride.report', ['id' => $ride->id]) }}" class="badge bg-red"><i class="fa fa-flag"></i> Report {{ count($ride->report) }}</a> --}}
         </p>
         <p>Passenger(s): <strong>{{ count($ride->passenger) }}</strong></p>
 

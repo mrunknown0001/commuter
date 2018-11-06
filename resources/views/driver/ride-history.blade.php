@@ -39,7 +39,7 @@
 							<td>
 								<span class="label label-primary" style="cursor: pointer;" data-toggle="modal" data-target="#id-{{ $ride->id }}"><i class="fa fa-eye"></i> View</span>
 								@if($ride->cancelled == 0 || $ride->cancelled_by_commuter == 1)
-								<a href="javascript:void(0)" class="label label-danger" data-toggle="modal" data-target="#report-{{ $ride->id }}"><i class="fa fa-flag"></i> Report</a>
+								{{-- <a href="javascript:void(0)" class="label label-danger" data-toggle="modal" data-target="#report-{{ $ride->id }}"><i class="fa fa-flag"></i> Report</a> --}}
 								@endif
 								{{-- Add Modal for Additional ride information --}}
 
