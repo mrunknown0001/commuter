@@ -21,6 +21,7 @@ use App\Feedback;
 use App\Avatar;
 use App\DriverInfo;
 use App\Location;
+use App\DriverStatus;
 
 class AdminController extends Controller
 {
@@ -541,6 +542,11 @@ class AdminController extends Controller
         $info->license = $license;
         $info->save();
 
+        // add driver status
+        $ds = new DriverStatus();
+        $ds->driver_id = $driver->id;
+        $ds->save();
+
         // add to activity log
         GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Added New Driver', now());
 
@@ -573,6 +579,7 @@ class AdminController extends Controller
 
         $drivers = [];
         $info = [];
+        $status = [];
 
         $last_driver = DriverInfo::orderBy('id', 'desc')->first(['id']);
         if(count($last_driver) > 0) {
@@ -616,6 +623,10 @@ class AdminController extends Controller
                             'plate_number' => $row->plate_number,
                             'license' => $row->license_number,
                             'operator_name' => $row->operator
+                        ];
+
+                        $status[] = [
+                            'driver_id' => $ref_id
                         ];
                     }
 
