@@ -645,6 +645,9 @@ class AdminController extends Controller
 
             DB::table('driver_infos')->insert($info);
 
+            // add to driver_status
+            DB::table('driver_statuses')->insert($status);
+
             GeneralController::activity_log(null, Auth::guard('admin')->user()->id, 'Admin Imported Drivers');
 
             return redirect()->route('admin.view.all.driver')->with('success', 'Imported Drivers');
