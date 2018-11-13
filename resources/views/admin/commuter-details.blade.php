@@ -30,7 +30,7 @@
             @endif
           </p>
           <p>Name: <strong>{{ ucwords($commuter->first_name . ' ' . $commuter->last_name) }}</strong></p>
-          <p>Identification: <strong>{{ $commuter->identification }}</strong></p>
+          <p>Student Number: <strong>{{ $commuter->student_number }}</strong></p>
           <p>Mobile Number: <strong>{{ $commuter->mobile_number }}</strong></p>
           <hr>
           <p>Feedback Made: <strong><a href="{{ route('admin.view.commuter.feedback', ['id' => $commuter->id]) }}">{{ count($commuter->comment) }}</a></strong></p>

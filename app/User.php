@@ -61,4 +61,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Avatar', 'user_id');
     }
 
+    public function driver_status()
+    {
+        return $this->hasOne('App\DriverStatus', 'driver_id', 'id');
+    }
+
 }

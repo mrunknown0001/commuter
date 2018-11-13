@@ -23,7 +23,11 @@
         <div class="col-md-12">
           <p><a href="{{ url()->previous() }}" class="">Back</a></p>
           <div class="img-thumbnail">
-            <img src="@if($driver->avatar->avatar != null) {{ asset('uploads/images/'.$driver->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="img-circle" alt="User Image" width="250" height="250">
+            @if(count($driver->avatar) > 0)
+              <img src="@if( $driver->avatar->avatar != null) {{ asset('uploads/images/'.$driver->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="img-circle" alt="User Image" width="250" height="250">
+            @else
+              <img src="{{ asset('uploads/images/avatar.png') }}" class="img-circle" alt="User Image" width="250" height="250">
+            @endif
           </div>
           <p>
             @if($driver->active == 1)

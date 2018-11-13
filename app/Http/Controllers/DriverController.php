@@ -289,18 +289,25 @@ class DriverController extends Controller
     // method to accept ride request
     public function acceptRideRequest(Request $request)
     {
-        // check if ride is solo and group proceed to accept ride
-
-
-        // if mix the driver and commuter will be waiting for another 
-        // commuter/requester with mix type
-
 
 
         $id = $request['ride_id'];
 
         // update the ride with needed data
         $ride = Ride::findorfail($id);
+
+        $driver = Auth::user();
+
+
+        // check if ride is solo and group proceed to accept ride
+
+
+        // if mix the driver and commuter will be waiting for another 
+        // commuter/requester with mix type
+        if($ride->type == 'mix') {
+            $driver->driver_status->status = 'Loading';
+            $driver->driver_status->save();
+        }
 
 
         // check if the driver is null
@@ -393,6 +400,8 @@ class DriverController extends Controller
     {
         $id = $request['id'];
 
+        $driver = Auth::user();
+
         // update to current at time of pickup
         $ride = Ride::find($id);
 
@@ -401,6 +410,14 @@ class DriverController extends Controller
             abort(406);
         }
 
+
+        // ride_type is solo or group
+        // driver status will change to OTW
+        if($ride->type == 'solo' || $ride->type == 'group') {
+            // driver status to OTW
+            $driver->driver_status->status = 'OTW';
+            $driver->driver_status->save();
+        }
 
         $ride->current = 1;
         $ride->current_at = now();
@@ -418,6 +435,8 @@ class DriverController extends Controller
     {
         $id = $request['id'];
 
+        $driver = Auth::user();
+
         // update to current at time of pickup
         $ride = Ride::find($id);
 
@@ -429,6 +448,12 @@ class DriverController extends Controller
         $ride->drop_off = 1;
         $ride->drop_off_at = now();
         $ride->save();
+
+
+        // change driver status to arrived
+        $driver->driver_status->status = 'Arrived';
+        $driver->driver_status->save();
+
 
         // add to notification for drop off confirmation
         $notif = new Notification();
