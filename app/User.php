@@ -66,4 +66,9 @@ class User extends Authenticatable
         return $this->hasOne('App\DriverStatus', 'driver_id', 'id');
     }
 
+    public function driver_last_ride()
+    {
+        return $this->hasOne('App\Ride', 'driver_id')->latest();
+    }
+
 }
