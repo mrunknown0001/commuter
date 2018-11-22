@@ -44,7 +44,8 @@ class RegisterController extends Controller
         // find student
         $student = User::where('student_number', $student_number)->first();
 
-        if(count($student) < 1) {
+        // if(count($student) < 1) {
+        if(empty($student)) {
             return redirect()->back()->with('error', 'No Student Found!');
         }
 
