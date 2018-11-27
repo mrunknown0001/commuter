@@ -345,11 +345,13 @@ class DriverController extends Controller
     {
         // get the accepted ride by the driver
         $ride = Ride::where('driver_id', Auth::user()->id)
+                    ->where('type', '!=', 'mix')
+                    ->where('cancelled', 0)
                     ->where('finished', 0)
                     ->first();
 
 
-        if(!empty($ride)) {
+        if(empty($ride)) {
             return redirect()->route('driver.ride.request');
         }
         

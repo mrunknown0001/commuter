@@ -687,11 +687,11 @@ class CommuterController extends Controller
             ->where('finished', 0)
             ->first();
 
-        if(count($ride) < 1) {
+        if(empty($ride)) {
             return redirect()->route('commuter.active.ride.request')->with('info', 'You have already dropoff!'); 
         }
 
-        if(count($ride) > 0) {
+        if(!empty($ride)) {
             $notifs = DB::table('notifications')->where('ride_id', $ride->id)
                         ->update(['viewed' => 1]);
                         
