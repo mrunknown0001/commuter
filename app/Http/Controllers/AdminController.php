@@ -586,7 +586,7 @@ class AdminController extends Controller
         $status = [];
 
         $last_driver = DriverInfo::orderBy('id', 'desc')->first(['id']);
-        if(count($last_driver) > 0) {
+        if(!empty($last_driver)) {
             $ref_id = $last_driver->id + 1;
         }
         else {
@@ -927,7 +927,7 @@ class AdminController extends Controller
         // check id
         $check_id = User::where('student_number', $id)->first();
 
-        if(count($check_id) > 0 && $check_id->id != $commuter->id) {
+        if(!empty($check_id) && $check_id->id != $commuter->id) {
             return redirect()->back()->with('error', 'Student Number already exists!');
         }
 

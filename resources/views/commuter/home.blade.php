@@ -18,6 +18,24 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<hr>
+			<table class="table table-hover table-striped">
+				<thead>
+	              <th>Driver</th>
+	              <th>Body Number</th>
+	              <th>Status</th>
+	              <th class="text-center">Time</th>
+	              <th>Origin</th>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 </div>
   
 @endsection
