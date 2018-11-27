@@ -29,9 +29,44 @@
 	              <th class="text-center">Time</th>
 	              <th>Origin</th>
 				</thead>
-				<tbody>
-					
-				</tbody>
+	            <tbody>
+	              @if(count($otw) > 0)
+	                @foreach($otw as $r)
+	                  <tr>
+	                    <td>{{ ucwords($r->driver->first_name . ' ' . $r->driver->last_name) }}</td>
+	                    <td>{{ strtoupper($r->driver->driver_info->body_number) }}</td>
+	                    <td>{{ $r->status }}</td>
+	                    <td class="text-center">{{ date('l, F j, Y g:i:s a', strtotime($r->updated_at)) }}</td>
+	                    <td>{{ $r->driver->driver_last_ride->pickup_location->name }}</td>
+	                  </tr>
+	                @endforeach
+	              @endif
+
+	              @if(count($loading) > 0)
+	                @foreach($loading as $r)
+	                  <tr>
+	                    <td>{{ ucwords($r->driver->first_name . ' ' . $r->driver->last_name) }}</td>
+	                    <td>{{ strtoupper($r->driver->driver_info->body_number) }}</td>
+	                    <td>{{ $r->status }}</td>
+	                    <td class="text-center">{{ date('l, F j, Y g:i:s a', strtotime($r->updated_at)) }}</td>
+	                    <td>{{ $r->driver->driver_last_ride->pickup_location->name }}</td>
+	                  </tr>
+	                @endforeach
+	              @endif
+
+	              @if(count($arrived) > 0)
+	                @foreach($arrived as $r)
+	                  <tr>
+	                    <td>{{ ucwords($r->driver->first_name . ' ' . $r->driver->last_name) }}</td>
+	                    <td>{{ strtoupper($r->driver->driver_info->body_number) }}</td>
+	                    <td>{{ $r->status }}</td>
+	                    <td class="text-center">{{ date('l, F j, Y g:i:s a', strtotime($r->updated_at)) }}</td>
+	                    <td>{{ $r->driver->driver_last_ride->pickup_location->name }}</td>
+	                  </tr>
+	                @endforeach
+	              @endif
+
+	            </tbody>
 			</table>
 		</div>
 	</div>
