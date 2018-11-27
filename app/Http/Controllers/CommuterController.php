@@ -17,6 +17,7 @@ use App\CommuterCancel;
 use App\Feedback;
 use App\Notification;
 use App\Avatar;
+use App\DriverStatus;
 
 
 class CommuterController extends Controller
@@ -36,7 +37,12 @@ class CommuterController extends Controller
     // method to go to home page of the commuter
     public function home()
     {
-    	return view('commuter.home');
+        // get the status of the driver
+        $arrived = DriverStatus::where('status', 'Arrived')->orderBy('updated_at', 'asc')->get();
+        $otw = DriverStatus::where('status', 'OTW')->orderBy('updated_at', 'asc')->get();
+        $loading = DriverStatus::where('status', 'Loading')->orderBy('updated_at', 'asc')->get();
+
+    	return view('commuter.home', ['arrived' => $arrived, 'otw' => $otw, 'loading' => $loading]);
     }
 
 
@@ -232,7 +238,7 @@ class CommuterController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->first();
 
-        if(count($last_ride) > 0) {
+        if(!empty($last_ride)) {
 
             // check if ride is less than 20mins from time of request
             $timeofrequest = date(strtotime($last_ride->created_at));
@@ -258,7 +264,7 @@ class CommuterController extends Controller
                         ->where('finished', 0)
                         ->first();
 
-        if(count($active_ride) > 0) {
+        if(!empty($active_ride)) {
             return redirect()->route('commuter.active.ride.request');
         }
 
@@ -401,7 +407,6 @@ class CommuterController extends Controller
     // method to view active request ride
     public function activeRideRequest()
     {
-
 
         // get the active requested ride by the commuter
         $active_ride = Ride::where('commuter_id', Auth::user()->id)

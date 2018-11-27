@@ -12,7 +12,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			@include('includes.all')
 			
-			@if(count($active_ride) > 0)
+			@if(!empty($active_ride))
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Active Ride Request</h3>

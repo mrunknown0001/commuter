@@ -38,7 +38,7 @@ class DriverController extends Controller
                     ->where('finished', 0)
                     ->first();
 
-        if(count($ride) > 0) {
+        if(!empty($ride)) {
             return redirect()->route('driver.accepted.ride');
         }
         
@@ -257,7 +257,7 @@ class DriverController extends Controller
                     ->where('finished', 0)
                     ->first();
 
-        if(count($ride) > 0) {
+        if(!empty($ride)) {
             return redirect()->route('driver.accepted.ride');
         }
 
@@ -349,7 +349,7 @@ class DriverController extends Controller
                     ->first();
 
 
-        if(count($ride) < 1) {
+        if(!empty($ride)) {
             return redirect()->route('driver.ride.request');
         }
         
