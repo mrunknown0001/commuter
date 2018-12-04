@@ -38,9 +38,9 @@ class CommuterController extends Controller
     public function home()
     {
         // get the status of the driver
-        $arrived = DriverStatus::where('status', 'Arrived')->orderBy('updated_at', 'asc')->get();
-        $otw = DriverStatus::where('status', 'OTW')->orderBy('updated_at', 'asc')->get();
-        $loading = DriverStatus::where('status', 'Loading')->orderBy('updated_at', 'asc')->get();
+        $arrived = DriverStatus::where('status', 'Arrived')->orderBy('updated_at', 'asc')->limit(5)->get();
+        $otw = DriverStatus::where('status', 'OTW')->orderBy('updated_at', 'asc')->limit(5)->get();
+        $loading = DriverStatus::where('status', 'Loading')->orderBy('updated_at', 'asc')->limit(5)->get();
 
     	return view('commuter.home', ['arrived' => $arrived, 'otw' => $otw, 'loading' => $loading]);
     }

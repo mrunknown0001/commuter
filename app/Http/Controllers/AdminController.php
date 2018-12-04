@@ -322,9 +322,9 @@ class AdminController extends Controller
                             ->where('finished', 0)
                             ->get();
 
-        $arrived = DriverStatus::where('status', 'Arrived')->orderBy('updated_at', 'asc')->get();
-        $otw = DriverStatus::where('status', 'OTW')->orderBy('updated_at', 'asc')->get();
-        $loading = DriverStatus::where('status', 'Loading')->orderBy('updated_at', 'asc')->get();
+        $arrived = DriverStatus::where('status', 'Arrived')->orderBy('updated_at', 'asc')->limit(5)->get();
+        $otw = DriverStatus::where('status', 'OTW')->orderBy('updated_at', 'asc')->limit(5)->get();
+        $loading = DriverStatus::where('status', 'Loading')->orderBy('updated_at', 'asc')->limit(5)->get();
 
     	return view('admin.dashboard', ['rides' => $rides, 'commuters' => $commuters, 'drivers' => $drivers, 'current_rides' => $current_rides, 'arrived' => $arrived, 'otw' => $otw, 'loading' => $loading]);
     }
