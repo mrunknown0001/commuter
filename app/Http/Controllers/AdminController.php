@@ -164,13 +164,15 @@ class AdminController extends Controller
             */
             $request->image->move(public_path('uploads/images'), $photoname);
 
+            // save photoname to database
+            $avatar = new Avatar();
+            $avatar->admin_id = $admin->id;
+            $avatar->avatar = $photoname;
+            $avatar->save();
+
         }
 
-        // save photoname to database
-        $avatar = new Avatar();
-        $avatar->admin_id = $admin->id;
-        $avatar->avatar = $photoname;
-        $avatar->save();
+
 
 
         // activity log
@@ -401,7 +403,7 @@ class AdminController extends Controller
         $avatar = Avatar::where('admin_id', Auth::guard('admin')->user()->id)->first();
 
         // save photoname to database
-        if(count($avatar) < 1) {
+        if(empty($avatar)) {
             $avatar = new Avatar();
             $avatar->admin_id = Auth::user()->id;
             $avatar->avatar = $photoname;
@@ -492,8 +494,8 @@ class AdminController extends Controller
             'last_name' => 'required',
             'username' => 'required|unique:users,username',
             'mobile_number' => 'required|unique:users|numeric|digits:11',
-            'body_number' => 'required|min:3|max:10|unique:driver_infos',
-            'plate_number' => 'required|unique:driver_infos'
+            'body_number' => 'required|min:5|max:10|unique:driver_infos',
+            'plate_number' => 'required|unique:driver_infos|min:5|max:12'
         ]);
 
         $fn = $request['first_name'];

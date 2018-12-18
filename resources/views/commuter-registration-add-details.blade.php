@@ -33,7 +33,11 @@
                             <a href="{{ route('welcome') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
-
+                    <p>Password Must</p>
+                    <ul>
+                        <li>Atleast 8 Characters</li>
+                        <li>Atleast 3 Combinations of CAPITAL letters, small letters, numbers and special characters</li>
+                    </ul>
                 </div>
             </div>
         </div>

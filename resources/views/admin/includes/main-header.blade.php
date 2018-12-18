@@ -25,7 +25,10 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="@if(Auth::guard('admin')->user()->avatar) {{ asset('uploads/images/'.Auth::guard('admin')->user()->avatar->avatar) }} @else {{ asset('uploads/images/avatar.png') }} @endif" class="img-circle" alt="User Image">
+                <img src="@if(Auth::guard('admin')->user()->avatar) {{ asset('uploads/images/'.Auth::guard('admin')->user()->avatar->avatar) }} 
+                @else 
+                {{ asset('uploads/images/avatar.png') }} 
+                @endif" class="img-circle" alt="User Image">
 
                 <p>
                   {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}

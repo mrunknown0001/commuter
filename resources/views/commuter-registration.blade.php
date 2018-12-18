@@ -9,6 +9,7 @@
         <div class="col-md-8 col-md-offset-2">
             @include('includes.success')
             @include('includes.error')
+            @include('includes.errors')
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Commuter Registration</strong>
