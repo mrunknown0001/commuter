@@ -132,9 +132,9 @@ class AdminController extends Controller
     // method use to save new admin
     public function postAddAdmin(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+        return $request->validate([
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'username' => 'required|unique:admins,username',
             'mobile_number' => 'required|unique:admins|numeric|digits:11'
         ]);
@@ -221,6 +221,10 @@ class AdminController extends Controller
                     }
 
 
+                    // check if firstname & lastname has numbers on it
+
+
+
                     if(!empty($check_username)) {
                         return redirect()->back()->with('error', 'Admin Exist! Please Remove Admin with Username: ' . $row->username . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
                     }
@@ -270,8 +274,8 @@ class AdminController extends Controller
     public function postUpdateAdmin(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'mobile_number' => 'required'
         ]);
 
@@ -351,8 +355,8 @@ class AdminController extends Controller
     {
         // validate request data
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'mobile_number' => 'required'
         ]);
 
@@ -436,7 +440,7 @@ class AdminController extends Controller
         // validate form data
         $request->validate([
             'old_password' => 'required',
-            'password' => 'required|min:6|confirmed|max:50'
+            'password' => 'required|min:8|confirmed|max:50'
         ]);
 
         // assign values to variable
@@ -490,8 +494,8 @@ class AdminController extends Controller
     public function postAddDriver(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'username' => 'required|unique:users,username',
             'mobile_number' => 'required|unique:users|numeric|digits:11',
             'body_number' => 'required|min:5|max:10|unique:driver_infos',
@@ -677,8 +681,8 @@ class AdminController extends Controller
     public function postUpdateDriver(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'mobile_number' => 'required|numeric|digits:11',
             'body_number' => 'required',
             'plate_number' => 'required'
@@ -806,8 +810,8 @@ class AdminController extends Controller
     public function postAddCommuter(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'student_number' => 'required|unique:users,student_number'
         ]);
 
@@ -914,8 +918,8 @@ class AdminController extends Controller
     public function postUpdateCommuter(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'student_number' => 'required'
         ]);
 
