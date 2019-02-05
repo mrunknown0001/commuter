@@ -133,8 +133,8 @@ class AdminController extends Controller
     public function postAddAdmin(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
-            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'first_name' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z ]+$/u',
             'username' => 'required|unique:admins,username',
             'mobile_number' => 'required|unique:admins|numeric|digits:11'
         ]);
@@ -494,11 +494,11 @@ class AdminController extends Controller
     public function postAddDriver(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
-            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'first_name' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-Z ]+$/u',
             'username' => 'required|unique:users,username',
             'mobile_number' => 'required|unique:users|numeric|digits:11',
-            'body_number' => 'required|min:5|max:10|unique:driver_infos',
+            'body_number' => 'required|min:3|max:5|unique:driver_infos',
             'plate_number' => 'required|unique:driver_infos|min:5|max:12'
         ]);
 
@@ -810,8 +810,8 @@ class AdminController extends Controller
     public function postAddCommuter(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
-            'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
+            'first_name' => 'required|regex:/^[a-zA-Z ]+$/',
+            'last_name' => 'required|regex:/^[a-zA-Z ]+$/',
             'student_number' => 'required|unique:users,student_number'
         ]);
 
