@@ -186,7 +186,7 @@ class RegisterController extends Controller
     	// validate request data
     	$request->validate([
             'commuter_id' => 'required',
-    		'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|confirmed|max:50'
+    		'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,50}$/|confirmed|max:50'
     	]);
 
     	$password = $request['password'];

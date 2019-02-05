@@ -132,7 +132,7 @@ class AdminController extends Controller
     // method use to save new admin
     public function postAddAdmin(Request $request)
     {
-        return $request->validate([
+        $request->validate([
             'first_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'last_name' => 'required|regex:/^[a-zA-Z]+$/u',
             'username' => 'required|unique:admins,username',
