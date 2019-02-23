@@ -92,6 +92,12 @@
           </a>
         </li>
 
+        <li class="{{ route('admin.usage.statistics') == url()->current() ? 'active' : ''}}">
+          <a href="{{ route('admin.usage.statistics') }}">
+            <i class="fa fa-bar-chart"></i> <span>Statistics</span>
+          </a>
+        </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->

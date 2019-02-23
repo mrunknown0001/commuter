@@ -18,6 +18,8 @@
 
   <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
+  <script src="{{ asset('js/chart.js') }}"></script>
+
 </head>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">

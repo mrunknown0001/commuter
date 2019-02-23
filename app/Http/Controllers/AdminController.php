@@ -1418,4 +1418,31 @@ class AdminController extends Controller
 
         return view('admin.activity-logs-print-search', ['logs' => $users]);
     }
+
+
+
+    // method use to usageAnalytics
+    public function usageAnalytics()
+    {
+        // get all commuter and driver that has log on each day
+        // count all users on the day
+
+        $previous_month = DB::table('activity_logs')
+                ->where('user_id', '!=', null)
+                ->whereMonth('created_at', date('m', strtotime("-1 month")))
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->groupBy('user_id')
+                ->get();
+
+        $current = DB::table('activity_logs')
+                ->where('user_id', '!=', null)
+                ->whereMonth('created_at', date('m'))
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->groupBy('user_id')
+                ->get();
+
+        // return count($current);
+
+        return view('admin.statistics');
+    }
 }

@@ -537,5 +537,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 
 	// route to print activity log in search result
 	Route::get('/activity-log-print/search/{keyword}', 'AdminController@printSearchActivityLog')->name('admin.print.search.activity.log');
+
+	// route to view analytics usage of the app
+	Route::get('/usage/statistics', 'AdminController@usageAnalytics')->name('admin.usage.statistics');
 });
 
