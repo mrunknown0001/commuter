@@ -1426,6 +1426,12 @@ class AdminController extends Controller
     {
         // get all commuter and driver that has log on each day
         // count all users on the day
+        $previous_two_month = DB::table('activity_logs')
+                ->where('user_id', '!=', null)
+                ->whereMonth('created_at', date('m', strtotime("-2 month")))
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->groupBy('user_id')
+                ->get();
 
         $previous_month = DB::table('activity_logs')
                 ->where('user_id', '!=', null)
@@ -1443,6 +1449,6 @@ class AdminController extends Controller
 
         // return count($current);
 
-        return view('admin.statistics');
+        return view('admin.statistics', ['current' => count($current), 'previous_month' => count($previous_month), 'previous_two_month' => count($previous_two_month)]);
     }
 }

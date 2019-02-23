@@ -35,23 +35,38 @@
   </div>
   <!-- /.content-wrapper -->
 <script>
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  var d = new Date();
+
+  var x = new Date();
+  x.setDate(1);
+  x.setMonth(x.getMonth()-1);
+
+  var y = new Date();
+  y.setDate(1);
+  y.setMonth(y.getMonth()-2);
+
+
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: ["January", "February", "March",],
+          labels: [monthNames[y.getMonth()], monthNames[x.getMonth()], monthNames[d.getMonth()],],
           datasets: [{
-              label: '# of Users',
-              data: [100, 300, 200],
+              label: 'Monthly Users',
+              data: [{{ $previous_two_month }}, {{ $previous_month }}, {{ $current }}],
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
               ],
               borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(75, 192, 192, 1)',
               ],
               borderWidth: 1
           }]
