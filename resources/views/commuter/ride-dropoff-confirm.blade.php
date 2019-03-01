@@ -14,7 +14,7 @@
 				{{ csrf_field() }}
 				<input type="hidden" name="id" value="{{ $ride->id }}">
 				<div class="form-group">
-					<h3>Were you already drop-off?</h3>
+					<h3>Were you already dropped off?</h3>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Yes</button>
