@@ -56,7 +56,7 @@
       data: {
           labels: [monthNames[y.getMonth()], monthNames[x.getMonth()], monthNames[d.getMonth()],],
           datasets: [{
-              label: 'Monthly Users',
+              label: 'Monthly Usage',
               data: [{{ $previous_two_month }}, {{ $previous_month }}, {{ $current }}],
               backgroundColor: [
                   'rgba(75, 192, 192, 0.2)',
