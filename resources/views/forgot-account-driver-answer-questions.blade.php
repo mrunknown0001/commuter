@@ -15,7 +15,7 @@
             </div>
             <div class="panel-body">
                  
-                <form class="form" method="get" action="#" autocomplete="off">
+                <form class="form" method="post" action="{{ route('forgot.driver.account.verify.post') }}" autocomplete="off">
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
 

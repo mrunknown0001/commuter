@@ -237,6 +237,12 @@ class ForgotAccountController extends Controller
 
         if(!empty($student)) {
             // return $student;
+
+            // check if the student is already registered
+            if($student->registered == 0) {
+                return redirect()->back()->with('error', 'Active User Not Found!');
+            }
+
             return view('forgot-account-commuter-answer-questions', ['user' => $student]);
         }
 
@@ -254,7 +260,56 @@ class ForgotAccountController extends Controller
     }
 
 
-    // 
+
+
+
+
+    // postForgotCommuterAccountVerify
+    public function postForgotCommuterAccountVerify(Request $request)
+    {
+        $father = $request['father'];
+        $mother = $request['mother'];
+        $fav_food = $request['fav_food'];
+        $hobby = $request['hobby'];
+
+        $user_id = $request['user_id'];
+
+        $user = User::findorfail($user_id);
+
+        if(strtoupper($user->father) == strtoupper($father) &&
+            strtoupper($user->mother) == strtoupper($mother) &&
+            strtoupper($user->fav_food) == strtoupper($fav_food) &&
+            strtoupper($user->hobby) == strtoupper($hobby)
+        ) {
+            return view('forgot-account-commuter-change-password', ['user' => $user]);
+        }
+        else {
+            return redirect()->back()->with('error', 'You\'re answer were incorrect. Please Try Again');
+        }
+    }
+
+
+
+    public function postForgotAccountDriverVerify(Request $request)
+    {
+        $user_id = $request['user_id'];
+        $username = $request['username'];
+        $license = $request['license'];
+        $plate_number = $request['plate_number'];
+
+        $user = User::findorfail($user_id);
+
+        if(strtoupper($user->username) == strtoupper($username) &&
+            strtoupper($user->driver_info->license) == strtoupper($license) &&
+            strtoupper($user->driver_info->plate_number) == strtoupper($plate_number)
+        ) {
+            return view('forgot-account-commuter-change-password', ['user' => $user]);
+        }
+        else {
+            return redirect()->back()->with('error', 'You\'re answer were incorrect. Please Try Again');
+        }
+    }
+
 
 
 

@@ -61,11 +61,27 @@ Route::group(['middleware' => 'prevent-back-history'], function ()  {
 	// route to verifiy details entered/send sms code with the retrieval code 
 	Route::get('/forgot/account/verify', 'ForgotAccountController@forgotAccountVerify')->name('forgot.account.verify');
 
-	// route to verify sent code
-	Route::get('/forgot/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
+	// route to continuation of forgot password of student/commuter
+	Route::post('/forgot/account/commuter/verify', 'ForgotAccountController@postForgotCommuterAccountVerify')->name('forgot.commuter.account.verify.post');
+
+	Route::get('/forgot/account/commuter/verify', function () {
+		return redirect()->route('forgot.account');
+	});
+
+	// route to continuation of forgot password of driver
+	Route::post('/forgot/account/driver/verify', 'ForgotAccountController@postForgotAccountDriverVerify')->name('forgot.driver.account.verify.post');
 
 	// route to change password of the account
 	Route::post('/forgot/account/change/password', 'ForgotAccountController@postForgotAccountChangePassword')->name('forgot.account.change.password');
+
+
+
+
+
+
+
+	// route to verify sent code
+	Route::get('/forgot/account/verify/code', 'ForgotAccountController@forgotAccountVerifyCode')->name('forgot.account.verify.code');
 
 	// route to forgot admin account
 	Route::get('/forgot/admin/account', 'ForgotAccountController@forgotAdminAccount')->name('forgot.admin.account');
