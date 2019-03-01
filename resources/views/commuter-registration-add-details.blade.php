@@ -22,22 +22,45 @@
                         <input type="hidden" name="commuter_id" value="{{ $student->id }}">
                         <div class="form-group">
                             <label>Enter Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
                         </div>
                         <div class="form-group">
                             <label>Re-Enter Password</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Re-Enter Password">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Re-Enter Password" required>
+                        </div>
+                        <div class="form-group">
+                            <p>Password Must</p>
+                            <ul>
+                                <li>Atleast 8 Characters</li>
+                                <li>Atleast 3 Combinations of CAPITAL letters, small letters, numbers and special characters</li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-center">
+                                <label>Security Questions</label>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label>What is your father's name?</label>
+                            <input type="text" name="father" id="father" class="form-control" placeholder="Your Answer" required>
+                        </div>
+                        <div class="form-group">
+                            <label>What is your mother's name?</label>
+                            <input type="text" name="mother" id="mother" class="form-control" placeholder="Your Answer" required>
+                        </div>
+                        <div class="form-group">
+                            <label>What is your favorite food?</label>
+                            <input type="text" name="fav_food" id="fav_food" class="form-control" placeholder="Your answer" required>
+                        </div>
+                        <div class="form-group">
+                            <label>What is your hobby?</label>
+                            <input type="text" name="hobby" id="hobby" class="form-control" placeholder="Your answer" required>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Register</button>
                             <a href="{{ route('welcome') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
-                    <p>Password Must</p>
-                    <ul>
-                        <li>Atleast 8 Characters</li>
-                        <li>Atleast 3 Combinations of CAPITAL letters, small letters, numbers and special characters</li>
-                    </ul>
                 </div>
             </div>
         </div>

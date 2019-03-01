@@ -186,17 +186,29 @@ class RegisterController extends Controller
     	// validate request data
     	$request->validate([
             'commuter_id' => 'required',
-    		'password' => 'required|min:8|regex:/^(?=.*[A-Za-z])(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%_*?&])[A-Za-z\d@$!%_*?&]{8,50}$/|confirmed|max:50'
+    		'password' => 'required|min:8|regex:/^(?=.*[A-Za-z])(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%_*?&])[A-Za-z\d@$!%_*?&]{8,50}$/|confirmed|max:50',
+            'father' => 'required',
+            'mother' => 'required',
+            'fav_food' => 'required',
+            'hobby' => 'required'
     	]);
 
     	$password = $request['password'];
         $commuter_id = $request['commuter_id'];
+        $father = $request['father'];
+        $mother = $request['mother'];
+        $fav_food = $request['fav_food'];
+        $hobby = $request['hobby'];
 
 
     	// create user
     	$user = User::findorfail($commuter_id);
     	// $user->email = $email;
     	$user->password = bcrypt($password);
+        $user->father = $father;
+        $user->mother = $mother;
+        $user->fav_food = $fav_food;
+        $user->hobby = $hobby;
         $user->active = 1;
         $user->registered = 1;
     	$user->save();

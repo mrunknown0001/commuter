@@ -21,7 +21,7 @@
                     {{-- 1 for commuter/driver --}}
                     <input type="hidden" name="code" value="1">
                     <div class="form-group{{ $errors->has('identification') ? ' has-error' : '' }}">
-                        <label for="identification" class="control-label">Student #/Username/Mobile #</label>
+                        <label for="identification" class="control-label">Student #/Username</label>
 
                         <input id="identification" type="text" class="form-control" name="identification" value="{{ old('identification') }}" id="identification" placeholder="Student #/Username/Mobile #" required autofocus>
 

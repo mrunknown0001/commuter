@@ -21,54 +21,54 @@ class ForgotAccountController extends Controller
 
     // method use to verify identity and send code to mobile number with the
     // username and the retrieval code
-    public function forgotAccountVerify(Request $request)
-    {
-    	$request->validate([
-    		'identification' => 'required'
-    	]);
+    // public function forgotAccountVerify(Request $request)
+    // {
+    // 	$request->validate([
+    // 		'identification' => 'required'
+    // 	]);
 
-    	$id = $request['identification'];
-    	$account_code = $request['code'];
+    // 	$id = $request['identification'];
+    // 	$account_code = $request['code'];
 
-    	$user = User::where('identification', $id)
-    				->orwhere('mobile_number', $id)
-    				->first();
+    // 	$user = User::where('identification', $id)
+    // 				->orwhere('mobile_number', $id)
+    // 				->first();
 
-    	if(count($user) < 1) {
-    		return redirect()->back()->with('error', 'User not found!');
-    	}
+    // 	if(count($user) < 1) {
+    // 		return redirect()->back()->with('error', 'User not found!');
+    // 	}
 
-    	if($user->registered == 0) {
-    		return redirect()->back()->with('error', 'User not active or registered!');
-    	}
+    // 	if($user->registered == 0) {
+    // 		return redirect()->back()->with('error', 'User not active or registered!');
+    // 	}
 
-    	// delete old code
-    	$old_code = UserRetrievalCode::where('user_id', $user->id)->where('used', 0)->first();
-    	if(count($old_code) > 0) {
-    		$old_code->delete();
-    	}
+    // 	// delete old code
+    // 	$old_code = UserRetrievalCode::where('user_id', $user->id)->where('used', 0)->first();
+    // 	if(count($old_code) > 0) {
+    // 		$old_code->delete();
+    // 	}
 
-    	$code = GeneralController::generateRandomString(5, '1234567890');
+    // 	$code = GeneralController::generateRandomString(5, '1234567890');
 
-    	$message = 'The retrieval code for the account ' . strtoupper($user->identification) . ' is ' . $code . '. This code is valid for 5minutes.';
+    // 	$message = 'The retrieval code for the account ' . strtoupper($user->identification) . ' is ' . $code . '. This code is valid for 5minutes.';
 
-    	// send sms with retrival code
-    	SmsController::sendSms($user->mobile_number, $message);
+    // 	// send sms with retrival code
+    // 	SmsController::sendSms($user->mobile_number, $message);
 
-    	// save to retrival code
-    	$ret = new UserRetrievalCode();
-    	$ret->user_id = $user->id;
-    	$ret->code = $code;
-    	$ret->expiration = strtotime(now()) + 300;
-    	$ret->type = $account_code;
-    	$ret->save();
+    // 	// save to retrival code
+    // 	$ret = new UserRetrievalCode();
+    // 	$ret->user_id = $user->id;
+    // 	$ret->code = $code;
+    // 	$ret->expiration = strtotime(now()) + 300;
+    // 	$ret->type = $account_code;
+    // 	$ret->save();
 
-    	// generate report
+    // 	// generate report
 
-    	// return to view/validate retrival code
-    	return view('forgot-account-enter-code', ['user' => $user]);
+    // 	// return to view/validate retrival code
+    // 	return view('forgot-account-enter-code', ['user' => $user]);
 
-    }
+    // }
 
 
 
@@ -130,44 +130,44 @@ class ForgotAccountController extends Controller
 
 
     // method use to validate and send code
-    public function sendAdminCode(Request $request)
-    {
-        $request->validate([
-            'identification' => 'required'
-        ]);
+    // public function sendAdminCode(Request $request)
+    // {
+    //     $request->validate([
+    //         'identification' => 'required'
+    //     ]);
 
-        $username = $request['identification'];
-        $account_code = $request['code'];
+    //     $username = $request['identification'];
+    //     $account_code = $request['code'];
 
-        $admin = Admin::where('identification', $username)->first();
+    //     $admin = Admin::where('identification', $username)->first();
 
-        if(count($admin) < 1) {
-            return redirect()->back()->with('error', 'Admin Not Found!');
-        }
+    //     if(count($admin) < 1) {
+    //         return redirect()->back()->with('error', 'Admin Not Found!');
+    //     }
 
-        $old_code = UserRetrievalCode::where('admin_id', $admin->id)->where('used', 0)->first();
-        if(count($old_code) > 0) {
-            $old_code->delete();
-        }
+    //     $old_code = UserRetrievalCode::where('admin_id', $admin->id)->where('used', 0)->first();
+    //     if(count($old_code) > 0) {
+    //         $old_code->delete();
+    //     }
 
-        $code = GeneralController::generateRandomString(5, '1234567890');
+    //     $code = GeneralController::generateRandomString(5, '1234567890');
 
-        $message = 'The retrieval code for the account ' . strtoupper($admin->identification) . ' is ' . $code . '. This code is valid for 5minutes.';
+    //     $message = 'The retrieval code for the account ' . strtoupper($admin->identification) . ' is ' . $code . '. This code is valid for 5minutes.';
 
-        // send sms with retrival code
-        SmsController::sendSms($admin->mobile_number, $message);
+    //     // send sms with retrival code
+    //     SmsController::sendSms($admin->mobile_number, $message);
 
-        // save to retrival code
-        $ret = new UserRetrievalCode();
-        $ret->admin_id = $admin->id;
-        $ret->code = $code;
-        $ret->expiration = strtotime(now()) + 300;
-        $ret->type = $account_code;
-        $ret->save();
+    //     // save to retrival code
+    //     $ret = new UserRetrievalCode();
+    //     $ret->admin_id = $admin->id;
+    //     $ret->code = $code;
+    //     $ret->expiration = strtotime(now()) + 300;
+    //     $ret->type = $account_code;
+    //     $ret->save();
 
-        // return to 
-        return view('forgot-admin-account-enter-code', ['admin' => $admin]);
-    }
+    //     // return to 
+    //     return view('forgot-admin-account-enter-code', ['admin' => $admin]);
+    // }
 
 
     // method use to verify code
@@ -217,5 +217,50 @@ class ForgotAccountController extends Controller
         $admin->save();
 
         return redirect()->route('admin.login')->with('success', 'Account Retrieved!');
+    }
+
+
+    /*
+     * start of new account recovery
+     * 
+     */
+    public function forgotAccountVerify(Request $request)
+    {
+        $request->validate([
+            'identification' => 'required'
+        ]);
+
+        $id = $request['identification'];
+
+        // check for commuter/student
+        $student = User::where('student_number', $id)->first();
+
+        if(!empty($student)) {
+            // return $student;
+            return view('forgot-account-commuter-answer-questions', ['user' => $student]);
+        }
+
+        // check for driver
+        $driver = User::where('username', $id)->first();
+
+        if(!empty($driver)) {
+            // return $driver;
+            return view('forgot-account-driver-answer-questions', ['user' => $driver]);
+        }
+
+        return redirect()->route('forgot.account')->with('error', 'No User Found!');
+
+
+    }
+
+
+    // 
+
+
+
+    // admin recover account
+    public function sendAdminCode(Request $request)
+    {
+        return 'admin account recovery';
     }
 }

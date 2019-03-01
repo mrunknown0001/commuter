@@ -21,7 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('student_number', 10)->nullable()->unique(); // for students
             $table->string('username', 20)->nullable()->unique();
             $table->string('mobile_number', 11)->nullable();
-            $table->string('password')->nullable();
+            $table->string('password', 100)->nullable();
+            $table->string('father', 80)->nullable();
+            $table->string('mother', 80)->nullable();
+            $table->string('fav_food', 50)->nullable();
+            $table->string('hobby', 50)->nullable();
             $table->tinyInteger('active')->default(0); // 1 for active users, 0 for deactivated users
             $table->tinyInteger('registered')->default(0);
             $table->rememberToken();
